@@ -8,6 +8,6 @@ import (
 
 func SetRouter() http.Handler {
 	r := chi.NewRouter()
-	r.Get("/", GetCodeHandler)
+	r.Get("/{id}", GetCodeHandler)
 	return r
 }

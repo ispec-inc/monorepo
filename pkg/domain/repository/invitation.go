@@ -5,5 +5,5 @@ import (
 )
 
 type Invitation interface {
-	FindByUserID(int) model.Invitation
+	Find(int64) (model.Invitation, error)
 }
