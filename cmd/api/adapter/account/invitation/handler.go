@@ -17,7 +17,7 @@ func GetCodeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	usecase := registry.NewInvitationUseCase()
+	usecase := registry.NewInvitationUsecase()
 	output, aerr := usecase.FindCode(invitation.Input{ID: int64(id)})
 	if aerr != nil {
 		http.Error(w, aerr.Message(), aerr.Status())

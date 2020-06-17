@@ -5,7 +5,7 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/src/account/invitation"
 )
 
-func NewInvitationUseCase() invitation.Usecase {
+func NewInvitationUsecase() invitation.Usecase {
 	return invitation.NewUsecase(
 		dao.NewInvitation(),
 	)
