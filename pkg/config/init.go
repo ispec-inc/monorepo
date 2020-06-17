@@ -7,13 +7,16 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func loadEnv() {
-	godotenv.Load()
+func LoadEnv(envFile string) error {
+	if envFile == "" {
+		err := godotenv.Load()
+		return err
+	}
+	err := godotenv.Load(envFile)
+	return err
 }
 
 func NewRDS() RDS {
-	loadEnv()
-
 	DBMS := os.Getenv("DB_TYPE")
 	USER := os.Getenv("DB_USERNAME")
 	PASS := os.Getenv("DB_PASSWORD")
@@ -30,8 +33,6 @@ func NewRDS() RDS {
 }
 
 func NewRouter() Router {
-	loadEnv()
-
 	Timeout, _ := strconv.Atoi(os.Getenv("APP_TIMEOUT"))
 	return Router{
 		Timeout: Timeout,
