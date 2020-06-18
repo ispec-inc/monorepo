@@ -1,0 +1,26 @@
+version: '2.2'
+services:
+  app:
+    container_name: go-distributed-monolith-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+  db:
+    container_name: go-distributed-monolith-db
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root-password
+      MYSQL_PASSWORD: 
+      MYSQL_DATABASE: go-distributed-monolith
+      MYSQL_USER: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_HOST: 'db'
+    ports:
+      - "3306:3306"
