@@ -5,14 +5,12 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/entity"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
 )
 
 func Test(t *testing.T) {
-	config.LoadEnv(".env.test")
 	db, err := mysql.NewDB()
 	if err != nil {
 		panic(err)

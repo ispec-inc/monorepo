@@ -3,12 +3,10 @@ package main
 import (
 	"net/http"
 
-	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
 )
 
 func main() {
-	config.LoadEnv("")
 	db, err := mysql.NewDB()
 	if err != nil {
 		panic(err)
