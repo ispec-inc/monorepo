@@ -2,6 +2,8 @@ package mysql
 
 import (
 	"os"
+	"strconv"
+	"time"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -18,5 +20,14 @@ func NewDB() (*gorm.DB, error) {
 	CONNECT := USER + ":" + PASS + "@(" + HOST + ":" + PORT + ")/" + NAME + "?charset=utf8mb4&parseTime=true"
 
 	db, err := gorm.Open(DBMS, CONNECT)
+
+	maxIdle, _ := strconv.Atoi(os.Getenv("DB_MAX_IDLE_CONNS"))
+	maxOpen, _ := strconv.Atoi(os.Getenv("DB_MAX_OPENC_CONNS"))
+	maxLifetime, _ := strconv.Atoi(os.Getenv("DB_CONN_MAX_LIFETIME"))
+
+	db.DB().SetMaxIdleConns(maxIdle)
+	db.DB().SetMaxOpenConns(maxOpen)
+	db.DB().SetConnMaxLifetime(time.Duration(maxLifetime))
+
 	return db, err
 }
