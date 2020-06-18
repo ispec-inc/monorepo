@@ -8,12 +8,12 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/entity"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
 )
 
 func Test(t *testing.T) {
 	config.LoadEnv(".env.test")
-	rds := config.NewRDS()
-	db, err := NewRDSDB(rds)
+	db, err := mysql.NewDB()
 	if err != nil {
 		panic(err)
 	}
