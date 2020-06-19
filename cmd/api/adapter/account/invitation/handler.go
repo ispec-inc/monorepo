@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 	"github.com/ispec-inc/go-distributed-monolith/src/account/invitation"
 )
@@ -24,7 +25,7 @@ func GetCodeHandler(w http.ResponseWriter, r *http.Request) {
 
 	output, aerr := usecase.FindCode(invitation.Input{ID: int64(id)})
 	if aerr != nil {
-		http.Error(w, aerr.Message(), aerr.Status())
+		http.Error(w, aerr.Message(), presenter.CodeStatuses[aerr.Code()])
 		return
 	}
 

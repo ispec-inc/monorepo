@@ -1,7 +1,6 @@
 package invitation
 
 import (
-	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 	"testing"
 
 	gomock "github.com/golang/mock/gomock"
@@ -9,6 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/mock"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 )
 
 func Test(t *testing.T) {
@@ -23,7 +24,6 @@ func Test(t *testing.T) {
 		nil,
 	)
 
-	// usecase := registry.NewInvitationUsecaseMock(ctrl) invitaion <-> regsitry 間で循環参照が発生するため，やめた
 	usecase := Usecase{mock}
 
 	test := NewTest(t, usecase)
@@ -45,7 +45,7 @@ func (t test) FindCodeSuccess() {
 	if err != nil {
 		t.t.Errorf(
 			"Error: code: %d, message: %s",
-			err.Status(), err.Message(),
+			presenter.CodeStatuses[err.Code()], err.Message(),
 		)
 	}
 	assert.IsType(t.t, Output{}, output)

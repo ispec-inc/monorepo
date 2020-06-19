@@ -1,8 +1,6 @@
 package invitation
 
 import (
-	"net/http"
-
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/repository"
 )
@@ -18,9 +16,7 @@ func NewUsecase(invitationRepo repository.Invitation) Usecase {
 func (usecase Usecase) FindCode(input Input) (Output, apperror.Error) {
 	invitationCode, err := usecase.invitationRepo.Find(input.ID)
 	if err != nil {
-		return Output{}, apperror.New(
-			http.StatusNotFound, err,
-		)
+		return Output{}, apperror.New(apperror.CodeNotFound, err)
 	}
 
 	return Output{

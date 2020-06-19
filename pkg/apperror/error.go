@@ -1,28 +1,32 @@
 package apperror
 
+type Code string
+
+var CodeError Code = "error"
+var CodeSuccess Code = "sucess"
+var CodeNotFound Code = "not found"
+
 type Error interface {
-	Status() int
+	Code() Code
 	Message() string
 }
 
 type appError struct {
-	statusCode int
-	code       string
-	err        error
-	message    string
+	code    Code
+	err     error
+	message string
 }
 
-func New(status int, err error) appError {
+func New(code Code, err error) appError {
 	return appError{
-		statusCode: status,
-		code:       "000",
-		err:        err,
-		message:    err.Error(),
+		code:    code,
+		err:     err,
+		message: err.Error(),
 	}
 }
 
-func (e appError) Status() int {
-	return e.statusCode
+func (e appError) Code() Code {
+	return e.code
 }
 
 func (e appError) Message() string {
