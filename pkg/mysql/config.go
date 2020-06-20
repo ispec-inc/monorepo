@@ -9,7 +9,9 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-func NewDB() (*gorm.DB, error) {
+var DB *gorm.DB
+
+func SetDB() error {
 	DBMS := os.Getenv("DB_TYPE")
 	USER := os.Getenv("DB_USERNAME")
 	PASS := os.Getenv("DB_PASSWORD")
@@ -29,5 +31,10 @@ func NewDB() (*gorm.DB, error) {
 	db.DB().SetMaxOpenConns(maxOpen)
 	db.DB().SetConnMaxLifetime(time.Duration(maxLifetime))
 
-	return db, err
+	DB = db
+	return err
+}
+
+func GetConnection() *gorm.DB {
+	return DB
 }

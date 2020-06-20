@@ -11,10 +11,10 @@ import (
 )
 
 func Test(t *testing.T) {
-	db, err := mysql.NewDB()
-	if err != nil {
+	if err := mysql.SetDB(); err != nil {
 		panic(err)
 	}
+	db := mysql.GetConnection()
 	defer db.Close()
 
 	db.AutoMigrate(entity.Invitation{})

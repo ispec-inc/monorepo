@@ -6,9 +6,9 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/src/account/invitation"
 )
 
-func NewInvitationUsecase() (invitation.Usecase, error) {
-	db, err := mysql.NewDB()
+func NewInvitationUsecase() invitation.Usecase {
+	db := mysql.GetConnection()
 	return invitation.NewUsecase(
 		dao.NewInvitation(db),
-	), err
+	)
 }

@@ -16,10 +16,7 @@ type handler struct {
 }
 
 func NewHandler() handler {
-	usecase, err := registry.NewInvitationUsecase()
-	if err != nil {
-		panic(err)
-	}
+	usecase := registry.NewInvitationUsecase()
 	return handler{usecase}
 }
 

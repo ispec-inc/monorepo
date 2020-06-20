@@ -7,11 +7,9 @@ import (
 )
 
 func main() {
-	db, err := mysql.NewDB()
-	if err != nil {
+	if err := mysql.SetDB(); err != nil {
 		panic(err)
 	}
-	db.Close()
 
 	r := SetRouter()
 	http.ListenAndServe(":9000", r)
