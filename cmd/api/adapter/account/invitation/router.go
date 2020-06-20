@@ -7,7 +7,9 @@ import (
 )
 
 func SetRouter() http.Handler {
+	handler := NewHandler()
+
 	r := chi.NewRouter()
-	r.Get("/{id}", GetCodeHandler)
+	r.Get("/{id}", handler.GetCode)
 	return r
 }

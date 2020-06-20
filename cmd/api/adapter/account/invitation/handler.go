@@ -11,19 +11,26 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/src/account/invitation"
 )
 
-func GetCodeHandler(w http.ResponseWriter, r *http.Request) {
+type handler struct {
+	usecase invitation.Usecase
+}
+
+func NewHandler() handler {
+	usecase, err := registry.NewInvitationUsecase()
+	if err != nil {
+		panic(err)
+	}
+	return handler{usecase}
+}
+
+func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	usecase, err := registry.NewInvitationUsecase()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-	output, aerr := usecase.FindCode(invitation.Input{ID: int64(id)})
+	output, aerr := h.usecase.FindCode(invitation.Input{ID: int64(id)})
 	if aerr != nil {
 		http.Error(w, aerr.Message(), presenter.CodeStatuses[aerr.Code()])
 		return
