@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+
+	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
 )
 
 func main() {
