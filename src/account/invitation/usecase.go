@@ -14,9 +14,9 @@ func NewUsecase(invitationRepo repository.Invitation) Usecase {
 }
 
 func (usecase Usecase) FindCode(input Input) (Output, apperror.Error) {
-	invitationCode, err := usecase.invitationRepo.Find(input.ID)
-	if err != nil {
-		return Output{}, apperror.New(apperror.CodeNotFound, err)
+	invitationCode, aerr := usecase.invitationRepo.Find(input.ID)
+	if aerr != nil {
+		return Output{}, aerr
 	}
 
 	return Output{

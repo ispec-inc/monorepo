@@ -1,11 +1,9 @@
 package dao
 
 import (
-	"errors"
-	"fmt"
-
 	"github.com/jinzhu/gorm"
 
+	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/entity"
 )
@@ -18,13 +16,18 @@ func NewInvitation(db *gorm.DB) Invitation {
 	return Invitation{db}
 }
 
-func (repo Invitation) Find(ID int64) (model.Invitation, error) {
+func (repo Invitation) Find(ID int64) (model.Invitation, apperror.Error) {
 	var invitation entity.Invitation
 
-	repo.db.Find(&invitation, ID)
-	if invitation.ID == 0 {
-		return model.Invitation{},
-			errors.New(fmt.Sprintf("invitation code (id = %d) is not found.", ID))
+	err := repo.db.Find(&invitation, ID).Error
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			return model.Invitation{},
+				apperror.New(apperror.CodeNotFound, err)
+		} else {
+			return model.Invitation{},
+				apperror.New(apperror.CodeError, err)
+		}
 	}
 
 	return model.Invitation{
