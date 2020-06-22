@@ -23,10 +23,10 @@ func (repo Invitation) Find(ID int64) (model.Invitation, apperror.Error) {
 	if err != nil {
 		if gorm.IsRecordNotFoundError(err) {
 			return model.Invitation{},
-				apperror.New(apperror.CodeError, err)
+				apperror.New(apperror.CodeNotFound, err)
 		} else {
 			return model.Invitation{},
-				apperror.New(apperror.CodeNotFound, err)
+				apperror.New(apperror.CodeError, err)
 		}
 	}
 
