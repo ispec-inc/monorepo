@@ -14,18 +14,37 @@ var CodeStatuses = map[apperror.Code]int{
 }
 
 func ApplicationException(w http.ResponseWriter, aerr apperror.Error) {
-	http.Error(w, aerr.Message(), CodeStatuses[aerr.Code()])
+	w.WriteHeader(CodeStatuses[aerr.Code()])
+
+	body := NewErrorResponse(aerr.Message())
+	json.NewEncoder(w).Encode(body)
 }
 
 func InternalServerError(w http.ResponseWriter, err error) {
-	http.Error(w, err.Error(), http.StatusInternalServerError)
+	w.WriteHeader(http.StatusInternalServerError)
+
+	body := NewErrorResponse(err.Error())
+	json.NewEncoder(w).Encode(body)
 }
 
 func BadRequestError(w http.ResponseWriter, err error) {
-	http.Error(w, err.Error(), http.StatusBadRequest)
+	w.WriteHeader(http.StatusBadRequest)
+
+	body := NewErrorResponse(err.Error())
+	json.NewEncoder(w).Encode(body)
 }
 
 func Response(w http.ResponseWriter, body interface{}) {
 	w.WriteHeader(CodeStatuses[apperror.CodeSuccess])
 	json.NewEncoder(w).Encode(body)
+}
+
+type ErrorResponse struct {
+	Message string `json:"message"`
+}
+
+func NewErrorResponse(msg string) ErrorResponse {
+	return ErrorResponse{
+		msg,
+	}
 }
