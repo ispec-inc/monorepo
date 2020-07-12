@@ -1,7 +1,6 @@
 package invitation
 
 import (
-	"encoding/json"
 	"net/http"
 	"strconv"
 
@@ -35,15 +34,8 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := json.Marshal(InvitationCodeResponse{
+	presenter.Response(w, InvitationCodeResponse{
 		ID:             output.ID,
 		InvitationCode: output.Code,
 	})
-	if err != nil {
-		presenter.InternalServerError(w, err)
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(response))
 }
