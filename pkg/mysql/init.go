@@ -6,7 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"github.com/ispec-inc/anipic-api/pkg/config"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 )
 
 func Init() (*gorm.DB, func() error, error) {
