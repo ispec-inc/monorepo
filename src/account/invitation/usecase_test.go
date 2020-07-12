@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	gomock "github.com/golang/mock/gomock"
-	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/mock"
@@ -13,8 +12,6 @@ import (
 )
 
 func Test(t *testing.T) {
-	godotenv.Load()
-
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
@@ -41,14 +38,14 @@ func NewTest(t *testing.T, u Usecase) test {
 }
 
 func (t test) FindCodeSuccess() {
-	output, err := t.u.FindCode(Input{ID: int64(1)})
+	output, err := t.u.FindCode(FindCodeInput{ID: int64(1)})
 	if err != nil {
 		t.t.Errorf(
 			"Error: code: %d, message: %s",
 			presenter.CodeStatuses[err.Code()], err.Message(),
 		)
 	}
-	assert.IsType(t.t, Output{}, output)
+	assert.IsType(t.t, FindCodeOutput{}, output)
 	assert.Exactly(t.t, int64(1), output.ID)
 	assert.Exactly(t.t, "invitation-code", output.Code)
 }

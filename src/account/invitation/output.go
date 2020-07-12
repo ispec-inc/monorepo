@@ -1,6 +1,6 @@
 package invitation
 
-type Output struct {
+type FindCodeOutput struct {
 	ID   int64
 	Code string
 }

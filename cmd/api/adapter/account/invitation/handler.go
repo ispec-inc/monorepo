@@ -28,7 +28,7 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, aerr := h.usecase.FindCode(invitation.Input{ID: int64(id)})
+	output, aerr := h.usecase.FindCode(invitation.FindCodeInput{ID: int64(id)})
 	if aerr != nil {
 		http.Error(w, aerr.Message(), presenter.CodeStatuses[aerr.Code()])
 		presenter.ApplicationException(w, aerr)
