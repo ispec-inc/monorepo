@@ -15,8 +15,8 @@ type handler struct {
 	usecase invitation.Usecase
 }
 
-func NewHandler() handler {
-	usecase := registry.NewInvitationUsecase()
+func NewHandler(repo registry.Repository) handler {
+	usecase := invitation.NewUsecase(repo.NewInvitation())
 	return handler{usecase}
 }
 

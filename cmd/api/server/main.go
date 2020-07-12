@@ -3,16 +3,16 @@ package main
 import (
 	"net/http"
 
-	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 )
 
 func main() {
-	if err := mysql.SetDB(); err != nil {
-		panic(err)
-	}
-	db := mysql.GetConnection()
-	defer db.Close()
+	config.Init()
 
-	r := SetRouter()
+	repo, cleanup := registry.NewRepository()
+	defer cleanup()
+
+	r := NewRouter(repo)
 	http.ListenAndServe(":9000", r)
 }

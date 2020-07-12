@@ -3,8 +3,8 @@ package registry
 import (
 	"github.com/jinzhu/gorm"
 
-	"github.com/ispec-inc/anipic-api/pkg/infra/dao"
-	"github.com/ispec-inc/anipic-api/pkg/mysql"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/dao"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
 )
 
 type Repository struct {
