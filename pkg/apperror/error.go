@@ -1,5 +1,9 @@
 package apperror
 
+import (
+	"github.com/jinzhu/gorm"
+)
+
 type Code string
 
 var CodeError Code = "error"
@@ -22,6 +26,23 @@ func New(code Code, err error) appError {
 		code:    code,
 		err:     err,
 		message: err.Error(),
+	}
+}
+
+func NewGorm(err error) appError {
+	switch err {
+	case gorm.ErrRecordNotFound:
+		return appError{
+			code:    CodeNotFound,
+			err:     err,
+			message: err.Error(),
+		}
+	default:
+		return appError{
+			code:    CodeError,
+			err:     err,
+			message: err.Error(),
+		}
 	}
 }
 
