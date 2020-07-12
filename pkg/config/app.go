@@ -1,17 +1,7 @@
 package config
 
-import (
-	"os"
-	"strconv"
-)
+var Router router
 
-type Router struct {
+type router struct {
 	Timeout int
-}
-
-func NewRouter() Router {
-	Timeout, _ := strconv.Atoi(os.Getenv("APP_TIMEOUT"))
-	return Router{
-		Timeout: Timeout,
-	}
 }

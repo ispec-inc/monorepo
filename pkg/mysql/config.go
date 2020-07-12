@@ -1,40 +1,33 @@
 package mysql
 
 import (
-	"os"
-	"strconv"
-	"time"
+	"fmt"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+
+	"github.com/ispec-inc/anipic-api/pkg/config"
 )
 
-var db *gorm.DB
+func Init() (*gorm.DB, func() error, error) {
+	CONNECT := fmt.Sprintf(
+		"%s:%s@(%s:%s)/%s?charset=utf8mb4&parseTime=true",
+		config.RDS.User, config.RDS.Password,
+		config.RDS.Host, config.RDS.Port,
+		config.RDS.Database,
+	)
+	db, err := gorm.Open(config.RDS.MS, CONNECT)
+	if err != nil {
+		return nil, nil, err
+	}
 
-func SetDB() error {
-	DBMS := os.Getenv("DB_TYPE")
-	USER := os.Getenv("DB_USERNAME")
-	PASS := os.Getenv("DB_PASSWORD")
-	NAME := os.Getenv("DB_NAME")
-	HOST := os.Getenv("DB_HOST")
-	PORT := os.Getenv("DB_PORT")
+	db.DB().SetMaxIdleConns(config.RDS.MaxIdle)
+	db.DB().SetMaxOpenConns(config.RDS.MaxOpen)
+	db.DB().SetConnMaxLifetime(config.RDS.MaxLifetime)
 
-	CONNECT := USER + ":" + PASS + "@(" + HOST + ":" + PORT + ")/" + NAME + "?charset=utf8mb4&parseTime=true"
-
-	db_, err := gorm.Open(DBMS, CONNECT)
-
-	maxIdle, _ := strconv.Atoi(os.Getenv("DB_MAX_IDLE_CONNS"))
-	maxOpen, _ := strconv.Atoi(os.Getenv("DB_MAX_OPENC_CONNS"))
-	maxLifetime, _ := strconv.Atoi(os.Getenv("DB_CONN_MAX_LIFETIME"))
-
-	db_.DB().SetMaxIdleConns(maxIdle)
-	db_.DB().SetMaxOpenConns(maxOpen)
-	db_.DB().SetConnMaxLifetime(time.Duration(maxLifetime))
-
-	db = db_
-	return err
+	return db, cleanup(db), nil
 }
 
-func GetConnection() *gorm.DB {
-	return db
+func cleanup(db *gorm.DB) func() error {
+	return db.Close
 }
