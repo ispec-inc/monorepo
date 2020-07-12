@@ -1,3 +1,5 @@
+//go:generate go run github.com/golang/mock/mockgen --build_flags=--mod=vendor -package mock -source=invitation.go -destination=../mock/invitation.go
+
 package repository
 
 import (
