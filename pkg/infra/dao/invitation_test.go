@@ -5,52 +5,55 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
+	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/entity"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 )
 
 func Test(t *testing.T) {
-	if err := mysql.SetDB(); err != nil {
+	config.Init()
+
+	db, cleanup, err := mysql.Init()
+	if err != nil {
 		panic(err)
 	}
-	db := mysql.GetConnection()
-	defer db.Close()
+	defer cleanup()
 
 	db.AutoMigrate(entity.Invitation{})
 
-	tx := db.Begin()
-	defer tx.Rollback()
-
 	// seed data
-	tx.Save(&entity.Invitation{
-		ID:     1,
+	invitation := entity.Invitation{
+		ID:     int64(1),
 		UserID: int64(1),
 		Code:   "invitation-code",
-	})
+	}
+	db.Save(&invitation)
 
-	repo := NewInvitation(tx)
-
-	test := NewTest(t, repo)
+	repo := NewInvitation(db)
+	test := NewTestInvitation(t, repo)
 	test.FindSuccess()
+
+	db.Delete(&invitation)
 }
 
-type test struct {
+type testInvitation struct {
 	t *testing.T
 	r Invitation
 }
 
-func NewTest(t *testing.T, r Invitation) test {
+func NewTestInvitation(t *testing.T, r Invitation) testInvitation {
 	t.Helper()
-	return test{t, r}
+	return testInvitation{t, r}
 }
 
-func (t test) FindSuccess() {
+func (t testInvitation) FindSuccess() {
 	output, err := t.r.Find(int64(1))
 	if err != nil {
 		t.t.Errorf(
-			"Error: %s",
-			err.Error(),
+			"Error: code: %d, message: %s",
+			presenter.CodeStatuses[err.Code()], err.Message(),
 		)
 	}
 	assert.IsType(t.t, model.Invitation{}, output)

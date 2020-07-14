@@ -6,9 +6,7 @@ import (
 	"github.com/go-chi/chi"
 )
 
-func SetRouter() http.Handler {
-	handler := NewHandler()
-
+func NewRouter(handler handler) http.Handler {
 	r := chi.NewRouter()
 	r.Get("/{id}", handler.GetCode)
 	return r

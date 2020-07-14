@@ -1,7 +1,6 @@
 package invitation
 
 import (
-	"encoding/json"
 	"net/http"
 	"strconv"
 
@@ -16,8 +15,8 @@ type handler struct {
 	usecase invitation.Usecase
 }
 
-func NewHandler() handler {
-	usecase := registry.NewInvitationUsecase()
+func NewHandler(repo registry.Repository) handler {
+	usecase := invitation.NewUsecase(repo.NewInvitation())
 	return handler{usecase}
 }
 
@@ -28,22 +27,15 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, aerr := h.usecase.FindCode(invitation.Input{ID: int64(id)})
+	output, aerr := h.usecase.FindCode(invitation.FindCodeInput{ID: int64(id)})
 	if aerr != nil {
 		http.Error(w, aerr.Message(), presenter.CodeStatuses[aerr.Code()])
 		presenter.ApplicationException(w, aerr)
 		return
 	}
 
-	response, err := json.Marshal(InvitationCodeResponse{
+	presenter.Response(w, InvitationCodeResponse{
 		ID:             output.ID,
 		InvitationCode: output.Code,
 	})
-	if err != nil {
-		presenter.InternalServerError(w, err)
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(response))
 }

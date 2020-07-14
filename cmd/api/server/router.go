@@ -6,11 +6,17 @@ import (
 	"github.com/go-chi/chi"
 
 	"github.com/ispec-inc/go-distributed-monolith/cmd/api/adapter/account/invitation"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 )
 
-func SetRouter() http.Handler {
+func NewRouter(repo registry.Repository) http.Handler {
 	r := chi.NewRouter()
-	r = Middleware(r)
-	r.Mount("/invitation", invitation.SetRouter())
+
+	invitationHandler := invitation.NewHandler(repo)
+
+	r = CommonMiddleware(r)
+
+	r.Mount("/invitation", invitation.NewRouter(invitationHandler))
+
 	return r
 }

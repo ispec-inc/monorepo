@@ -13,13 +13,13 @@ func NewUsecase(invitationRepo repository.Invitation) Usecase {
 	return Usecase{invitationRepo}
 }
 
-func (usecase Usecase) FindCode(input Input) (Output, apperror.Error) {
+func (usecase Usecase) FindCode(input FindCodeInput) (FindCodeOutput, apperror.Error) {
 	invitationCode, aerr := usecase.invitationRepo.Find(input.ID)
 	if aerr != nil {
-		return Output{}, aerr
+		return FindCodeOutput{}, aerr
 	}
 
-	return Output{
+	return FindCodeOutput{
 		ID:   invitationCode.ID,
 		Code: invitationCode.Code,
 	}, nil

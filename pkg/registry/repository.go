@@ -1,14 +1,27 @@
 package registry
 
 import (
+	"github.com/jinzhu/gorm"
+
 	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/dao"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
-	"github.com/ispec-inc/go-distributed-monolith/src/account/invitation"
 )
 
-func NewInvitationUsecase() invitation.Usecase {
-	db := mysql.GetConnection()
-	return invitation.NewUsecase(
-		dao.NewInvitation(db),
-	)
+type Repository struct {
+	db *gorm.DB
+}
+
+func NewRepository() (Repository, func() error) {
+	db, cleanup, err := mysql.Init()
+	if err != nil {
+		panic(err)
+	}
+
+	return Repository{
+		db: db,
+	}, cleanup
+}
+
+func (repo Repository) NewInvitation() dao.Invitation {
+	return dao.NewInvitation(repo.db)
 }

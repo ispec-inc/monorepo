@@ -1,5 +1,5 @@
 package invitation
 
-type Input struct {
-	ID int64 `json:"id"`
+type FindCodeInput struct {
+	ID int64
 }
