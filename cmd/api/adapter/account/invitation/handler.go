@@ -29,12 +29,11 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 
 	output, aerr := h.usecase.FindCode(invitation.FindCodeInput{ID: int64(id)})
 	if aerr != nil {
-		http.Error(w, aerr.Message(), presenter.CodeStatuses[aerr.Code()])
 		presenter.ApplicationException(w, aerr)
 		return
 	}
 
-	presenter.Response(w, InvitationCodeResponse{
+	presenter.Encode(w, InvitationCodeResponse{
 		ID:             output.ID,
 		InvitationCode: output.Code,
 	})

@@ -1,6 +1,8 @@
 package apperror
 
 import (
+	"log"
+
 	"github.com/jinzhu/gorm"
 )
 
@@ -32,6 +34,7 @@ func New(code Code, err error) appError {
 func NewGorm(err error) appError {
 	switch err {
 	case gorm.ErrRecordNotFound:
+		log.Println(err)
 		return appError{
 			code:    CodeNotFound,
 			err:     err,
