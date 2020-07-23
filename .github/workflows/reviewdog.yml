@@ -26,6 +26,7 @@ jobs:
       - name: errcheck
         uses: reviewdog/action-golangci-lint@v1
         with:
+          github_token: ${{ secrets.reviewdog_github_token }}
           golangci_lint_flags: "--disable-all -E errcheck"
           tool_name: errcheck
           level: info
