@@ -19,7 +19,7 @@
 *.env.*
 server
 
-scripts/
+.scripts/
 vendor
 
 # OS X

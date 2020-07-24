@@ -8,44 +8,70 @@ import (
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/mock"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 )
 
-func Test(t *testing.T) {
+func TestInvitationUsecase_FindCode_Success(t *testing.T) {
+	t.Helper()
+
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mock := mock.NewMockInvitation(ctrl)
-	mock.EXPECT().Find(int64(1)).Return(
-		model.Invitation{ID: int64(1), Code: "invitation-code"},
+	id := int64(1)
+	userID := int64(1)
+	code := "code"
+
+	im := mock.NewMockInvitation(ctrl)
+	im.EXPECT().Find(
+		id,
+	).Return(
+		model.Invitation{
+			ID:     id,
+			UserID: userID,
+			Code:   code,
+		},
 		nil,
 	)
 
-	usecase := Usecase{mock}
+	u := Usecase{invitationRepo: im}
 
-	test := NewTest(t, usecase)
-	test.FindCodeSuccess()
+	output, aerr := u.FindCode(FindCodeInput{ID: id})
+	assert.Exactly(t, nil, aerr)
+	assert.Exactly(t, id, output.ID)
 }
 
-type test struct {
-	t *testing.T
-	u Usecase
-}
-
-func NewTest(t *testing.T, u Usecase) test {
+func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 	t.Helper()
-	return test{t, u}
-}
 
-func (t test) FindCodeSuccess() {
-	output, err := t.u.FindCode(FindCodeInput{ID: int64(1)})
-	if err != nil {
-		t.t.Errorf(
-			"Error: code: %d, message: %s",
-			presenter.CodeStatuses[err.Code()], err.Message(),
-		)
-	}
-	assert.IsType(t.t, FindCodeOutput{}, output)
-	assert.Exactly(t.t, int64(1), output.ID)
-	assert.Exactly(t.t, "invitation-code", output.Code)
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	id := int64(1)
+	userID := int64(1)
+	code := "code"
+
+	im := mock.NewMockInvitation(ctrl)
+	im.EXPECT().Create(
+		model.Invitation{
+			UserID: userID,
+			Code:   code,
+		},
+	).Return(
+		model.Invitation{
+			ID:     id,
+			UserID: userID,
+			Code:   code,
+		},
+		nil,
+	)
+
+	u := Usecase{invitationRepo: im}
+
+	output, aerr := u.AddCode(
+		AddCodeInput{
+			UserID: userID,
+			Code:   code,
+		},
+	)
+	assert.Exactly(t, nil, aerr)
+	assert.Exactly(t, id, output.ID)
 }
