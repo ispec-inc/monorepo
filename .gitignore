@@ -21,3 +21,6 @@ server
 
 .scripts/
 vendor
+
+# OS X
+.DS_Store

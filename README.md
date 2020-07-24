@@ -1,42 +1,23 @@
-# go-project-template
+# go-distributed-monolith
+単一のDBに対してやりとりをするようなシステムアーキテクチャにおけるGoのサーバーのテンプレートPJです．
 
-## 使い方
-`GET /invitations`
-- 招待コードを取得
-- リクエスト
-```
-{
-  "id": 1
-}
-```
-- レスポンス
-```
-{
-  "id": 1,
-  "user_id": 1,
-  "code": "code"
-}
-```
+## Usage
+1. [migration](github.com/ispec-inc/migration)をクローンする
+マイグレーションとアプリケーションを分離させていて，docker networkでそれらを繋げるような設計をしている．
 
-`POST /invitations`
-- 招待コードを作成
-- リクエスト
+2. 以下のコマンドを実行
 ```
-{
-  "user_id": 1,
-  "code": "code"
-}
+$ docker network create monolith
+$ docker-compose build
+$ bash scripts/run.sh # in ispec-inc/go-distributed-monolith
+$ docker-compose up # in ispec-inc/migration
 ```
-- レスポンス
-```
-{
-  "id": 1,
-  "user_id": 1,
-  "code": "code"
-}
-```
+3. ヘルスチェック
 
-## コードの設計
+$ curl localhost:9000/health
+{"message":"success"}
+
+## Directory Structure
 ```
  cmd/ -> srcにあるビジネスロジックをAPI・WEBなどの役割やHTTP・gRPCなどのプロトコルによって呼び分けるサーバやスクリプト
    ├── api -> HTTPプロトコルで通信を受け付けるAPIサーバ（https://api.snkrdunk.comみたいな）
@@ -98,4 +79,40 @@
    │   └── status_code.go
    └── registry -> repositoryを持つusecaseに対してdaoの実装をDIする軽量DIコンテナ
        └── repository.go
+```
+
+## Request Examples
+`GET /invitations`
+- 招待コードを取得
+- リクエスト
+```
+{
+  "id": 1
+}
+```
+- レスポンス
+```
+{
+  "id": 1,
+  "user_id": 1,
+  "code": "code"
+}
+```
+
+`POST /invitations`
+- 招待コードを作成
+- リクエスト
+```
+{
+  "user_id": 1,
+  "code": "code"
+}
+```
+- レスポンス
+```
+{
+  "id": 1,
+  "user_id": 1,
+  "code": "code"
+}
 ```

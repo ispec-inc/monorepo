@@ -1,0 +1,19 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+schema:
+  - name: server
+    path: .
+    commands:
+      build:
+        status: true
+        method: go build -o server cmd/api/server/main.go cmd/api/server/router.go cmd/api/server/middleware.go
+      run:
+        status: true
+        method: ./server
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /
