@@ -20,16 +20,13 @@ func NewInvitation(db *gorm.DB) Invitation {
 }
 
 func (repo Invitation) Find(ID int64) (model.Invitation, apperror.Error) {
-	var invitation entity.Invitation
+	var inv entity.Invitation
 
-	err := repo.db.Find(&invitation, ID).Error
+	err := repo.db.Find(&inv, ID).Error
 	if err != nil {
 		e := errors.New(fmt.Sprintf("error searching invitation in database: %v", err))
 		return model.Invitation{}, apperror.NewGorm(e)
 	}
 
-	return model.Invitation{
-		ID:   invitation.ID,
-		Code: invitation.Code,
-	}, nil
+	return inv.ToModel(), nil
 }
