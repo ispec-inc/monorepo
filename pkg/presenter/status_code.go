@@ -11,6 +11,7 @@ var CodeStatuses = map[apperror.Code]int{
 	apperror.CodeError:    http.StatusInternalServerError,
 	apperror.CodeSuccess:  http.StatusOK,
 	apperror.CodeNotFound: http.StatusNotFound,
+	apperror.CodeInvalid:  http.StatusBadRequest,
 }
 
 func ApplicationException(w http.ResponseWriter, aerr apperror.Error) {

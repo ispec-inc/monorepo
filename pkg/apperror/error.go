@@ -7,6 +7,7 @@ import (
 type Code string
 
 var CodeError Code = "error"
+var CodeInvalid Code = "invalid"
 var CodeSuccess Code = "sucess"
 var CodeNotFound Code = "not found"
 
