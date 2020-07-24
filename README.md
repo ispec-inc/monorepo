@@ -2,7 +2,8 @@
 単一のDBに対してやりとりをするようなシステムアーキテクチャにおけるGoのサーバーのテンプレートPJです．
 
 ## Usage
-1. github.com/ispec-inc/migrationをクローンする
+1. [migration](github.com/ispec-inc/migration)をクローンする
+マイグレーションとアプリケーションを分離させていて，docker networkでそれらを繋げるような設計をしている．
 
 2. 以下のコマンドを実行
 ```
@@ -12,5 +13,6 @@ $ bash scripts/run.sh # in ispec-inc/go-distributed-monolith
 $ docker-compose up # in ispec-inc/migration
 ```
 3. ヘルスチェック
+
 $ curl localhost:9000/health
 {"message":"success"}
