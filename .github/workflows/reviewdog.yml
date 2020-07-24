@@ -12,5 +12,6 @@ jobs:
         uses: reviewdog/action-golangci-lint@v1
         with:
           github_token: ${{ secrets.reviewdog_github_token }}
-          golangci_lint_flags: "--enable-all"
+          golangci_lint_flags: "--disable-all -E golint"
           tool_name: golint # Change reporter name.
+          reporter: github-pr-review
