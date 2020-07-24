@@ -13,9 +13,10 @@ $ bash scripts/run.sh # in ispec-inc/go-distributed-monolith
 $ docker-compose up # in ispec-inc/migration
 ```
 3. ヘルスチェック
-
+```
 $ curl localhost:9000/health
 {"message":"success"}
+```
 
 ## Directory Structure
 ```
