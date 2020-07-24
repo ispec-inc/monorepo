@@ -26,7 +26,8 @@ func NewInvitationFromModel(
 
 func (i Invitation) ToModel() model.Invitation {
 	return model.Invitation{
-		ID:   i.ID,
-		Code: i.Code,
+		ID:     i.ID,
+		UserID: i.UserID,
+		Code:   i.Code,
 	}
 }

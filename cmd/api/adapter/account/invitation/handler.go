@@ -37,6 +37,7 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 
 	presenter.Response(w, findCodeResponse{
 		ID:             output.ID,
+		UserID:         output.UserID,
 		InvitationCode: output.Code,
 	})
 }
@@ -54,8 +55,8 @@ func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 
 	output, aerr := h.usecase.AddCode(
 		invitation.AddCodeInput{
-			request.UserID,
-			request.Code,
+			UserID: request.UserID,
+			Code:   request.Code,
 		},
 	)
 	if aerr != nil {
@@ -66,6 +67,7 @@ func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 
 	presenter.Response(w, addCodeResponse{
 		ID:             output.ID,
+		UserID:         output.UserID,
 		InvitationCode: output.Code,
 	})
 }
