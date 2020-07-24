@@ -34,7 +34,7 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	presenter.Encode(w, InvitationCodeResponse{
+	presenter.Encode(w, getCodeResponse{
 		ID:             output.ID,
 		UserID:         output.UserID,
 		InvitationCode: output.Code,

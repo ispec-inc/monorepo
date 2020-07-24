@@ -6,6 +6,6 @@ type invitationCodeResponse struct {
 	InvitationCode string `json:"invitation_code"`
 }
 
-type findCodeResponse invitationCodeResponse
+type getCodeResponse invitationCodeResponse
 
 type addCodeResponse invitationCodeResponse
