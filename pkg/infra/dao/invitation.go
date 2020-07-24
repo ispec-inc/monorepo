@@ -31,13 +31,20 @@ func (repo Invitation) Find(ID int64) (model.Invitation, apperror.Error) {
 func (repo Invitation) Create(invModel model.Invitation) (
 	model.Invitation, apperror.Error,
 ) {
+	tx := repo.db.Begin()
+
 	var inv entity.Invitation
-	err := repo.db.First(&inv, "user_id = ?", invModel.UserID).Error
+	err := tx.
+		Set("gorm:query_option", "for update").
+		First(&inv, "user_id = ?", invModel.UserID).
+		Error
 	if err != nil && !gorm.IsRecordNotFoundError(err) {
+		tx.Rollback()
 		return model.Invitation{}, apperror.NewGorm(
 			err, "error searching invitation in database",
 		)
 	} else if err == nil {
+		tx.Rollback()
 		return model.Invitation{}, apperror.New(
 			apperror.CodeInvalid,
 			errors.New("error: invitation code is already exists"),
@@ -45,11 +52,13 @@ func (repo Invitation) Create(invModel model.Invitation) (
 	}
 
 	inv = entity.NewInvitationFromModel(invModel)
-	if err := repo.db.Create(&inv).Error; err != nil {
+	if err := tx.Create(&inv).Error; err != nil {
+		tx.Rollback()
 		return model.Invitation{}, apperror.NewGorm(
 			err, "error inserting invitation in database",
 		)
 	}
 
+	tx.Commit()
 	return inv.ToModel(), nil
 }
