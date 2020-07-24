@@ -29,19 +29,19 @@ func New(code Code, err error) appError {
 	}
 }
 
-func NewGorm(err error) appError {
+func NewGorm(err error, msg string) appError {
 	switch err {
 	case gorm.ErrRecordNotFound:
 		return appError{
 			code:    CodeNotFound,
 			err:     err,
-			message: err.Error(),
+			message: msg + ": " + err.Error(),
 		}
 	default:
 		return appError{
 			code:    CodeError,
 			err:     err,
-			message: err.Error(),
+			message: msg + ": " + err.Error(),
 		}
 	}
 }

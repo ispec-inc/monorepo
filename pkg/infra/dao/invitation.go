@@ -1,9 +1,6 @@
 package dao
 
 import (
-	"errors"
-	"fmt"
-
 	"github.com/jinzhu/gorm"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
@@ -22,8 +19,9 @@ func NewInvitation(db *gorm.DB) Invitation {
 func (repo Invitation) Find(ID int64) (model.Invitation, apperror.Error) {
 	var inv entity.Invitation
 	if err := repo.db.Find(&inv, ID).Error; err != nil {
-		e := errors.New(fmt.Sprintf("error searching invitation in database: %v", err))
-		return model.Invitation{}, apperror.NewGorm(e)
+		return model.Invitation{}, apperror.NewGorm(
+			err, "error searching invitation in database",
+		)
 	}
 
 	return inv.ToModel(), nil
@@ -34,8 +32,9 @@ func (repo Invitation) Create(invModel model.Invitation) (
 ) {
 	inv := entity.NewInvitationFromModel(invModel)
 	if err := repo.db.Create(&inv).Error; err != nil {
-		e := errors.New(fmt.Sprintf("error searching invitation in database: %v", err))
-		return model.Invitation{}, apperror.NewGorm(e)
+		return model.Invitation{}, apperror.NewGorm(
+			err, "error inserting invitation in database",
+		)
 	}
 
 	return inv.ToModel(), nil
