@@ -17,6 +17,7 @@ func TestInvitationUsecase_FindCode_Success(t *testing.T) {
 	defer ctrl.Finish()
 
 	id := int64(1)
+	userID := int64(1)
 	code := "code"
 
 	im := mock.NewMockInvitation(ctrl)
@@ -24,8 +25,9 @@ func TestInvitationUsecase_FindCode_Success(t *testing.T) {
 		id,
 	).Return(
 		model.Invitation{
-			ID:   id,
-			Code: code,
+			ID:     id,
+			UserID: userID,
+			Code:   code,
 		},
 		nil,
 	)
@@ -34,7 +36,42 @@ func TestInvitationUsecase_FindCode_Success(t *testing.T) {
 
 	output, aerr := u.FindCode(FindCodeInput{ID: id})
 	assert.Exactly(t, nil, aerr)
-	assert.IsType(t, FindCodeOutput{}, output)
 	assert.Exactly(t, id, output.ID)
-	assert.Exactly(t, code, output.Code)
+}
+
+func TestInvitationUsecase_AddCode_Success(t *testing.T) {
+	t.Helper()
+
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	id := int64(1)
+	userID := int64(1)
+	code := "code"
+
+	im := mock.NewMockInvitation(ctrl)
+	im.EXPECT().Create(
+		model.Invitation{
+			UserID: userID,
+			Code:   code,
+		},
+	).Return(
+		model.Invitation{
+			ID:     id,
+			UserID: userID,
+			Code:   code,
+		},
+		nil,
+	)
+
+	u := Usecase{invitationRepo: im}
+
+	output, aerr := u.AddCode(
+		AddCodeInput{
+			UserID: userID,
+			Code:   code,
+		},
+	)
+	assert.Exactly(t, nil, aerr)
+	assert.Exactly(t, id, output.ID)
 }

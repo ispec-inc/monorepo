@@ -1,6 +1,7 @@
 package invitation
 
 import (
+	"encoding/json"
 	"net/http"
 	"strconv"
 
@@ -34,7 +35,36 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	presenter.Response(w, InvitationCodeResponse{
+	presenter.Response(w, findCodeResponse{
+		ID:             output.ID,
+		InvitationCode: output.Code,
+	})
+}
+
+func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
+	var request addCodeRequest
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		presenter.BadRequestError(w, err)
+		return
+	}
+	if err := request.validate(); err != nil {
+		presenter.BadRequestError(w, err)
+		return
+	}
+
+	output, aerr := h.usecase.AddCode(
+		invitation.AddCodeInput{
+			request.UserID,
+			request.Code,
+		},
+	)
+	if aerr != nil {
+		http.Error(w, aerr.Message(), presenter.CodeStatuses[aerr.Code()])
+		presenter.ApplicationException(w, aerr)
+		return
+	}
+
+	presenter.Response(w, addCodeResponse{
 		ID:             output.ID,
 		InvitationCode: output.Code,
 	})

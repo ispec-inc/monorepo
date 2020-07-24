@@ -14,6 +14,16 @@ type Invitation struct {
 	UpdatedAt *time.Time `gorm:"column:updated_at; not null"`
 }
 
+func NewInvitationFromModel(
+	m model.Invitation,
+) Invitation {
+	return Invitation{
+		ID:     m.ID,
+		UserID: m.UserID,
+		Code:   m.Code,
+	}
+}
+
 func (i Invitation) ToModel() model.Invitation {
 	return model.Invitation{
 		ID:   i.ID,
