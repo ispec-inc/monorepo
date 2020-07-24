@@ -1,29 +1,40 @@
 version: '2.2'
 services:
-  app:
+  api:
     container_name: go-distributed-monolith-api
     build:
       context: .
-      dockerfile: Dockerfile
-    command: sh -c "
-       sleep 10s &&
-       ./server"
+      dockerfile: docker/dev/Dockerfile
     ports:
       - "9000:9000"
     env_file:
       - .env
     depends_on:
-      - db
-  db:
-    container_name: go-distributed-monolith-db
+      - mysql
+    volumes:
+      - ./:/app
+    working_dir: /app
+    networks:
+      - monolith
+  mysql:
     image: mysql:5.7
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
-      MYSQL_ROOT_PASSWORD: root-password
-      MYSQL_PASSWORD:
-      MYSQL_DATABASE: go-distributed-monolith
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: monolith
       MYSQL_USER: root
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_HOST: 'db'
-    ports:
-      - "3306:3306"
+    networks:
+      - monolith
+    volumes:
+      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+
+  dockerize:
+    image: jwilder/dockerize:0.6.1
+    depends_on:
+      - mysql
+    networks:
+      - monolith
+    command: dockerize
+
+networks:
+  monolith:
+    external: true
