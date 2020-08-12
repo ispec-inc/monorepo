@@ -1,0 +1,4 @@
+services:
+  mysql:
+    environment:
+      MYSQL_DATABASE: monolith_test

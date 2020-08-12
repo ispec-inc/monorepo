@@ -23,6 +23,7 @@ jobs:
         run: | 
           cd ./app
           cp .github/workflows/env/go-distributed-monolith .env
+          cp .github/workflows/docker-compose.override.yml .
           docker-compose build
       - name: start containers
         run: |
