@@ -1,0 +1,27 @@
+name: gotest
+on: [push]
+jobs:
+
+  test:
+    name: runner / gotest
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          path: main
+      - name: checkout migration
+        uses: actions/checkout@v2
+        with:
+          repository: ispec-inc/migration
+          path: migration
+      - name: create docker network
+        run: cd main && docker network create monolith
+      - name: build containers
+        run: cd main && docker-compose build
+      - name: start containers
+        run: cd main && bash scripts/run.sh
+      - name: migrate database
+        run: cd migration && docker-compose up
+      - name: run test
+        run: cd main && docker-compose exec -T api go test ./... -v
