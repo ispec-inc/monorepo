@@ -1,0 +1,20 @@
+name: DockerLint
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps: 
+    - name: checkout
+      uses: actions/checkout@master
+    - name: lint flask/Dockerfile
+      uses: luke142367/Docker-Lint-Action@v1.0.0
+      with:
+        target: ./docker/dev/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: lint nginx/Dockerfile
+      uses: luke142367/Docker-Lint-Action@v1.0.0
+      with:
+        target: ./docker/prod/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
