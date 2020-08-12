@@ -14,10 +14,10 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-!.env.default
-*.env
-*.env.*
+.env
+.env.*
 server
+!.env.default
 
 .scripts/
 vendor
