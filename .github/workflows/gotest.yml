@@ -1,7 +1,6 @@
 name: gotest
 on: [push]
 jobs:
-
   test:
     name: runner / gotest
     runs-on: ubuntu-latest
@@ -23,6 +22,7 @@ jobs:
       - name: build containers
         run: | 
           cd ./app
+          cp .env.default .env
           docker-compose build
       - name: start containers
         run: |
@@ -31,6 +31,7 @@ jobs:
       - name: migrate database
         run: |
           cd ./migration
+          cp .env.default .env
           docker-compose up
       - name: run test
         run: |
