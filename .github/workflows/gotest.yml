@@ -27,7 +27,9 @@ jobs:
       - name: start containers
         run: |
           cd ./app
-          bash scripts/run.sh
+          docker-compose up -d mysql
+          docker-compose run dockerize -wait tcp://mysql:3306 -timeout 20s
+          docker-compose up api -d
       - name: migrate database
         run: |
           cd ./migration
