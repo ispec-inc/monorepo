@@ -39,4 +39,4 @@ jobs:
       - name: run test
         run: |
           cd ./app
-          docker-compose exec -T api go test ./... -v
+          docker-compose exec -T api go test -cover ./... -v
