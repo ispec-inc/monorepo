@@ -9,20 +9,30 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          path: main
+          path: ./app
       - name: checkout migration
         uses: actions/checkout@v2
         with:
           repository: ispec-inc/migration
-          token: ${{ secrets.GitHub_PAT }}
-          path: migration
+          token: ${{ secrets.private }}
+          path: ./migration
       - name: create docker network
-        run: cd main && docker network create monolith
+        run: | 
+          cd ./app
+          docker network create monolith
       - name: build containers
-        run: cd main && docker-compose build
+        run: | 
+          cd ./app
+          docker-compose build
       - name: start containers
-        run: cd main && bash scripts/run.sh
+        run: |
+          cd ./app
+          bash scripts/run.sh
       - name: migrate database
-        run: cd migration && docker-compose up
+        run: |
+          cd ./migration
+          docker-compose up
       - name: run test
-        run: cd main && docker-compose exec -T api go test ./... -v
+        run: |
+          cd ./app
+          docker-compose exec -T api go test ./... -v
