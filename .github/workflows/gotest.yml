@@ -1,5 +1,5 @@
 name: gotest
-on: [push]
+on: [pull_request]
 jobs:
   test:
     name: runner / gotest
