@@ -15,3 +15,15 @@ jobs:
           golangci_lint_flags: "--disable-all -E golint"
           tool_name: golint # Change reporter name.
           reporter: github-pr-review
+
+  hadolint:
+    name: runner / hadolint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: hadolint
+        uses: reviewdog/action-hadolint@v1
+        with:
+          github_token: ${{ secrets.reviewdog_github_token }}
+          reporter: github-pr-review # Default is github-pr-check
