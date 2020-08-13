@@ -1,10 +1,10 @@
-name: dockerlint_
+name: dockerlint
 
 on: push
 
 jobs:
   linter:
-    name: runner / dockerlint
+    name: runner / linter
     runs-on: ubuntu-latest
     steps:
 
