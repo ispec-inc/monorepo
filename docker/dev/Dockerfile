@@ -1,4 +1,4 @@
-FROM golang:1.14
+FROM golang:latest
 
 RUN go get github.com/oxequa/realize
 
