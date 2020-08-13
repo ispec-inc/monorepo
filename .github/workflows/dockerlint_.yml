@@ -1,0 +1,22 @@
+name: dockerlint_
+
+on: push
+
+jobs:
+  linter:
+    name: runner / dockerlint
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: lint ./docker/dev/Dockerfile
+        uses: brpaz/hadolint-action@master
+        with:
+          dockerfile: ./docker/dev/Dockerfile
+
+      - name: lint ./docker/prod/Dockerfile
+        uses: brpaz/hadolint-action@master
+        with:
+          dockerfile: ./docker/prod/Dockerfile
