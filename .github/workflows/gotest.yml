@@ -22,7 +22,7 @@ jobs:
       - name: build containers
         run: | 
           cd ./app
-          cp .github/workflows/env/go-distributed-monolith .env
+          cp .github/workflows/.env/.go-distributed-monolith .env
           cp .github/workflows/docker-compose.override.yml .
           docker-compose build
       - name: start containers
@@ -33,7 +33,7 @@ jobs:
           docker-compose up -d api
       - name: migrate database
         run: |
-          cp ./app/.github/workflows/env/migration ./migration/.env
+          cp ./app/.github/workflows/.env/.migration ./migration/.env
           cd ./migration
           docker-compose up
       - name: run test

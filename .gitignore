@@ -18,6 +18,7 @@
 .env.*
 server
 !.env.default
+!.env/
 
 .scripts/
 vendor
