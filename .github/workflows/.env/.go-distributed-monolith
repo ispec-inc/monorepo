@@ -2,5 +2,5 @@ DB_TYPE=mysql
 DB_USERNAME=root
 DB_PASSWORD=password
 DB_HOST=mysql
-DB_NAME=monolith_test
+DB_NAME=monolith
 DB_PORT=3306
