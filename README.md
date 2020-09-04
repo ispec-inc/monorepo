@@ -1,4 +1,8 @@
 # go-distributed-monolith
+
+![CI/CD](https://github.com/ispec-inc/go-distributed-monolith/workflows/gotest/badge.svg)
+[![codecov](https://codecov.io/gh/ispec-inc/go-distributed-monolith/branch/master/graph/badge.svg)](https://codecov.io/gh/ispec-inc/go-distributed-monolith)
+
 単一のDBに対してやりとりをするようなシステムアーキテクチャにおけるGoのサーバーのテンプレートPJです．
 
 ## Usage

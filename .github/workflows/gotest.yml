@@ -1,5 +1,11 @@
 name: gotest
-on: [pull_request]
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
 jobs:
   test:
     name: runner / gotest
@@ -7,35 +13,36 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-        with:
-          path: ./app
       - name: checkout migration
         uses: actions/checkout@v2
         with:
           repository: ispec-inc/migration
           token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
-          path: ./migration
+          path: ./_migration
       - name: create docker network
         run: | 
-          cd ./app
           docker network create monolith
       - name: build containers
         run: | 
-          cd ./app
           cp .github/workflows/.env/.go-distributed-monolith .env
           docker-compose build
       - name: start containers
         run: |
-          cd ./app
           docker-compose up -d mysql
           docker-compose run dockerize -wait tcp://mysql:3306 -timeout 20s
           docker-compose up -d api
       - name: migrate database
         run: |
-          cp ./app/.github/workflows/.env/.migration ./migration/.env
-          cd ./migration
+          cp ./.github/workflows/.env/.migration ./_migration/.env
+          cd ./_migration
           docker-compose up
       - name: run test
         run: |
-          cd ./app
-          docker-compose exec -T api go test -cover ./... -v
+          docker-compose run -T api go test -v -p 1 -cover -coverprofile=coverage.out ./...
+      - name: upload coverage to codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.GO_DISTRIBUTED_MONOLITH_CODECOV_TOKEN }}
+          name: coverage
+          flags: unittests
+          fail_ci_if_error: true
