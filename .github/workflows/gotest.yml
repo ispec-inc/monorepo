@@ -1,5 +1,11 @@
 name: gotest
-on: [pull_request]
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
 jobs:
   test:
     name: runner / gotest
