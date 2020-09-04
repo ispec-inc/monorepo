@@ -39,7 +39,7 @@ jobs:
           docker-compose up
       - name: run test
         run: |
-          docker-compose run -T app go test -v -p 1 -cover -coverprofile=coverage.out ./...
+          docker-compose run -T api go test -v -p 1 -cover -coverprofile=coverage.out ./...
       - name: upload coverage to codecov
         uses: codecov/codecov-action@v1
         with:
