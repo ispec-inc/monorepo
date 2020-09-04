@@ -24,6 +24,7 @@ func Init() (*gorm.DB, func() error, error) {
 	db.DB().SetMaxIdleConns(config.RDS.MaxIdle)
 	db.DB().SetMaxOpenConns(config.RDS.MaxOpen)
 	db.DB().SetConnMaxLifetime(config.RDS.MaxLifetime)
+	db.LogMode(true)
 
 	return db, cleanup(db), nil
 }

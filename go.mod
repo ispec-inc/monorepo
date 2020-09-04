@@ -9,4 +9,5 @@ require (
 	github.com/jinzhu/gorm v1.9.14
 	github.com/joho/godotenv v1.3.0
 	github.com/stretchr/testify v1.6.1
+	github.com/tanimutomo/sqlfile v0.0.0-20200828042957-aa60690f7209
 )
