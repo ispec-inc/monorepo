@@ -120,3 +120,17 @@ $ curl localhost:9000/health
   "code": "code"
 }
 ```
+
+# CLIツールの導入
+CLIツールを個々人で別々にgo installすると、バージョンが固定できないため、開発の障壁になる場合があります。
+それを防ぐために、新しいCLIツールを導入する場合は、Makefileのadd-toolターゲットを実行してください。
+例えば `github.com/golang/mock/mockgen` を使いたい場合、次のようなコマンドになります。
+```
+$ make add-tool TOOL=github.com/golang/mock/mockgen
+```
+その後、toolsターゲットを実行することで、`build_cmd/` 以下にビルドされるので、以降はそのコマンドを使用してください。
+```
+$ make tools
+$ ./build_cmd/mockgen --version
+v1.4.4
+```
