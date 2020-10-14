@@ -23,5 +23,7 @@ server
 .scripts/
 vendor
 
+build_cmd/
+
 # OS X
 .DS_Store
