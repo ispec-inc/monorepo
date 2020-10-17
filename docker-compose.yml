@@ -11,11 +11,28 @@ services:
       - .env
     depends_on:
       - mysql
+
     volumes:
       - ./:/app
     working_dir: /app
     networks:
       - monolith
+
+  api-test:
+    image: golang:1.14
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/app
+    working_dir: /app
+    networks:
+      - monolith
+    command: go test -v -cover -coverprofile=.cover/all.txt ./...
+
   mysql:
     image: mysql:5.7
     environment:
