@@ -9,5 +9,5 @@ import (
 
 type Invitation interface {
 	Find(int64) (model.Invitation, apperror.Error)
-	Create(model.Invitation) (model.Invitation, apperror.Error)
+	Create(model.Invitation) apperror.Error
 }

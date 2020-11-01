@@ -40,15 +40,13 @@ func TestInvitationDao_Create_Success(t *testing.T) {
 	}
 	i := NewInvitation(DB)
 
-	output, aerr := i.Create(
+	aerr := i.Create(
 		model.Invitation{
 			UserID: int64(1),
 			Code:   "code",
 		},
 	)
 	assert.Exactly(t, nil, aerr)
-	assert.Exactly(t, int64(1), output.UserID)
-	assert.Exactly(t, "code", output.Code)
 }
 
 func TestInvitationDao_Create_Fail_AlreadyExist(t *testing.T) {
@@ -58,7 +56,7 @@ func TestInvitationDao_Create_Fail_AlreadyExist(t *testing.T) {
 	}
 	i := NewInvitation(DB)
 
-	_, aerr := i.Create(
+	aerr := i.Create(
 		model.Invitation{
 			UserID: int64(1),
 			Code:   "code",
