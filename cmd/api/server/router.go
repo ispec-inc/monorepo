@@ -15,7 +15,7 @@ func NewRouter(repo registry.Repository) http.Handler {
 
 	invitationHandler := invitation.NewHandler(repo)
 
-	r = CommonMiddleware(r)
+	r = commonMiddleware(r)
 
 	r.Mount("/invitations", invitation.NewRouter(invitationHandler))
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {

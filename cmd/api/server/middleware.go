@@ -9,7 +9,7 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 )
 
-func CommonMiddleware(r *chi.Mux) *chi.Mux {
+func commonMiddleware(r *chi.Mux) *chi.Mux {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
