@@ -16,7 +16,7 @@ func Init() (*gorm.DB, func() error, error) {
 		config.RDS.Host, config.RDS.Port,
 		config.RDS.Database,
 	)
-	db, err := gorm.Open(config.RDS.MS, conn)
+	db, err := gorm.Open(config.RDS.Driver, conn)
 	if err != nil {
 		return nil, nil, err
 	}

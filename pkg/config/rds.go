@@ -7,13 +7,13 @@ import (
 var RDS rds
 
 type rds struct {
-	MS          string
-	User        string
-	Password    string
-	Database    string
-	Host        string
-	Port        string
-	MaxIdle     int
-	MaxOpen     int
-	MaxLifetime time.Duration
+	Driver      string        `env:"DB_DRIVER"`
+	User        string        `env:"DB_USERNAME"`
+	Password    string        `env:"DB_PASSWORD"`
+	Database    string        `env:"DB_NAME"`
+	Host        string        `env:"DB_HOST"`
+	Port        string        `env:"DB_PORT"`
+	MaxIdle     int           `env:"DB_MAX_IDLE_CONNS"`
+	MaxOpen     int           `env:"DB_MAX_OPEN_CONNS"`
+	MaxLifetime time.Duration `env:"DB_MAX_CONN_LIFETIME"`
 }
