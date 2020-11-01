@@ -2,6 +2,7 @@ package dao
 
 import (
 	"errors"
+
 	"github.com/jinzhu/gorm"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
@@ -17,9 +18,9 @@ func NewInvitation(db *gorm.DB) Invitation {
 	return Invitation{db}
 }
 
-func (repo Invitation) Find(ID int64) (model.Invitation, apperror.Error) {
+func (repo Invitation) Find(id int64) (model.Invitation, apperror.Error) {
 	var inv entity.Invitation
-	if err := repo.db.Find(&inv, ID).Error; err != nil {
+	if err := repo.db.Find(&inv, id).Error; err != nil {
 		return model.Invitation{}, apperror.NewGorm(
 			err, "error searching invitation in database",
 		)
@@ -28,7 +29,7 @@ func (repo Invitation) Find(ID int64) (model.Invitation, apperror.Error) {
 	return inv.ToModel(), nil
 }
 
-func (repo Invitation) Create(invModel model.Invitation) (
+func (repo Invitation) Create(minv model.Invitation) (
 	model.Invitation, apperror.Error,
 ) {
 	tx := repo.db.Begin()
@@ -36,7 +37,7 @@ func (repo Invitation) Create(invModel model.Invitation) (
 	var inv entity.Invitation
 	err := tx.
 		Set("gorm:query_option", "for update").
-		First(&inv, "user_id = ?", invModel.UserID).
+		First(&inv, "user_id = ?", minv.UserID).
 		Error
 	if err != nil && !gorm.IsRecordNotFoundError(err) {
 		tx.Rollback()
@@ -51,7 +52,7 @@ func (repo Invitation) Create(invModel model.Invitation) (
 		)
 	}
 
-	inv = entity.NewInvitationFromModel(invModel)
+	inv = entity.NewInvitationFromModel(minv)
 	if err := tx.Create(&inv).Error; err != nil {
 		tx.Rollback()
 		return model.Invitation{}, apperror.NewGorm(
