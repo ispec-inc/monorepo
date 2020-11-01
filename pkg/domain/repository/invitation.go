@@ -8,6 +8,7 @@ import (
 )
 
 type Invitation interface {
-	Find(int64) (model.Invitation, apperror.Error)
-	Create(model.Invitation) apperror.Error
+	Find(id int64) (model.Invitation, apperror.Error)
+	FindByUserID(uid int64) (model.Invitation, apperror.Error)
+	Create(minv model.Invitation) apperror.Error
 }

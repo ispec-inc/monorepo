@@ -29,6 +29,16 @@ func (repo Invitation) Find(id int64) (model.Invitation, apperror.Error) {
 	return inv.ToModel(), nil
 }
 
+func (repo Invitation) FindByUserID(uid int64) (model.Invitation, apperror.Error) {
+	var inv entity.Invitation
+	if err := repo.db.Find(&inv, "user_id = ?", uid).Error; err != nil {
+		return model.Invitation{}, NewGormError(
+			err, "error searching invitation in database",
+		)
+	}
+	return inv.ToModel(), nil
+}
+
 func (repo Invitation) Create(minv model.Invitation) apperror.Error {
 	f := func(tx *gorm.DB) apperror.Error {
 		var invs []entity.Invitation
