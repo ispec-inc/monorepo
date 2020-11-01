@@ -21,7 +21,7 @@ func NewInvitation(db *gorm.DB) Invitation {
 func (repo Invitation) Find(id int64) (model.Invitation, apperror.Error) {
 	var inv entity.Invitation
 	if err := repo.db.Find(&inv, id).Error; err != nil {
-		return model.Invitation{}, apperror.NewGorm(
+		return model.Invitation{}, NewGormError(
 			err, "error searching invitation in database",
 		)
 	}
@@ -41,7 +41,7 @@ func (repo Invitation) Create(minv model.Invitation) (
 		Error
 	if err != nil {
 		tx.Rollback()
-		return model.Invitation{}, apperror.NewGorm(
+		return model.Invitation{}, NewGormError(
 			err, "error searching invitation in database",
 		)
 	}
@@ -56,7 +56,7 @@ func (repo Invitation) Create(minv model.Invitation) (
 	inv := entity.NewInvitationFromModel(minv)
 	if err := tx.Create(&inv).Error; err != nil {
 		tx.Rollback()
-		return model.Invitation{}, apperror.NewGorm(
+		return model.Invitation{}, NewGormError(
 			err, "error inserting invitation in database",
 		)
 	}
