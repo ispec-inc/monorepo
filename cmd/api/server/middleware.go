@@ -14,6 +14,6 @@ func CommonMiddleware(r *chi.Mux) *chi.Mux {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
-	r.Use(middleware.Timeout(time.Second * time.Duration(config.Router.Timeout)))
+	r.Use(middleware.Timeout(config.Router.Timeout))
 	return r
 }
