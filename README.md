@@ -24,7 +24,7 @@ $ curl localhost:9000/health
 ## Directory Structure
 ```
  cmd/ -> srcにあるビジネスロジックをAPI・WEBなどの役割やHTTP・gRPCなどのプロトコルによって呼び分けるサーバやスクリプト
-   ├── api -> HTTPプロトコルで通信を受け付けるAPIサーバ（https://api.snkrdunk.comみたいな）
+   ├── api -> HTTPプロトコルで通信を受け付けるAPIサーバ（https://api.example.comみたいな）
    │   ├── adapter -> HTTP特有の情報（Request Bodyなど）をHTTPに依存しないビジネスロジックでの情報に変換する
    │   │   └── account -> /accounts とかのパスに対応させると分かりやすいかも
    │   │       ├── invitation -> /accounts/invitations
