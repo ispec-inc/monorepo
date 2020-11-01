@@ -16,6 +16,7 @@ services:
     working_dir: /app
     networks:
       - monolith
+
   mysql:
     image: mysql:5.7
     environment:
@@ -33,7 +34,7 @@ services:
       - mysql
     networks:
       - monolith
-    command: dockerize
+    command: dockerize -wait tcp://mysql:3306 -timeout 20s
 
 networks:
   monolith:
