@@ -10,13 +10,13 @@ import (
 )
 
 func Init() (*gorm.DB, func() error, error) {
-	CONNECT := fmt.Sprintf(
+	conn := fmt.Sprintf(
 		"%s:%s@(%s:%s)/%s?charset=utf8mb4&parseTime=true",
 		config.RDS.User, config.RDS.Password,
 		config.RDS.Host, config.RDS.Port,
 		config.RDS.Database,
 	)
-	db, err := gorm.Open(config.RDS.MS, CONNECT)
+	db, err := gorm.Open(config.RDS.MS, conn)
 	if err != nil {
 		return nil, nil, err
 	}
