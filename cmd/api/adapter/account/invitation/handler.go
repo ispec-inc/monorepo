@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi"
+	"github.com/go-playground/validator"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
@@ -47,7 +48,8 @@ func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 		presenter.BadRequestError(w, err)
 		return
 	}
-	if err := request.validate(); err != nil {
+	validate := validator.New()
+	if err := validate.Struct(request); err != nil {
 		presenter.BadRequestError(w, err)
 		return
 	}
