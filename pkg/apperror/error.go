@@ -16,30 +16,30 @@ type Error interface {
 	Message() string
 }
 
-type appError struct {
+type AppError struct {
 	code    Code
 	err     error
 	message string
 }
 
-func New(code Code, err error) appError {
-	return appError{
+func New(code Code, err error) AppError {
+	return AppError{
 		code:    code,
 		err:     err,
 		message: err.Error(),
 	}
 }
 
-func NewGorm(err error, msg string) appError {
+func NewGorm(err error, msg string) AppError {
 	switch err {
 	case gorm.ErrRecordNotFound:
-		return appError{
+		return AppError{
 			code:    CodeNotFound,
 			err:     err,
 			message: msg + ": " + err.Error(),
 		}
 	default:
-		return appError{
+		return AppError{
 			code:    CodeError,
 			err:     err,
 			message: msg + ": " + err.Error(),
@@ -47,11 +47,11 @@ func NewGorm(err error, msg string) appError {
 	}
 }
 
-func (e appError) Code() Code {
+func (e AppError) Code() Code {
 	return e.code
 }
 
-func (e appError) Message() string {
+func (e AppError) Message() string {
 	if e.message != "" {
 		return e.message
 	}
