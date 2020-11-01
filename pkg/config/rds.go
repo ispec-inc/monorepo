@@ -7,7 +7,7 @@ import (
 var RDS rds
 
 type rds struct {
-	MS          string
+	Driver      string
 	User        string
 	Password    string
 	Database    string
