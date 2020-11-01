@@ -10,6 +10,7 @@ import (
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/view"
 	"github.com/ispec-inc/go-distributed-monolith/src/account/invitation"
 )
 
@@ -35,11 +36,12 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	presenter.Encode(w, getCodeResponse{
+	res := view.InvitationCode{
 		ID:             output.ID,
 		UserID:         output.UserID,
 		InvitationCode: output.Code,
-	})
+	}
+	presenter.Encode(w, res)
 }
 
 func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
@@ -65,9 +67,10 @@ func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	presenter.Encode(w, addCodeResponse{
+	res := view.InvitationCode{
 		ID:             output.ID,
 		UserID:         output.UserID,
 		InvitationCode: output.Code,
-	})
+	}
+	presenter.Encode(w, res)
 }
