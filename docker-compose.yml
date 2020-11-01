@@ -23,6 +23,8 @@ services:
       MYSQL_DATABASE: monolith
       MYSQL_USER: user
       MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33061:3306"
     networks:
       - monolith
     volumes:
