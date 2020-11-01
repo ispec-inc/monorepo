@@ -3,6 +3,7 @@ module github.com/ispec-inc/go-distributed-monolith
 go 1.13
 
 require (
+	github.com/caarlos0/env/v6 v6.4.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-testfixtures/testfixtures/v3 v3.3.0
 	github.com/golang/mock v1.4.3
