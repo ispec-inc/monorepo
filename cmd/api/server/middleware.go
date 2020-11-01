@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 
