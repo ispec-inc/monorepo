@@ -34,17 +34,18 @@ func (repo Invitation) Create(minv model.Invitation) (
 ) {
 	tx := repo.db.Begin()
 
-	var inv entity.Invitation
+	var invs []entity.Invitation
 	err := tx.
 		Set("gorm:query_option", "for update").
-		First(&inv, "user_id = ?", minv.UserID).
+		Find(&invs, "user_id = ?", minv.UserID).
 		Error
-	if err != nil && !gorm.IsRecordNotFoundError(err) {
+	if err != nil {
 		tx.Rollback()
 		return model.Invitation{}, apperror.NewGorm(
 			err, "error searching invitation in database",
 		)
-	} else if err == nil {
+	}
+	if len(invs) > 0 {
 		tx.Rollback()
 		return model.Invitation{}, apperror.New(
 			apperror.CodeInvalid,
@@ -52,7 +53,7 @@ func (repo Invitation) Create(minv model.Invitation) (
 		)
 	}
 
-	inv = entity.NewInvitationFromModel(minv)
+	inv := entity.NewInvitationFromModel(minv)
 	if err := tx.Create(&inv).Error; err != nil {
 		tx.Rollback()
 		return model.Invitation{}, apperror.NewGorm(
