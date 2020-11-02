@@ -12,7 +12,7 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/view"
-	"github.com/ispec-inc/go-distributed-monolith/src/account/invitation"
+	"github.com/ispec-inc/go-distributed-monolith/src/invitation"
 )
 
 type handler struct {
