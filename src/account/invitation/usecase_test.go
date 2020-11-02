@@ -50,7 +50,7 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 			aerr := apperror.NewTestError(c.errCode)
 			im.EXPECT().Find(c.inp.ID).Return(c.out.Invitation, aerr)
 
-			u := Usecase{invitationRepo: im}
+			u := Usecase{invitation: im}
 			out, aerr := u.FindCode(c.inp)
 
 			assert.Equal(t, c.out, out)
@@ -104,9 +104,9 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 
 			aerr := apperror.NewTestError(c.errCode)
 			im.EXPECT().Create(c.inp.Invitation).Return(aerr)
-			im.EXPECT().FindByUserID(c.inp.Invitation.UserID).Return(c.out.Invitation, aerr)
+			im.EXPECT().FindByUserID(c.inp.Invitation.UserID).Return(c.out.Invitation, aerr).AnyTimes()
 
-			u := Usecase{invitationRepo: im}
+			u := Usecase{invitation: im}
 			out, aerr := u.AddCode(c.inp)
 
 			assert.Equal(t, c.out, out)

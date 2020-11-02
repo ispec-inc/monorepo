@@ -20,7 +20,7 @@ type handler struct {
 }
 
 func NewHandler(repo registry.Repository) handler {
-	usecase := invitation.NewUsecase(repo.NewInvitation())
+	usecase := invitation.NewUsecase(repo)
 	return handler{usecase}
 }
 
