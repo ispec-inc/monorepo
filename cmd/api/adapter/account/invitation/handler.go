@@ -8,6 +8,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-playground/validator"
 
+	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/view"
@@ -30,16 +31,18 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, aerr := h.usecase.FindCode(invitation.FindCodeInput{ID: int64(id)})
+	inp := invitation.FindCodeInput{
+		ID: int64(id),
+	}
+	out, aerr := h.usecase.FindCode(inp)
 	if aerr != nil {
 		presenter.ApplicationException(w, aerr)
 		return
 	}
 
-	res := view.InvitationCode{
-		ID:             output.ID,
-		UserID:         output.UserID,
-		InvitationCode: output.Code,
+	invres := view.NewInvitationCode(out.Invitation)
+	res := GetCodeResponse{
+		InvitationCode: invres,
 	}
 	presenter.Encode(w, res)
 }
@@ -56,21 +59,22 @@ func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, aerr := h.usecase.AddCode(
-		invitation.AddCodeInput{
-			UserID: request.UserID,
-			Code:   request.Code,
-		},
-	)
+	inv := model.Invitation{
+		UserID: request.UserID,
+		Code:   request.Code,
+	}
+	inp := invitation.AddCodeInput{
+		Invitation: inv,
+	}
+	out, aerr := h.usecase.AddCode(inp)
 	if aerr != nil {
 		presenter.ApplicationException(w, aerr)
 		return
 	}
 
-	res := view.InvitationCode{
-		ID:             output.ID,
-		UserID:         output.UserID,
-		InvitationCode: output.Code,
+	invres := view.NewInvitationCode(out.Invitation)
+	res := AddCodeResponse{
+		InvitationCode: invres,
 	}
 	presenter.Encode(w, res)
 }
