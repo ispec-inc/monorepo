@@ -44,7 +44,7 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 	res := GetCodeResponse{
 		InvitationCode: invres,
 	}
-	presenter.Encode(w, res)
+	presenter.Response(w, res)
 }
 
 func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
@@ -76,5 +76,5 @@ func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 	res := AddCodeResponse{
 		InvitationCode: invres,
 	}
-	presenter.Encode(w, res)
+	presenter.Response(w, res)
 }
