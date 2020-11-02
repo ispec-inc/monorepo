@@ -17,9 +17,13 @@ func NewRepository() (Repository, func() error) {
 		panic(err)
 	}
 
-	return Repository{
+	repo := Repository{
 		db: db,
-	}, cleanup
+	}
+	f := func() error {
+		return cleanup()
+	}
+	return repo, f
 }
 
 func (repo Repository) NewInvitation() dao.Invitation {
