@@ -18,7 +18,7 @@ func prepareTestInvitationDao(t *testing.T, path string) Invitation {
 }
 
 func TestInvitationDao_Find_Success(t *testing.T) {
-	i := prepareTestInvitationDao(t, "./testdata/invitation/find_success.sql")
+	i := prepareTestInvitationDao(t, "./testdata/invitation/find/success.sql")
 
 	output, aerr := i.Find(int64(1))
 	assert.Exactly(t, nil, aerr)
@@ -27,14 +27,14 @@ func TestInvitationDao_Find_Success(t *testing.T) {
 }
 
 func TestInvitationDao_Find_Fail_NotFound(t *testing.T) {
-	i := prepareTestInvitationDao(t, "./testdata/invitation/find_fail_not_found.sql")
+	i := prepareTestInvitationDao(t, "./testdata/invitation/find/fail_not_found.sql")
 
 	_, aerr := i.Find(int64(1))
 	assert.Exactly(t, apperror.CodeNotFound, aerr.Code())
 }
 
 func TestInvitationDao_FindByUserID_Success(t *testing.T) {
-	i := prepareTestInvitationDao(t, "./testdata/invitation/find_by_user_id_success.sql")
+	i := prepareTestInvitationDao(t, "./testdata/invitation/find_by_user_id/success.sql")
 
 	output, aerr := i.FindByUserID(int64(1))
 	assert.Exactly(t, nil, aerr)
@@ -43,14 +43,14 @@ func TestInvitationDao_FindByUserID_Success(t *testing.T) {
 }
 
 func TestInvitationDao_FindByUserID_Fail_NotFound(t *testing.T) {
-	i := prepareTestInvitationDao(t, "./testdata/invitation/find_by_user_id_fail_not_found.sql")
+	i := prepareTestInvitationDao(t, "./testdata/invitation/find_by_user_id/fail_not_found.sql")
 
 	_, aerr := i.FindByUserID(int64(1))
 	assert.Exactly(t, apperror.CodeNotFound, aerr.Code())
 }
 
 func TestInvitationDao_Create_Success(t *testing.T) {
-	i := prepareTestInvitationDao(t, "./testdata/invitation/create_success.sql")
+	i := prepareTestInvitationDao(t, "./testdata/invitation/create/success.sql")
 
 	aerr := i.Create(
 		model.Invitation{
@@ -62,7 +62,7 @@ func TestInvitationDao_Create_Success(t *testing.T) {
 }
 
 func TestInvitationDao_Create_Fail_AlreadyExist(t *testing.T) {
-	i := prepareTestInvitationDao(t, "./testdata/invitation/create_fail_already_exist.sql")
+	i := prepareTestInvitationDao(t, "./testdata/invitation/create/fail_already_exist.sql")
 
 	aerr := i.Create(
 		model.Invitation{
