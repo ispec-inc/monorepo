@@ -23,9 +23,11 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 				ID: int64(1),
 			},
 			out: FindCodeOutput{
-				ID:     int64(1),
-				UserID: int64(1),
-				Code:   "code",
+				Invitation: model.Invitation{
+					ID:     int64(1),
+					UserID: int64(1),
+					Code:   "code",
+				},
 			},
 			errCode: apperror.CodeNoError,
 		},
@@ -46,7 +48,7 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 			im := mock.NewMockInvitation(ctrl)
 
 			aerr := apperror.NewTestError(c.errCode)
-			im.EXPECT().Find(c.inp.ID).Return(model.Invitation(c.out), aerr)
+			im.EXPECT().Find(c.inp.ID).Return(c.out.Invitation, aerr)
 
 			u := Usecase{invitationRepo: im}
 			out, aerr := u.FindCode(c.inp)
@@ -67,20 +69,26 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 	}{
 		"success": {
 			inp: AddCodeInput{
-				UserID: int64(1),
-				Code:   "code",
+				Invitation: model.Invitation{
+					UserID: int64(1),
+					Code:   "code",
+				},
 			},
 			out: AddCodeOutput{
-				ID:     int64(1),
-				UserID: int64(1),
-				Code:   "code",
+				Invitation: model.Invitation{
+					ID:     int64(1),
+					UserID: int64(1),
+					Code:   "code",
+				},
 			},
 			errCode: apperror.CodeNoError,
 		},
 		"internal error": {
 			inp: AddCodeInput{
-				UserID: int64(1),
-				Code:   "code",
+				Invitation: model.Invitation{
+					UserID: int64(1),
+					Code:   "code",
+				},
 			},
 			out:     AddCodeOutput{},
 			errCode: apperror.CodeError,
@@ -95,11 +103,8 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 			im := mock.NewMockInvitation(ctrl)
 
 			aerr := apperror.NewTestError(c.errCode)
-			inv := model.Invitation{
-				UserID: c.inp.UserID,
-				Code:   c.inp.Code,
-			}
-			im.EXPECT().Create(inv).Return(aerr)
+			im.EXPECT().Create(c.inp.Invitation).Return(aerr)
+			im.EXPECT().FindByUserID(c.inp.Invitation.UserID).Return(c.out.Invitation, aerr)
 
 			u := Usecase{invitationRepo: im}
 			out, aerr := u.AddCode(c.inp)

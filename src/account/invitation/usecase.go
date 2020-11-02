@@ -2,7 +2,6 @@ package invitation
 
 import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/repository"
 )
 
@@ -14,31 +13,26 @@ func NewUsecase(invitationRepo repository.Invitation) Usecase {
 	return Usecase{invitationRepo}
 }
 
-func (u Usecase) FindCode(input FindCodeInput) (
-	FindCodeOutput, apperror.Error,
-) {
-	invitationCode, aerr := u.invitationRepo.Find(input.ID)
+func (u Usecase) FindCode(inp FindCodeInput) (out FindCodeOutput, aerr apperror.Error) {
+	inv, aerr := u.invitationRepo.Find(inp.ID)
 	if aerr != nil {
-		return FindCodeOutput{}, aerr
+		return
 	}
-
-	return FindCodeOutput(invitationCode), nil
+	out.Invitation = inv
+	return out, nil
 }
 
-func (u Usecase) AddCode(input AddCodeInput) (AddCodeOutput, apperror.Error) {
-	inv := model.Invitation{
-		UserID: input.UserID,
-		Code:   input.Code,
-	}
-	aerr := u.invitationRepo.Create(inv)
+func (u Usecase) AddCode(inp AddCodeInput) (out AddCodeOutput, aerr apperror.Error) {
+	aerr = u.invitationRepo.Create(inp.Invitation)
 	if aerr != nil {
-		return AddCodeOutput{}, aerr
+		return
 	}
 
-	inv, aerr = u.invitationRepo.FindByUserID(input.UserID)
+	inv, aerr := u.invitationRepo.FindByUserID(inp.Invitation.UserID)
 	if aerr != nil {
-		return AddCodeOutput{}, aerr
+		return
 	}
+	out.Invitation = inv
 
-	return AddCodeOutput(inv), nil
+	return out, nil
 }
