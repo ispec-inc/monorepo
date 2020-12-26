@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: backstage
+  name: go-template
   description: |
     Goでバックエンドの開発を始める際のテンプレート
   annotations:
