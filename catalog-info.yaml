@@ -15,3 +15,21 @@ spec:
   type: service
   owner: yamad07
   lifecycle: experimental
+  schema:
+    required:
+      - service_id
+      - project_id
+      - description
+    properties:
+      service_id:
+        title: Service
+        type: string
+        description: Unique name of the service
+      project_id:
+        title: Projecct
+        type: string
+        description: Unique name of the component
+      description:
+        title: Description
+        type: string
+        description: Description of the component
