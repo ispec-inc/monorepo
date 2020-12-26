@@ -1,13 +1,17 @@
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: Template
 metadata:
   name: go-template
+  title: Go API Template
   description: |
     Goでバックエンドの開発を始める際のテンプレート
   annotations:
     github.com/project-slug: ispec-inc/go-distributed-monolith
     backstage.io/techdocs-ref: github:https://github.com/ispec-inc/go-distributed-monolith
+  tags:
+    - recommended
+    - golang
 spec:
-  type: template
+  type: service
   owner: yamad07
   lifecycle: experimental
