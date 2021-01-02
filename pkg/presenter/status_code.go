@@ -14,48 +14,45 @@ var CodeStatuses = map[apperror.Code]int{
 	apperror.CodeInvalid:  http.StatusBadRequest,
 }
 
-type Response struct {
+type messageResponse struct {
 	Message string `json:"message"`
 }
 
-func NewResponse(msg string) Response {
-	return Response{
-		msg,
+func newMessageResponse(msg string) messageResponse {
+	return messageResponse{
+		Message: msg,
 	}
 }
 
 func ApplicationException(w http.ResponseWriter, aerr apperror.Error) {
+	w.Header().Add("Content-type", "application/json")
 	w.WriteHeader(CodeStatuses[aerr.Code()])
-
-	body := NewResponse(aerr.Message())
-	encode(w, body)
+	body := newMessageResponse(aerr.Message())
+	json.NewEncoder(w).Encode(body)
 }
 
 func InternalServerError(w http.ResponseWriter, err error) {
+	w.Header().Add("Content-type", "application/json")
 	w.WriteHeader(http.StatusInternalServerError)
-
-	body := NewResponse(err.Error())
-	encode(w, body)
+	body := newMessageResponse(err.Error())
+	json.NewEncoder(w).Encode(body)
 }
 
 func BadRequestError(w http.ResponseWriter, err error) {
+	w.Header().Add("Content-type", "application/json")
 	w.WriteHeader(http.StatusBadRequest)
-
-	body := NewResponse(err.Error())
-	encode(w, body)
+	body := newMessageResponse(err.Error())
+	json.NewEncoder(w).Encode(body)
 }
 
 func Success(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusOK)
-	body := NewResponse("success")
-	encode(w, body)
+	body := newMessageResponse("success")
+	json.NewEncoder(w).Encode(body)
 }
 
-func Encode(w http.ResponseWriter, body interface{}) {
-	w.WriteHeader(http.StatusOK)
-	encode(w, body)
-}
-
-func encode(w http.ResponseWriter, body interface{}) {
+func Response(w http.ResponseWriter, body interface{}) {
+	w.Header().Add("Content-type", "application/json")
+	w.WriteHeader(CodeStatuses[apperror.CodeSuccess])
 	json.NewEncoder(w).Encode(body)
 }
