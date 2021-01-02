@@ -13,36 +13,29 @@ import (
 )
 
 var (
-	DB *gorm.DB
+	db *gorm.DB
 )
 
 func TestMain(m *testing.M) {
 	config.Init()
 
-	db, cleanup, err := mysql.Init()
+	d, cleanup, err := mysql.Init()
 	if err != nil {
 		panic(err)
 	}
 	defer cleanup()
-	db.LogMode(false)
-	DB = db
+	d.LogMode(false)
+	db = d
 
 	os.Exit(m.Run())
 }
 
 func prepareTestData(filepath string) error {
-	s, err := sqlfile.Load("./testdata/delete.sql")
-	if err != nil {
+	s := sqlfile.New()
+	if err := s.Files("./testdata/delete.sql", filepath); err != nil {
 		return err
 	}
-	if _, err := s.Exec(DB.DB()); err != nil {
-		return err
-	}
-	s, err = sqlfile.Load(filepath)
-	if err != nil {
-		return err
-	}
-	if _, err := s.Exec(DB.DB()); err != nil {
+	if _, err := s.Exec(db.DB()); err != nil {
 		return err
 	}
 	return nil

@@ -26,15 +26,19 @@ func (u Usecase) FindCode(input FindCodeInput) (
 }
 
 func (u Usecase) AddCode(input AddCodeInput) (AddCodeOutput, apperror.Error) {
-	invitationCode, aerr := u.invitationRepo.Create(
-		model.Invitation{
-			UserID: input.UserID,
-			Code:   input.Code,
-		},
-	)
+	inv := model.Invitation{
+		UserID: input.UserID,
+		Code:   input.Code,
+	}
+	aerr := u.invitationRepo.Create(inv)
 	if aerr != nil {
 		return AddCodeOutput{}, aerr
 	}
 
-	return AddCodeOutput(invitationCode), nil
+	inv, aerr = u.invitationRepo.FindByUserID(input.UserID)
+	if aerr != nil {
+		return AddCodeOutput{}, aerr
+	}
+
+	return AddCodeOutput(inv), nil
 }
