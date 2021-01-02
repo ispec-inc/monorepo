@@ -8,7 +8,7 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 )
 
-func NewGormError(err error, msg string) apperror.AppError {
+func NewGormError(err error, msg string) apperror.Error {
 	switch err {
 	case gorm.ErrRecordNotFound:
 		return apperror.New(apperror.CodeNotFound, fmt.Errorf("%s: %s", msg, err.Error()))

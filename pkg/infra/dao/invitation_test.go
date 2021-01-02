@@ -9,12 +9,16 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 )
 
-func TestInvitationDao_Find_Success(t *testing.T) {
+func prepareTestInvitationDao(t *testing.T, path string) Invitation {
 	t.Helper()
-	if err := prepareTestData("./testdata/invitation/find_success.sql"); err != nil {
+	if err := prepareTestData(path); err != nil {
 		t.Error(err)
 	}
-	i := NewInvitation(DB)
+	return NewInvitation(db)
+}
+
+func TestInvitationDao_Find_Success(t *testing.T) {
+	i := prepareTestInvitationDao(t, "./testdata/invitation/find/success.sql")
 
 	output, aerr := i.Find(int64(1))
 	assert.Exactly(t, nil, aerr)
@@ -22,43 +26,45 @@ func TestInvitationDao_Find_Success(t *testing.T) {
 	assert.Exactly(t, "code", output.Code)
 }
 
-func TestInvitationDao_Fail_NotFound(t *testing.T) {
-	t.Helper()
-	if err := prepareTestData("./testdata/invitation/find_fail_not_found.sql"); err != nil {
-		t.Error(err)
-	}
-	i := NewInvitation(DB)
+func TestInvitationDao_Find_Fail_NotFound(t *testing.T) {
+	i := prepareTestInvitationDao(t, "./testdata/invitation/find/fail_not_found.sql")
 
 	_, aerr := i.Find(int64(1))
 	assert.Exactly(t, apperror.CodeNotFound, aerr.Code())
 }
 
-func TestInvitationDao_Create_Success(t *testing.T) {
-	t.Helper()
-	if err := prepareTestData("./testdata/invitation/create_success.sql"); err != nil {
-		t.Error(err)
-	}
-	i := NewInvitation(DB)
+func TestInvitationDao_FindByUserID_Success(t *testing.T) {
+	i := prepareTestInvitationDao(t, "./testdata/invitation/find_by_user_id/success.sql")
 
-	output, aerr := i.Create(
+	output, aerr := i.FindByUserID(int64(1))
+	assert.Exactly(t, nil, aerr)
+	assert.Exactly(t, int64(1), output.ID)
+	assert.Exactly(t, "code", output.Code)
+}
+
+func TestInvitationDao_FindByUserID_Fail_NotFound(t *testing.T) {
+	i := prepareTestInvitationDao(t, "./testdata/invitation/find_by_user_id/fail_not_found.sql")
+
+	_, aerr := i.FindByUserID(int64(1))
+	assert.Exactly(t, apperror.CodeNotFound, aerr.Code())
+}
+
+func TestInvitationDao_Create_Success(t *testing.T) {
+	i := prepareTestInvitationDao(t, "./testdata/invitation/create/success.sql")
+
+	aerr := i.Create(
 		model.Invitation{
 			UserID: int64(1),
 			Code:   "code",
 		},
 	)
 	assert.Exactly(t, nil, aerr)
-	assert.Exactly(t, int64(1), output.UserID)
-	assert.Exactly(t, "code", output.Code)
 }
 
 func TestInvitationDao_Create_Fail_AlreadyExist(t *testing.T) {
-	t.Helper()
-	if err := prepareTestData("./testdata/invitation/create_fail_already_exist.sql"); err != nil {
-		t.Error(err)
-	}
-	i := NewInvitation(DB)
+	i := prepareTestInvitationDao(t, "./testdata/invitation/create/fail_already_exist.sql")
 
-	_, aerr := i.Create(
+	aerr := i.Create(
 		model.Invitation{
 			UserID: int64(1),
 			Code:   "code",

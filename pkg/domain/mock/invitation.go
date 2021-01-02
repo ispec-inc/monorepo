@@ -50,12 +50,11 @@ func (mr *MockInvitationMockRecorder) Find(arg0 interface{}) *gomock.Call {
 }
 
 // Create mocks base method
-func (m *MockInvitation) Create(arg0 model.Invitation) (model.Invitation, apperror.Error) {
+func (m *MockInvitation) Create(arg0 model.Invitation) apperror.Error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", arg0)
-	ret0, _ := ret[0].(model.Invitation)
-	ret1, _ := ret[1].(apperror.Error)
-	return ret0, ret1
+	ret0, _ := ret[0].(apperror.Error)
+	return ret0
 }
 
 // Create indicates an expected call of Create

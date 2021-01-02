@@ -62,7 +62,7 @@ require (
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/stretchr/testify v1.6.1
 	github.com/syndtr/goleveldb v1.0.0 // indirect
-	github.com/tanimutomo/sqlfile v0.0.0-20200828042957-aa60690f7209
+	github.com/tanimutomo/sqlfile v1.0.0
 	go.opencensus.io v0.22.5 // indirect
 	golang.org/x/build v0.0.0-20201030074411-3b7f1150099d // indirect
 	golang.org/x/image v0.0.0-20200927104501-e162460cd6b5 // indirect

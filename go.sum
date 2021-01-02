@@ -520,6 +520,8 @@ github.com/syndtr/goleveldb v1.0.0/go.mod h1:ZVVdQEZoIme9iO1Ch2Jdy24qqXrMMOU6lpP
 github.com/tanimutomo/sqlfile v0.0.0-20200824012650-85fa16b16ce7/go.mod h1:wln4uYrCppYkqoztt0XBYaCMOGItH3ABQBWxUUXA8zQ=
 github.com/tanimutomo/sqlfile v0.0.0-20200828042957-aa60690f7209 h1:1rNraD11zjWG3AzNsHlZkfMJE3uAH/S3g0O2Uc6lUak=
 github.com/tanimutomo/sqlfile v0.0.0-20200828042957-aa60690f7209/go.mod h1:vdHiTAUB+JJn9lSFzv4iLGm54ghBOo444TthhTSvP4E=
+github.com/tanimutomo/sqlfile v1.0.0 h1:8Nnkd1ra7vBDb7yrv4zvvEdto0vO5Yuegv87C6Tcyp8=
+github.com/tanimutomo/sqlfile v1.0.0/go.mod h1:vdHiTAUB+JJn9lSFzv4iLGm54ghBOo444TthhTSvP4E=
 github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07 h1:UyzmZLoiDWMRywV4DUYb9Fbt8uiOSooupjTq10vpvnU=
 github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07/go.mod h1:kDXzergiv9cbyO7IOYJZWg1U88JhDg3PB6klq9Hg2pA=
 github.com/yuin/goldmark v1.1.25/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
