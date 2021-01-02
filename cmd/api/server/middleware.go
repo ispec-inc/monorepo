@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 
@@ -14,6 +12,6 @@ func commonMiddleware(r *chi.Mux) *chi.Mux {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
-	r.Use(middleware.Timeout(time.Second * time.Duration(config.Router.Timeout)))
+	r.Use(middleware.Timeout(config.Router.Timeout))
 	return r
 }
