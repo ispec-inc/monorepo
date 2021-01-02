@@ -1,7 +1,11 @@
 package config
 
+import (
+	"time"
+)
+
 var Router router
 
 type router struct {
-	Timeout int
+	Timeout time.Duration `env:"APP_TIMEOUT"`
 }
