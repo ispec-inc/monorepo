@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-chi/chi"
 
-	"github.com/ispec-inc/go-distributed-monolith/cmd/api/adapter/account/invitation"
+	"github.com/ispec-inc/go-distributed-monolith/cmd/api/adapter/invitation"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 )

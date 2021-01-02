@@ -4,6 +4,10 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 )
 
-type FindCodeOutput model.Invitation
+type FindCodeInput struct {
+	ID int64
+}
 
-type AddCodeOutput model.Invitation
+type AddCodeInput struct {
+	Invitation model.Invitation
+}
