@@ -1,5 +1,5 @@
 apiVersion: backstage.io/v1alpha1
-kind: API
+kind: Component
 metadata:
   name: go-distributed-monolith
   title: Go Monolith API Base
@@ -13,8 +13,6 @@ metadata:
     - golang
     - sample
 spec:
-  type: openapi
+  type: service
   owner: yamad07
   lifecycle: production
-  definition:
-    $text: https://petstore.swagger.io/v2/swagger.json
