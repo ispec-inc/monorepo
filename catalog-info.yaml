@@ -16,6 +16,5 @@ spec:
   type: service
   owner: yamad07
   lifecycle: production
-  providesApis:
-    - anipic-api
-    - bewin-admin
+  definition:
+    $text: https://petstore.swagger.io/v2/swagger.json
