@@ -1,21 +1,21 @@
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: API
 metadata:
   name: go-distributed-monolith
   title: Go Monolith API Base
   description: |
-    Goでバックエンドの開発を始める際のモジュール
+    Sample Go API Project
   annotations:
     github.com/project-slug: ispec-inc/go-distributed-monolith
     backstage.io/techdocs-ref: github:https://github.com/ispec-inc/go-distributed-monolith
   tags:
     - recommended
     - golang
-    - template
+    - sample
 spec:
   type: service
   owner: yamad07
-  lifecycle: experimental
+  lifecycle: production
   providesApis:
     - anipic-api
     - bewin-admin
