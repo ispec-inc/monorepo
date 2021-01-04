@@ -13,7 +13,7 @@ metadata:
     - golang
     - sample
 spec:
-  type: service
+  type: openapi
   owner: yamad07
   lifecycle: production
   definition:
