@@ -1,7 +1,6 @@
 site_name: 'Sample Go API Project'
 
 nav:
-  - Overview: index.md
   - Docs:
     - Architecture: docs/architecture.md
 
