@@ -1,9 +1,0 @@
-site_name: 'Sample Go API Project'
-
-nav:
-  - Overview: index.md
-  - Docs:
-    - Architecture: architecture.md
-
-plugins:
-  - techdocs-core

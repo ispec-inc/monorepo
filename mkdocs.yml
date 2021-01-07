@@ -1,0 +1,7 @@
+site_name: 'Go API Project'
+
+nav:
+  - Overview: index.md
+
+plugins:
+  - techdocs-core
