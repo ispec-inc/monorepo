@@ -12,7 +12,7 @@ const (
 
 type Error interface {
 	Code() Code
-	Message() string
+	Error() string
 }
 
 type AppError struct {
@@ -33,7 +33,7 @@ func (e AppError) Code() Code {
 	return e.code
 }
 
-func (e AppError) Message() string {
+func (e AppError) Error() string {
 	if e.message != "" {
 		return e.message
 	}

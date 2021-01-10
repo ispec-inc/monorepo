@@ -4,7 +4,6 @@ go 1.13
 
 require (
 	fyne.io/fyne v1.3.3 // indirect
-	gioui.org v0.0.0-20201031091437-39b50261d082 // indirect
 	github.com/BurntSushi/xgb v0.0.0-20201008132610-5f9e7b3c49cd // indirect
 	github.com/aclements/go-gg v0.0.0-20170323211221-abd1f791f5ee // indirect
 	github.com/aclements/go-moremath v0.0.0-20190830160640-d16893ddf098 // indirect
@@ -50,7 +49,6 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0 // indirect
 	github.com/iancoleman/strcase v0.1.2 // indirect
 	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1 // indirect
-	github.com/jinzhu/gorm v1.9.14
 	github.com/joho/godotenv v1.3.0
 	github.com/jung-kurt/gofpdf v1.16.2 // indirect
 	github.com/kisielk/sqlstruct v0.0.0-20150923205031-648daed35d49 // indirect
@@ -72,4 +70,6 @@ require (
 	google.golang.org/genproto v0.0.0-20201030142918-24207fddd1c3 // indirect
 	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
 	gopkg.in/yaml.v1 v1.0.0-20140924161607-9f9df34309c0 // indirect
+	gorm.io/driver/mysql v1.0.3
+	gorm.io/gorm v1.20.10
 )

@@ -2,7 +2,7 @@ package transaction
 
 import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 // See also: https://stackoverflow.com/questions/16184238/database-sql-tx-detecting-commit-or-rollback
