@@ -1,7 +1,7 @@
 package registry
 
 import (
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/dao"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
@@ -12,7 +12,7 @@ type Repository struct {
 }
 
 func NewRepository() (Repository, func() error) {
-	db, cleanup, err := mysql.Init()
+	db, err := mysql.Init()
 	if err != nil {
 		panic(err)
 	}
@@ -20,9 +20,7 @@ func NewRepository() (Repository, func() error) {
 	repo := Repository{
 		db: db,
 	}
-	f := func() error {
-		return cleanup()
-	}
+	f := func() error { return nil }
 	return repo, f
 }
 

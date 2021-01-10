@@ -3,7 +3,7 @@ package dao
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 )
