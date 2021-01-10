@@ -27,7 +27,7 @@ func newMessageResponse(msg string) messageResponse {
 func ApplicationException(w http.ResponseWriter, aerr apperror.Error) {
 	w.Header().Add("Content-type", "application/json")
 	w.WriteHeader(CodeStatuses[aerr.Code()])
-	body := newMessageResponse(aerr.Message())
+	body := newMessageResponse(aerr.Error())
 	json.NewEncoder(w).Encode(body)
 }
 
