@@ -7,7 +7,6 @@ import (
 	"github.com/tanimutomo/sqlfile"
 	"gorm.io/gorm"
 
-	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
 )
 
@@ -16,8 +15,6 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	config.Init()
-
 	d, err := mysql.Init()
 	if err != nil {
 		panic(err)
