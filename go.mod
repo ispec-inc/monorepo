@@ -29,6 +29,7 @@ require (
 	github.com/edsrzf/mmap-go v1.0.0 // indirect
 	github.com/fogleman/gg v1.3.0 // indirect
 	github.com/garyburd/redigo v1.6.2 // indirect
+	github.com/getsentry/sentry-go v0.9.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible
