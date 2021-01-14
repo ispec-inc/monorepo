@@ -2,7 +2,7 @@
 // Source: invitation.go
 
 // Package mock is a generated GoMock package.
-package mock
+package mock_repository
 
 import (
 	gomock "github.com/golang/mock/gomock"

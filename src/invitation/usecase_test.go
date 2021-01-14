@@ -9,9 +9,9 @@ import (
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/mock"
-	mockio_repository "github.com/ispec-inc/go-distributed-monolith/pkg/domain/mock/mockio"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
+	mock_repository "github.com/ispec-inc/go-distributed-monolith/pkg/domain/repository/mock"
+	mockio_repository "github.com/ispec-inc/go-distributed-monolith/pkg/domain/repository/mockio"
 )
 
 func TestInvitationUsecase_FindCode(t *testing.T) {
@@ -73,7 +73,7 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			invRepo := mock.NewMockInvitation(ctrl)
+			invRepo := mock_repository.NewMockInvitation(ctrl)
 			invRepo.EXPECT().
 				Find(tc.invFind.ArgId).
 				Return(tc.invFind.Ret0, tc.invFind.Ret1).
@@ -169,7 +169,7 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			invRepo := mock.NewMockInvitation(ctrl)
+			invRepo := mock_repository.NewMockInvitation(ctrl)
 			invRepo.EXPECT().
 				Create(tc.invCreate.ArgMinv).
 				Return(tc.invCreate.Ret0).
