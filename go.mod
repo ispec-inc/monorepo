@@ -47,8 +47,8 @@ require (
 	github.com/google/pprof v0.0.0-20201023163331-3e6fc7fc9c4c // indirect
 	github.com/googleapis/gax-go v2.0.2+incompatible // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0 // indirect
-	github.com/iancoleman/strcase v0.1.2 // indirect
 	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1 // indirect
+	github.com/ispec-inc/civgen-go/mockio v0.0.0-20210113074613-221b469da465 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/jung-kurt/gofpdf v1.16.2 // indirect
 	github.com/kisielk/sqlstruct v0.0.0-20150923205031-648daed35d49 // indirect
