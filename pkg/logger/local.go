@@ -2,7 +2,8 @@ package logger
 
 import (
 	"context"
-	"log"
+
+	"github.com/k0kubun/pp"
 )
 
 type localLogger struct{}
@@ -18,16 +19,23 @@ func (r localLogger) SetUser(ctx context.Context, id, name string) context.Conte
 }
 
 func (r localLogger) Error(ctx context.Context, code, message string, err error) {
-	var uid, uname string
+	errLog := errorLog{
+		errCode:    code,
+		errMessage: message,
+	}
 	if v := ctx.Value(userIDKey); v != nil {
-		uid = v.(string)
+		errLog.userID = v.(string)
 	}
 	if v := ctx.Value(userNameKey); v != nil {
-		uname = v.(string)
+		errLog.userName = v.(string)
 	}
 
-	log.Printf(
-		"[Exception] User(id:%s, name:%s) Error(code:%s, message:%s)\n",
-		uid, uname, code, message,
-	)
+	pp.Println(errLog)
+}
+
+type errorLog struct {
+	userID     string
+	userName   string
+	errCode    string
+	errMessage string
 }
