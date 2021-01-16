@@ -14,11 +14,15 @@ func main() {
 	defer cleanup()
 
 	var loggerCleanup func()
+	var err error
 	switch config.App.Env {
 	case config.EnvDev:
 		apphttp.Logger = logger.NewLocal()
 	default:
-		apphttp.Logger, loggerCleanup = logger.NewSentry(config.Sentry.DSN, config.Sentry.Env, config.Sentry.Debug)
+		apphttp.Logger, loggerCleanup, err = logger.NewSentry(config.Sentry.DSN, config.Sentry.Env, config.Sentry.Debug)
+	}
+	if err != nil {
+		panic(err)
 	}
 	defer loggerCleanup()
 

@@ -2,7 +2,6 @@ package logger
 
 import (
 	"context"
-	"log"
 	"time"
 
 	"github.com/getsentry/sentry-go"
@@ -10,19 +9,15 @@ import (
 
 type sentryLogger struct{}
 
-func NewSentry(dsn, env string, debug bool) (Logger, func()) {
+func NewSentry(dsn, env string, debug bool) (Logger, func(), error) {
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn:         dsn,
 		Environment: env,
 		Debug:       debug,
 	})
-	if err != nil {
-		log.Fatalf("sentry.Init: %s", err)
-	}
-
 	return sentryLogger{}, func() {
 		sentry.Flush(2 * time.Second)
-	}
+	}, err
 }
 
 func (r sentryLogger) SetUser(ctx context.Context, id, name string) context.Context {
