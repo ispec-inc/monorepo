@@ -11,17 +11,17 @@ type Repository struct {
 	db *gorm.DB
 }
 
-func NewRepository() (Repository, func() error) {
+func NewRepository() (Repository, func() error, error) {
 	db, err := mysql.Init()
 	if err != nil {
-		panic(err)
+		return Repository{}, func() error { return nil }, err
 	}
 
 	repo := Repository{
 		db: db,
 	}
-	f := func() error { return nil }
-	return repo, f
+	cleanup := func() error { return nil }
+	return repo, cleanup, nil
 }
 
 func (repo Repository) NewInvitation() dao.Invitation {
