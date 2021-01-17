@@ -34,7 +34,7 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 	inp := invitation.FindCodeInput{
 		ID: int64(id),
 	}
-	out, aerr := h.usecase.FindCode(inp)
+	out, aerr := h.usecase.FindCode(r.Context(), inp)
 	if aerr != nil {
 		presenter.ApplicationException(w, aerr)
 		return
@@ -66,7 +66,7 @@ func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 	inp := invitation.AddCodeInput{
 		Invitation: inv,
 	}
-	out, aerr := h.usecase.AddCode(inp)
+	out, aerr := h.usecase.AddCode(r.Context(), inp)
 	if aerr != nil {
 		presenter.ApplicationException(w, aerr)
 		return

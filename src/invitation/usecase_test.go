@@ -1,6 +1,7 @@
 package invitation
 
 import (
+	"context"
 	"testing"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
@@ -51,7 +52,7 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 			im.EXPECT().Find(c.inp.ID).Return(c.out.Invitation, aerr)
 
 			u := Usecase{invitation: im}
-			out, aerr := u.FindCode(c.inp)
+			out, aerr := u.FindCode(context.TODO(), c.inp)
 
 			assert.Equal(t, c.out, out)
 			apperror.AssertError(t, c.errCode, aerr)
@@ -107,7 +108,7 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 			im.EXPECT().FindByUserID(c.inp.Invitation.UserID).Return(c.out.Invitation, aerr).AnyTimes()
 
 			u := Usecase{invitation: im}
-			out, aerr := u.AddCode(c.inp)
+			out, aerr := u.AddCode(context.TODO(), c.inp)
 
 			assert.Equal(t, c.out, out)
 			apperror.AssertError(t, c.errCode, aerr)
