@@ -1,4 +1,4 @@
-site_name: 'Go API Project'
+site_name: 'Go Best Practices'
 
 nav:
   - Overview: index.md
