@@ -9,24 +9,23 @@ import (
 
 type sentryLogger struct{}
 
-func NewSentry(dsn, env string, debug bool) (Logger, func(), error) {
+func newSentryLogger(options SentryOptions) (*sentryLogger, func(), error) {
 	err := sentry.Init(sentry.ClientOptions{
-		Dsn:         dsn,
-		Environment: env,
-		Debug:       debug,
+		Dsn:         options.DSN,
+		Environment: options.Environment,
+		Debug:       options.Debug,
 	})
-	return sentryLogger{}, func() {
-		sentry.Flush(2 * time.Second)
-	}, err
+	cleanup := func() { sentry.Flush(2 * time.Second) }
+	return &sentryLogger{}, cleanup, err
 }
 
-func (r sentryLogger) SetUser(ctx context.Context, id, name string) context.Context {
+func (r *sentryLogger) SetUser(ctx context.Context, id, name string) context.Context {
 	ctx = context.WithValue(ctx, userIDKey, id)
 	ctx = context.WithValue(ctx, userNameKey, name)
 	return ctx
 }
 
-func (r sentryLogger) Error(ctx context.Context, code, message string, err error) {
+func (r *sentryLogger) Error(ctx context.Context, code, message string, err error) {
 	var uid, uname string
 	if v := ctx.Value(userIDKey); v != nil {
 		uid = v.(string)

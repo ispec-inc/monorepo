@@ -6,19 +6,19 @@ import (
 	"github.com/k0kubun/pp"
 )
 
-type localLogger struct{}
+type stdoutLogger struct{}
 
-func NewLocal() Logger {
-	return localLogger{}
+func newStdoutLogger() *stdoutLogger {
+	return &stdoutLogger{}
 }
 
-func (r localLogger) SetUser(ctx context.Context, id, name string) context.Context {
+func (r *stdoutLogger) SetUser(ctx context.Context, id, name string) context.Context {
 	ctx = context.WithValue(ctx, userIDKey, id)
 	ctx = context.WithValue(ctx, userNameKey, name)
 	return ctx
 }
 
-func (r localLogger) Error(ctx context.Context, code, message string, err error) {
+func (r *stdoutLogger) Error(ctx context.Context, code, message string, err error) {
 	errLog := errorLog{
 		errCode:    code,
 		errMessage: message,
