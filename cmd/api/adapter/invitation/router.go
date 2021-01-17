@@ -4,12 +4,14 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/apphttp"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 )
 
-func NewRouter(handler handler) http.Handler {
+func NewRouter(repo registry.Repository, srvc registry.Service) http.Handler {
 	r := chi.NewRouter()
-	r.Get("/{id}", apphttp.Wrap(handler.GetCode))
-	r.Post("/", apphttp.Wrap(handler.AddCode))
+	h := NewHandler(repo, srvc)
+
+	r.Get("/{id}", h.GetCode)
+	r.Post("/", h.AddCode)
 	return r
 }

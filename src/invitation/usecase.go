@@ -10,7 +10,7 @@ type Usecase struct {
 	invitation repository.Invitation
 }
 
-func NewUsecase(repo registry.Repository) Usecase {
+func NewUsecase(repo registry.Repository, srvc registry.Service) Usecase {
 	return Usecase{
 		invitation: repo.NewInvitation(),
 	}

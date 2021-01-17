@@ -6,21 +6,20 @@ import (
 	"github.com/go-chi/chi"
 
 	"github.com/ispec-inc/go-distributed-monolith/cmd/api/adapter/invitation"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/apphttp"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 )
 
-func NewRouter(repo registry.Repository) http.Handler {
+func NewRouter(repo registry.Repository, srvc registry.Service) http.Handler {
 	r := chi.NewRouter()
-
-	invitationHandler := invitation.NewHandler(repo)
 
 	r = commonMiddleware(r)
 
-	r.Mount("/invitations", invitation.NewRouter(invitationHandler))
-	r.Get("/health", apphttp.Wrap(func(w apphttp.ResponseWriter, r *http.Request) {
-		w.WriteResponse(map[string]string{"messsage": "ok"})
-	}))
+	r.Mount("/invitations", invitation.NewRouter(repo, srvc))
+
+	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+		presenter.Response(w, map[string]string{"messsage": "ok"})
+	})
 
 	return r
 }
