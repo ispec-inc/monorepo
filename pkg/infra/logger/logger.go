@@ -25,6 +25,10 @@ func (l Logger) SetUser(ctx context.Context, userID int64, userName string) cont
 }
 
 func (l Logger) Error(ctx context.Context, aerr apperror.Error) {
+	if aerr.Code() != apperror.CodeError {
+		return
+	}
+
 	var user logger.User
 	if v := ctx.Value(userIDKey); v != nil {
 		user.ID = v.(string)
