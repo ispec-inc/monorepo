@@ -13,15 +13,18 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 	mock_repository "github.com/ispec-inc/go-distributed-monolith/pkg/domain/repository/mock"
 	mockio_repository "github.com/ispec-inc/go-distributed-monolith/pkg/domain/repository/mockio"
+	mock_service "github.com/ispec-inc/go-distributed-monolith/pkg/domain/service/mock"
+	mockio_service "github.com/ispec-inc/go-distributed-monolith/pkg/domain/service/mockio"
 )
 
 func TestInvitationUsecase_FindCode(t *testing.T) {
 	cases := []struct {
-		name    string
-		in      FindCodeInput
-		want    FindCodeOutput
-		invFind mockio_repository.InvitationFind
-		err     bool
+		name     string
+		in       FindCodeInput
+		want     FindCodeOutput
+		invFind  mockio_repository.InvitationFind
+		logError mockio_service.LoggerError
+		err      bool
 	}{
 		{
 			name: "Created",
@@ -63,6 +66,11 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 				},
 				Ret1: apperror.New(apperror.CodeNotFound, errors.New("")),
 			},
+			logError: mockio_service.LoggerError{
+				Time:    1,
+				ArgCtx:  context.TODO(),
+				ArgAerr: apperror.New(apperror.CodeNotFound, errors.New("")),
+			},
 			err: true,
 		},
 	}
@@ -80,8 +88,15 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 				Return(tc.invFind.Ret0, tc.invFind.Ret1).
 				Times(tc.invFind.Time)
 
+			logSrvc := mock_service.NewMockLogger(ctrl)
+			logSrvc.EXPECT().
+				Error(tc.logError.ArgCtx, tc.logError.ArgAerr).
+				Return().
+				Times(tc.logError.Time)
+
 			u := Usecase{
 				invitation: invRepo,
+				logger:     logSrvc,
 			}
 			got, aerr := u.FindCode(context.TODO(), tc.in)
 
@@ -102,6 +117,7 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 		want            AddCodeOutput
 		invCreate       mockio_repository.InvitationCreate
 		invFindByUserID mockio_repository.InvitationFindByUserID
+		logError        mockio_service.LoggerError
 		err             bool
 	}{
 		{
@@ -159,6 +175,11 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 			invFindByUserID: mockio_repository.InvitationFindByUserID{
 				Time: 0,
 			},
+			logError: mockio_service.LoggerError{
+				Time:    1,
+				ArgCtx:  context.TODO(),
+				ArgAerr: apperror.New(apperror.CodeError, errors.New("")),
+			},
 			err: true,
 		},
 	}
@@ -180,8 +201,15 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 				Return(tc.invFindByUserID.Ret0, tc.invFindByUserID.Ret1).
 				Times(tc.invFindByUserID.Time)
 
+			logSrvc := mock_service.NewMockLogger(ctrl)
+			logSrvc.EXPECT().
+				Error(tc.logError.ArgCtx, tc.logError.ArgAerr).
+				Return().
+				Times(tc.logError.Time)
+
 			u := Usecase{
 				invitation: invRepo,
+				logger:     logSrvc,
 			}
 			got, aerr := u.AddCode(context.TODO(), tc.in)
 
