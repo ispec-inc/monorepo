@@ -1,18 +1,16 @@
 package logger
 
 import (
-	"context"
 	"errors"
 )
 
 var logger Logger
 
 type Logger interface {
-	SetUser(ctx context.Context, id, name string) context.Context
-	Error(ctx context.Context, code, msg string, err error)
+	Error(user User, err Error)
 }
 
-func Set(options Options) (func(), error) {
+func Setup(options Options) (func(), error) {
 	var instance Logger
 	var cleanup func()
 	var err error
