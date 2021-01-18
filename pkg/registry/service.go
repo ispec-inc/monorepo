@@ -2,6 +2,8 @@ package registry
 
 import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/service"
+	infra_logger "github.com/ispec-inc/go-distributed-monolith/pkg/infra/logger"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
 )
 
@@ -22,7 +24,7 @@ func NewService() (Service, func() error, error) {
 			},
 		}
 	}
-	logCleanup, err := logger.Set(logOpt)
+	logCleanup, err := logger.Setup(logOpt)
 	if err != nil {
 		return Service{}, func() error { return nil }, err
 	}
@@ -35,6 +37,6 @@ func NewService() (Service, func() error, error) {
 	return s, cleanup, nil
 }
 
-func (s Service) NewLogger() logger.Logger {
-	return logger.New()
+func (s Service) NewLogger() service.Logger {
+	return infra_logger.NewLogger(logger.New())
 }

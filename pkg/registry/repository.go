@@ -3,6 +3,7 @@ package registry
 import (
 	"gorm.io/gorm"
 
+	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/repository"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/dao"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
 )
@@ -24,6 +25,6 @@ func NewRepository() (Repository, func() error, error) {
 	return repo, cleanup, nil
 }
 
-func (repo Repository) NewInvitation() dao.Invitation {
+func (repo Repository) NewInvitation() repository.Invitation {
 	return dao.NewInvitation(repo.db)
 }
