@@ -1,3 +1,6 @@
+//go:generate go run github.com/golang/mock/mockgen -source=logger.go -destination=mock/logger.go
+//go:generate go run github.com/ispec-inc/civgen-go/mockio -source=logger.go -destination=mockio/logger.go
+
 package service
 
 import (
