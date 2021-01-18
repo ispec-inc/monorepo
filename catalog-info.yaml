@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: go-distributed-monolith
-  title: Go Monolith API Base
+  name: go-best-practices
+  title: Go Best Practices in Application
   description: |
-    Sample Go API Project
+    ispec Go Best Practices in Application
   annotations:
     github.com/project-slug: ispec-inc/go-distributed-monolith
     backstage.io/techdocs-ref: github:https://github.com/ispec-inc/go-distributed-monolith.git
