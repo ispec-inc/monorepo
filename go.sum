@@ -378,7 +378,10 @@ github.com/iris-contrib/go.uuid v2.0.0+incompatible/go.mod h1:iz2lgM/1UnEf1kP0L/
 github.com/iris-contrib/jade v1.1.3/go.mod h1:H/geBymxJhShH5kecoiOCSssPX7QWYH7UaeZTSWddIk=
 github.com/iris-contrib/pongo2 v0.0.1/go.mod h1:Ssh+00+3GAZqSQb30AvBRNxBx7rf0GqwkjqxNd0u65g=
 github.com/iris-contrib/schema v0.0.1/go.mod h1:urYA3uvUNG1TIIjOSCzHr9/LmbQo8LrOcOqfqxa4hXw=
+github.com/ispec-inc/civgen-go v0.0.0-20210113074613-221b469da465 h1:qRIlrk8H4hADEtnnQMnpWTDg6yNIJMYK8oCrWd5O+mU=
+github.com/ispec-inc/civgen-go/mockio v0.0.0-20210113074613-221b469da465 h1:NeSpi0udLN8BiP/oSV0g1rkZTdOkmsGODkmcO6icQ3A=
 github.com/ispec-inc/civgen-go/mockio v0.0.0-20210113074613-221b469da465/go.mod h1:YfPp/Caz6K5NdT1IqsAM/TMtO+979Ni28xl0g4gTqeU=
+github.com/jackc/chunkreader v1.0.0 h1:4s39bBR8ByfqH+DKm8rQA3E1LHZWB9XWcrz8fqaZbe0=
 github.com/jackc/chunkreader v1.0.0/go.mod h1:RT6O25fNZIuasFJRyZ4R/Y2BbhasbmZXF9QQ7T3kePo=
 github.com/jackc/chunkreader/v2 v2.0.0/go.mod h1:odVSm741yZoC3dpHEUXIqA9tQRhFrgOHwnPIn9lDKlk=
 github.com/jackc/chunkreader/v2 v2.0.1/go.mod h1:odVSm741yZoC3dpHEUXIqA9tQRhFrgOHwnPIn9lDKlk=
