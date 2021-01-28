@@ -7,7 +7,6 @@ package mock_service
 import (
 	context "context"
 	gomock "github.com/golang/mock/gomock"
-	apperror "github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 	reflect "reflect"
 )
 
@@ -49,13 +48,13 @@ func (mr *MockLoggerMockRecorder) SetUser(ctx, userID, userName interface{}) *go
 }
 
 // Error mocks base method
-func (m *MockLogger) Error(ctx context.Context, aerr apperror.Error) {
+func (m *MockLogger) Error(ctx context.Context, err error) {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "Error", ctx, aerr)
+	m.ctrl.Call(m, "Error", ctx, err)
 }
 
 // Error indicates an expected call of Error
-func (mr *MockLoggerMockRecorder) Error(ctx, aerr interface{}) *gomock.Call {
+func (mr *MockLoggerMockRecorder) Error(ctx, err interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Error", reflect.TypeOf((*MockLogger)(nil).Error), ctx, aerr)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Error", reflect.TypeOf((*MockLogger)(nil).Error), ctx, err)
 }

@@ -24,9 +24,15 @@ func (l Logger) SetUser(ctx context.Context, userID int64, userName string) cont
 	return ctx
 }
 
-func (l Logger) Error(ctx context.Context, aerr apperror.Error) {
-	if aerr.Code() != apperror.CodeError {
-		return
+func (l Logger) Error(ctx context.Context, err error) {
+	var lerr logger.Error
+	if aerr := apperror.Unwrap(err); aerr == nil {
+		lerr.Message = err.Error()
+		lerr.Err = err
+	} else {
+		lerr.Code = aerr.Code().String()
+		lerr.Message = aerr.Error()
+		lerr.Err = aerr
 	}
 
 	var user logger.User
@@ -37,11 +43,5 @@ func (l Logger) Error(ctx context.Context, aerr apperror.Error) {
 		user.Name = v.(string)
 	}
 
-	err := logger.Error{
-		Code:    aerr.Code().String(),
-		Message: aerr.Error(),
-		Err:     aerr,
-	}
-
-	l.logger.Error(user, err)
+	l.logger.Error(user, lerr)
 }

@@ -2,7 +2,6 @@ package invitation
 
 import (
 	"context"
-	"errors"
 	"testing"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
@@ -64,12 +63,12 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 					UserID: int64(1),
 					Code:   "code",
 				},
-				Ret1: apperror.New(apperror.CodeNotFound, errors.New("")),
+				Ret1: apperror.New(apperror.CodeNotFound, ""),
 			},
 			logError: mockio_service.LoggerError{
-				Time:    1,
-				ArgCtx:  context.TODO(),
-				ArgAerr: apperror.New(apperror.CodeNotFound, errors.New("")),
+				Time:   1,
+				ArgCtx: context.TODO(),
+				ArgErr: apperror.New(apperror.CodeNotFound, ""),
 			},
 			err: true,
 		},
@@ -90,7 +89,7 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 
 			logSrvc := mock_service.NewMockLogger(ctrl)
 			logSrvc.EXPECT().
-				Error(tc.logError.ArgCtx, tc.logError.ArgAerr).
+				Error(tc.logError.ArgCtx, tc.logError.ArgErr).
 				Return().
 				Times(tc.logError.Time)
 
@@ -170,15 +169,15 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 					UserID: int64(1),
 					Code:   "code",
 				},
-				Ret0: apperror.New(apperror.CodeError, errors.New("")),
+				Ret0: apperror.New(apperror.CodeError, ""),
 			},
 			invFindByUserID: mockio_repository.InvitationFindByUserID{
 				Time: 0,
 			},
 			logError: mockio_service.LoggerError{
-				Time:    1,
-				ArgCtx:  context.TODO(),
-				ArgAerr: apperror.New(apperror.CodeError, errors.New("")),
+				Time:   1,
+				ArgCtx: context.TODO(),
+				ArgErr: apperror.New(apperror.CodeError, ""),
 			},
 			err: true,
 		},
@@ -203,7 +202,7 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 
 			logSrvc := mock_service.NewMockLogger(ctrl)
 			logSrvc.EXPECT().
-				Error(tc.logError.ArgCtx, tc.logError.ArgAerr).
+				Error(tc.logError.ArgCtx, tc.logError.ArgErr).
 				Return().
 				Times(tc.logError.Time)
 

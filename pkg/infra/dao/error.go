@@ -3,16 +3,43 @@ package dao
 import (
 	"fmt"
 
-	"gorm.io/gorm"
-
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
+	"github.com/pkg/errors"
+	"gorm.io/gorm"
 )
 
-func NewGormError(err error, msg string) apperror.Error {
-	switch err {
-	case gorm.ErrRecordNotFound:
-		return apperror.New(apperror.CodeNotFound, fmt.Errorf("%s: %s", msg, err.Error()))
+type gormErr struct {
+	s string
+}
+
+func newGormErr(method, model string, err error) *gormErr {
+	return &gormErr{fmt.Sprintf("%s record `%s` error: %s", method, model, err.Error())}
+}
+
+func (e *gormErr) Error() string {
+	return e.s
+}
+
+func newGormFindError(err error, model string) error {
+	var code apperror.Code
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		code = apperror.CodeNotFound
 	default:
-		return apperror.New(apperror.CodeError, fmt.Errorf("%s: %s", msg, err.Error()))
+		code = apperror.CodeError
 	}
+
+	return apperror.Wrap(code, newGormErr("Find", model, err))
+}
+
+func newGormCreateError(err error, model string) error {
+	return apperror.Wrap(apperror.CodeError, newGormErr("Create", model, err))
+}
+
+func newGormUpdateError(err error, model string) error {
+	return apperror.Wrap(apperror.CodeError, newGormErr("Update", model, err))
+}
+
+func newGormDeleteError(err error, model string) error {
+	return apperror.Wrap(apperror.CodeError, newGormErr("Delete", model, err))
 }

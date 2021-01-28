@@ -6,7 +6,6 @@ package mock_repository
 
 import (
 	gomock "github.com/golang/mock/gomock"
-	apperror "github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 	model "github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 	reflect "reflect"
 )
@@ -35,11 +34,11 @@ func (m *MockInvitation) EXPECT() *MockInvitationMockRecorder {
 }
 
 // Find mocks base method
-func (m *MockInvitation) Find(id int64) (model.Invitation, apperror.Error) {
+func (m *MockInvitation) Find(id int64) (model.Invitation, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Find", id)
 	ret0, _ := ret[0].(model.Invitation)
-	ret1, _ := ret[1].(apperror.Error)
+	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
@@ -50,11 +49,11 @@ func (mr *MockInvitationMockRecorder) Find(id interface{}) *gomock.Call {
 }
 
 // FindByUserID mocks base method
-func (m *MockInvitation) FindByUserID(uid int64) (model.Invitation, apperror.Error) {
+func (m *MockInvitation) FindByUserID(uid int64) (model.Invitation, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "FindByUserID", uid)
 	ret0, _ := ret[0].(model.Invitation)
-	ret1, _ := ret[1].(apperror.Error)
+	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
@@ -65,10 +64,10 @@ func (mr *MockInvitationMockRecorder) FindByUserID(uid interface{}) *gomock.Call
 }
 
 // Create mocks base method
-func (m *MockInvitation) Create(minv model.Invitation) apperror.Error {
+func (m *MockInvitation) Create(minv model.Invitation) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", minv)
-	ret0, _ := ret[0].(apperror.Error)
+	ret0, _ := ret[0].(error)
 	return ret0
 }
 

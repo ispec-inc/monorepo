@@ -5,26 +5,25 @@
 package mockio_repository
 
 import (
-	apperror "github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 	model "github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 )
 
 type InvitationCreate struct {
 	Time    int
 	ArgMinv model.Invitation
-	Ret0    apperror.Error
+	Ret0    error
 }
 
 type InvitationFind struct {
 	Time  int
 	ArgId int64
 	Ret0  model.Invitation
-	Ret1  apperror.Error
+	Ret1  error
 }
 
 type InvitationFindByUserID struct {
 	Time   int
 	ArgUid int64
 	Ret0   model.Invitation
-	Ret1   apperror.Error
+	Ret1   error
 }

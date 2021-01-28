@@ -4,12 +4,11 @@
 package repository
 
 import (
-	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 )
 
 type Invitation interface {
-	Find(id int64) (model.Invitation, apperror.Error)
-	FindByUserID(uid int64) (model.Invitation, apperror.Error)
-	Create(minv model.Invitation) apperror.Error
+	Find(id int64) (model.Invitation, error)
+	FindByUserID(uid int64) (model.Invitation, error)
+	Create(minv model.Invitation) error
 }

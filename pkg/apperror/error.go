@@ -1,31 +1,51 @@
 package apperror
 
-type Error interface {
-	Code() Code
-	Error() string
+import (
+	"github.com/pkg/errors"
+)
+
+type Error struct {
+	code Code
+	msg  string
+	org  error
 }
 
-type appError struct {
-	error
-	code    Code
-	message string
+func New(code Code, msg string) error {
+	return errors.WithStack(&Error{
+		code: code,
+		msg:  msg,
+	})
 }
 
-func New(code Code, err error) Error {
-	return appError{
-		error:   err,
-		code:    code,
-		message: err.Error(),
-	}
+func Wrap(code Code, err error) error {
+	return errors.WithStack(&Error{
+		code: code,
+		msg:  err.Error(),
+		org:  err,
+	})
 }
 
-func (e appError) Code() Code {
+func (e *Error) Code() Code {
 	return e.code
 }
 
-func (e appError) Error() string {
-	if e.message != "" {
-		return e.message
+func (e *Error) Error() string {
+	return e.msg
+}
+
+func (e *Error) Origin() error {
+	return e.org
+}
+
+func Unwrap(err error) *Error {
+	if err == nil {
+		return nil
 	}
-	return e.error.Error()
+
+	aerr, ok := errors.Cause(err).(*Error)
+	if ok {
+		aerr.msg = err.Error()
+		return aerr
+	}
+	return nil
 }

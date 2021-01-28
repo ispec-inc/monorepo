@@ -6,14 +6,12 @@ package mockio_service
 
 import (
 	context "context"
-
-	apperror "github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 )
 
 type LoggerError struct {
-	Time    int
-	ArgCtx  context.Context
-	ArgAerr apperror.Error
+	Time   int
+	ArgCtx context.Context
+	ArgErr error
 }
 
 type LoggerSetUser struct {
