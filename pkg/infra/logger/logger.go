@@ -2,10 +2,12 @@ package logger
 
 import (
 	"context"
+	"reflect"
 	"strconv"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
+	"github.com/pkg/errors"
 )
 
 type Logger struct {
@@ -25,14 +27,14 @@ func (l Logger) SetUser(ctx context.Context, userID int64, userName string) cont
 }
 
 func (l Logger) Error(ctx context.Context, err error) {
-	var lerr logger.Error
+	lerr := logger.Error{Error: err}
 	if aerr := apperror.Unwrap(err); aerr == nil {
 		lerr.Message = err.Error()
-		lerr.Err = err
+		lerr.ErrorType = reflect.TypeOf(errors.Cause(err)).String()
 	} else {
 		lerr.Code = aerr.Code().String()
 		lerr.Message = aerr.Error()
-		lerr.Err = aerr
+		lerr.ErrorType = reflect.TypeOf(aerr).String()
 	}
 
 	var user logger.User
