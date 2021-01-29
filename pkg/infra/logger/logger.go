@@ -14,9 +14,9 @@ type Logger struct {
 	logger logger.Logger
 }
 
-func NewLogger(l logger.Logger) Logger {
+func New() Logger {
 	return Logger{
-		logger: l,
+		logger: logger.New(),
 	}
 }
 

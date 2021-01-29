@@ -4,19 +4,19 @@ import (
 	"context"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/repository"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/service"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/logger"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 )
 
 type Usecase struct {
 	invitation repository.Invitation
-	logger     service.Logger
+	logger     logger.Logger
 }
 
 func NewUsecase(repo registry.Repository, srvc registry.Service) Usecase {
 	return Usecase{
 		invitation: repo.NewInvitation(),
-		logger:     srvc.NewLogger(),
+		logger:     logger.New(),
 	}
 }
 
