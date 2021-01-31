@@ -34,19 +34,29 @@ func Setup() (func() error, error) {
 	return func() error { cleanup(); return nil }, err
 }
 
-func New() Logger {
-	return Logger{
+func New() *Logger {
+	return &Logger{
 		logger: logger.New(),
 	}
 }
 
-func (l Logger) SetUser(ctx context.Context, userID int64, userName string) context.Context {
+func (l *Logger) SetUser(ctx context.Context, userID int64, userName string) context.Context {
 	ctx = context.WithValue(ctx, userIDKey, strconv.FormatInt(userID, 10))
 	ctx = context.WithValue(ctx, userNameKey, userName)
 	return ctx
 }
 
-func (l Logger) Error(ctx context.Context, err error) {
+func (l *Logger) TestMode() context.Context {
+	ctx := context.Background()
+	ctx = context.WithValue(ctx, testModeKey, true)
+	return ctx
+}
+
+func (l *Logger) Error(ctx context.Context, err error) {
+	if v := ctx.Value(testModeKey); v != nil && v.(bool) {
+		return
+	}
+
 	lerr := logger.Error{Error: err}
 	if aerr := apperror.Unwrap(err); aerr == nil {
 		lerr.Message = err.Error()
