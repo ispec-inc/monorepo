@@ -1,4 +1,4 @@
-package logger
+package applog
 
 import (
 	"context"
@@ -6,12 +6,32 @@ import (
 	"strconv"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
 	"github.com/pkg/errors"
 )
 
 type Logger struct {
 	logger logger.Logger
+}
+
+func Setup() (func() error, error) {
+	var opt logger.Options
+	switch config.App.Env {
+	case config.EnvDev:
+		opt = logger.Options{Type: logger.LogTypeStdout}
+	default:
+		opt = logger.Options{
+			Type: logger.LogTypeSentry,
+			SentryOptions: logger.SentryOptions{
+				Environment: config.Sentry.DSN,
+				DSN:         config.Sentry.DSN,
+				Debug:       config.Sentry.Debug,
+			},
+		}
+	}
+	cleanup, err := logger.Setup(opt)
+	return func() error { cleanup(); return nil }, err
 }
 
 func New() Logger {

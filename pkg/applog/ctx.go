@@ -1,4 +1,4 @@
-package logger
+package applog
 
 const (
 	userIDKey   ctxkey = "report_user_id"
