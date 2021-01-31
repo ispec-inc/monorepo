@@ -10,7 +10,7 @@ import (
 
 type Usecase struct {
 	invitation repository.Invitation
-	logger     applog.Logger
+	logger     *applog.Logger
 }
 
 func NewUsecase(repo registry.Repository) Usecase {
