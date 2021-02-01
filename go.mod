@@ -52,7 +52,7 @@ require (
 	github.com/ispec-inc/civgen-go/mockio v0.0.0-20210113074613-221b469da465 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/jung-kurt/gofpdf v1.16.2 // indirect
-	github.com/k0kubun/pp v3.0.1+incompatible
+	github.com/k0kubun/pp v3.0.7+incompatible
 	github.com/kisielk/sqlstruct v0.0.0-20150923205031-648daed35d49 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lyft/protoc-gen-star v0.5.2 // indirect
