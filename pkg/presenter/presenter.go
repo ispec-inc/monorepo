@@ -7,7 +7,13 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 )
 
-func ApplicationException(w http.ResponseWriter, aerr apperror.Error) {
+func ApplicationException(w http.ResponseWriter, err error) {
+	aerr := apperror.Unwrap(err)
+	if aerr == nil {
+		InternalServerError(w, err)
+		return
+	}
+
 	w.Header().Add("Content-type", "application/json")
 	w.WriteHeader(code2status[aerr.Code()])
 
@@ -33,6 +39,6 @@ func BadRequestError(w http.ResponseWriter, err error) {
 
 func Response(w http.ResponseWriter, body interface{}) {
 	w.Header().Add("Content-type", "application/json")
-	w.WriteHeader(code2status[apperror.CodeSuccess])
+	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(body)
 }

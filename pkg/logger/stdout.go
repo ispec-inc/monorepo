@@ -1,6 +1,8 @@
 package logger
 
 import (
+	"fmt"
+
 	"github.com/k0kubun/pp"
 )
 
@@ -11,17 +13,25 @@ func newStdoutLogger() *stdoutLogger {
 }
 
 func (l *stdoutLogger) Error(user User, err Error) {
-	pp.Println(errorLog{
-		userID:     user.ID,
-		userName:   user.Name,
-		errCode:    err.Code,
-		errMessage: err.Message,
+	fmt.Println("=================== ERROR ===================")
+	fmt.Println("INFO: ")
+	pp.Println(struct {
+		User  User
+		Error errorLog
+	}{
+		User: user,
+		Error: errorLog{
+			Code:    err.Code,
+			Message: err.Message,
+			Type:    err.ErrorType,
+		},
 	})
+	fmt.Printf("STACK TRACE: \n%+v\n", err.Error)
+	fmt.Println("=============================================")
 }
 
 type errorLog struct {
-	userID     string
-	userName   string
-	errCode    string
-	errMessage string
+	Code    string
+	Message string
+	Type    string
 }

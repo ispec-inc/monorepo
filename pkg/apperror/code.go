@@ -1,11 +1,10 @@
 package apperror
 
 const (
-	CodeNoError  Code = "no error"
-	CodeError    Code = "error"
-	CodeInvalid  Code = "invalid"
-	CodeSuccess  Code = "sucess"
-	CodeNotFound Code = "not found"
+	CodeInvalid      = Code("invalid")
+	CodeUnauthorized = Code("unauthorized")
+	CodeNotFound     = Code("not found")
+	CodeError        = Code("error")
 )
 
 type Code string

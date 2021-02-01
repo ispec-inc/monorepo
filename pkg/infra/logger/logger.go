@@ -2,19 +2,21 @@ package logger
 
 import (
 	"context"
+	"reflect"
 	"strconv"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
+	"github.com/pkg/errors"
 )
 
 type Logger struct {
 	logger logger.Logger
 }
 
-func NewLogger(l logger.Logger) Logger {
+func New() Logger {
 	return Logger{
-		logger: l,
+		logger: logger.New(),
 	}
 }
 
@@ -24,9 +26,15 @@ func (l Logger) SetUser(ctx context.Context, userID int64, userName string) cont
 	return ctx
 }
 
-func (l Logger) Error(ctx context.Context, aerr apperror.Error) {
-	if aerr.Code() != apperror.CodeError {
-		return
+func (l Logger) Error(ctx context.Context, err error) {
+	lerr := logger.Error{Error: err}
+	if aerr := apperror.Unwrap(err); aerr == nil {
+		lerr.Message = err.Error()
+		lerr.ErrorType = reflect.TypeOf(errors.Cause(err)).String()
+	} else {
+		lerr.Code = aerr.Code().String()
+		lerr.Message = aerr.Error()
+		lerr.ErrorType = reflect.TypeOf(aerr).String()
 	}
 
 	var user logger.User
@@ -37,11 +45,5 @@ func (l Logger) Error(ctx context.Context, aerr apperror.Error) {
 		user.Name = v.(string)
 	}
 
-	err := logger.Error{
-		Code:    aerr.Code().String(),
-		Message: aerr.Error(),
-		Err:     aerr,
-	}
-
-	l.logger.Error(user, err)
+	l.logger.Error(user, lerr)
 }

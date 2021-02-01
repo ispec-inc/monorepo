@@ -7,8 +7,8 @@ import (
 )
 
 var code2status = map[apperror.Code]int{
-	apperror.CodeError:    http.StatusInternalServerError,
-	apperror.CodeSuccess:  http.StatusOK,
-	apperror.CodeNotFound: http.StatusNotFound,
-	apperror.CodeInvalid:  http.StatusBadRequest,
+	apperror.CodeError:        http.StatusInternalServerError,
+	apperror.CodeInvalid:      http.StatusBadRequest,
+	apperror.CodeUnauthorized: http.StatusUnauthorized,
+	apperror.CodeNotFound:     http.StatusNotFound,
 }

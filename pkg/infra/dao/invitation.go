@@ -1,8 +1,6 @@
 package dao
 
 import (
-	"errors"
-
 	"gorm.io/gorm"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
@@ -19,50 +17,46 @@ func NewInvitation(db *gorm.DB) Invitation {
 	return Invitation{db}
 }
 
-func (repo Invitation) Find(id int64) (model.Invitation, apperror.Error) {
+func (repo Invitation) Find(id int64) (model.Invitation, error) {
 	var inv entity.Invitation
 	if err := repo.db.First(&inv, id).Error; err != nil {
-		return model.Invitation{}, NewGormError(
-			err, "error searching invitation in database",
-		)
+		return model.Invitation{}, newGormFindError(err, entity.InvitationModelName)
 	}
 	return inv.ToModel(), nil
 }
 
-func (repo Invitation) FindByUserID(uid int64) (model.Invitation, apperror.Error) {
+func (repo Invitation) FindByUserID(uid int64) (model.Invitation, error) {
 	var inv entity.Invitation
 	if err := repo.db.First(&inv, "user_id = ?", uid).Error; err != nil {
-		return model.Invitation{}, NewGormError(
-			err, "error searching invitation in database",
-		)
+		return model.Invitation{}, newGormFindError(err, entity.InvitationModelName)
 	}
 	return inv.ToModel(), nil
 }
 
-func (repo Invitation) Create(minv model.Invitation) apperror.Error {
-	f := func(tx *gorm.DB) apperror.Error {
+func (repo Invitation) Create(minv model.Invitation) error {
+	f := func(tx *gorm.DB) error {
 		var invs []entity.Invitation
 		err := tx.
 			Set("gorm:query_option", "for update").
 			Find(&invs, "user_id = ?", minv.UserID).
 			Error
 		if err != nil {
-			return NewGormError(err, "error searching invitation in database")
+			return newGormFindError(err, entity.InvitationModelName)
 		}
 		if len(invs) > 0 {
-			return apperror.New(apperror.CodeInvalid, errors.New("error: invitation code is already exists"))
+			return apperror.New(apperror.CodeInvalid, "invitation code has been already existed")
 		}
 
 		inv := entity.NewInvitationFromModel(minv)
 		if err := tx.Create(&inv).Error; err != nil {
-			return NewGormError(err, "error inserting invitation in database")
+			return newGormCreateError(err, entity.InvitationModelName)
 		}
 
 		return nil
 	}
 
-	if aerr := transaction.Run(repo.db, f); aerr != nil {
-		return aerr
+	if err := transaction.Run(repo.db, f); err != nil {
+		return err
 	}
 
 	return nil

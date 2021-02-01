@@ -20,14 +20,22 @@ func newSentryLogger(options SentryOptions) (*sentryLogger, func(), error) {
 
 func (l *sentryLogger) Error(user User, err Error) {
 	sentry.WithScope(func(scope *sentry.Scope) {
-		scope.SetUser(sentry.User{
+		event := sentry.NewEvent()
+
+		event.Level = sentry.LevelError
+		event.User = sentry.User{
 			ID:       user.ID,
 			Username: user.Name,
-		})
-		scope.SetTags(map[string]string{
-			"code": err.Code,
-		})
-		scope.SetExtra("message", err.Message)
-		sentry.CaptureException(err.Err)
+		}
+		event.Tags = map[string]string{"code": err.Code}
+		event.Extra = map[string]interface{}{"message": err.Message}
+
+		event.Exception = []sentry.Exception{{
+			Value:      err.Message,
+			Type:       err.ErrorType,
+			Stacktrace: sentry.ExtractStacktrace(err.Error),
+		}}
+
+		sentry.CaptureEvent(event)
 	})
 }

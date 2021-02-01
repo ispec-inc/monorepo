@@ -6,6 +6,8 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
 )
 
+const InvitationModelName = "Invitation"
+
 type Invitation struct {
 	ID        int64     `gorm:"column:id"`
 	UserID    int64     `gorm:"column:user_id"`
