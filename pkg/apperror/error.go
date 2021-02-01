@@ -1,41 +1,31 @@
 package apperror
 
-type Code string
-
-const (
-	CodeNoError  Code = "no error"
-	CodeError    Code = "error"
-	CodeInvalid  Code = "invalid"
-	CodeSuccess  Code = "sucess"
-	CodeNotFound Code = "not found"
-)
-
 type Error interface {
 	Code() Code
 	Error() string
 }
 
-type AppError struct {
+type appError struct {
+	error
 	code    Code
-	err     error
 	message string
 }
 
-func New(code Code, err error) AppError {
-	return AppError{
+func New(code Code, err error) Error {
+	return appError{
+		error:   err,
 		code:    code,
-		err:     err,
 		message: err.Error(),
 	}
 }
 
-func (e AppError) Code() Code {
+func (e appError) Code() Code {
 	return e.code
 }
 
-func (e AppError) Error() string {
+func (e appError) Error() string {
 	if e.message != "" {
 		return e.message
 	}
-	return e.err.Error()
+	return e.error.Error()
 }

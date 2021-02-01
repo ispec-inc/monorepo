@@ -29,6 +29,7 @@ require (
 	github.com/edsrzf/mmap-go v1.0.0 // indirect
 	github.com/fogleman/gg v1.3.0 // indirect
 	github.com/garyburd/redigo v1.6.2 // indirect
+	github.com/getsentry/sentry-go v0.9.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible
@@ -51,6 +52,7 @@ require (
 	github.com/ispec-inc/civgen-go/mockio v0.0.0-20210113074613-221b469da465 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/jung-kurt/gofpdf v1.16.2 // indirect
+	github.com/k0kubun/pp v3.0.1+incompatible
 	github.com/kisielk/sqlstruct v0.0.0-20150923205031-648daed35d49 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lyft/protoc-gen-star v0.5.2 // indirect

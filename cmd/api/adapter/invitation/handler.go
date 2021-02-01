@@ -8,8 +8,9 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-playground/validator"
 
+	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/apphttp"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/view"
 	"github.com/ispec-inc/go-distributed-monolith/src/invitation"
@@ -24,10 +25,10 @@ func NewHandler(repo registry.Repository) handler {
 	return handler{usecase}
 }
 
-func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
+func (h handler) GetCode(w apphttp.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
-		presenter.BadRequestError(w, err)
+		w.WriteError(apperror.New(apperror.CodeInvalid, err))
 		return
 	}
 
@@ -36,7 +37,7 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 	}
 	out, aerr := h.usecase.FindCode(inp)
 	if aerr != nil {
-		presenter.ApplicationException(w, aerr)
+		w.WriteError(aerr)
 		return
 	}
 
@@ -44,18 +45,18 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 	res := GetCodeResponse{
 		InvitationCode: invres,
 	}
-	presenter.Response(w, res)
+	w.WriteResponse(res)
 }
 
-func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
+func (h handler) AddCode(w apphttp.ResponseWriter, r *http.Request) {
 	var request addCodeRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		presenter.BadRequestError(w, err)
+		w.WriteError(apperror.New(apperror.CodeInvalid, err))
 		return
 	}
 	validate := validator.New()
 	if err := validate.Struct(request); err != nil {
-		presenter.BadRequestError(w, err)
+		w.WriteError(apperror.New(apperror.CodeInvalid, err))
 		return
 	}
 
@@ -68,7 +69,7 @@ func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 	}
 	out, aerr := h.usecase.AddCode(inp)
 	if aerr != nil {
-		presenter.ApplicationException(w, aerr)
+		w.WriteError(aerr)
 		return
 	}
 
@@ -76,5 +77,5 @@ func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 	res := AddCodeResponse{
 		InvitationCode: invres,
 	}
-	presenter.Response(w, res)
+	w.WriteResponse(res)
 }

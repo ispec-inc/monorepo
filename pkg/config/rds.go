@@ -2,7 +2,15 @@ package config
 
 import (
 	"time"
+
+	"github.com/caarlos0/env/v6"
 )
+
+func init() {
+	if err := env.Parse(&RDS); err != nil {
+		panic(err)
+	}
+}
 
 var RDS rds
 

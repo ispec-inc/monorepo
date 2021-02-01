@@ -5,13 +5,10 @@ import (
 
 	"github.com/tanimutomo/sqlfile"
 
-	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
 )
 
 func main() {
-	config.Init()
-
 	db, err := mysql.Init()
 	if err != nil {
 		panic(err)
