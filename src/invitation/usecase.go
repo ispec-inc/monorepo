@@ -3,20 +3,20 @@ package invitation
 import (
 	"context"
 
+	"github.com/ispec-inc/go-distributed-monolith/pkg/applog"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/repository"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/logger"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 )
 
 type Usecase struct {
 	invitation repository.Invitation
-	logger     logger.Logger
+	logger     *applog.Logger
 }
 
-func NewUsecase(repo registry.Repository, srvc registry.Service) Usecase {
+func NewUsecase(repo registry.Repository) Usecase {
 	return Usecase{
 		invitation: repo.NewInvitation(),
-		logger:     logger.New(),
+		logger:     applog.New(),
 	}
 }
 

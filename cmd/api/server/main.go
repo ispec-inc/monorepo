@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/ispec-inc/go-distributed-monolith/pkg/applog"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 )
 
@@ -13,12 +14,12 @@ func main() {
 	}
 	defer repoCleanup()
 
-	srvc, srvcCleanup, err := registry.NewService()
+	logCleanup, err := applog.Setup()
 	if err != nil {
 		panic(err)
 	}
-	defer srvcCleanup()
+	defer logCleanup()
 
-	r := NewRouter(repo, srvc)
+	r := NewRouter(repo)
 	http.ListenAndServe(":9000", r)
 }

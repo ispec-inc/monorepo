@@ -10,12 +10,12 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 )
 
-func NewRouter(repo registry.Repository, srvc registry.Service) http.Handler {
+func NewRouter(repo registry.Repository) http.Handler {
 	r := chi.NewRouter()
 
 	r = commonMiddleware(r)
 
-	r.Mount("/invitations", invitation.NewRouter(repo, srvc))
+	r.Mount("/invitations", invitation.NewRouter(repo))
 
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		presenter.Response(w, map[string]string{"messsage": "ok"})

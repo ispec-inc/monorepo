@@ -15,16 +15,16 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/src/invitation"
 )
 
-type handler struct {
+type Handler struct {
 	usecase invitation.Usecase
 }
 
-func NewHandler(repo registry.Repository, srvc registry.Service) handler {
-	usecase := invitation.NewUsecase(repo, srvc)
-	return handler{usecase}
+func NewHandler(repo registry.Repository) Handler {
+	usecase := invitation.NewUsecase(repo)
+	return Handler{usecase}
 }
 
-func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
+func (h Handler) GetCode(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		presenter.BadRequestError(w, err)
@@ -47,7 +47,7 @@ func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 	presenter.Response(w, res)
 }
 
-func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
+func (h Handler) AddCode(w http.ResponseWriter, r *http.Request) {
 	var request addCodeRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		presenter.BadRequestError(w, err)
