@@ -8,9 +8,8 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-playground/validator"
 
-	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/apphttp"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/presenter"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/registry"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/view"
 	"github.com/ispec-inc/go-distributed-monolith/src/invitation"
@@ -20,24 +19,24 @@ type handler struct {
 	usecase invitation.Usecase
 }
 
-func NewHandler(repo registry.Repository) handler {
-	usecase := invitation.NewUsecase(repo)
+func NewHandler(repo registry.Repository, srvc registry.Service) handler {
+	usecase := invitation.NewUsecase(repo, srvc)
 	return handler{usecase}
 }
 
-func (h handler) GetCode(w apphttp.ResponseWriter, r *http.Request) {
+func (h handler) GetCode(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
-		w.WriteError(apperror.New(apperror.CodeInvalid, err))
+		presenter.BadRequestError(w, err)
 		return
 	}
 
 	inp := invitation.FindCodeInput{
 		ID: int64(id),
 	}
-	out, aerr := h.usecase.FindCode(inp)
+	out, aerr := h.usecase.FindCode(r.Context(), inp)
 	if aerr != nil {
-		w.WriteError(aerr)
+		presenter.ApplicationException(w, aerr)
 		return
 	}
 
@@ -45,18 +44,18 @@ func (h handler) GetCode(w apphttp.ResponseWriter, r *http.Request) {
 	res := GetCodeResponse{
 		InvitationCode: invres,
 	}
-	w.WriteResponse(res)
+	presenter.Response(w, res)
 }
 
-func (h handler) AddCode(w apphttp.ResponseWriter, r *http.Request) {
+func (h handler) AddCode(w http.ResponseWriter, r *http.Request) {
 	var request addCodeRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		w.WriteError(apperror.New(apperror.CodeInvalid, err))
+		presenter.BadRequestError(w, err)
 		return
 	}
 	validate := validator.New()
 	if err := validate.Struct(request); err != nil {
-		w.WriteError(apperror.New(apperror.CodeInvalid, err))
+		presenter.BadRequestError(w, err)
 		return
 	}
 
@@ -67,9 +66,9 @@ func (h handler) AddCode(w apphttp.ResponseWriter, r *http.Request) {
 	inp := invitation.AddCodeInput{
 		Invitation: inv,
 	}
-	out, aerr := h.usecase.AddCode(inp)
+	out, aerr := h.usecase.AddCode(r.Context(), inp)
 	if aerr != nil {
-		w.WriteError(aerr)
+		presenter.ApplicationException(w, aerr)
 		return
 	}
 
@@ -77,5 +76,5 @@ func (h handler) AddCode(w apphttp.ResponseWriter, r *http.Request) {
 	res := AddCodeResponse{
 		InvitationCode: invres,
 	}
-	w.WriteResponse(res)
+	presenter.Response(w, res)
 }

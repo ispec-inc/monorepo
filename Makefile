@@ -14,3 +14,7 @@ dbinit:
 	docker-compose up -d mysql
 	docker-compose run dockerize
 	docker-compose up dbinit
+
+.PHONY: generate
+generate:
+	go generate ./...

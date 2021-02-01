@@ -1,4 +1,5 @@
-//go:generate mockgen -package mock -source=invitation.go -destination=../mock/invitation.go
+//go:generate go run github.com/golang/mock/mockgen -source=invitation.go -destination=mock/invitation.go
+//go:generate go run github.com/ispec-inc/civgen-go/mockio -source=invitation.go -destination=mockio/invitation.go
 
 package repository
 
