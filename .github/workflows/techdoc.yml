@@ -8,7 +8,7 @@ on:
       - "*"
 jobs:
   techdoc:
-    name: runner / gotest
+    name: runner / techdocs
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
