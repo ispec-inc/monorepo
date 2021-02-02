@@ -24,6 +24,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-1
 
-    - run: npm install npx
+    - run: npm install -g @techdocs/cli
 
-    - run: npx @techdocs-cli publish --publisher-type awsS3 --storage-name backstage-ispec --entity default/component/go-distributed-monolith
+    - run: techdocs-cli publish --publisher-type awsS3 --storage-name backstage-ispec --entity default/component/go-distributed-monolith
