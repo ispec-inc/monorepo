@@ -26,4 +26,6 @@ jobs:
 
     - run: npm install -g @techdocs/cli
 
+    - run: techdocs-cli build
+
     - run: techdocs-cli publish --publisher-type awsS3 --storage-name backstage-ispec --entity default/component/go-distributed-monolith
