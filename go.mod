@@ -33,7 +33,7 @@ require (
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible
-	github.com/go-testfixtures/testfixtures/v3 v3.3.0
+	github.com/go-testfixtures/testfixtures/v3 v3.5.0
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/godbus/dbus v4.1.0+incompatible // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
