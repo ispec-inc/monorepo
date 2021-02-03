@@ -13,7 +13,7 @@ require (
 	github.com/ajstarks/giocanvas v0.0.0-20200906124405-959276188b5c // indirect
 	github.com/ajstarks/svgo v0.0.0-20200725142600-7a3c8b57fecb // indirect
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b // indirect
-	github.com/caarlos0/env/v6 v6.4.0
+	github.com/caarlos0/env/v6 v6.5.0
 	github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f // indirect
 	github.com/cznic/cc v0.0.0-20181122101902-d673e9b70d4d // indirect
 	github.com/cznic/fileutil v0.0.0-20181122101858-4d67cfea8c87 // indirect
