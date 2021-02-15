@@ -3,7 +3,7 @@ module github.com/ispec-inc/go-distributed-monolith
 go 1.13
 
 require (
-	github.com/caarlos0/env/v6 v6.4.0
+	github.com/caarlos0/env/v6 v6.5.0
 	github.com/getsentry/sentry-go v0.9.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/universal-translator v0.17.0 // indirect
@@ -14,7 +14,7 @@ require (
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/pkg/errors v0.9.1
-	github.com/stretchr/testify v1.6.1
+	github.com/stretchr/testify v1.7.0
 	github.com/tanimutomo/sqlfile v1.0.0
 	golang.org/x/net v0.0.0-20201021035429-f5854403a974 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
