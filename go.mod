@@ -10,7 +10,7 @@ require (
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/golang/mock v1.4.4
 	github.com/google/go-cmp v0.5.2 // indirect
-	github.com/k0kubun/pp v3.0.1+incompatible
+	github.com/k0kubun/pp v3.0.7+incompatible
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/pkg/errors v0.9.1
