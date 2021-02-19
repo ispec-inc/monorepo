@@ -7,7 +7,7 @@ require (
 	github.com/getsentry/sentry-go v0.9.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/universal-translator v0.17.0 // indirect
-	github.com/go-playground/validator v9.31.0+incompatible
+	github.com/go-playground/validator/v10 v10.4.1
 	github.com/golang/mock v1.4.4
 	github.com/google/go-cmp v0.5.2 // indirect
 	github.com/k0kubun/pp v3.0.1+incompatible
