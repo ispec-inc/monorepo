@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/caarlos0/env/v6 v6.4.0
-	github.com/getsentry/sentry-go v0.9.0
+	github.com/getsentry/sentry-go v0.10.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible
