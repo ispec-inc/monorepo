@@ -2,6 +2,7 @@ site_name: 'Go Best Practices'
 
 nav:
   - Overview: index.md
+  - Error Handling: error.md
 
 plugins:
   - techdocs-core
