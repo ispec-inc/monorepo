@@ -1,22 +1,23 @@
-package logger
+package stdlog
 
 import (
 	"fmt"
 
+	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
 	"github.com/k0kubun/pp"
 )
 
-type stdoutLogger struct{}
+type Logger struct{}
 
-func newStdoutLogger() *stdoutLogger {
-	return &stdoutLogger{}
+func New() *Logger {
+	return &Logger{}
 }
 
-func (l *stdoutLogger) Error(user User, err Error) {
+func (l *Logger) Error(user logger.User, err logger.Error) {
 	fmt.Println("=================== ERROR ===================")
 	fmt.Println("INFO: ")
 	pp.Println(struct {
-		User  User
+		User  logger.User
 		Error errorLog
 	}{
 		User: user,

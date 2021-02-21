@@ -8,29 +8,29 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/sentry"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/stdlog"
 	"github.com/pkg/errors"
 )
 
 var lgr logger.Logger
 
 func Setup() (func() error, error) {
-	var opt logger.Options
 	switch config.App.Env {
 	case config.EnvDev:
-		opt = logger.Options{Type: logger.LogTypeStdout}
+		lgr = stdlog.New()
+		return func() error { return nil }, nil
 	default:
-		opt = logger.Options{
-			Type: logger.LogTypeSentry,
-			SentryOptions: logger.SentryOptions{
+		l, cleanup, err := sentry.New(
+			sentry.Options{
 				Environment: config.Sentry.DSN,
 				DSN:         config.Sentry.DSN,
 				Debug:       config.Sentry.Debug,
 			},
-		}
+		)
+		lgr = l
+		return func() error { cleanup(); return nil }, err
 	}
-	cleanup, err := logger.Setup(opt)
-	lgr = logger.New()
-	return func() error { cleanup(); return nil }, err
 }
 
 func SetUser(ctx context.Context, userID int64, userName string) context.Context {
@@ -45,7 +45,7 @@ func TestContext() context.Context {
 	return ctx
 }
 
-func Error(ctx context.Context, err error) {
+func LogError(ctx context.Context, err error) {
 	if v := ctx.Value(testModeKey); v != nil && v.(bool) {
 		return
 	}
