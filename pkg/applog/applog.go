@@ -28,7 +28,7 @@ func TestContext() context.Context {
 	return ctx
 }
 
-func LogError(ctx context.Context, err error) {
+func Error(ctx context.Context, err error) {
 	if v := ctx.Value(testModeKey); v != nil && v.(bool) {
 		return
 	}
