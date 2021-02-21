@@ -3,7 +3,7 @@ package stdlog
 import (
 	"fmt"
 
-	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/applog/logger"
 	"github.com/k0kubun/pp"
 )
 

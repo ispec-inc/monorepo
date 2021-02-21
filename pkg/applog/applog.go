@@ -6,31 +6,14 @@ import (
 	"strconv"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/sentry"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/stdlog"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/applog/logger"
 	"github.com/pkg/errors"
 )
 
 var lgr logger.Logger
 
-func Setup() (func() error, error) {
-	switch config.App.Env {
-	case config.EnvDev:
-		lgr = stdlog.New()
-		return func() error { return nil }, nil
-	default:
-		l, cleanup, err := sentry.New(
-			sentry.Options{
-				Environment: config.Sentry.DSN,
-				DSN:         config.Sentry.DSN,
-				Debug:       config.Sentry.Debug,
-			},
-		)
-		lgr = l
-		return func() error { cleanup(); return nil }, err
-	}
+func Setup(l logger.Logger) {
+	lgr = l
 }
 
 func SetUser(ctx context.Context, userID int64, userName string) context.Context {

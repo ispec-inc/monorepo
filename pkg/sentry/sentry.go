@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/getsentry/sentry-go"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/applog/logger"
 )
 
 type Logger struct{}
