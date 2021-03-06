@@ -10,25 +10,29 @@ import (
 	"github.com/pkg/errors"
 )
 
-var lgr logger.Logger
-
-func Setup(l logger.Logger) {
-	lgr = l
+type AppLog struct {
+	lgr logger.Logger
 }
 
-func SetUser(ctx context.Context, userID int64, userName string) context.Context {
+func New(l logger.Logger) AppLog {
+	return AppLog{
+		lgr: l,
+	}
+}
+
+func (l AppLog) SetUser(ctx context.Context, userID int64, userName string) context.Context {
 	ctx = context.WithValue(ctx, userIDKey, strconv.FormatInt(userID, 10))
 	ctx = context.WithValue(ctx, userNameKey, userName)
 	return ctx
 }
 
-func TestContext() context.Context {
+func (l AppLog) TestContext() context.Context {
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, testModeKey, true)
 	return ctx
 }
 
-func Error(ctx context.Context, err error) {
+func (l AppLog) Error(ctx context.Context, err error) {
 	if v := ctx.Value(testModeKey); v != nil && v.(bool) {
 		return
 	}
@@ -51,5 +55,5 @@ func Error(ctx context.Context, err error) {
 		user.Name = v.(string)
 	}
 
-	lgr.Error(user, lerr)
+	l.lgr.Error(user, lerr)
 }
