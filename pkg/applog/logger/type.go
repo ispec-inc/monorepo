@@ -6,3 +6,8 @@ type Error struct {
 	ErrorType string
 	Error     error
 }
+
+type User struct {
+	ID   string
+	Name string
+}

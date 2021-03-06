@@ -10,18 +10,20 @@ import (
 
 type Usecase struct {
 	invitation repository.Invitation
+	lgr        applog.AppLog
 }
 
-func NewUsecase(repo registry.Repository) Usecase {
+func NewUsecase(rgst registry.Registry) Usecase {
 	return Usecase{
-		invitation: repo.NewInvitation(),
+		invitation: rgst.Repository().NewInvitation(),
+		lgr:        applog.New(rgst.Logger().New()),
 	}
 }
 
 func (u Usecase) FindCode(ctx context.Context, inp FindCodeInput) (out FindCodeOutput, aerr error) {
 	inv, aerr := u.invitation.Find(inp.ID)
 	if aerr != nil {
-		applog.Error(ctx, aerr)
+		u.lgr.Error(ctx, aerr)
 		return
 	}
 	out.Invitation = inv
@@ -31,13 +33,13 @@ func (u Usecase) FindCode(ctx context.Context, inp FindCodeInput) (out FindCodeO
 func (u Usecase) AddCode(ctx context.Context, inp AddCodeInput) (out AddCodeOutput, err error) {
 	err = u.invitation.Create(inp.Invitation)
 	if err != nil {
-		applog.Error(ctx, err)
+		u.lgr.Error(ctx, err)
 		return
 	}
 
 	inv, err := u.invitation.FindByUserID(inp.Invitation.UserID)
 	if err != nil {
-		applog.Error(ctx, err)
+		u.lgr.Error(ctx, err)
 		return
 	}
 	out.Invitation = inv
