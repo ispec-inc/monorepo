@@ -21,7 +21,7 @@ func NewUsecase(repo registry.Repository) Usecase {
 func (u Usecase) FindCode(ctx context.Context, inp FindCodeInput) (out FindCodeOutput, aerr error) {
 	inv, aerr := u.invitation.Find(inp.ID)
 	if aerr != nil {
-		applog.LogError(ctx, aerr)
+		applog.Error(ctx, aerr)
 		return
 	}
 	out.Invitation = inv
@@ -31,13 +31,13 @@ func (u Usecase) FindCode(ctx context.Context, inp FindCodeInput) (out FindCodeO
 func (u Usecase) AddCode(ctx context.Context, inp AddCodeInput) (out AddCodeOutput, err error) {
 	err = u.invitation.Create(inp.Invitation)
 	if err != nil {
-		applog.LogError(ctx, err)
+		applog.Error(ctx, err)
 		return
 	}
 
 	inv, err := u.invitation.FindByUserID(inp.Invitation.UserID)
 	if err != nil {
-		applog.LogError(ctx, err)
+		applog.Error(ctx, err)
 		return
 	}
 	out.Invitation = inv
