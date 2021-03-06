@@ -17,12 +17,20 @@ func New(code Code, msg string) error {
 	})
 }
 
-func Wrap(code Code, err error) error {
+func WithCode(code Code, err error) error {
 	return errors.WithStack(&Error{
 		code: code,
 		msg:  err.Error(),
 		org:  err,
 	})
+}
+
+func Wrap(err error, msg string) error {
+	return errors.Wrap(err, msg)
+}
+
+func Wrapf(err error, msg string, args ...interface{}) error {
+	return errors.Wrapf(err, msg, args)
 }
 
 func (e *Error) Code() Code {

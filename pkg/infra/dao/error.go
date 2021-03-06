@@ -29,17 +29,17 @@ func newGormFindError(err error, model string) error {
 		code = apperror.CodeError
 	}
 
-	return apperror.Wrap(code, newGormErr("Find", model, err))
+	return apperror.WithCode(code, newGormErr("Find", model, err))
 }
 
 func newGormCreateError(err error, model string) error {
-	return apperror.Wrap(apperror.CodeError, newGormErr("Create", model, err))
+	return apperror.WithCode(apperror.CodeError, newGormErr("Create", model, err))
 }
 
 func newGormUpdateError(err error, model string) error {
-	return apperror.Wrap(apperror.CodeError, newGormErr("Update", model, err))
+	return apperror.WithCode(apperror.CodeError, newGormErr("Update", model, err))
 }
 
 func newGormDeleteError(err error, model string) error {
-	return apperror.Wrap(apperror.CodeError, newGormErr("Delete", model, err))
+	return apperror.WithCode(apperror.CodeError, newGormErr("Delete", model, err))
 }
