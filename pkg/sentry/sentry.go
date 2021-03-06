@@ -1,24 +1,31 @@
-package logger
+package sentry
 
 import (
 	"time"
 
 	"github.com/getsentry/sentry-go"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/applog/logger"
 )
 
-type sentryLogger struct{}
+type Logger struct{}
 
-func newSentryLogger(options SentryOptions) (*sentryLogger, func(), error) {
+type Options struct {
+	Environment string
+	DSN         string
+	Debug       bool
+}
+
+func New(options Options) (*Logger, func(), error) {
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn:         options.DSN,
 		Environment: options.Environment,
 		Debug:       options.Debug,
 	})
 	cleanup := func() { sentry.Flush(2 * time.Second) }
-	return &sentryLogger{}, cleanup, err
+	return &Logger{}, cleanup, err
 }
 
-func (l *sentryLogger) Error(user User, err Error) {
+func (l *Logger) Error(user logger.User, err logger.Error) {
 	sentry.WithScope(func(scope *sentry.Scope) {
 		event := sentry.NewEvent()
 

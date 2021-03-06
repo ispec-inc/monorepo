@@ -6,53 +6,33 @@ import (
 	"strconv"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/apperror"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
-	"github.com/ispec-inc/go-distributed-monolith/pkg/logger"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/applog/logger"
 	"github.com/pkg/errors"
 )
 
-type Logger struct {
-	logger logger.Logger
+type AppLog struct {
+	lgr logger.Logger
 }
 
-func Setup() (func() error, error) {
-	var opt logger.Options
-	switch config.App.Env {
-	case config.EnvDev:
-		opt = logger.Options{Type: logger.LogTypeStdout}
-	default:
-		opt = logger.Options{
-			Type: logger.LogTypeSentry,
-			SentryOptions: logger.SentryOptions{
-				Environment: config.Sentry.DSN,
-				DSN:         config.Sentry.DSN,
-				Debug:       config.Sentry.Debug,
-			},
-		}
-	}
-	cleanup, err := logger.Setup(opt)
-	return func() error { cleanup(); return nil }, err
-}
-
-func New() *Logger {
-	return &Logger{
-		logger: logger.New(),
+func New(l logger.Logger) AppLog {
+	return AppLog{
+		lgr: l,
 	}
 }
 
-func (l *Logger) SetUser(ctx context.Context, userID int64, userName string) context.Context {
+func (l AppLog) SetUser(ctx context.Context, userID int64, userName string) context.Context {
 	ctx = context.WithValue(ctx, userIDKey, strconv.FormatInt(userID, 10))
 	ctx = context.WithValue(ctx, userNameKey, userName)
 	return ctx
 }
 
-func (l *Logger) TestMode() context.Context {
+func (l AppLog) TestContext() context.Context {
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, testModeKey, true)
 	return ctx
 }
 
-func (l *Logger) Error(ctx context.Context, err error) {
+func (l AppLog) Error(ctx context.Context, err error) {
 	if v := ctx.Value(testModeKey); v != nil && v.(bool) {
 		return
 	}
@@ -75,5 +55,5 @@ func (l *Logger) Error(ctx context.Context, err error) {
 		user.Name = v.(string)
 	}
 
-	l.logger.Error(user, lerr)
+	l.lgr.Error(user, lerr)
 }

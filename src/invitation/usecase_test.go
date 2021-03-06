@@ -79,12 +79,12 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 				Return(tc.invFind.Ret0, tc.invFind.Ret1).
 				Times(tc.invFind.Time)
 
-			lgr := applog.New()
-			ctx := lgr.TestMode()
+			lgr := applog.New(nil)
+			ctx := lgr.TestContext()
 
 			u := Usecase{
 				invitation: invRepo,
-				logger:     lgr,
+				lgr:        lgr,
 			}
 			got, aerr := u.FindCode(ctx, tc.in)
 
@@ -183,12 +183,12 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 				Return(tc.invFindByUserID.Ret0, tc.invFindByUserID.Ret1).
 				Times(tc.invFindByUserID.Time)
 
-			lgr := applog.New()
-			ctx := lgr.TestMode()
+			lgr := applog.New(nil)
+			ctx := lgr.TestContext()
 
 			u := Usecase{
 				invitation: invRepo,
-				logger:     lgr,
+				lgr:        lgr,
 			}
 			got, aerr := u.AddCode(ctx, tc.in)
 
