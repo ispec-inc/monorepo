@@ -51,7 +51,7 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 			in: &FindCodeInput{
 				ID: int64(1),
 			},
-			want: &FindCodeOutput{},
+			want: nil,
 			invFind: mockio_repository.InvitationFind{
 				Time:  1,
 				ArgId: int64(1),
@@ -150,7 +150,7 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 					Code:   "code",
 				},
 			},
-			want: &AddCodeOutput{},
+			want: nil,
 			invCreate: mockio_repository.InvitationCreate{
 				Time: 1,
 				ArgMinv: model.Invitation{
