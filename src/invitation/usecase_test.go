@@ -17,17 +17,17 @@ import (
 func TestInvitationUsecase_FindCode(t *testing.T) {
 	cases := []struct {
 		name    string
-		in      FindCodeInput
-		want    FindCodeOutput
+		in      *FindCodeInput
+		want    *FindCodeOutput
 		invFind mockio_repository.InvitationFind
 		err     bool
 	}{
 		{
 			name: "Created",
-			in: FindCodeInput{
+			in: &FindCodeInput{
 				ID: int64(1),
 			},
-			want: FindCodeOutput{
+			want: &FindCodeOutput{
 				Invitation: model.Invitation{
 					ID:     int64(1),
 					UserID: int64(1),
@@ -48,10 +48,10 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 		},
 		{
 			name: "NotFound",
-			in: FindCodeInput{
+			in: &FindCodeInput{
 				ID: int64(1),
 			},
-			want: FindCodeOutput{},
+			want: &FindCodeOutput{},
 			invFind: mockio_repository.InvitationFind{
 				Time:  1,
 				ArgId: int64(1),
@@ -101,21 +101,21 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 	cases := []struct {
 		name            string
-		in              AddCodeInput
-		want            AddCodeOutput
+		in              *AddCodeInput
+		want            *AddCodeOutput
 		invCreate       mockio_repository.InvitationCreate
 		invFindByUserID mockio_repository.InvitationFindByUserID
 		err             bool
 	}{
 		{
 			name: "Created",
-			in: AddCodeInput{
+			in: &AddCodeInput{
 				Invitation: model.Invitation{
 					UserID: int64(1),
 					Code:   "code",
 				},
 			},
-			want: AddCodeOutput{
+			want: &AddCodeOutput{
 				Invitation: model.Invitation{
 					ID:     int64(1),
 					UserID: int64(1),
@@ -144,13 +144,13 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 		},
 		{
 			name: "InternalError",
-			in: AddCodeInput{
+			in: &AddCodeInput{
 				Invitation: model.Invitation{
 					UserID: int64(1),
 					Code:   "code",
 				},
 			},
-			want: AddCodeOutput{},
+			want: &AddCodeOutput{},
 			invCreate: mockio_repository.InvitationCreate{
 				Time: 1,
 				ArgMinv: model.Invitation{
