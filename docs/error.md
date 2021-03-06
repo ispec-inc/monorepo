@@ -39,7 +39,7 @@ GoでリポートしたエラーがSentry上で表示される際の特徴には
 
 # Package Dependencies
 
-`pkg/apperror` <- `pkg/applog` -> `pkg/applog/logger` <- `pkg/sentry, pkg/stdlog`
+`pkg/apperror` <- `pkg/applog` -> `<I> pkg/applog/logger` <- `pkg/sentry, pkg/stdlog`
 
 
 # Packages
