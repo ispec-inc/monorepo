@@ -1,6 +1,8 @@
 package apperror
 
 import (
+	"fmt"
+
 	"github.com/pkg/errors"
 )
 
@@ -17,6 +19,13 @@ func New(code Code, msg string) error {
 	})
 }
 
+func Newf(code Code, msg string, args ...interface{}) error {
+	return errors.WithStack(&Error{
+		code: code,
+		msg:  fmt.Sprintf(msg, args...),
+	})
+}
+
 func WithCode(code Code, err error) error {
 	return errors.WithStack(&Error{
 		code: code,
@@ -30,7 +39,7 @@ func Wrap(err error, msg string) error {
 }
 
 func Wrapf(err error, msg string, args ...interface{}) error {
-	return errors.Wrapf(err, msg, args)
+	return errors.Wrapf(err, msg, args...)
 }
 
 func (e *Error) Code() Code {
