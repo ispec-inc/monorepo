@@ -18,7 +18,7 @@ func Run(db *gorm.DB, f func(tx *gorm.DB) error) (err error) {
 		} else {
 			err := tx.Commit().Error
 			if err != nil {
-				err = apperror.Wrap(apperror.CodeError, err)
+				err = apperror.WithCode(apperror.CodeError, err)
 			}
 		}
 	}()
