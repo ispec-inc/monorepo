@@ -2,19 +2,17 @@ name: reviewdog
 on: [pull_request]
 jobs:
 
-  golint:
-    name: runner / golint
+  staticcheck:
+    name: runner / staticcheck
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code into the Go module directory
-        uses: actions/checkout@v1
-      - name: golint
-        uses: reviewdog/action-golangci-lint@v1
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-staticcheck@v1
         with:
-          github_token: ${{ secrets.reviewdog_github_token }}
-          golangci_lint_flags: "--disable-all -E golint"
-          tool_name: golint # Change reporter name.
+          github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
+          filter_mode: nofilter
+          fail_on_error: true
 
   hadolint:
     name: runner / hadolint
