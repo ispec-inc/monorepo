@@ -14,7 +14,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: setup
-        run: make setup
+        run: |
+          cp .env.default .env
+          make setup
       - name: run test
         run: make test
       - name: upload coverage to codecov
