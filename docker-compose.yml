@@ -1,6 +1,6 @@
 version: '2.2'
 services:
-  api:
+  app:
     container_name: go-distributed-monolith-api
     build:
       context: .
