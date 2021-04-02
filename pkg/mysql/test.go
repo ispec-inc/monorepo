@@ -26,6 +26,6 @@ func NewTest(name string) (*gorm.DB, error) {
 	})
 
 	return gorm.Open(dialector, &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
+		Logger: logger.Default.LogMode(logger.Silent),
 	})
 }
