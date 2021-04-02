@@ -6,136 +6,149 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/ispec-inc/go-distributed-monolith/pkg/domain/model"
+	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/dao/test"
 	"github.com/ispec-inc/go-distributed-monolith/pkg/infra/entity"
 )
 
 func TestInvitationDao_Find(t *testing.T) {
-	t.Helper()
+	db, cleanup := test.Prepare(t, "invitation_dao_find", []interface{}{
+		&entity.Invitation{ID: int64(1), UserID: int64(1), Code: "foo"},
+	})
+	defer cleanup()
 	d := NewInvitation(db)
 
-	cases := []struct {
+	type (
+		give struct {
+			id int64
+		}
+		want struct {
+			id int64
+		}
+	)
+	tests := []struct {
 		name string
-		id   int64
-		want int64
+		give give
+		want want
 		err  bool
 	}{
 		{
-			name: "Found",
-			id:   int64(1),
-			want: int64(1),
-			err:  false,
+			name: "success",
+			give: give{id: int64(1)},
+			want: want{id: int64(1)},
 		},
 		{
-			name: "NotFound",
-			id:   int64(2),
-			want: int64(0),
+			name: "not found",
+			give: give{id: int64(2)},
+			want: want{id: int64(0)},
 			err:  true,
 		},
 	}
-	for i := range cases {
-		tc := cases[i]
-		t.Run(tc.name, func(t *testing.T) {
-			if err := prepareTestData("./testdata/invitation/find.sql"); err != nil {
-				t.Error(err)
-			}
-
-			opt, aerr := d.Find(tc.id)
-
-			assert.Exactly(t, tc.want, opt.ID)
-			if tc.err {
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			got, aerr := d.Find(tt.give.id)
+			if tt.err {
 				assert.Error(t, aerr)
 			} else {
 				assert.NoError(t, aerr)
+				assert.Exactly(t, tt.want.id, got.ID)
 			}
 		})
 	}
 }
 
 func TestInvitationDao_FindByUserID(t *testing.T) {
-	t.Helper()
+	db, cleanup := test.Prepare(t, "invitation_dao_find_by_user_id", []interface{}{
+		&entity.Invitation{ID: int64(1), UserID: int64(1), Code: "foo"},
+	})
+	defer cleanup()
 	d := NewInvitation(db)
 
-	cases := []struct {
-		name   string
-		userID int64
-		want   int64
-		err    bool
+	type (
+		give struct {
+			userID int64
+		}
+		want struct {
+			id int64
+		}
+	)
+	tests := []struct {
+		name string
+		give give
+		want want
+		err  bool
 	}{
 		{
-			name:   "Found",
-			userID: int64(1),
-			want:   int64(1),
-			err:    false,
+			name: "success",
+			give: give{userID: int64(1)},
+			want: want{id: int64(1)},
 		},
 		{
-			name:   "NotFound",
-			userID: int64(2),
-			want:   int64(0),
-			err:    true,
+			name: "not found",
+			give: give{userID: int64(2)},
+			want: want{id: int64(0)},
+			err:  true,
 		},
 	}
-	for i := range cases {
-		tc := cases[i]
-		t.Run(tc.name, func(t *testing.T) {
-			if err := prepareTestData("./testdata/invitation/find_by_user_id.sql"); err != nil {
-				t.Error(err)
-			}
-
-			opt, aerr := d.FindByUserID(tc.userID)
-
-			assert.Exactly(t, tc.want, opt.UserID)
-			if tc.err {
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			got, aerr := d.FindByUserID(tt.give.userID)
+			if tt.err {
 				assert.Error(t, aerr)
 			} else {
 				assert.NoError(t, aerr)
+				assert.Exactly(t, tt.want.id, got.ID)
 			}
 		})
 	}
 }
 
 func TestInvitationDao_Create(t *testing.T) {
-	t.Helper()
+	db, cleanup := test.Prepare(t, "invitation_dao_create", []interface{}{
+		&entity.Invitation{ID: int64(1), UserID: int64(1), Code: "foo"},
+	})
+	defer cleanup()
 	d := NewInvitation(db)
 
-	cases := []struct {
-		name       string
-		model      model.Invitation
-		createdCnt int
-		err        bool
+	type (
+		give struct {
+			model model.Invitation
+		}
+		want struct {
+			createdCount int
+		}
+	)
+	tests := []struct {
+		name string
+		give give
+		want want
+		err  bool
 	}{
 		{
-			name:       "Created",
-			model:      model.Invitation{UserID: int64(2), Code: "code"},
-			createdCnt: 1,
-			err:        false,
+			name: "success",
+			give: give{model: model.Invitation{UserID: int64(2), Code: "code"}},
+			want: want{createdCount: 1},
 		},
 		{
-			name:       "AlreadyExist",
-			model:      model.Invitation{UserID: int64(1), Code: "code"},
-			createdCnt: 0,
-			err:        true,
+			name: "already existed",
+			give: give{model: model.Invitation{UserID: int64(1), Code: "code"}},
+			want: want{createdCount: 0},
+			err:  true,
 		},
 	}
-	for i := range cases {
-		tc := cases[i]
-		t.Run(tc.name, func(t *testing.T) {
-			if err := prepareTestData("./testdata/invitation/create.sql"); err != nil {
-				t.Error(err)
-			}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			bcnt := test.CountRecord(t, db, "invitations")
+			aerr := d.Create(tt.give.model)
+			acnt := test.CountRecord(t, db, "invitations")
 
-			var before, after []entity.Invitation
-
-			d.db.Find(&before)
-
-			aerr := d.Create(tc.model)
-
-			d.db.Find(&after)
-
-			assert.Exactly(t, tc.createdCnt, len(after)-len(before))
-			if tc.err {
+			if tt.err {
 				assert.Error(t, aerr)
 			} else {
 				assert.NoError(t, aerr)
+				assert.Exactly(t, tt.want.createdCount, acnt-bcnt)
 			}
 		})
 	}
