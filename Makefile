@@ -5,7 +5,7 @@ setup:
 	docker-compose up -d mysql
 	docker-compose build
 	docker-compose run dockerize
-	docker-compose up dbinit
+	docker-compose run --rm -T app go run ./cmd/db/init
 
 server:
 	docker-compose up -d mysql
@@ -17,4 +17,4 @@ generate:
 
 test: pkg = ./...
 test:
-	docker-compose run --rm -e -T app go test -v -p 1 -cover  -coverprofile=coverage.out $(pkg)
+	docker-compose run --rm -T app go test -v -cover -coverprofile=coverage.out $(pkg)
