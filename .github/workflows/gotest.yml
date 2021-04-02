@@ -13,32 +13,12 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: checkout migration
-        uses: actions/checkout@v2
-        with:
-          repository: ispec-inc/migration
-          token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
-          path: ./_migration
-      - name: create docker network
-        run: | 
-          docker network create monolith
-      - name: build containers
-        run: | 
-          cp .github/workflows/.env/.go-distributed-monolith .env
-          docker-compose build
-      - name: start containers
+      - name: setup
         run: |
-          docker-compose up -d mysql
-          docker-compose run dockerize -wait tcp://mysql:3306 -timeout 20s
-          docker-compose up -d api
-      - name: migrate database
-        run: |
-          cp ./.github/workflows/.env/.migration ./_migration/.env
-          cd ./_migration
-          docker-compose up
+          cp .env.default .env
+          make setup
       - name: run test
-        run: |
-          docker-compose run -T api go test -v -p 1 -cover -coverprofile=coverage.out ./...
+        run: make test
       - name: upload coverage to codecov
         uses: codecov/codecov-action@v1
         with:

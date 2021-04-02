@@ -10,7 +10,7 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 )
 
-func Init() (*gorm.DB, error) {
+func New() (*gorm.DB, error) {
 	var logLevel logger.LogLevel
 	switch config.App.Env {
 	case config.EnvDev, config.EnvStg:

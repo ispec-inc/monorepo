@@ -1,27 +1,12 @@
 version: '2.2'
 services:
-  api:
+  app:
     container_name: go-distributed-monolith-api
     build:
       context: .
       dockerfile: docker/dev/Dockerfile
     ports:
       - "9000:9000"
-    env_file:
-      - .env
-    depends_on:
-      - mysql
-    volumes:
-      - ./:/app
-    working_dir: /app
-    networks:
-      - monolith
-  
-  dbinit:
-    container_name: go-distributed-monolith-dbinit
-    build:
-      context: .
-      dockerfile: docker/dev/dbinit.Dockerfile
     env_file:
       - .env
     depends_on:

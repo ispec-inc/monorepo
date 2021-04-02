@@ -1,20 +1,20 @@
-.PHONY: init
-init:
-	go mod download
-	docker network create monolith
+.PHONY: setup server generate test
 
-.PHONY: server
+setup:
+	docker network create monolith || true
+	docker-compose up -d mysql
+	docker-compose build
+	docker-compose run dockerize
+	docker-compose run --rm -T app go run ./cmd/db/init
+
 server:
 	docker-compose up -d mysql
 	docker-compose run dockerize
-	docker-compose up api
+	docker-compose up app
 
-.PHONY: dbinit
-dbinit:
-	docker-compose up -d mysql
-	docker-compose run dockerize
-	docker-compose up dbinit
-
-.PHONY: generate
 generate:
 	go generate ./...
+
+test: pkg = ./...
+test:
+	docker-compose run --rm -T app go test -v -cover -coverprofile=coverage.out $(pkg)

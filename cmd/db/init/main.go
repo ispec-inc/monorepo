@@ -3,13 +3,12 @@ package main
 import (
 	"fmt"
 
-	"github.com/tanimutomo/sqlfile"
-
 	"github.com/ispec-inc/go-distributed-monolith/pkg/mysql"
+	"github.com/tanimutomo/sqlfile"
 )
 
 func main() {
-	db, err := mysql.Init()
+	db, err := mysql.New()
 	if err != nil {
 		panic(err)
 	}

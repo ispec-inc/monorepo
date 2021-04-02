@@ -13,7 +13,7 @@ type Repository struct {
 }
 
 func NewRepository() (Repository, func() error, error) {
-	db, err := mysql.Init()
+	db, err := mysql.New()
 	if err != nil {
 		return Repository{}, func() error { return nil }, err
 	}
