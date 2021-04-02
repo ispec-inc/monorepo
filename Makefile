@@ -1,20 +1,16 @@
-.PHONY: init
-init:
-	go mod download
-	docker network create monolith
+.PHONY: setup server generate
 
-.PHONY: server
+setup:
+	docker network create monolith || true
+	docker-compose up -d mysql
+	docker-compose build
+	docker-compose run dockerize
+	docker-compose up dbinit
+
 server:
 	docker-compose up -d mysql
 	docker-compose run dockerize
 	docker-compose up api
 
-.PHONY: dbinit
-dbinit:
-	docker-compose up -d mysql
-	docker-compose run dockerize
-	docker-compose up dbinit
-
-.PHONY: generate
 generate:
 	go generate ./...
