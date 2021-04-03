@@ -11,20 +11,23 @@ import (
 	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
 )
 
-func NewTest(name string) (*gorm.DB, error) {
+const driver = "txdb"
+
+func init() {
 	dsn := fmt.Sprintf(
 		"%s:%s@(%s:%s)/%s?charset=utf8mb4&parseTime=true",
 		config.RDS.User, config.RDS.Password,
 		config.RDS.Host, config.RDS.Port,
 		config.RDS.Database,
 	)
+	txdb.Register(driver, "mysql", dsn)
+}
 
-	txdb.Register(name, "mysql", dsn)
+func NewTest(name string) (*gorm.DB, error) {
 	dialector := mysql.New(mysql.Config{
-		DriverName: name,
-		DSN:        dsn,
+		DriverName: driver,
+		DSN:        name,
 	})
-
 	return gorm.Open(dialector, &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
