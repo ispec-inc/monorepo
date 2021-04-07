@@ -1,10 +1,9 @@
 package dao
 
 import (
-	"gorm.io/gorm"
-
 	"github.com/ispec-inc/monorepo/server/pkg/domain/model"
 	"github.com/ispec-inc/monorepo/server/pkg/infra/entity"
+	"gorm.io/gorm"
 )
 
 type User struct {
@@ -12,29 +11,45 @@ type User struct {
 }
 
 func NewUser(db *gorm.DB) User {
-	return User{db}
-}
-
-func (i User) Find(id int64) (model.User, error) {
-	var inv entity.User
-	if err := i.db.First(&inv, id).Error; err != nil {
-		return model.User{}, newGormFindError(err, entity.UserModelName)
+	return User{
+		db,
 	}
-	return inv.ToModel(), nil
 }
 
-func (i User) FindByUserID(uid int64) (model.User, error) {
-	var inv entity.User
-	if err := i.db.First(&inv, "user_id = ?", uid).Error; err != nil {
-		return model.User{}, newGormFindError(err, entity.UserModelName)
+func (d User) Get(id int64) (*model.User, error) {
+	var e entity.User
+	if err := d.db.First(&e, id).Error; err != nil {
+		return nil, newGormFindError(err, entity.UserModelName)
 	}
-	return inv.ToModel(), nil
+	return e.ToModel(), nil
 }
 
-func (i User) Create(minv model.User) error {
-	e := entity.NewUserFromModel(minv)
-	if err := i.db.Create(&e).Error; err != nil {
-		return newGormCreateError(err, entity.UserModelName)
+func (d User) List(ids []int64) ([]*model.User, error) {
+	query := d.db
+	if len(ids) > 0 {
+		query = query.Where("id in (?)", ids)
+	}
+
+	var es []entity.User
+	if err := query.Find(&es).Error; err != nil {
+		return nil, newGormFindError(err, entity.UserModelName)
+	}
+
+	ms := make([]*model.User, len(es))
+	for i, e := range es {
+		ms[i] = e.ToModel()
+	}
+	return ms, nil
+}
+
+func (d User) Create(m *model.User) error {
+	e := &entity.User{
+		Name:        m.Name,
+		Description: m.Description,
+		Email:       m.Email,
+	}
+	if err := d.db.Create(e).Error; err != nil {
+		return err
 	}
 	return nil
 }
