@@ -19,11 +19,11 @@ server:
 
 test: pkg = ./...
 test:
-	docker-compose run --rm -e DB_HOST=mysql-test -T api go test -v -cover -coverprofile=coverage.out $(pkg)
+	docker-compose run --rm -e DB_HOST=mysql-test api go test -v -cover -coverprofile=coverage.out $(pkg)
 
 generate: pkg = ./...
 generate:
-	docker-compose run --rm -T api go generate $(pkg)
+	docker-compose run --rm api go generate $(pkg)
 
 db: cmd
 db:
