@@ -15,7 +15,7 @@ services:
       - ./:/app
     working_dir: /app
     networks:
-      - monorepo-server
+      - monorepo
   
   mysql:
     image: mysql:5.7
@@ -25,18 +25,40 @@ services:
     ports:
       - "33071:3306"
     networks:
-      - monorepo-server
+      - monorepo
     volumes:
       - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
+  mysql-test:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: monorepo
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33072:3306"
+    networks:
+      - monorepo
+    volumes:
+      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+
+  migrate:
+    container_name: migration
+    build:
+      context: .
+      dockerfile: docker/dev/db.Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - ./db:/db
+    networks:
+      - monorepo
+
   dockerize:
     image: jwilder/dockerize:0.6.1
-    depends_on:
-      - mysql
     networks:
-      - monorepo-server
-    command: dockerize -wait tcp://mysql:3306 -timeout 20s
+      - monorepo
+    command: dockerize
 
 networks:
-  monorepo-server:
+  monorepo:
     external: true
