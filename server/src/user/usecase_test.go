@@ -1,9 +1,9 @@
 package user
 
 import (
+	"errors"
 	"testing"
 
-	"github.com/ispec-inc/monorepo/server/pkg/apperror"
 	"github.com/ispec-inc/monorepo/server/pkg/applog"
 
 	gomock "github.com/golang/mock/gomock"
@@ -14,53 +14,36 @@ import (
 	mockio_repository "github.com/ispec-inc/monorepo/server/pkg/domain/repository/mockio"
 )
 
-func TestUserUsecase_FindCode(t *testing.T) {
+func TestUserUsecase_Get(t *testing.T) {
 	cases := []struct {
 		name    string
-		in      *FindCodeInput
-		want    *FindCodeOutput
-		invFind mockio_repository.UserFind
+		give    *GetInput
+		want    *GetOutput
+		userGet mockio_repository.UserGet
 		err     bool
 	}{
 		{
-			name: "Created",
-			in: &FindCodeInput{
+			name: "success",
+			give: &GetInput{
 				ID: int64(1),
 			},
-			want: &FindCodeOutput{
-				User: model.User{
-					ID:     int64(1),
-					UserID: int64(1),
-					Code:   "code",
-				},
+			want: &GetOutput{
+				User: &model.User{ID: int64(1)},
 			},
-			invFind: mockio_repository.UserFind{
+			userGet: mockio_repository.UserGet{
 				Time:  1,
 				ArgId: int64(1),
-				Ret0: model.User{
-					ID:     int64(1),
-					UserID: int64(1),
-					Code:   "code",
-				},
-				Ret1: nil,
+				Ret0:  &model.User{ID: int64(1)},
+				Ret1:  nil,
 			},
-			err: false,
 		},
 		{
-			name: "NotFound",
-			in: &FindCodeInput{
-				ID: int64(1),
-			},
-			want: nil,
-			invFind: mockio_repository.UserFind{
+			name: "fail to get user",
+			give: &GetInput{ID: int64(1)},
+			userGet: mockio_repository.UserGet{
 				Time:  1,
 				ArgId: int64(1),
-				Ret0: model.User{
-					ID:     int64(1),
-					UserID: int64(1),
-					Code:   "code",
-				},
-				Ret1: apperror.New(apperror.CodeNotFound, ""),
+				Ret1:  errors.New("unknown"),
 			},
 			err: true,
 		},
@@ -73,94 +56,94 @@ func TestUserUsecase_FindCode(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			invRepo := mock_repository.NewMockUser(ctrl)
-			invRepo.EXPECT().
-				Find(tc.invFind.ArgId).
-				Return(tc.invFind.Ret0, tc.invFind.Ret1).
-				Times(tc.invFind.Time)
+			userRepo := mock_repository.NewMockUser(ctrl)
+			userRepo.EXPECT().
+				Get(tc.userGet.ArgId).
+				Return(tc.userGet.Ret0, tc.userGet.Ret1).
+				Times(tc.userGet.Time)
 
 			lg := applog.New(nil)
-			ctx := lg.TestContext()
 
 			u := Usecase{
-				user: invRepo,
+				user: userRepo,
 				log:  lg,
 			}
-			got, aerr := u.FindCode(ctx, tc.in)
+			got, aerr := u.Get(lg.TestContext(), tc.give)
 
-			assert.Exactly(t, tc.want, got)
 			if tc.err {
 				assert.Error(t, aerr)
 			} else {
 				assert.NoError(t, aerr)
+				assert.Exactly(t, tc.want, got)
 			}
 		})
 	}
 }
 
-func TestUserUsecase_AddCode_Success(t *testing.T) {
+func TestUserUsecase_Create(t *testing.T) {
 	cases := []struct {
-		name            string
-		in              *AddCodeInput
-		want            *AddCodeOutput
-		invCreate       mockio_repository.UserCreate
-		invFindByUserID mockio_repository.UserFindByUserID
-		err             bool
+		name       string
+		give       *CreateInput
+		want       *CreateOutput
+		userCreate mockio_repository.UserCreate
+		userList   mockio_repository.UserList
+		err        bool
 	}{
 		{
-			name: "Created",
-			in: &AddCodeInput{
-				User: model.User{
-					UserID: int64(1),
-					Code:   "code",
+			name: "success",
+			give: &CreateInput{Name: "new"},
+			want: &CreateOutput{
+				Users: []*model.User{
+					{Name: "old"},
+					{Name: "new"},
 				},
 			},
-			want: &AddCodeOutput{
-				User: model.User{
-					ID:     int64(1),
-					UserID: int64(1),
-					Code:   "code",
-				},
+			userCreate: mockio_repository.UserCreate{
+				Time:    1,
+				ArgUser: &model.User{Name: "new"},
+				Ret0:    nil,
 			},
-			invCreate: mockio_repository.UserCreate{
-				Time: 1,
-				ArgMinv: model.User{
-					UserID: int64(1),
-					Code:   "code",
-				},
-				Ret0: nil,
-			},
-			invFindByUserID: mockio_repository.UserFindByUserID{
+			userList: mockio_repository.UserList{
 				Time:   1,
-				ArgUid: int64(1),
-				Ret0: model.User{
-					ID:     int64(1),
-					UserID: int64(1),
-					Code:   "code",
+				ArgIds: nil,
+				Ret0: []*model.User{
+					{Name: "old"},
+					{Name: "new"},
 				},
 				Ret1: nil,
 			},
 			err: false,
 		},
 		{
-			name: "InternalError",
-			in: &AddCodeInput{
-				User: model.User{
-					UserID: int64(1),
-					Code:   "code",
-				},
-			},
+			name: "fail to create user",
+			give: &CreateInput{Name: "new"},
 			want: nil,
-			invCreate: mockio_repository.UserCreate{
-				Time: 1,
-				ArgMinv: model.User{
-					UserID: int64(1),
-					Code:   "code",
-				},
-				Ret0: apperror.New(apperror.CodeError, ""),
+			userCreate: mockio_repository.UserCreate{
+				Time:    1,
+				ArgUser: &model.User{Name: "new"},
+				Ret0:    errors.New("unknown"),
 			},
-			invFindByUserID: mockio_repository.UserFindByUserID{
-				Time: 0,
+			err: true,
+		},
+		{
+			name: "fail to list user",
+			give: &CreateInput{Name: "new"},
+			want: &CreateOutput{
+				Users: []*model.User{
+					{Name: "old"},
+					{Name: "new"},
+				},
+			},
+			userCreate: mockio_repository.UserCreate{
+				Time:    1,
+				ArgUser: &model.User{Name: "new"},
+				Ret0:    nil,
+			},
+			userList: mockio_repository.UserList{
+				Time:   1,
+				ArgIds: nil,
+				Ret0:   nil,
+				Ret1:   errors.New("unknown"),
 			},
 			err: true,
 		},
@@ -170,33 +153,33 @@ func TestUserUsecase_AddCode_Success(t *testing.T) {
 		tc := cases[i]
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
+
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			invRepo := mock_repository.NewMockUser(ctrl)
-			invRepo.EXPECT().
-				Create(tc.invCreate.ArgMinv).
-				Return(tc.invCreate.Ret0).
-				Times(tc.invCreate.Time)
-			invRepo.EXPECT().
-				FindByUserID(tc.invFindByUserID.ArgUid).
-				Return(tc.invFindByUserID.Ret0, tc.invFindByUserID.Ret1).
-				Times(tc.invFindByUserID.Time)
+			userRepo := mock_repository.NewMockUser(ctrl)
+			userRepo.EXPECT().
+				Create(tc.userCreate.ArgUser).
+				Return(tc.userCreate.Ret0).
+				Times(tc.userCreate.Time)
+			userRepo.EXPECT().
+				List(tc.userList.ArgIds).
+				Return(tc.userList.Ret0, tc.userList.Ret1).
+				Times(tc.userList.Time)
 
 			lg := applog.New(nil)
-			ctx := lg.TestContext()
 
 			u := Usecase{
-				user: invRepo,
+				user: userRepo,
 				log:  lg,
 			}
-			got, aerr := u.AddCode(ctx, tc.in)
+			got, aerr := u.Create(lg.TestContext(), tc.give)
 
-			assert.Exactly(t, tc.want, got)
 			if tc.err {
 				assert.Error(t, aerr)
 			} else {
 				assert.NoError(t, aerr)
+				assert.Exactly(t, tc.want, got)
 			}
 		})
 	}

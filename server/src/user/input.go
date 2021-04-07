@@ -1,13 +1,11 @@
 package user
 
-import (
-	"github.com/ispec-inc/monorepo/server/pkg/domain/model"
-)
-
-type FindCodeInput struct {
+type GetInput struct {
 	ID int64
 }
 
-type AddCodeInput struct {
-	User model.User
+type CreateInput struct {
+	Name        string
+	Description string
+	Email       string
 }

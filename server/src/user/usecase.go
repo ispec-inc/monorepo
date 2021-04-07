@@ -5,6 +5,7 @@ import (
 
 	"github.com/ispec-inc/monorepo/server/pkg/apperror"
 	"github.com/ispec-inc/monorepo/server/pkg/applog"
+	"github.com/ispec-inc/monorepo/server/pkg/domain/model"
 	"github.com/ispec-inc/monorepo/server/pkg/domain/repository"
 	"github.com/ispec-inc/monorepo/server/pkg/registry"
 )
@@ -21,33 +22,38 @@ func NewUsecase(rgst registry.Registry) Usecase {
 	}
 }
 
-func (u Usecase) FindCode(ctx context.Context, inp *FindCodeInput) (*FindCodeOutput, error) {
-	inv, err := u.user.Find(inp.ID)
+func (u Usecase) Get(ctx context.Context, ipt *GetInput) (*GetOutput, error) {
+	user, err := u.user.Get(ipt.ID)
 	if err != nil {
-		err = apperror.Wrap(err, "FindCode")
+		err = apperror.Wrap(err, "Get")
 		u.log.Error(ctx, err)
 		return nil, err
 	}
-	return &FindCodeOutput{
-		User: inv,
+	return &GetOutput{
+		User: user,
 	}, nil
 }
 
-func (u Usecase) AddCode(ctx context.Context, inp *AddCodeInput) (*AddCodeOutput, error) {
-	err := u.user.Create(inp.User)
+func (u Usecase) Create(ctx context.Context, ipt *CreateInput) (*CreateOutput, error) {
+	err := u.user.Create(&model.User{
+		Name:        ipt.Name,
+		Description: ipt.Description,
+		Email:       ipt.Email,
+	})
 	if err != nil {
-		err = apperror.Wrap(err, "AddCode")
+		err = apperror.Wrap(err, "Create")
 		u.log.Error(ctx, err)
 		return nil, err
 	}
 
-	inv, err := u.user.FindByUserID(inp.User.UserID)
+	users, err := u.user.List(nil)
 	if err != nil {
-		err = apperror.Wrap(err, "AddCode")
+		err = apperror.Wrap(err, "Create")
 		u.log.Error(ctx, err)
 		return nil, err
 	}
-	return &AddCodeOutput{
-		User: inv,
+
+	return &CreateOutput{
+		Users: users,
 	}, nil
 }
