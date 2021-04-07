@@ -1,4 +1,4 @@
-package invitation
+package user
 
 import (
 	"testing"
@@ -14,12 +14,12 @@ import (
 	mockio_repository "github.com/ispec-inc/monorepo/server/pkg/domain/repository/mockio"
 )
 
-func TestInvitationUsecase_FindCode(t *testing.T) {
+func TestUserUsecase_FindCode(t *testing.T) {
 	cases := []struct {
 		name    string
 		in      *FindCodeInput
 		want    *FindCodeOutput
-		invFind mockio_repository.InvitationFind
+		invFind mockio_repository.UserFind
 		err     bool
 	}{
 		{
@@ -28,16 +28,16 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 				ID: int64(1),
 			},
 			want: &FindCodeOutput{
-				Invitation: model.Invitation{
+				User: model.User{
 					ID:     int64(1),
 					UserID: int64(1),
 					Code:   "code",
 				},
 			},
-			invFind: mockio_repository.InvitationFind{
+			invFind: mockio_repository.UserFind{
 				Time:  1,
 				ArgId: int64(1),
-				Ret0: model.Invitation{
+				Ret0: model.User{
 					ID:     int64(1),
 					UserID: int64(1),
 					Code:   "code",
@@ -52,10 +52,10 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 				ID: int64(1),
 			},
 			want: nil,
-			invFind: mockio_repository.InvitationFind{
+			invFind: mockio_repository.UserFind{
 				Time:  1,
 				ArgId: int64(1),
-				Ret0: model.Invitation{
+				Ret0: model.User{
 					ID:     int64(1),
 					UserID: int64(1),
 					Code:   "code",
@@ -73,7 +73,7 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			invRepo := mock_repository.NewMockInvitation(ctrl)
+			invRepo := mock_repository.NewMockUser(ctrl)
 			invRepo.EXPECT().
 				Find(tc.invFind.ArgId).
 				Return(tc.invFind.Ret0, tc.invFind.Ret1).
@@ -83,8 +83,8 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 			ctx := lg.TestContext()
 
 			u := Usecase{
-				invitation: invRepo,
-				log:        lg,
+				user: invRepo,
+				log:  lg,
 			}
 			got, aerr := u.FindCode(ctx, tc.in)
 
@@ -98,42 +98,42 @@ func TestInvitationUsecase_FindCode(t *testing.T) {
 	}
 }
 
-func TestInvitationUsecase_AddCode_Success(t *testing.T) {
+func TestUserUsecase_AddCode_Success(t *testing.T) {
 	cases := []struct {
 		name            string
 		in              *AddCodeInput
 		want            *AddCodeOutput
-		invCreate       mockio_repository.InvitationCreate
-		invFindByUserID mockio_repository.InvitationFindByUserID
+		invCreate       mockio_repository.UserCreate
+		invFindByUserID mockio_repository.UserFindByUserID
 		err             bool
 	}{
 		{
 			name: "Created",
 			in: &AddCodeInput{
-				Invitation: model.Invitation{
+				User: model.User{
 					UserID: int64(1),
 					Code:   "code",
 				},
 			},
 			want: &AddCodeOutput{
-				Invitation: model.Invitation{
+				User: model.User{
 					ID:     int64(1),
 					UserID: int64(1),
 					Code:   "code",
 				},
 			},
-			invCreate: mockio_repository.InvitationCreate{
+			invCreate: mockio_repository.UserCreate{
 				Time: 1,
-				ArgMinv: model.Invitation{
+				ArgMinv: model.User{
 					UserID: int64(1),
 					Code:   "code",
 				},
 				Ret0: nil,
 			},
-			invFindByUserID: mockio_repository.InvitationFindByUserID{
+			invFindByUserID: mockio_repository.UserFindByUserID{
 				Time:   1,
 				ArgUid: int64(1),
-				Ret0: model.Invitation{
+				Ret0: model.User{
 					ID:     int64(1),
 					UserID: int64(1),
 					Code:   "code",
@@ -145,21 +145,21 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 		{
 			name: "InternalError",
 			in: &AddCodeInput{
-				Invitation: model.Invitation{
+				User: model.User{
 					UserID: int64(1),
 					Code:   "code",
 				},
 			},
 			want: nil,
-			invCreate: mockio_repository.InvitationCreate{
+			invCreate: mockio_repository.UserCreate{
 				Time: 1,
-				ArgMinv: model.Invitation{
+				ArgMinv: model.User{
 					UserID: int64(1),
 					Code:   "code",
 				},
 				Ret0: apperror.New(apperror.CodeError, ""),
 			},
-			invFindByUserID: mockio_repository.InvitationFindByUserID{
+			invFindByUserID: mockio_repository.UserFindByUserID{
 				Time: 0,
 			},
 			err: true,
@@ -173,7 +173,7 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			invRepo := mock_repository.NewMockInvitation(ctrl)
+			invRepo := mock_repository.NewMockUser(ctrl)
 			invRepo.EXPECT().
 				Create(tc.invCreate.ArgMinv).
 				Return(tc.invCreate.Ret0).
@@ -187,8 +187,8 @@ func TestInvitationUsecase_AddCode_Success(t *testing.T) {
 			ctx := lg.TestContext()
 
 			u := Usecase{
-				invitation: invRepo,
-				log:        lg,
+				user: invRepo,
+				log:  lg,
 			}
 			got, aerr := u.AddCode(ctx, tc.in)
 

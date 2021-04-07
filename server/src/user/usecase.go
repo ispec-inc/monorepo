@@ -1,4 +1,4 @@
-package invitation
+package user
 
 import (
 	"context"
@@ -10,44 +10,44 @@ import (
 )
 
 type Usecase struct {
-	invitation repository.Invitation
-	log        applog.AppLog
+	user repository.User
+	log  applog.AppLog
 }
 
 func NewUsecase(rgst registry.Registry) Usecase {
 	return Usecase{
-		invitation: rgst.Repository().NewInvitation(),
-		log:        applog.New(rgst.Logger().New()),
+		user: rgst.Repository().NewUser(),
+		log:  applog.New(rgst.Logger().New()),
 	}
 }
 
 func (u Usecase) FindCode(ctx context.Context, inp *FindCodeInput) (*FindCodeOutput, error) {
-	inv, err := u.invitation.Find(inp.ID)
+	inv, err := u.user.Find(inp.ID)
 	if err != nil {
 		err = apperror.Wrap(err, "FindCode")
 		u.log.Error(ctx, err)
 		return nil, err
 	}
 	return &FindCodeOutput{
-		Invitation: inv,
+		User: inv,
 	}, nil
 }
 
 func (u Usecase) AddCode(ctx context.Context, inp *AddCodeInput) (*AddCodeOutput, error) {
-	err := u.invitation.Create(inp.Invitation)
+	err := u.user.Create(inp.User)
 	if err != nil {
 		err = apperror.Wrap(err, "AddCode")
 		u.log.Error(ctx, err)
 		return nil, err
 	}
 
-	inv, err := u.invitation.FindByUserID(inp.Invitation.UserID)
+	inv, err := u.user.FindByUserID(inp.User.UserID)
 	if err != nil {
 		err = apperror.Wrap(err, "AddCode")
 		u.log.Error(ctx, err)
 		return nil, err
 	}
 	return &AddCodeOutput{
-		Invitation: inv,
+		User: inv,
 	}, nil
 }

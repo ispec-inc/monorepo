@@ -1,4 +1,4 @@
-package invitation
+package user
 
 import (
 	"encoding/json"
@@ -12,15 +12,15 @@ import (
 	"github.com/ispec-inc/monorepo/server/pkg/presenter"
 	"github.com/ispec-inc/monorepo/server/pkg/registry"
 	"github.com/ispec-inc/monorepo/server/pkg/view"
-	"github.com/ispec-inc/monorepo/server/src/invitation"
+	"github.com/ispec-inc/monorepo/server/src/user"
 )
 
 type Handler struct {
-	usecase invitation.Usecase
+	usecase user.Usecase
 }
 
 func NewHandler(rgst registry.Registry) Handler {
-	usecase := invitation.NewUsecase(rgst)
+	usecase := user.NewUsecase(rgst)
 	return Handler{usecase}
 }
 
@@ -31,7 +31,7 @@ func (h Handler) GetCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	inp := &invitation.FindCodeInput{
+	inp := &user.FindCodeInput{
 		ID: int64(id),
 	}
 	out, aerr := h.usecase.FindCode(r.Context(), inp)
@@ -40,9 +40,9 @@ func (h Handler) GetCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	invres := view.NewInvitationCode(out.Invitation)
+	invres := view.NewUserCode(out.User)
 	res := GetCodeResponse{
-		InvitationCode: invres,
+		UserCode: invres,
 	}
 	presenter.Response(w, res)
 }
@@ -59,12 +59,12 @@ func (h Handler) AddCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	inv := model.Invitation{
+	inv := model.User{
 		UserID: request.UserID,
 		Code:   request.Code,
 	}
-	inp := &invitation.AddCodeInput{
-		Invitation: inv,
+	inp := &user.AddCodeInput{
+		User: inv,
 	}
 	out, aerr := h.usecase.AddCode(r.Context(), inp)
 	if aerr != nil {
@@ -72,9 +72,9 @@ func (h Handler) AddCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	invres := view.NewInvitationCode(out.Invitation)
+	invres := view.NewUserCode(out.User)
 	res := AddCodeResponse{
-		InvitationCode: invres,
+		UserCode: invres,
 	}
 	presenter.Response(w, res)
 }

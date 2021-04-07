@@ -1,13 +1,13 @@
-package invitation
+package user
 
 import (
 	"github.com/ispec-inc/monorepo/server/pkg/domain/model"
 )
 
 type FindCodeOutput struct {
-	Invitation model.Invitation
+	User model.User
 }
 
 type AddCodeOutput struct {
-	Invitation model.Invitation
+	User model.User
 }

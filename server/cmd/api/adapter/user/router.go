@@ -1,4 +1,4 @@
-package invitation
+package user
 
 import (
 	"net/http"

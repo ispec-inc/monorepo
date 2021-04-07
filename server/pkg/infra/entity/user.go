@@ -6,9 +6,9 @@ import (
 	"github.com/ispec-inc/monorepo/server/pkg/domain/model"
 )
 
-const InvitationModelName = "Invitation"
+const UserModelName = "User"
 
-type Invitation struct {
+type User struct {
 	ID        int64     `gorm:"column:id"`
 	UserID    int64     `gorm:"column:user_id"`
 	Code      string    `gorm:"column:code"`
@@ -16,18 +16,18 @@ type Invitation struct {
 	UpdatedAt time.Time `gorm:"column:updated_at"`
 }
 
-func NewInvitationFromModel(
-	m model.Invitation,
-) Invitation {
-	return Invitation{
+func NewUserFromModel(
+	m model.User,
+) User {
+	return User{
 		ID:     m.ID,
 		UserID: m.UserID,
 		Code:   m.Code,
 	}
 }
 
-func (i Invitation) ToModel() model.Invitation {
-	return model.Invitation{
+func (i User) ToModel() model.User {
+	return model.User{
 		ID:     i.ID,
 		UserID: i.UserID,
 		Code:   i.Code,

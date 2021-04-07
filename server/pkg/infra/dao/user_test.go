@@ -10,12 +10,12 @@ import (
 	"github.com/ispec-inc/monorepo/server/pkg/infra/entity"
 )
 
-func TestInvitationDao_Find(t *testing.T) {
-	db, cleanup := test.Prepare(t, "invitation_dao_find", []interface{}{
-		&entity.Invitation{ID: int64(1), UserID: int64(1), Code: "foo"},
+func TestUserDao_Find(t *testing.T) {
+	db, cleanup := test.Prepare(t, "user_dao_find", []interface{}{
+		&entity.User{ID: int64(1), UserID: int64(1), Code: "foo"},
 	})
 	defer cleanup()
-	d := NewInvitation(db)
+	d := NewUser(db)
 
 	type (
 		give struct {
@@ -57,12 +57,12 @@ func TestInvitationDao_Find(t *testing.T) {
 	}
 }
 
-func TestInvitationDao_FindByUserID(t *testing.T) {
-	db, cleanup := test.Prepare(t, "invitation_dao_find_by_user_id", []interface{}{
-		&entity.Invitation{ID: int64(1), UserID: int64(1), Code: "foo"},
+func TestUserDao_FindByUserID(t *testing.T) {
+	db, cleanup := test.Prepare(t, "user_dao_find_by_user_id", []interface{}{
+		&entity.User{ID: int64(1), UserID: int64(1), Code: "foo"},
 	})
 	defer cleanup()
-	d := NewInvitation(db)
+	d := NewUser(db)
 
 	type (
 		give struct {
@@ -104,16 +104,16 @@ func TestInvitationDao_FindByUserID(t *testing.T) {
 	}
 }
 
-func TestInvitationDao_Create(t *testing.T) {
-	db, cleanup := test.Prepare(t, "invitation_dao_create", []interface{}{
-		&entity.Invitation{ID: int64(1), UserID: int64(1), Code: "foo"},
+func TestUserDao_Create(t *testing.T) {
+	db, cleanup := test.Prepare(t, "user_dao_create", []interface{}{
+		&entity.User{ID: int64(1), UserID: int64(1), Code: "foo"},
 	})
 	defer cleanup()
-	d := NewInvitation(db)
+	d := NewUser(db)
 
 	type (
 		give struct {
-			model model.Invitation
+			model model.User
 		}
 		want struct {
 			createdCount int
@@ -127,12 +127,12 @@ func TestInvitationDao_Create(t *testing.T) {
 	}{
 		{
 			name: "success",
-			give: give{model: model.Invitation{UserID: int64(2), Code: "code"}},
+			give: give{model: model.User{UserID: int64(2), Code: "code"}},
 			want: want{createdCount: 1},
 		},
 		{
 			name: "already existed",
-			give: give{model: model.Invitation{UserID: int64(1), Code: "code"}},
+			give: give{model: model.User{UserID: int64(1), Code: "code"}},
 			want: want{createdCount: 0},
 			err:  true,
 		},
@@ -140,9 +140,9 @@ func TestInvitationDao_Create(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			bcnt := test.CountRecord(t, db, "invitations")
+			bcnt := test.CountRecord(t, db, "users")
 			aerr := d.Create(tt.give.model)
-			acnt := test.CountRecord(t, db, "invitations")
+			acnt := test.CountRecord(t, db, "users")
 
 			if tt.err {
 				assert.Error(t, aerr)
