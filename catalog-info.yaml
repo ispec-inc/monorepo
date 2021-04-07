@@ -6,8 +6,8 @@ metadata:
   description: |
     ispec Go Best Practices in Application
   annotations:
-    github.com/project-slug: ispec-inc/go-distributed-monolith
-    backstage.io/techdocs-ref: github:https://github.com/ispec-inc/go-distributed-monolith.git
+    github.com/project-slug: ispec-inc/monorepo
+    backstage.io/techdocs-ref: github:https://github.com/ispec-inc/monorepo.git
   tags:
     - recommended
     - golang

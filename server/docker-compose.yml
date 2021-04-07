@@ -1,0 +1,42 @@
+version: '2.2'
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: docker/dev/Dockerfile
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/app
+    working_dir: /app
+    networks:
+      - monorepo-server
+  
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: monorepo
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33071:3306"
+    networks:
+      - monorepo-server
+    volumes:
+      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+
+  dockerize:
+    image: jwilder/dockerize:0.6.1
+    depends_on:
+      - mysql
+    networks:
+      - monorepo-server
+    command: dockerize -wait tcp://mysql:3306 -timeout 20s
+
+networks:
+  monorepo-server:
+    external: true
