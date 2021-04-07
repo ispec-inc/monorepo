@@ -9,27 +9,21 @@ import (
 const UserModelName = "User"
 
 type User struct {
-	ID        int64     `gorm:"column:id"`
-	UserID    int64     `gorm:"column:user_id"`
-	Code      string    `gorm:"column:code"`
-	CreatedAt time.Time `gorm:"column:created_at"`
-	UpdatedAt time.Time `gorm:"column:updated_at"`
+	ID          int64     `gorm:"column:id"`
+	Name        string    `gorm:"column:name"`
+	Description string    `gorm:"column:description"`
+	Email       string    `gorm:"column:email"`
+	CreatedAt   time.Time `gorm:"column:created_at"`
+	UpdatedAt   time.Time `gorm:"column:updated_at"`
 }
 
-func NewUserFromModel(
-	m model.User,
-) User {
-	return User{
-		ID:     m.ID,
-		UserID: m.UserID,
-		Code:   m.Code,
-	}
-}
-
-func (i User) ToModel() model.User {
-	return model.User{
-		ID:     i.ID,
-		UserID: i.UserID,
-		Code:   i.Code,
+func (e *User) ToModel() *model.User {
+	return &model.User{
+		CreatedAt:   e.CreatedAt,
+		Description: e.Description,
+		Email:       e.Email,
+		ID:          e.ID,
+		Name:        e.Name,
+		UpdatedAt:   e.UpdatedAt,
 	}
 }
