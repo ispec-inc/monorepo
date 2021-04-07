@@ -11,7 +11,7 @@ func NewRouter(rgst registry.Registry) http.Handler {
 	r := chi.NewRouter()
 	h := NewHandler(rgst)
 
-	r.Get("/{id}", h.GetCode)
-	r.Post("/", h.AddCode)
+	r.Get("/{id}", h.Get)
+	r.Post("/", h.Create)
 	return r
 }
