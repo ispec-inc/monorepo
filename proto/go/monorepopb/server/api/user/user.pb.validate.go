@@ -135,10 +135,10 @@ func (m *GetResponse) Validate(all bool) error {
 
 	var errors []error
 
-	if v, ok := interface{}(m.GetUsers()).(interface{ Validate(bool) error }); ok {
+	if v, ok := interface{}(m.GetUser()).(interface{ Validate(bool) error }); ok {
 		if err := v.Validate(all); err != nil {
 			err = GetResponseValidationError{
-				field:  "Users",
+				field:  "User",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

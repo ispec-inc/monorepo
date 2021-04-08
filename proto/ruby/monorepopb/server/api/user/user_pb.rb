@@ -9,7 +9,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "monorepopb.server.api.user.GetRequest" do
     end
     add_message "monorepopb.server.api.user.GetResponse" do
-      optional :users, :message, 1, "monorepopb.server.view.User"
+      optional :user, :message, 1, "monorepopb.server.view.User"
     end
     add_message "monorepopb.server.api.user.CreateRequest" do
       optional :name, :string, 1
