@@ -3,6 +3,7 @@ package view
 import (
 	pb "github.com/ispec-inc/monorepo/proto/go/monorepopb/server/view"
 	"github.com/ispec-inc/monorepo/server/pkg/domain/model"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func NewUser(m *model.User) *pb.User {
@@ -11,8 +12,8 @@ func NewUser(m *model.User) *pb.User {
 		Name:        m.Name,
 		Description: m.Description,
 		Email:       m.Email,
-		CreatedAt:   TimeToProto(m.CreatedAt),
-		UpdatedAt:   TimeToProto(m.UpdatedAt),
+		CreatedAt:   timestamppb.New(m.CreatedAt),
+		UpdatedAt:   timestamppb.New(m.UpdatedAt),
 	}
 }
 
