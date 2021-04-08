@@ -25,6 +25,10 @@ jobs:
           cp .env.default .env
           make setup
         working-directory: server
+      
+      - name: migration
+        run: make migrate
+        working-directory: server
 
       - name: run test
         run: make test
