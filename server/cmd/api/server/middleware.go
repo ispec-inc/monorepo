@@ -4,7 +4,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 
-	"github.com/ispec-inc/go-distributed-monolith/pkg/config"
+	"github.com/ispec-inc/monorepo/server/pkg/config"
 )
 
 func commonMiddleware(r *chi.Mux) *chi.Mux {
