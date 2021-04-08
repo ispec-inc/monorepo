@@ -25,6 +25,6 @@ func NewRepository() (Repository, func() error, error) {
 	return repo, cleanup, nil
 }
 
-func (repo Repository) NewInvitation() repository.Invitation {
-	return dao.NewInvitation(repo.db)
+func (repo Repository) NewUser() repository.User {
+	return dao.NewUser(repo.db)
 }

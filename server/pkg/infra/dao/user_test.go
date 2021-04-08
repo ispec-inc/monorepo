@@ -10,12 +10,12 @@ import (
 	"github.com/ispec-inc/monorepo/server/pkg/infra/entity"
 )
 
-func TestInvitationDao_Find(t *testing.T) {
-	db, cleanup := test.Prepare(t, "invitation_dao_find", []interface{}{
-		&entity.Invitation{ID: int64(1), UserID: int64(1), Code: "foo"},
+func TestUserDao_Get(t *testing.T) {
+	db, cleanup := test.Prepare(t, "user_dao_get", []interface{}{
+		&entity.User{ID: int64(1), Email: "email"},
 	})
 	defer cleanup()
-	d := NewInvitation(db)
+	d := NewUser(db)
 
 	type (
 		give struct {
@@ -46,7 +46,7 @@ func TestInvitationDao_Find(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			got, aerr := d.Find(tt.give.id)
+			got, aerr := d.Get(tt.give.id)
 			if tt.err {
 				assert.Error(t, aerr)
 			} else {
@@ -57,19 +57,20 @@ func TestInvitationDao_Find(t *testing.T) {
 	}
 }
 
-func TestInvitationDao_FindByUserID(t *testing.T) {
-	db, cleanup := test.Prepare(t, "invitation_dao_find_by_user_id", []interface{}{
-		&entity.Invitation{ID: int64(1), UserID: int64(1), Code: "foo"},
+func TestUserDao_List(t *testing.T) {
+	db, cleanup := test.Prepare(t, "user_dao_find_by_user_id", []interface{}{
+		&entity.User{ID: int64(1), Email: "email-1"},
+		&entity.User{ID: int64(2), Email: "email-2"},
 	})
 	defer cleanup()
-	d := NewInvitation(db)
+	d := NewUser(db)
 
 	type (
 		give struct {
-			userID int64
+			ids []int64
 		}
 		want struct {
-			id int64
+			count int
 		}
 	)
 	tests := []struct {
@@ -79,41 +80,42 @@ func TestInvitationDao_FindByUserID(t *testing.T) {
 		err  bool
 	}{
 		{
-			name: "success",
-			give: give{userID: int64(1)},
-			want: want{id: int64(1)},
+			name: "success without ids",
+			give: give{ids: nil},
+			want: want{count: 2},
+			err:  false,
 		},
 		{
-			name: "not found",
-			give: give{userID: int64(2)},
-			want: want{id: int64(0)},
-			err:  true,
+			name: "success with ids",
+			give: give{ids: []int64{1}},
+			want: want{count: 1},
+			err:  false,
 		},
 	}
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			got, aerr := d.FindByUserID(tt.give.userID)
+			got, aerr := d.List(tt.give.ids)
 			if tt.err {
 				assert.Error(t, aerr)
 			} else {
 				assert.NoError(t, aerr)
-				assert.Exactly(t, tt.want.id, got.ID)
+				assert.Exactly(t, tt.want.count, len(got))
 			}
 		})
 	}
 }
 
-func TestInvitationDao_Create(t *testing.T) {
-	db, cleanup := test.Prepare(t, "invitation_dao_create", []interface{}{
-		&entity.Invitation{ID: int64(1), UserID: int64(1), Code: "foo"},
+func TestUserDao_Create(t *testing.T) {
+	db, cleanup := test.Prepare(t, "user_dao_create", []interface{}{
+		&entity.User{ID: int64(1), Email: "old"},
 	})
 	defer cleanup()
-	d := NewInvitation(db)
+	d := NewUser(db)
 
 	type (
 		give struct {
-			model model.Invitation
+			user *model.User
 		}
 		want struct {
 			createdCount int
@@ -127,12 +129,13 @@ func TestInvitationDao_Create(t *testing.T) {
 	}{
 		{
 			name: "success",
-			give: give{model: model.Invitation{UserID: int64(2), Code: "code"}},
+			give: give{user: &model.User{Email: "new"}},
 			want: want{createdCount: 1},
+			err:  false,
 		},
 		{
-			name: "already existed",
-			give: give{model: model.Invitation{UserID: int64(1), Code: "code"}},
+			name: "fail for already existed",
+			give: give{user: &model.User{Email: "old"}},
 			want: want{createdCount: 0},
 			err:  true,
 		},
@@ -140,9 +143,9 @@ func TestInvitationDao_Create(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			bcnt := test.CountRecord(t, db, "invitations")
-			aerr := d.Create(tt.give.model)
-			acnt := test.CountRecord(t, db, "invitations")
+			bcnt := test.CountRecord(t, db, "users")
+			aerr := d.Create(tt.give.user)
+			acnt := test.CountRecord(t, db, "users")
 
 			if tt.err {
 				assert.Error(t, aerr)

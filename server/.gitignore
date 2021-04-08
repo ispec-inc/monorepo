@@ -17,6 +17,7 @@
 .env
 .env.*
 server
+!server/
 !.env.default
 !.env/
 
