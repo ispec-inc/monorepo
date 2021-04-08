@@ -12,6 +12,9 @@ migrate:
 	docker-compose run --rm migrate db:migrate
 	docker-compose run --rm -e DB_HOST=mysql-test migrate db:migrate
 
+seed:
+	docker-compose run --rm api go run ./cmd/db/seed
+
 server:
 	docker-compose up -d mysql
 	docker-compose run dockerize -wait tcp://mysql:3306 -timeout 20s
