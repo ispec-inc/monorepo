@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package monorepopb.server.view;
+
+option go_package = "github.com/ispec-inc/monorepo/proto/monorepopb/server/view";
+option ruby_package = "UserPb";
+
+import "google/protobuf/timestamp.proto";
+
+message User {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  string email = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
