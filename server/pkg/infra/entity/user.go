@@ -36,7 +36,7 @@ func (u *User) BeforeCreate(tx *gorm.DB) error {
 	if err == nil {
 		return apperror.ErrDuplicated
 	}
-	if errors.Is(err, gorm.ErrRecordNotFound) {
+	if !errors.Is(err, gorm.ErrRecordNotFound) {
 		return err
 	}
 	return nil
