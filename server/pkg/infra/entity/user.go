@@ -31,8 +31,8 @@ func (e *User) ToModel() *model.User {
 	}
 }
 
-func (u *User) BeforeCreate(tx *gorm.DB) error {
-	err := tx.Where("email = ?", u.Email).First(&User{}).Error
+func (e *User) BeforeCreate(tx *gorm.DB) error {
+	err := tx.Where("email = ?", e.Email).First(&User{}).Error
 	if err == nil {
 		return apperror.ErrDuplicated
 	}
