@@ -6,6 +6,7 @@ option go_package = "github.com/ispec-inc/monorepo/proto/monorepopb/server/api/u
 option ruby_package = "UserPb";
 
 import "monorepopb/server/view/user.proto";
+import "validate/validate.proto";
 
 message GetRequest {}
 
@@ -15,7 +16,7 @@ message GetResponse {
 message CreateRequest {
   string name = 1;
   string description = 2;
-  string email = 3;
+  string email = 3 [(validate.rules).string.email = true];
 }
 
 message CreateResponse {

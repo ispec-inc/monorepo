@@ -4,8 +4,19 @@ SHELL=/bin/bash
 .PHONY: protoc
 
 protoc: ## generate go and ruby codes from proto
-	protoc -I=./proto --go_out=./go --go_opt=paths=source_relative $(shell find ./proto -name '*.proto')
-	grpc_tools_ruby_protoc -I=./proto --ruby_out=./ruby --grpc_out=./ruby $(shell find ./proto -name '*.proto')
+	protoc \
+		-I=./proto \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/envoyproxy/protoc-gen-validate \
+		--go_out=paths=source_relative:./go \
+		--validate_out=lang=go,paths=source_relative:./go \
+		$(shell find ./proto -name '*.proto')
+	grpc_tools_ruby_protoc \
+		-I=./proto \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/envoyproxy/protoc-gen-validate \
+		--ruby_out=./ruby \
+		$(shell find ./proto -name '*.proto')
 	/bin/bash scripts/gen_dummy_rb.sh
 
 help: ## display this help screen
