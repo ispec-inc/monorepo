@@ -1,0 +1,12 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.2.12",
+    "google-protobuf": "^3.16.0-rc.1",
+    "grpc-tools": "^1.11.1",
+    "ts-protoc-gen": "^0.14.0"
+  }
+}
