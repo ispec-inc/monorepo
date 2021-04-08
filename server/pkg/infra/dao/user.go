@@ -49,7 +49,7 @@ func (d User) Create(m *model.User) error {
 		Email:       m.Email,
 	}
 	if err := d.db.Create(e).Error; err != nil {
-		return err
+		return newGormCreateError(err, entity.UserModelName)
 	}
 	return nil
 }

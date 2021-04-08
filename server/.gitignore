@@ -22,6 +22,7 @@ server
 !.env/
 
 .scripts/
+.vscode/
 vendor
 
 # OS X

@@ -1,9 +1,12 @@
 package entity
 
 import (
+	"errors"
 	"time"
 
+	"github.com/ispec-inc/monorepo/server/pkg/apperror"
 	"github.com/ispec-inc/monorepo/server/pkg/domain/model"
+	"gorm.io/gorm"
 )
 
 const UserModelName = "User"
@@ -26,4 +29,15 @@ func (e *User) ToModel() *model.User {
 		Name:        e.Name,
 		UpdatedAt:   e.UpdatedAt,
 	}
+}
+
+func (e *User) BeforeCreate(tx *gorm.DB) error {
+	err := tx.Where("email = ?", e.Email).First(&User{}).Error
+	if err == nil {
+		return apperror.ErrDuplicated
+	}
+	if !errors.Is(err, gorm.ErrRecordNotFound) {
+		return err
+	}
+	return nil
 }
