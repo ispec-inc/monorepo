@@ -22,10 +22,10 @@ export namespace GetRequest {
 }
 
 export class GetResponse extends jspb.Message {
-  hasUsers(): boolean;
-  clearUsers(): void;
-  getUsers(): monorepopb_server_view_user_pb.User | undefined;
-  setUsers(value?: monorepopb_server_view_user_pb.User): void;
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): monorepopb_server_view_user_pb.User | undefined;
+  setUser(value?: monorepopb_server_view_user_pb.User): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetResponse.AsObject;
@@ -39,7 +39,7 @@ export class GetResponse extends jspb.Message {
 
 export namespace GetResponse {
   export type AsObject = {
-    users?: monorepopb_server_view_user_pb.User.AsObject,
+    user?: monorepopb_server_view_user_pb.User.AsObject,
   }
 }
 

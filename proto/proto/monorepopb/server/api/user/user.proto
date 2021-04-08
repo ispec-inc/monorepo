@@ -11,7 +11,7 @@ import "validate/validate.proto";
 message GetRequest {}
 
 message GetResponse {
-  monorepopb.server.view.User users = 1;
+  monorepopb.server.view.User user = 1;
 }
 message CreateRequest {
   string name = 1;
