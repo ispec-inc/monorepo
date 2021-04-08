@@ -15,7 +15,6 @@ require (
 	github.com/k0kubun/pp v3.0.1+incompatible
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.6.1
-	github.com/tanimutomo/sqlfile v1.0.0
 	gorm.io/driver/mysql v1.0.3
 	gorm.io/gorm v1.20.10
 )
