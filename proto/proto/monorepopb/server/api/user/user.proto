@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package monorepopb.server.api.user;
 
-option go_package = "github.com/ispec-inc/monorepo/proto/monorepopb/server/api/user";
+option go_package = "github.com/ispec-inc/monorepo/proto/go/monorepopb/server/api/user";
 option ruby_package = "UserPb";
 
 import "monorepopb/server/view/user.proto";
