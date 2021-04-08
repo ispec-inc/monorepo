@@ -6,8 +6,7 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi"
-	"github.com/go-playground/validator"
-
+	pb "github.com/ispec-inc/monorepo/proto/go/monorepopb/server/api/user"
 	"github.com/ispec-inc/monorepo/server/pkg/presenter"
 	"github.com/ispec-inc/monorepo/server/pkg/registry"
 	"github.com/ispec-inc/monorepo/server/pkg/view"
@@ -38,17 +37,18 @@ func (h Handler) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	presenter.Response(w, view.NewUser(opt.User))
+	presenter.Response(w, &pb.GetResponse{
+		User: view.NewUser(opt.User),
+	})
 }
 
 func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
-	body := &createRequest{}
+	body := &pb.CreateRequest{}
 	if err := json.NewDecoder(r.Body).Decode(body); err != nil {
 		presenter.BadRequestError(w, err)
 		return
 	}
-	validate := validator.New()
-	if err := validate.Struct(body); err != nil {
+	if err := body.Validate(true); err != nil {
 		presenter.BadRequestError(w, err)
 		return
 	}
@@ -63,5 +63,7 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	presenter.Response(w, view.NewUsers(opt.Users))
+	presenter.Response(w, &pb.CreateResponse{
+		Users: view.NewUsers(opt.Users),
+	})
 }
