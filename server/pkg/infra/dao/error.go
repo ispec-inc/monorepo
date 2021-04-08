@@ -3,10 +3,10 @@
 package dao
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/ispec-inc/monorepo/server/pkg/apperror"
-	"github.com/pkg/errors"
 	"gorm.io/gorm"
 )
 
@@ -14,8 +14,24 @@ type gormErr struct {
 	s string
 }
 
-func newGormErr(method, model string, err error) *gormErr {
-	return &gormErr{fmt.Sprintf("%s record `%s` error: %s", method, model, err.Error())}
+func newGormErr(method, model string, err error) error {
+	var code apperror.Code
+	switch err {
+	case gorm.ErrRecordNotFound:
+		code = apperror.CodeNotFound
+	case apperror.ErrDuplicated:
+		code = apperror.CodeInvalid
+	default:
+		code = apperror.CodeError
+	}
+	fmt.Println("err:", err)
+	fmt.Println("duplidated:", apperror.ErrDuplicated)
+	fmt.Println("erros.Is", errors.Is(err, apperror.ErrDuplicated))
+
+	return apperror.WithCode(
+		code,
+		&gormErr{fmt.Sprintf("%s record `%s` error: %s", method, model, err.Error())},
+	)
 }
 
 func (e *gormErr) Error() string {
@@ -23,25 +39,17 @@ func (e *gormErr) Error() string {
 }
 
 func newGormFindError(err error, model string) error {
-	var code apperror.Code
-	switch {
-	case errors.Is(err, gorm.ErrRecordNotFound):
-		code = apperror.CodeNotFound
-	default:
-		code = apperror.CodeError
-	}
-
-	return apperror.WithCode(code, newGormErr("Find", model, err))
+	return newGormErr("Find", model, err)
 }
 
 func newGormCreateError(err error, model string) error {
-	return apperror.WithCode(apperror.CodeError, newGormErr("Create", model, err))
+	return newGormErr("Create", model, err)
 }
 
 func newGormUpdateError(err error, model string) error {
-	return apperror.WithCode(apperror.CodeError, newGormErr("Update", model, err))
+	return newGormErr("Update", model, err)
 }
 
 func newGormDeleteError(err error, model string) error {
-	return apperror.WithCode(apperror.CodeError, newGormErr("Delete", model, err))
+	return newGormErr("Delete", model, err)
 }
