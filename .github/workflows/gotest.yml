@@ -6,11 +6,13 @@ on:
       - master
     paths:
       - server/**
+      - .github/workflows/gotest.yml
   pull_request:
     branches:
       - "*"
     paths:
       - server/** 
+      - .github/workflows/gotest.yml
 
 jobs:
   test:
