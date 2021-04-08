@@ -3,7 +3,6 @@
 package dao
 
 import (
-	"errors"
 	"fmt"
 
 	"github.com/ispec-inc/monorepo/server/pkg/apperror"
@@ -24,9 +23,6 @@ func newGormErr(method, model string, err error) error {
 	default:
 		code = apperror.CodeError
 	}
-	fmt.Println("err:", err)
-	fmt.Println("duplidated:", apperror.ErrDuplicated)
-	fmt.Println("erros.Is", errors.Is(err, apperror.ErrDuplicated))
 
 	return apperror.WithCode(
 		code,
