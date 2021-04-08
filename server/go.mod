@@ -14,7 +14,7 @@ require (
 	github.com/golang/protobuf v1.5.0
 	github.com/ispec-inc/civgen-go/mockio v0.0.0-20210327051653-d4e1695f1fda // indirect
 	github.com/ispec-inc/civgen-go/model v0.0.0-20210327051653-d4e1695f1fda // indirect
-	github.com/ispec-inc/monorepo v0.0.0-20210408065710-cedad7db2e86
+	github.com/ispec-inc/monorepo v0.0.0-20210408072304-fb63477ed4c3
 	github.com/k0kubun/pp v3.0.1+incompatible
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/pkg/errors v0.9.1

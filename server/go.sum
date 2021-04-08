@@ -115,6 +115,8 @@ github.com/ispec-inc/monorepo v0.0.0-20210408063818-db1af2f2d99d h1:mexC3lnPDg7i
 github.com/ispec-inc/monorepo v0.0.0-20210408063818-db1af2f2d99d/go.mod h1:Obq4YoPlXmkuqZ6xy6LcIhgpJCmRZjVea5ky1FDszpo=
 github.com/ispec-inc/monorepo v0.0.0-20210408065710-cedad7db2e86 h1:c6Pj0OZ21rmsBtEvsWlreD3xva4cg1Lig1GXhB888CA=
 github.com/ispec-inc/monorepo v0.0.0-20210408065710-cedad7db2e86/go.mod h1:Obq4YoPlXmkuqZ6xy6LcIhgpJCmRZjVea5ky1FDszpo=
+github.com/ispec-inc/monorepo v0.0.0-20210408072304-fb63477ed4c3 h1:wL0Cdlghb+xoUxMtIbsqZJpNojoGK+puQPEeqiXzHJc=
+github.com/ispec-inc/monorepo v0.0.0-20210408072304-fb63477ed4c3/go.mod h1:Obq4YoPlXmkuqZ6xy6LcIhgpJCmRZjVea5ky1FDszpo=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
 github.com/jinzhu/inflection v1.0.0/go.mod h1:h+uFLlag+Qp1Va5pdKtLDYj+kHp5pxUVkryuEj+Srlc=
 github.com/jinzhu/now v1.1.1 h1:g39TucaRWyV3dwDO++eEc6qf8TVIQ/Da48WmqjZ3i7E=
