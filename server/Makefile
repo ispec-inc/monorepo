@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 .DEFAULT_GOAL := help
 
-.PHONY: setup migrate seed server test generate db help
+.PHONY: setup migrate seed server test generate db update-proto help
 
 setup: ## setup docker build, network, and databases
 	docker network create monorepo || true
@@ -34,6 +34,9 @@ generate: ## go generate
 db: cmd
 db: ## rake $(cmd) - execute standalone-migration command
 	docker-compose run --rm migrate $(cmd)
+
+update-proto: ## update ispec-inc/monorepo/proto version
+	docker-compose run --rm api go get github.com/ispec-inc/monorepo/proto/go/monorepopb/server/view@$(ver)
 
 help: ## display this help screen
 		@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m\033[0m\n"} /^[$$()% a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
