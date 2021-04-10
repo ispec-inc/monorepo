@@ -2,8 +2,5 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>ispec-inc/renovate-config"
-  ],
-  "labels": ["deps", "renovate"],
-  "timezone": "Asia/Tokyo",
-  "schedule": ["every weekend"]
+  ]
 }
