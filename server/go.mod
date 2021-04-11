@@ -8,18 +8,16 @@ require (
 	github.com/envoyproxy/protoc-gen-validate v0.5.1 // indirect
 	github.com/getsentry/sentry-go v0.9.0
 	github.com/go-chi/chi v4.1.2+incompatible
-	github.com/go-playground/universal-translator v0.17.0 // indirect
-	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/golang/mock v1.4.4
-	github.com/golang/protobuf v1.5.0
-	github.com/ispec-inc/civgen-go/mockio v0.0.0-20210327051653-d4e1695f1fda // indirect
-	github.com/ispec-inc/civgen-go/model v0.0.0-20210327051653-d4e1695f1fda // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/ispec-inc/monorepo v0.0.0-20210408072304-fb63477ed4c3
 	github.com/k0kubun/pp v3.0.1+incompatible
-	github.com/leodido/go-urn v1.2.1 // indirect
+	github.com/lib/pq v1.10.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.6.1
-	google.golang.org/protobuf v1.26.0 // indirect
+	golang.org/x/net v0.0.0-20201021035429-f5854403a974 // indirect
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+	google.golang.org/protobuf v1.26.0
 	gorm.io/driver/mysql v1.0.3
 	gorm.io/gorm v1.20.10
 )
