@@ -17,6 +17,6 @@ require (
 	golang.org/x/net v0.0.0-20201021035429-f5854403a974 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/protobuf v1.26.0
-	gorm.io/driver/mysql v1.0.3
-	gorm.io/gorm v1.20.10
+	gorm.io/driver/mysql v1.0.5
+	gorm.io/gorm v1.21.3
 )
