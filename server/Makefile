@@ -38,5 +38,12 @@ db: ## rake $(cmd) - execute standalone-migration command
 update-proto: ## update ispec-inc/monorepo/proto version
 	docker-compose run --rm api go get github.com/ispec-inc/monorepo/proto/go/monorepopb/server/view@$(ver)
 
+mockgen: cmd = mockgen
+mockgen: ## generate mock by gomockhandler (cmd is gomockhandler command)
+	gomockhandler -config=./gomockhandler.json $(cmd)
+
+mockadd: ## add a new mock generate
+	gomockhandler -config=./gomockhandler.json -source $(source) -destination $(destination)
+
 help: ## display this help screen
 		@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m\033[0m\n"} /^[$$()% a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
