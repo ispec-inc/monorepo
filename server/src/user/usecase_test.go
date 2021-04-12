@@ -14,7 +14,7 @@ import (
 )
 
 func TestUserUsecase_Get(t *testing.T) {
-	cases := []struct {
+	tests := []struct {
 		name     string
 		give     *GetInput
 		want     *GetOutput
@@ -47,9 +47,9 @@ func TestUserUsecase_Get(t *testing.T) {
 		},
 	}
 
-	for i := range cases {
-		tc := cases[i]
-		t.Run(tc.name, func(t *testing.T) {
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
 			c := gomock.NewController(t)
@@ -57,23 +57,23 @@ func TestUserUsecase_Get(t *testing.T) {
 
 			lg := applog.New(nil)
 			u := Usecase{
-				user: tc.userRepo(c),
+				user: tt.userRepo(c),
 				log:  lg,
 			}
-			got, aerr := u.Get(lg.TestContext(), tc.give)
+			got, aerr := u.Get(lg.TestContext(), tt.give)
 
-			if tc.err {
+			if tt.err {
 				assert.Error(t, aerr)
 			} else {
 				assert.NoError(t, aerr)
-				assert.Exactly(t, tc.want, got)
+				assert.Exactly(t, tt.want, got)
 			}
 		})
 	}
 }
 
 func TestUserUsecase_Create(t *testing.T) {
-	cases := []struct {
+	tests := []struct {
 		name     string
 		give     *CreateInput
 		want     *CreateOutput
@@ -127,9 +127,9 @@ func TestUserUsecase_Create(t *testing.T) {
 		},
 	}
 
-	for i := range cases {
-		tc := cases[i]
-		t.Run(tc.name, func(t *testing.T) {
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
 			c := gomock.NewController(t)
@@ -137,16 +137,16 @@ func TestUserUsecase_Create(t *testing.T) {
 
 			lg := applog.New(nil)
 			u := Usecase{
-				user: tc.userRepo(c),
+				user: tt.userRepo(c),
 				log:  lg,
 			}
-			got, aerr := u.Create(lg.TestContext(), tc.give)
+			got, aerr := u.Create(lg.TestContext(), tt.give)
 
-			if tc.err {
+			if tt.err {
 				assert.Error(t, aerr)
 			} else {
 				assert.NoError(t, aerr)
-				assert.Exactly(t, tc.want, got)
+				assert.Exactly(t, tt.want, got)
 			}
 		})
 	}
