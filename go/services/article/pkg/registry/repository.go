@@ -3,9 +3,9 @@ package registry
 import (
 	"gorm.io/gorm"
 
-	"github.com/ispec-inc/monorepo/go/pkg/domain/repository"
-	"github.com/ispec-inc/monorepo/go/pkg/infra/dao"
 	"github.com/ispec-inc/monorepo/go/pkg/mysql"
+	"github.com/ispec-inc/monorepo/go/services/article/pkg/domain/repository"
+	"github.com/ispec-inc/monorepo/go/services/article/pkg/infra/dao"
 )
 
 type Repository struct {

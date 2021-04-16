@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"github.com/ispec-inc/monorepo/go/pkg/domain/model"
 	"github.com/ispec-inc/monorepo/go/pkg/infra/entity"
+	"github.com/ispec-inc/monorepo/go/services/article/pkg/domain/model"
 	"gorm.io/gorm"
 )
 
@@ -17,11 +17,11 @@ func NewUser(db *gorm.DB) User {
 }
 
 func (d User) Get(id int64) (*model.User, error) {
-	var e entity.User
-	if err := d.db.First(&e, id).Error; err != nil {
+	e := &entity.User{}
+	if err := d.db.First(e, id).Error; err != nil {
 		return nil, newGormFindError(err, entity.UserModelName)
 	}
-	return e.ToModel(), nil
+	return model.NewUserFromEntity(e), nil
 }
 
 func (d User) List(ids []int64) ([]*model.User, error) {
@@ -30,14 +30,14 @@ func (d User) List(ids []int64) ([]*model.User, error) {
 		query = query.Where("id in (?)", ids)
 	}
 
-	var es []entity.User
-	if err := query.Find(&es).Error; err != nil {
+	es := make([]*entity.User, 0)
+	if err := query.Find(es).Error; err != nil {
 		return nil, newGormFindError(err, entity.UserModelName)
 	}
 
 	ms := make([]*model.User, len(es))
 	for i, e := range es {
-		ms[i] = e.ToModel()
+		ms[i] = model.NewUserFromEntity(e)
 	}
 	return ms, nil
 }

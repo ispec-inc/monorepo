@@ -6,7 +6,7 @@ package mock_repository
 
 import (
 	gomock "github.com/golang/mock/gomock"
-	model "github.com/ispec-inc/monorepo/go/pkg/domain/model"
+	model "github.com/ispec-inc/monorepo/go/services/article/pkg/domain/model"
 	reflect "reflect"
 )
 

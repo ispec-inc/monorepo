@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/ispec-inc/monorepo/go/pkg/registry"
+	"github.com/ispec-inc/monorepo/go/services/article/pkg/registry"
 )
 
 func main() {

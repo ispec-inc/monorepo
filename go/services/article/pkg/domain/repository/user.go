@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/ispec-inc/monorepo/go/pkg/domain/model"
+	"github.com/ispec-inc/monorepo/go/services/article/pkg/domain/model"
 )
 
 type User interface {

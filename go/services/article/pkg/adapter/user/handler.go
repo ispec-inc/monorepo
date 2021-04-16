@@ -7,9 +7,9 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
-	"github.com/ispec-inc/monorepo/go/pkg/registry"
-	"github.com/ispec-inc/monorepo/go/pkg/view"
-	"github.com/ispec-inc/monorepo/go/src/user"
+	"github.com/ispec-inc/monorepo/go/services/article/pkg/registry"
+	"github.com/ispec-inc/monorepo/go/services/article/pkg/view"
+	"github.com/ispec-inc/monorepo/go/services/article/src/user"
 	pb "github.com/ispec-inc/monorepo/proto/go/monorepopb/server/api/user"
 )
 
