@@ -27,7 +27,7 @@ jobs:
         working-directory: go
       
       - name: migration
-        run: make migrate
+        run: make article-migrate
         working-directory: migration
 
       - name: run test
