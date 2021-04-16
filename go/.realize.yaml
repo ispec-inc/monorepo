@@ -1,0 +1,34 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+schema:
+  - name: article
+    path: .
+    commands:
+      build:
+        status: true
+        method: go build -o ./bin/article ./services/article/cmd
+      run:
+        status: true
+        method: ./bin/article
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /
+
+  - name: admin
+    path: .
+    commands:
+      build:
+        status: true
+        method: go build -o ./bin/admin ./services/admin/cmd
+      run:
+        status: true
+        method: ./bin/admin
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /

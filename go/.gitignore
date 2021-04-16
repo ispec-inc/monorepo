@@ -14,16 +14,14 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-.env
 .env.*
-server
-!server/
-!.env.default
-!.env/
+bin/*
+.env/*
+!.env/*.default
 
-.scripts/
 .vscode/
-vendor
+
+!.gitkeep
 
 # OS X
 .DS_Store

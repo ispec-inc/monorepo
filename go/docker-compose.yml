@@ -1,26 +1,46 @@
 version: '2.2'
 services:
-  api:
-    container_name: api
+  article-api:
+    container_name: article-api
     build:
       context: .
       dockerfile: docker/dev/Dockerfile
+    command: realize start --name article --run
     ports:
       - "9000:9000"
     env_file:
-      - .env
+      - .env/article
     depends_on:
-      - mysql
+      - article-mysql
     volumes:
       - ./:/app
     working_dir: /app
     networks:
       - monorepo
   
-  mysql:
+  admin-api:
+    container_name: admin-api
+    build:
+      context: .
+      dockerfile: docker/dev/Dockerfile
+    command: realize start --name admin --run
+    ports:
+      - "9001:9001"
+    env_file:
+      - .env/admin
+    depends_on:
+      - article-mysql
+    volumes:
+      - ./:/app
+    working_dir: /app
+    networks:
+      - monorepo
+  
+  article-mysql:
+    container_name: article-mysql
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: monorepo
+      MYSQL_DATABASE: article
       MYSQL_ROOT_PASSWORD: password
     ports:
       - "33071:3306"
@@ -29,10 +49,11 @@ services:
     volumes:
       - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
-  mysql-test:
+  article-mysql-test:
+    container_name: article-mysql-test
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: monorepo
+      MYSQL_DATABASE: article
       MYSQL_ROOT_PASSWORD: password
     ports:
       - "33072:3306"
@@ -40,18 +61,6 @@ services:
       - monorepo
     volumes:
       - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
-
-  migrate:
-    container_name: migration
-    build:
-      context: .
-      dockerfile: docker/dev/db.Dockerfile
-    env_file:
-      - .env
-    volumes:
-      - ./db:/db
-    networks:
-      - monorepo
 
   dockerize:
     image: jwilder/dockerize:0.6.1
