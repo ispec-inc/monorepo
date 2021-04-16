@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"strconv"
 
-	"github.com/ispec-inc/monorepo/server/pkg/apperror"
-	"github.com/ispec-inc/monorepo/server/pkg/applog/logger"
+	"github.com/ispec-inc/monorepo/go/pkg/apperror"
+	"github.com/ispec-inc/monorepo/go/pkg/applog/logger"
 	"github.com/pkg/errors"
 )
 

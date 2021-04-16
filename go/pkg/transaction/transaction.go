@@ -1,7 +1,7 @@
 package transaction
 
 import (
-	"github.com/ispec-inc/monorepo/server/pkg/apperror"
+	"github.com/ispec-inc/monorepo/go/pkg/apperror"
 	"gorm.io/gorm"
 )
 

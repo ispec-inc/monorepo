@@ -1,6 +1,6 @@
 package presenter
 
-import "github.com/ispec-inc/monorepo/server/pkg/apperror"
+import "github.com/ispec-inc/monorepo/go/pkg/apperror"
 
 type errorResponse struct {
 	Code   string `json:"code"`

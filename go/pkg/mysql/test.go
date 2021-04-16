@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm/logger"
 
 	"github.com/DATA-DOG/go-txdb"
-	"github.com/ispec-inc/monorepo/server/pkg/config"
+	"github.com/ispec-inc/monorepo/go/pkg/config"
 )
 
 const driver = "txdb"

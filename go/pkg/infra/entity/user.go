@@ -4,8 +4,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/ispec-inc/monorepo/server/pkg/apperror"
-	"github.com/ispec-inc/monorepo/server/pkg/domain/model"
+	"github.com/ispec-inc/monorepo/go/pkg/apperror"
+	"github.com/ispec-inc/monorepo/go/pkg/domain/model"
 	"gorm.io/gorm"
 )
 

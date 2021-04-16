@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/ispec-inc/monorepo/server/pkg/apperror"
+	"github.com/ispec-inc/monorepo/go/pkg/apperror"
 )
 
 func ApplicationException(w http.ResponseWriter, err error) {
