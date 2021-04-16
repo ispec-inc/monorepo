@@ -21,7 +21,7 @@ server: ## go run server
 
 test: pkg = ./...
 test: ## go test
-	docker-compose run --rm -e DB_HOST=article-mysql-test article-api go test -v -cover -coverprofile=coverage.out $(pkg)
+	docker-compose run --rm test go test -v -cover -coverprofile=coverage.out $(pkg)
 
 mockgen: cmd = mockgen
 mockgen: ## generate mock by gomockhandler (cmd is gomockhandler command)

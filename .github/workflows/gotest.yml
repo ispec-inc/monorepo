@@ -4,14 +4,11 @@ on:
   push:
     branches:
       - master
-    paths:
-      - server/**
-      - .github/workflows/gotest.yml
   pull_request:
     branches:
       - "*"
     paths:
-      - server/** 
+      - go/** 
       - .github/workflows/gotest.yml
 
 jobs:
@@ -24,17 +21,16 @@ jobs:
 
       - name: setup
         run: |
-          cp .env.default .env
           make setup
-        working-directory: server
+        working-directory: go
       
       - name: migration
         run: make migrate
-        working-directory: server
+        working-directory: migration
 
       - name: run test
         run: make test
-        working-directory: server
+        working-directory: go
 
       - name: upload coverage to codecov
         uses: codecov/codecov-action@v1
@@ -43,4 +39,4 @@ jobs:
           name: coverage
           flags: unittests
           fail_ci_if_error: true
-          directory: server
+          directory: go
