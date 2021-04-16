@@ -1,15 +1,17 @@
 SHELL=/bin/bash
 .DEFAULT_GOAL := help
 
-.PHONY: setup seed server test update-proto mockgen mockadd help
+.PHONY: init build seed server test update-proto mockgen mockadd help
 
-setup: ## setup docker build, network, and databases
+init: ## setup docker build, network, and databases
 	docker network create monorepo || true
 	docker-compose up -d article-mysql
 	docker-compose up -d article-mysql-test
-	docker-compose build
 	docker-compose run dockerize -wait tcp://article-mysql:3306 -timeout 20s
 	docker-compose run dockerize -wait tcp://article-mysql-test:3306 -timeout 20s
+
+build:
+	docker-compose build
 
 seed: ## insert seed data
 	docker-compose run --rm article-api go run ./services/article/cmd/db/seed
