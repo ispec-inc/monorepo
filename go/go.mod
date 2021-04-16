@@ -1,4 +1,4 @@
-module github.com/ispec-inc/monorepo/server
+module github.com/ispec-inc/monorepo/go
 
 go 1.13
 
