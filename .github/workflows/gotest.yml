@@ -21,7 +21,8 @@ jobs:
 
       - name: setup
         run: |
-          for f in .env/*.default; do cp $f ${$f:0:-8}; done
+          cp .env/article.default .env/article
+          cp .env/admin.default .env/admin
           make setup
         working-directory: go
       
