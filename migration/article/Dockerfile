@@ -1,6 +1,8 @@
 FROM ruby:2.7.3-alpine
 
-COPY . /db
+RUN mkdir /db
+COPY Gemfile /db
+COPY Gemfile.lock /db
 WORKDIR /db
 
 RUN apk add --no-cache build-base=0.5-r2 mariadb-dev=10.5.8-r0 && \

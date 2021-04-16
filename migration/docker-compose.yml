@@ -1,15 +1,15 @@
 version: '2.2'
 
 services:
-  migrate:
-    container_name: migration
+  article-migrate:
+    container_name: article-migrate
     build:
-      context: .
+      context: ./article
       dockerfile: Dockerfile
     env_file:
-      - .env
+      - ./article/.env
     volumes:
-      - ./db:/db
+      - ./article:/db
     networks:
       - monorepo
 
