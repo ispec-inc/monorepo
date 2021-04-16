@@ -30,14 +30,14 @@ func (d User) List(ids []int64) ([]*model.User, error) {
 		query = query.Where("id in (?)", ids)
 	}
 
-	es := make([]*entity.User, 0)
-	if err := query.Find(es).Error; err != nil {
+	var es []entity.User
+	if err := query.Find(&es).Error; err != nil {
 		return nil, newGormFindError(err, entity.UserModelName)
 	}
 
 	ms := make([]*model.User, len(es))
 	for i, e := range es {
-		ms[i] = model.NewUserFromEntity(e)
+		ms[i] = model.NewUserFromEntity(&e)
 	}
 	return ms, nil
 }
