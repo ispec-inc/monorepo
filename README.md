@@ -10,5 +10,4 @@ ispec civlization project
 2. Open a pull request for 1
 3. Review the pull request by both frontend and backend engineers
 4. Merge the pull request
-5. Create a new release with `%Y.%m%d.%H%M` format (like `2021.1231.1030`)
-6. Implement frontend and backend in parallel (use the new-released tag)
+5. Implement frontend and backend in parallel

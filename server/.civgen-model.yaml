@@ -1,8 +1,0 @@
-project_path: github.com/ispec-inc/monorepo/server
-entity_path: pkg/infra/entity
-model_path: pkg/domain/model
-view_path: pkg/view
-repository_path: pkg/domain/repository
-dao_path: pkg/infra/dao
-error_path: pkg/apperror
-database_path: pkg/mysql
