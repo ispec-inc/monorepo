@@ -6,7 +6,7 @@ import (
 	"github.com/go-chi/chi"
 
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
-	"github.com/ispec-inc/monorepo/go/services/article/pkg/adapter/user"
+	"github.com/ispec-inc/monorepo/go/services/article/pkg/adapter/rest/user"
 	"github.com/ispec-inc/monorepo/go/services/article/pkg/registry"
 )
 
