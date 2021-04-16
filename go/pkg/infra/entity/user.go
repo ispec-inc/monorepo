@@ -1,15 +1,13 @@
 package entity
 
 import (
-	"errors"
 	"time"
-
-	"github.com/ispec-inc/monorepo/go/pkg/apperror"
-	"github.com/ispec-inc/monorepo/go/pkg/domain/model"
-	"gorm.io/gorm"
 )
 
-const UserModelName = "User"
+const (
+	UserModelName = "User"
+	UserTableName = "users"
+)
 
 type User struct {
 	ID          int64     `gorm:"column:id"`
@@ -18,26 +16,4 @@ type User struct {
 	Email       string    `gorm:"column:email"`
 	CreatedAt   time.Time `gorm:"column:created_at"`
 	UpdatedAt   time.Time `gorm:"column:updated_at"`
-}
-
-func (e *User) ToModel() *model.User {
-	return &model.User{
-		CreatedAt:   e.CreatedAt,
-		Description: e.Description,
-		Email:       e.Email,
-		ID:          e.ID,
-		Name:        e.Name,
-		UpdatedAt:   e.UpdatedAt,
-	}
-}
-
-func (e *User) BeforeCreate(tx *gorm.DB) error {
-	err := tx.Where("email = ?", e.Email).First(&User{}).Error
-	if err == nil {
-		return apperror.ErrDuplicated
-	}
-	if !errors.Is(err, gorm.ErrRecordNotFound) {
-		return err
-	}
-	return nil
 }
