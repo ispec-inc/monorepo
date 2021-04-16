@@ -1,0 +1,18 @@
+version: '2.2'
+
+services:
+  migrate:
+    container_name: migration
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - ./db:/db
+    networks:
+      - monorepo
+
+networks:
+  monorepo:
+    external: true
