@@ -19,11 +19,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: setup
+      - name: initialize
         run: |
           cp .env/article.default .env/article
           cp .env/admin.default .env/admin
-          make setup
+          make init
         working-directory: go
       
       - name: migration
