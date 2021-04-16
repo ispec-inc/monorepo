@@ -1,3 +1,3 @@
 FROM golang:1.16
 
-RUN go get github.com/oxequa/realize
+RUN GO111MODULE=off go get github.com/oxequa/realize
