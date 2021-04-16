@@ -23,9 +23,6 @@ test: pkg = ./...
 test: ## go test
 	docker-compose run --rm -e DB_HOST=article-mysql-test article-api go test -v -cover -coverprofile=coverage.out $(pkg)
 
-update-proto: ## update ispec-inc/monorepo/proto version
-	docker-compose run --rm article-api go get github.com/ispec-inc/monorepo/proto/go/monorepopb/server/view@$(ver)
-
 mockgen: cmd = mockgen
 mockgen: ## generate mock by gomockhandler (cmd is gomockhandler command)
 	gomockhandler -config=./gomockhandler.json $(cmd)
