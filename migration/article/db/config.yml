@@ -3,7 +3,6 @@ default: &default
   charset: utf8mb4
   collation: utf8mb4_bin
   encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: <%= ENV.fetch("DB_NAME") %>
   username: <%= ENV.fetch("DB_USERNAME") %>
   password: <%= ENV.fetch("DB_PASSWORD") %>
@@ -20,8 +19,5 @@ staging:
 production:
   <<: *default
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
