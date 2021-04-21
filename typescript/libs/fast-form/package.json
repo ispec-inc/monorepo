@@ -1,0 +1,19 @@
+{
+  "name": "fast-form",
+  "version": "1.0.0",
+  "description": "Components and modules to speed up the building of administration screens.",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^14.14.41",
+    "typescript": "^4.2.4"
+  }
+}
