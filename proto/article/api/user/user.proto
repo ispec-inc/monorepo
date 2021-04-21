@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package monorepopb.server.api.user;
 
-option go_package = "github.com/ispec-inc/monorepo/proto/go/monorepopb/server/api/user";
+option go_package = "github.com/ispec-inc/monorepo/go/gen/article/api/user";
 option ruby_package = "UserPb";
 
-import "monorepopb/server/view/user.proto";
+import "article/view/user.proto";
 import "validate/validate.proto";
 
 message GetRequest {}
@@ -13,6 +13,7 @@ message GetRequest {}
 message GetResponse {
   monorepopb.server.view.User user = 1;
 }
+
 message CreateRequest {
   string name = 1;
   string description = 2;

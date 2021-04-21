@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package monorepopb.server.view;
 
-option go_package = "github.com/ispec-inc/monorepo/proto/go/monorepopb/server/view";
+option go_package = "github.com/ispec-inc/monorepo/go/gen/article/view";
 option ruby_package = "UserPb";
 
 import "google/protobuf/timestamp.proto";
