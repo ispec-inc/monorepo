@@ -1,0 +1,15 @@
+version: '2.2'
+services:
+  protoc:
+    container_name: protoc
+    build:
+      context: .
+      dockerfile: proto/docker/Dockerfile
+    volumes:
+      - ./:/workspace
+    networks:
+      - monorepo
+
+networks:
+  monorepo:
+    external: true
