@@ -1,4 +1,4 @@
-// package: monorepopb.server.api.user
+// package: article.api.user
 // file: article/api/user/user.proto
 
 import * as jspb from "google-protobuf";

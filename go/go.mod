@@ -5,11 +5,10 @@ go 1.16
 require (
 	github.com/DATA-DOG/go-txdb v0.1.4
 	github.com/caarlos0/env/v6 v6.5.0
-	github.com/envoyproxy/protoc-gen-validate v0.5.1 // indirect
+	github.com/envoyproxy/protoc-gen-validate v0.5.1
 	github.com/getsentry/sentry-go v0.10.0
 	github.com/go-chi/chi v1.5.4
 	github.com/golang/mock v1.5.0
-	github.com/ispec-inc/monorepo v0.0.0-20210412100222-5ee9ff5c1352
 	github.com/k0kubun/pp v2.4.0+incompatible
 	github.com/lib/pq v1.10.0 // indirect
 	github.com/pkg/errors v0.9.1
