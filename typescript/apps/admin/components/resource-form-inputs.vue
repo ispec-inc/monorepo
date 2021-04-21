@@ -101,7 +101,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationObserver } from 'vee-validate'
-import { FormModule, FormAbstructModule } from 'fast-form'
+import { FormModule, FormAbstructModule } from '@monorepo/fast-form'
 
 @Component({
   components: {

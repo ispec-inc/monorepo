@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
-import { Resource } from 'fast-form'
+import { Resource } from '@monorepo/fast-form'
 
 @Component({})
 export default class DialogDelete extends Vue {

@@ -1,7 +1,7 @@
 import {
   FormModule,
   FormTextInputModule
-} from 'fast-form'
+} from '@monorepo/fast-form'
 import PlaceResource from '~/resources/place'
 
 export function PlaceForm(place?: PlaceResource): FormModule<any> {

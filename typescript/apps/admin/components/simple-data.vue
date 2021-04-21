@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import { Resource } from 'fast-form'
+import { Resource } from '@monorepo/fast-form'
 
 @Component({})
 export default class SimpleData extends Vue {
