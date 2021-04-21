@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package admin.api.article;
+
+option go_package = "github.com/ispec-inc/monorepo/go/gen/admin/api/article";
+
+import "admin/view/article.proto";
+import "validate/validate.proto";
+
+message GetRequest {}
+
+message GetResponse {
+  admin.view.Article article = 1;
+}
+
+message ListRequest {}
+
+message ListResponse {
+  repeated admin.view.Article articles = 1;
+}
+
+message CreateRequest {
+  string name = 1;
+  string description = 2;
+  string email = 3 [(validate.rules).string.email = true];
+}
+
+message CreateResponse {
+  repeated admin.view.Article articles = 1;
+}
+
+message UpdateRequest {
+  string name = 1;
+  string description = 2;
+  string email = 3 [(validate.rules).string.email = true];
+}
+
+message UpdateResponse {
+  admin.view.Article article = 1;
+}
+
+message DeleteRequest {}
+
+message DeleteResponse {
+  repeated admin.view.Article articles = 1;
+}

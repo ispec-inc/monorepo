@@ -1,5 +1,5 @@
-// package: article.view
-// file: article/view/user.proto
+// package: admin.view
+// file: admin/view/user.proto
 
 import * as jspb from "google-protobuf";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";

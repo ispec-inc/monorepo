@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package admin.view;
+
+option go_package = "github.com/ispec-inc/monorepo/go/gen/admin/view";
+
+import "google/protobuf/timestamp.proto";
+
+message Article {
+  int64 id = 1;
+  int64 user_id = 2;
+  string title = 3;
+  string body = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}

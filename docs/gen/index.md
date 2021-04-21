@@ -3,16 +3,428 @@
 
 ## Table of Contents
 
+- [admin/view/article.proto](#admin/view/article.proto)
+    - [Article](#admin.view.Article)
+  
+- [admin/view/user.proto](#admin/view/user.proto)
+    - [User](#admin.view.User)
+  
+- [admin/api/user/user.proto](#admin/api/user/user.proto)
+    - [CreateRequest](#admin.api.user.CreateRequest)
+    - [CreateResponse](#admin.api.user.CreateResponse)
+    - [DeleteRequest](#admin.api.user.DeleteRequest)
+    - [DeleteResponse](#admin.api.user.DeleteResponse)
+    - [GetRequest](#admin.api.user.GetRequest)
+    - [GetResponse](#admin.api.user.GetResponse)
+    - [ListRequest](#admin.api.user.ListRequest)
+    - [ListResponse](#admin.api.user.ListResponse)
+    - [UpdateRequest](#admin.api.user.UpdateRequest)
+    - [UpdateResponse](#admin.api.user.UpdateResponse)
+  
+- [admin/api/article/article.proto](#admin/api/article/article.proto)
+    - [CreateRequest](#admin.api.article.CreateRequest)
+    - [CreateResponse](#admin.api.article.CreateResponse)
+    - [DeleteRequest](#admin.api.article.DeleteRequest)
+    - [DeleteResponse](#admin.api.article.DeleteResponse)
+    - [GetRequest](#admin.api.article.GetRequest)
+    - [GetResponse](#admin.api.article.GetResponse)
+    - [ListRequest](#admin.api.article.ListRequest)
+    - [ListResponse](#admin.api.article.ListResponse)
+    - [UpdateRequest](#admin.api.article.UpdateRequest)
+    - [UpdateResponse](#admin.api.article.UpdateResponse)
+  
 - [article/view/user.proto](#article/view/user.proto)
-    - [User](#monorepopb.server.view.User)
+    - [User](#article.view.User)
   
 - [article/api/user/user.proto](#article/api/user/user.proto)
-    - [CreateRequest](#monorepopb.server.api.user.CreateRequest)
-    - [CreateResponse](#monorepopb.server.api.user.CreateResponse)
-    - [GetRequest](#monorepopb.server.api.user.GetRequest)
-    - [GetResponse](#monorepopb.server.api.user.GetResponse)
+    - [CreateRequest](#article.api.user.CreateRequest)
+    - [CreateResponse](#article.api.user.CreateResponse)
+    - [GetRequest](#article.api.user.GetRequest)
+    - [GetResponse](#article.api.user.GetResponse)
   
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="admin/view/article.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## admin/view/article.proto
+
+
+
+<a name="admin.view.Article"></a>
+
+### Article
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [int64](#int64) |  |  |
+| user_id | [int64](#int64) |  |  |
+| title | [string](#string) |  |  |
+| body | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="admin/view/user.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## admin/view/user.proto
+
+
+
+<a name="admin.view.User"></a>
+
+### User
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [int64](#int64) |  |  |
+| name | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| email | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="admin/api/user/user.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## admin/api/user/user.proto
+
+
+
+<a name="admin.api.user.CreateRequest"></a>
+
+### CreateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| email | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="admin.api.user.CreateResponse"></a>
+
+### CreateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| users | [admin.view.User](#admin.view.User) | repeated |  |
+
+
+
+
+
+
+<a name="admin.api.user.DeleteRequest"></a>
+
+### DeleteRequest
+
+
+
+
+
+
+
+<a name="admin.api.user.DeleteResponse"></a>
+
+### DeleteResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| users | [admin.view.User](#admin.view.User) | repeated |  |
+
+
+
+
+
+
+<a name="admin.api.user.GetRequest"></a>
+
+### GetRequest
+
+
+
+
+
+
+
+<a name="admin.api.user.GetResponse"></a>
+
+### GetResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user | [admin.view.User](#admin.view.User) |  |  |
+
+
+
+
+
+
+<a name="admin.api.user.ListRequest"></a>
+
+### ListRequest
+
+
+
+
+
+
+
+<a name="admin.api.user.ListResponse"></a>
+
+### ListResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| users | [admin.view.User](#admin.view.User) | repeated |  |
+
+
+
+
+
+
+<a name="admin.api.user.UpdateRequest"></a>
+
+### UpdateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| email | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="admin.api.user.UpdateResponse"></a>
+
+### UpdateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user | [admin.view.User](#admin.view.User) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="admin/api/article/article.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## admin/api/article/article.proto
+
+
+
+<a name="admin.api.article.CreateRequest"></a>
+
+### CreateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| email | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="admin.api.article.CreateResponse"></a>
+
+### CreateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| articles | [admin.view.Article](#admin.view.Article) | repeated |  |
+
+
+
+
+
+
+<a name="admin.api.article.DeleteRequest"></a>
+
+### DeleteRequest
+
+
+
+
+
+
+
+<a name="admin.api.article.DeleteResponse"></a>
+
+### DeleteResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| articles | [admin.view.Article](#admin.view.Article) | repeated |  |
+
+
+
+
+
+
+<a name="admin.api.article.GetRequest"></a>
+
+### GetRequest
+
+
+
+
+
+
+
+<a name="admin.api.article.GetResponse"></a>
+
+### GetResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| article | [admin.view.Article](#admin.view.Article) |  |  |
+
+
+
+
+
+
+<a name="admin.api.article.ListRequest"></a>
+
+### ListRequest
+
+
+
+
+
+
+
+<a name="admin.api.article.ListResponse"></a>
+
+### ListResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| articles | [admin.view.Article](#admin.view.Article) | repeated |  |
+
+
+
+
+
+
+<a name="admin.api.article.UpdateRequest"></a>
+
+### UpdateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| email | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="admin.api.article.UpdateResponse"></a>
+
+### UpdateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| article | [admin.view.Article](#admin.view.Article) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
 
 
 
@@ -23,7 +435,7 @@
 
 
 
-<a name="monorepopb.server.view.User"></a>
+<a name="article.view.User"></a>
 
 ### User
 
@@ -59,7 +471,7 @@
 
 
 
-<a name="monorepopb.server.api.user.CreateRequest"></a>
+<a name="article.api.user.CreateRequest"></a>
 
 ### CreateRequest
 
@@ -76,7 +488,7 @@
 
 
 
-<a name="monorepopb.server.api.user.CreateResponse"></a>
+<a name="article.api.user.CreateResponse"></a>
 
 ### CreateResponse
 
@@ -84,14 +496,14 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| users | [monorepopb.server.view.User](#monorepopb.server.view.User) | repeated |  |
+| users | [article.view.User](#article.view.User) | repeated |  |
 
 
 
 
 
 
-<a name="monorepopb.server.api.user.GetRequest"></a>
+<a name="article.api.user.GetRequest"></a>
 
 ### GetRequest
 
@@ -101,7 +513,7 @@
 
 
 
-<a name="monorepopb.server.api.user.GetResponse"></a>
+<a name="article.api.user.GetResponse"></a>
 
 ### GetResponse
 
@@ -109,7 +521,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user | [monorepopb.server.view.User](#monorepopb.server.view.User) |  |  |
+| user | [article.view.User](#article.view.User) |  |  |
 
 
 
