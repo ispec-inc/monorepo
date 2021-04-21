@@ -6,11 +6,11 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi"
+	pb "github.com/ispec-inc/monorepo/go/gen/article/api/user"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/view"
 	"github.com/ispec-inc/monorepo/go/svc/article/src/user"
-	pb "github.com/ispec-inc/monorepo/proto/go/monorepopb/server/api/user"
 )
 
 type Handler struct {
