@@ -1,9 +1,9 @@
-// package: admin.api.user
-// file: admin/api/user/user.proto
+// package: admin.api.article
+// file: admin/api/rest/article/article.proto
 
 import * as jspb from "google-protobuf";
-import * as admin_view_user_pb from "../../../admin/view/user_pb";
-import * as validate_validate_pb from "../../../validate/validate_pb";
+import * as admin_view_article_pb from "../../../../admin/view/article_pb";
+import * as validate_validate_pb from "../../../../validate/validate_pb";
 
 export class GetRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
@@ -22,10 +22,10 @@ export namespace GetRequest {
 }
 
 export class GetResponse extends jspb.Message {
-  hasUser(): boolean;
-  clearUser(): void;
-  getUser(): admin_view_user_pb.User | undefined;
-  setUser(value?: admin_view_user_pb.User): void;
+  hasArticle(): boolean;
+  clearArticle(): void;
+  getArticle(): admin_view_article_pb.Article | undefined;
+  setArticle(value?: admin_view_article_pb.Article): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetResponse.AsObject;
@@ -39,7 +39,7 @@ export class GetResponse extends jspb.Message {
 
 export namespace GetResponse {
   export type AsObject = {
-    user?: admin_view_user_pb.User.AsObject,
+    article?: admin_view_article_pb.Article.AsObject,
   }
 }
 
@@ -60,10 +60,10 @@ export namespace ListRequest {
 }
 
 export class ListResponse extends jspb.Message {
-  clearUsersList(): void;
-  getUsersList(): Array<admin_view_user_pb.User>;
-  setUsersList(value: Array<admin_view_user_pb.User>): void;
-  addUsers(value?: admin_view_user_pb.User, index?: number): admin_view_user_pb.User;
+  clearArticlesList(): void;
+  getArticlesList(): Array<admin_view_article_pb.Article>;
+  setArticlesList(value: Array<admin_view_article_pb.Article>): void;
+  addArticles(value?: admin_view_article_pb.Article, index?: number): admin_view_article_pb.Article;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ListResponse.AsObject;
@@ -77,7 +77,7 @@ export class ListResponse extends jspb.Message {
 
 export namespace ListResponse {
   export type AsObject = {
-    usersList: Array<admin_view_user_pb.User.AsObject>,
+    articlesList: Array<admin_view_article_pb.Article.AsObject>,
   }
 }
 
@@ -110,10 +110,10 @@ export namespace CreateRequest {
 }
 
 export class CreateResponse extends jspb.Message {
-  clearUsersList(): void;
-  getUsersList(): Array<admin_view_user_pb.User>;
-  setUsersList(value: Array<admin_view_user_pb.User>): void;
-  addUsers(value?: admin_view_user_pb.User, index?: number): admin_view_user_pb.User;
+  clearArticlesList(): void;
+  getArticlesList(): Array<admin_view_article_pb.Article>;
+  setArticlesList(value: Array<admin_view_article_pb.Article>): void;
+  addArticles(value?: admin_view_article_pb.Article, index?: number): admin_view_article_pb.Article;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateResponse.AsObject;
@@ -127,7 +127,7 @@ export class CreateResponse extends jspb.Message {
 
 export namespace CreateResponse {
   export type AsObject = {
-    usersList: Array<admin_view_user_pb.User.AsObject>,
+    articlesList: Array<admin_view_article_pb.Article.AsObject>,
   }
 }
 
@@ -160,10 +160,10 @@ export namespace UpdateRequest {
 }
 
 export class UpdateResponse extends jspb.Message {
-  hasUser(): boolean;
-  clearUser(): void;
-  getUser(): admin_view_user_pb.User | undefined;
-  setUser(value?: admin_view_user_pb.User): void;
+  hasArticle(): boolean;
+  clearArticle(): void;
+  getArticle(): admin_view_article_pb.Article | undefined;
+  setArticle(value?: admin_view_article_pb.Article): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateResponse.AsObject;
@@ -177,7 +177,7 @@ export class UpdateResponse extends jspb.Message {
 
 export namespace UpdateResponse {
   export type AsObject = {
-    user?: admin_view_user_pb.User.AsObject,
+    article?: admin_view_article_pb.Article.AsObject,
   }
 }
 
@@ -198,10 +198,10 @@ export namespace DeleteRequest {
 }
 
 export class DeleteResponse extends jspb.Message {
-  clearUsersList(): void;
-  getUsersList(): Array<admin_view_user_pb.User>;
-  setUsersList(value: Array<admin_view_user_pb.User>): void;
-  addUsers(value?: admin_view_user_pb.User, index?: number): admin_view_user_pb.User;
+  clearArticlesList(): void;
+  getArticlesList(): Array<admin_view_article_pb.Article>;
+  setArticlesList(value: Array<admin_view_article_pb.Article>): void;
+  addArticles(value?: admin_view_article_pb.Article, index?: number): admin_view_article_pb.Article;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeleteResponse.AsObject;
@@ -215,7 +215,7 @@ export class DeleteResponse extends jspb.Message {
 
 export namespace DeleteResponse {
   export type AsObject = {
-    usersList: Array<admin_view_user_pb.User.AsObject>,
+    articlesList: Array<admin_view_article_pb.Article.AsObject>,
   }
 }
 

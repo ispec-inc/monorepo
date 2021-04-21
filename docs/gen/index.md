@@ -9,7 +9,7 @@
 - [admin/view/user.proto](#admin/view/user.proto)
     - [User](#admin.view.User)
   
-- [admin/api/user/user.proto](#admin/api/user/user.proto)
+- [admin/api/rest/user/user.proto](#admin/api/rest/user/user.proto)
     - [CreateRequest](#admin.api.user.CreateRequest)
     - [CreateResponse](#admin.api.user.CreateResponse)
     - [DeleteRequest](#admin.api.user.DeleteRequest)
@@ -21,7 +21,7 @@
     - [UpdateRequest](#admin.api.user.UpdateRequest)
     - [UpdateResponse](#admin.api.user.UpdateResponse)
   
-- [admin/api/article/article.proto](#admin/api/article/article.proto)
+- [admin/api/rest/article/article.proto](#admin/api/rest/article/article.proto)
     - [CreateRequest](#admin.api.article.CreateRequest)
     - [CreateResponse](#admin.api.article.CreateResponse)
     - [DeleteRequest](#admin.api.article.DeleteRequest)
@@ -36,7 +36,7 @@
 - [article/view/user.proto](#article/view/user.proto)
     - [User](#article.view.User)
   
-- [article/api/user/user.proto](#article/api/user/user.proto)
+- [article/api/rest/user/user.proto](#article/api/rest/user/user.proto)
     - [CreateRequest](#article.api.user.CreateRequest)
     - [CreateResponse](#article.api.user.CreateResponse)
     - [GetRequest](#article.api.user.GetRequest)
@@ -118,10 +118,10 @@
 
 
 
-<a name="admin/api/user/user.proto"></a>
+<a name="admin/api/rest/user/user.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## admin/api/user/user.proto
+## admin/api/rest/user/user.proto
 
 
 
@@ -273,10 +273,10 @@
 
 
 
-<a name="admin/api/article/article.proto"></a>
+<a name="admin/api/rest/article/article.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## admin/api/article/article.proto
+## admin/api/rest/article/article.proto
 
 
 
@@ -464,10 +464,10 @@
 
 
 
-<a name="article/api/user/user.proto"></a>
+<a name="article/api/rest/user/user.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## article/api/user/user.proto
+## article/api/rest/user/user.proto
 
 
 
