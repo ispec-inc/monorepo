@@ -96,7 +96,7 @@
 import { required, numeric, excluded, integer } from 'vee-validate/dist/rules'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider, extend, setInteractionMode } from 'vee-validate'
-import { FormInputModule } from 'fast-form'
+import { FormInputModule } from '@monorepo/fast-form'
 
 setInteractionMode('eager')
 

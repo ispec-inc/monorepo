@@ -1,5 +1,5 @@
 {
-  "name": "fast-form",
+  "name": "@monorepo/fast-form",
   "version": "1.0.0",
   "description": "Components and modules to speed up the building of administration screens.",
   "files": [

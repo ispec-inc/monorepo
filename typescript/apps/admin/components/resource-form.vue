@@ -57,7 +57,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { ValidationObserver } from 'vee-validate'
-import { FormModule } from 'fast-form'
+import { FormModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
