@@ -14,6 +14,7 @@ jobs:
           filter_mode: nofilter
           fail_on_error: true
           workdir: go
+          target: ./pkg/... ./services/...
 
   hadolint:
     name: runner / hadolint
