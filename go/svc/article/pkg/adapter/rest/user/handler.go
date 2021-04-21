@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi"
-	pb "github.com/ispec-inc/monorepo/go/gen/article/api/user"
+	pb "github.com/ispec-inc/monorepo/go/gen/article/api/rest/user"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/view"
