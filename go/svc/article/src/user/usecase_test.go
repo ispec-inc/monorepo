@@ -9,8 +9,8 @@ import (
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ispec-inc/monorepo/go/services/article/pkg/domain/model"
-	mock_repository "github.com/ispec-inc/monorepo/go/services/article/pkg/domain/repository/mock"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/domain/model"
+	mock_repository "github.com/ispec-inc/monorepo/go/svc/article/pkg/domain/repository/mock"
 )
 
 func TestUserUsecase_Get(t *testing.T) {

@@ -6,8 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/ispec-inc/monorepo/go/pkg/infra/entity"
-	"github.com/ispec-inc/monorepo/go/services/article/pkg/domain/model"
-	"github.com/ispec-inc/monorepo/go/services/article/pkg/infra/dao/test"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/domain/model"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/infra/dao/test"
 )
 
 func TestUserDao_Get(t *testing.T) {

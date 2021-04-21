@@ -14,7 +14,7 @@ build:
 	docker-compose build
 
 seed: ## insert seed data
-	docker-compose run --rm article-api go run ./services/article/cmd/db/seed
+	docker-compose run --rm article-api go run ./svc/article/cmd/db/seed
 
 server: ## go run server
 	docker-compose up -d article-mysql
