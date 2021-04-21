@@ -1,11 +1,11 @@
 {
 	"mocks": {
-		"services/article/pkg/domain/repository/mock/user.go": {
+		"svc/article/pkg/domain/repository/mock/user.go": {
 			"checksum": "cPxkErw8bfOboHV5QDfHbg==",
 			"mode": "SOURCE_MODE",
 			"source_mode_runner": {
-				"source": "services/article/pkg/domain/repository/user.go",
-				"destination": "services/article/pkg/domain/repository/mock/user.go"
+				"source": "svc/article/pkg/domain/repository/user.go",
+				"destination": "svc/article/pkg/domain/repository/mock/user.go"
 			}
 		}
 	}

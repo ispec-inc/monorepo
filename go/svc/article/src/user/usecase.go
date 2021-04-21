@@ -5,9 +5,9 @@ import (
 
 	"github.com/ispec-inc/monorepo/go/pkg/apperror"
 	"github.com/ispec-inc/monorepo/go/pkg/applog"
-	"github.com/ispec-inc/monorepo/go/services/article/pkg/domain/model"
-	"github.com/ispec-inc/monorepo/go/services/article/pkg/domain/repository"
-	"github.com/ispec-inc/monorepo/go/services/article/pkg/registry"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/domain/model"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/domain/repository"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
 )
 
 type Usecase struct {

@@ -4,8 +4,8 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/ispec-inc/monorepo/go/pkg/mysql"
-	"github.com/ispec-inc/monorepo/go/services/article/pkg/domain/repository"
-	"github.com/ispec-inc/monorepo/go/services/article/pkg/infra/dao"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/domain/repository"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/infra/dao"
 )
 
 type Repository struct {

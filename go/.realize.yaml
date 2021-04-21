@@ -8,7 +8,7 @@ schema:
     commands:
       build:
         status: true
-        method: go build -o ./bin/article ./services/article/cmd/server/rest
+        method: go build -o ./bin/article ./svc/article/cmd/server/rest
       run:
         status: true
         method: ./bin/article
@@ -23,7 +23,7 @@ schema:
     commands:
       build:
         status: true
-        method: go build -o ./bin/admin ./services/admin/cmd/server/rest
+        method: go build -o ./bin/admin ./svc/admin/cmd/server/rest
       run:
         status: true
         method: ./bin/admin
