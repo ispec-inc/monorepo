@@ -82,14 +82,14 @@ export namespace ListResponse {
 }
 
 export class CreateRequest extends jspb.Message {
-  getName(): string;
-  setName(value: string): void;
+  getUserId(): number;
+  setUserId(value: number): void;
 
-  getDescription(): string;
-  setDescription(value: string): void;
+  getTitle(): string;
+  setTitle(value: string): void;
 
-  getEmail(): string;
-  setEmail(value: string): void;
+  getBody(): string;
+  setBody(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateRequest.AsObject;
@@ -103,9 +103,9 @@ export class CreateRequest extends jspb.Message {
 
 export namespace CreateRequest {
   export type AsObject = {
-    name: string,
-    description: string,
-    email: string,
+    userId: number,
+    title: string,
+    body: string,
   }
 }
 
@@ -132,14 +132,14 @@ export namespace CreateResponse {
 }
 
 export class UpdateRequest extends jspb.Message {
-  getName(): string;
-  setName(value: string): void;
+  getUserId(): number;
+  setUserId(value: number): void;
 
-  getDescription(): string;
-  setDescription(value: string): void;
+  getTitle(): string;
+  setTitle(value: string): void;
 
-  getEmail(): string;
-  setEmail(value: string): void;
+  getBody(): string;
+  setBody(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateRequest.AsObject;
@@ -153,9 +153,9 @@ export class UpdateRequest extends jspb.Message {
 
 export namespace UpdateRequest {
   export type AsObject = {
-    name: string,
-    description: string,
-    email: string,
+    userId: number,
+    title: string,
+    body: string,
   }
 }
 

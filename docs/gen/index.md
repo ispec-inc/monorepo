@@ -82,9 +82,9 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  |  |
-| description | [string](#string) |  |  |
-| email | [string](#string) |  |  |
+| user_id | [int64](#int64) |  |  |
+| title | [string](#string) |  |  |
+| body | [string](#string) |  |  |
 
 
 
@@ -189,9 +189,9 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  |  |
-| description | [string](#string) |  |  |
-| email | [string](#string) |  |  |
+| user_id | [int64](#int64) |  |  |
+| title | [string](#string) |  |  |
+| body | [string](#string) |  |  |
 
 
 
