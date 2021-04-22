@@ -20,6 +20,8 @@ type User struct {
 	Email       string    `gorm:"column:email"`
 	CreatedAt   time.Time `gorm:"column:created_at"`
 	UpdatedAt   time.Time `gorm:"column:updated_at"`
+
+	Articles []Article `gorm:"foreignKey:UserID;references:ID"`
 }
 
 func (e *User) BeforeCreate(tx *gorm.DB) error {
