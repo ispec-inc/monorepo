@@ -22,7 +22,7 @@ func NewArticle(userID int64, title, body string) *Article {
 }
 
 func (u *Article) Find(id int64) error {
-	if err := database.Get().Find(u).Error; err != nil {
+	if err := database.Get().First(u, id).Error; err != nil {
 		return apperror.NewGormFind(err, entity.ArticleTableName)
 	}
 	return nil
@@ -35,9 +35,9 @@ func (u *Article) Create() error {
 	return nil
 }
 
-func (u *Article) Update() error {
+func (u *Article) Save() error {
 	if err := database.Get().Save(u).Error; err != nil {
-		return apperror.NewGormUpdate(err, entity.ArticleTableName)
+		return apperror.NewGormSave(err, entity.ArticleTableName)
 	}
 	return nil
 }

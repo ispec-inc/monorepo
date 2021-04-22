@@ -100,7 +100,7 @@ func (h Handler) update(w http.ResponseWriter, r *http.Request) {
 	atl.UserID = body.UserId
 	atl.Title = body.Title
 	atl.Body = body.Body
-	if err := atl.Update(); err != nil {
+	if err := atl.Save(); err != nil {
 		presenter.ApplicationException(w, err)
 		return
 	}
