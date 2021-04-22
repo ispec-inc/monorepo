@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
+	"github.com/ispec-inc/monorepo/go/pkg/config"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
 )
 
@@ -22,5 +24,6 @@ func main() {
 	rgst := registry.NewRegistry(repo, lgr)
 
 	r := NewRouter(rgst)
-	http.ListenAndServe(":9000", r)
+	port := fmt.Sprintf(":%d", config.Router.Port)
+	http.ListenAndServe(port, r)
 }
