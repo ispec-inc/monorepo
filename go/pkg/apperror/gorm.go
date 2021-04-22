@@ -41,6 +41,10 @@ func NewGormCreate(err error, model string) error {
 	return newGorm("Create", model, err)
 }
 
+func NewGormSave(err error, model string) error {
+	return newGorm("Save", model, err)
+}
+
 func NewGormUpdate(err error, model string) error {
 	return newGorm("Update", model, err)
 }
