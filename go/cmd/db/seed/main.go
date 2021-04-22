@@ -8,8 +8,20 @@ import (
 
 var seeds = []interface{}{
 	[]*entity.User{
-		{Name: "name-1", Description: "desc-1", Email: "email-1"},
-		{Name: "name-2", Description: "desc-2", Email: "email-2"},
+		{
+			Name:        "name-1",
+			Description: "desc-1",
+			Email:       "email-1",
+			Articles: []entity.Article{
+				{Title: "article-1", Body: "This is article 1."},
+				{Title: "article-2", Body: "This is article 2."},
+			},
+		},
+		{
+			Name:        "name-2",
+			Description: "desc-2",
+			Email:       "email-2",
+		},
 	},
 }
 
