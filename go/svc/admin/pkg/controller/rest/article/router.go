@@ -6,9 +6,9 @@ import (
 	"github.com/go-chi/chi"
 )
 
-func NewRouter() http.Handler {
+func New() http.Handler {
 	r := chi.NewRouter()
-	h := NewHandler()
+	h := newController()
 
 	r.Get("/", h.list)
 	r.Get("/{id}", h.get)

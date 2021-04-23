@@ -13,7 +13,7 @@ func NewRouter() http.Handler {
 	r := chi.NewRouter()
 	r = commonMiddleware(r)
 
-	r.Mount("/articles", article.NewRouter())
+	r.Mount("/articles", article.New())
 
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		presenter.Response(w, map[string]string{"messsage": "ok"})

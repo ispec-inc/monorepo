@@ -12,13 +12,13 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/view"
 )
 
-type Handler struct{}
+type controller struct{}
 
-func NewHandler() Handler {
-	return Handler{}
+func newController() controller {
+	return controller{}
 }
 
-func (h Handler) list(w http.ResponseWriter, r *http.Request) {
+func (h controller) list(w http.ResponseWriter, r *http.Request) {
 	atls := &model.Articles{}
 	if err := atls.Find(); err != nil {
 		presenter.ApplicationException(w, err)
@@ -30,7 +30,7 @@ func (h Handler) list(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (h Handler) get(w http.ResponseWriter, r *http.Request) {
+func (h controller) get(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		presenter.BadRequestError(w, err)
@@ -48,7 +48,7 @@ func (h Handler) get(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (h Handler) create(w http.ResponseWriter, r *http.Request) {
+func (h controller) create(w http.ResponseWriter, r *http.Request) {
 	body := &pb.CreateRequest{}
 	if err := json.NewDecoder(r.Body).Decode(body); err != nil {
 		presenter.BadRequestError(w, err)
@@ -76,7 +76,7 @@ func (h Handler) create(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (h Handler) update(w http.ResponseWriter, r *http.Request) {
+func (h controller) update(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		presenter.BadRequestError(w, err)
@@ -110,7 +110,7 @@ func (h Handler) update(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (h Handler) delete(w http.ResponseWriter, r *http.Request) {
+func (h controller) delete(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		presenter.BadRequestError(w, err)
