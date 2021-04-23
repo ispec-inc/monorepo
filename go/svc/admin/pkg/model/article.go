@@ -10,7 +10,7 @@ type (
 	Article struct {
 		entity.Article
 	}
-	Articles []*Article
+	Articles []Article
 )
 
 func NewArticle(userID int64, title, body string) *Article {
@@ -49,7 +49,7 @@ func (u *Article) Delete() error {
 	return nil
 }
 
-func (u Articles) Find() error {
+func (u *Articles) Find() error {
 	if err := database.Get().Find(u).Error; err != nil {
 		return apperror.NewGormFind(err, entity.ArticleTableName)
 	}

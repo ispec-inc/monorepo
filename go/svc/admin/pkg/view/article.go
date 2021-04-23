@@ -17,10 +17,10 @@ func NewArticle(m *model.Article) *pb.Article {
 	}
 }
 
-func NewArticles(ms []*model.Article) []*pb.Article {
-	vs := make([]*pb.Article, len(ms))
-	for i, m := range ms {
-		vs[i] = NewArticle(m)
+func NewArticles(ms *model.Articles) []*pb.Article {
+	vs := make([]*pb.Article, len(*ms))
+	for i, m := range *ms {
+		vs[i] = NewArticle(&m)
 	}
 	return vs
 }

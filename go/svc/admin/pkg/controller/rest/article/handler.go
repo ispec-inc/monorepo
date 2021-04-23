@@ -19,7 +19,7 @@ func NewHandler() Handler {
 }
 
 func (h Handler) list(w http.ResponseWriter, r *http.Request) {
-	atls := model.Articles{}
+	atls := &model.Articles{}
 	if err := atls.Find(); err != nil {
 		presenter.ApplicationException(w, err)
 		return
@@ -65,7 +65,7 @@ func (h Handler) create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	atls := model.Articles{}
+	atls := &model.Articles{}
 	if err := atls.Find(); err != nil {
 		presenter.ApplicationException(w, err)
 		return
@@ -127,7 +127,7 @@ func (h Handler) delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	atls := model.Articles{}
+	atls := &model.Articles{}
 	if err := atls.Find(); err != nil {
 		presenter.ApplicationException(w, err)
 		return
