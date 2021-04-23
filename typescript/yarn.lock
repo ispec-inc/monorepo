@@ -945,7 +945,7 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@monorepo/fast-form@./libs/fast-form", fast-form@./libs/fast-form:
+"@monorepo/fast-form@./libs/fast-form":
   version "1.0.0"
 
 "@monorepo/gen@./libs/gen":
