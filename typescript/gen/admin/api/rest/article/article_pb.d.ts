@@ -3,7 +3,6 @@
 
 import * as jspb from "google-protobuf";
 import * as admin_view_article_pb from "../../../../admin/view/article_pb";
-import * as validate_validate_pb from "../../../../validate/validate_pb";
 
 export class GetRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
