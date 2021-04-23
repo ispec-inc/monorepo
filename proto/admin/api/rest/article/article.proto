@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package admin.api.article;
 
-option go_package = "github.com/ispec-inc/monorepo/go/gen/admin/api/rest/article";
+option go_package = "github.com/ispec-inc/monorepo/go/proto/admin/api/rest/article";
 
 import "admin/view/article.proto";
 

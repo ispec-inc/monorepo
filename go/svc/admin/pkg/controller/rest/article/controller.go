@@ -6,9 +6,9 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi"
-	pb "github.com/ispec-inc/monorepo/go/gen/admin/api/rest/article"
 	"github.com/ispec-inc/monorepo/go/pkg/applog"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
+	pb "github.com/ispec-inc/monorepo/go/proto/admin/api/rest/article"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/logger"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/model"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/view"

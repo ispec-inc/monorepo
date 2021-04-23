@@ -6,8 +6,8 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi"
-	pb "github.com/ispec-inc/monorepo/go/gen/article/api/rest/user"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
+	pb "github.com/ispec-inc/monorepo/go/proto/article/api/rest/user"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/view"
 	"github.com/ispec-inc/monorepo/go/svc/article/src/user"
