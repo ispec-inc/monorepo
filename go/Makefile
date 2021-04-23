@@ -14,12 +14,12 @@ build:
 	docker-compose build
 
 seed: ## insert seed data
-	docker-compose run --rm article-api go run ./svc/article/cmd/db/seed
+	docker-compose run --rm article-api go run ./cmd/db/seed
 
 server: ## go run server
 	docker-compose up -d article-mysql
 	docker-compose run dockerize -wait tcp://article-mysql:3306 -timeout 20s
-	docker-compose up article-api
+	docker-compose up article-api admin-api
 
 test: pkg = ./...
 test: ## go test

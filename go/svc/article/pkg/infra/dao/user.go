@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"github.com/ispec-inc/monorepo/go/pkg/apperror"
 	"github.com/ispec-inc/monorepo/go/pkg/infra/entity"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/domain/model"
 	"gorm.io/gorm"
@@ -19,7 +20,7 @@ func NewUser(db *gorm.DB) User {
 func (d User) Get(id int64) (*model.User, error) {
 	e := &entity.User{}
 	if err := d.db.First(e, id).Error; err != nil {
-		return nil, newGormFindError(err, entity.UserModelName)
+		return nil, apperror.NewGormFind(err, entity.UserModelName)
 	}
 	return model.NewUserFromEntity(e), nil
 }
@@ -32,7 +33,7 @@ func (d User) List(ids []int64) ([]*model.User, error) {
 
 	var es []entity.User
 	if err := query.Find(&es).Error; err != nil {
-		return nil, newGormFindError(err, entity.UserModelName)
+		return nil, apperror.NewGormFind(err, entity.UserModelName)
 	}
 
 	ms := make([]*model.User, len(es))
@@ -49,7 +50,7 @@ func (d User) Create(m *model.User) error {
 		Email:       m.Email,
 	}
 	if err := d.db.Create(e).Error; err != nil {
-		return newGormCreateError(err, entity.UserModelName)
+		return apperror.NewGormCreate(err, entity.UserModelName)
 	}
 	return nil
 }
