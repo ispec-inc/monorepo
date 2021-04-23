@@ -17,8 +17,8 @@ protoc: # protoc
 		--go_out=paths=source_relative:./go/gen \
 		--validate_out=lang=go,paths=source_relative:./go/gen \
 		--plugin=protoc-gen-ts=/ts/node_modules/.bin/protoc-gen-ts \
-		--ts_out=./typescript/gen \
-		--js_out=import_style=commonjs,binary:./typescript/gen \
+		--ts_out=./typescript/libs/gen \
+		--js_out=import_style=commonjs,binary:./typescript/libs/gen \
 		--doc_out=./docs/gen \
 		--doc_opt=markdown,index.md \
 		$(shell find ./proto -name '*.proto')
