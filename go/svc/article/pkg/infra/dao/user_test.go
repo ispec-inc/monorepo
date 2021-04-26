@@ -11,7 +11,7 @@ import (
 )
 
 func TestUserDao_Get(t *testing.T) {
-	db, cleanup := testool.Prepare(t, "user_dao_get", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "user_dao_get", []interface{}{
 		&entity.User{ID: int64(1), Email: "email"},
 	})
 	defer cleanup()
@@ -58,7 +58,7 @@ func TestUserDao_Get(t *testing.T) {
 }
 
 func TestUserDao_List(t *testing.T) {
-	db, cleanup := testool.Prepare(t, "user_dao_find_by_user_id", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "user_dao_find_by_user_id", []interface{}{
 		&entity.User{ID: int64(1), Email: "email-1"},
 		&entity.User{ID: int64(2), Email: "email-2"},
 	})
@@ -107,7 +107,7 @@ func TestUserDao_List(t *testing.T) {
 }
 
 func TestUserDao_Create(t *testing.T) {
-	db, cleanup := testool.Prepare(t, "user_dao_create", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "user_dao_create", []interface{}{
 		&entity.User{ID: int64(1), Email: "old"},
 	})
 	defer cleanup()

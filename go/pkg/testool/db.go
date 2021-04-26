@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func Prepare(t *testing.T, name string, seeds []interface{}) (*gorm.DB, func()) {
+func PrepareDB(t *testing.T, name string, seeds []interface{}) (*gorm.DB, func()) {
 	db, err := mysql.NewTest(name)
 	if err != nil {
 		t.Fatal(err)

@@ -28,7 +28,7 @@ func TestArticleController_list(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "article_controller_get", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "article_controller_get", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -71,7 +71,7 @@ func TestArticleController_get(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "article_controller_get", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "article_controller_get", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -110,7 +110,7 @@ func TestArticleController_create(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "article_controller_create", []interface{}{})
+	db, cleanup := testool.PrepareDB(t, "article_controller_create", []interface{}{})
 	database.Init(db)
 	defer cleanup()
 
@@ -152,7 +152,7 @@ func TestArticleController_update(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "article_controller_update", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "article_controller_update", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -196,7 +196,7 @@ func TestArticleController_delete(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "article_controller_delete", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "article_controller_delete", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)

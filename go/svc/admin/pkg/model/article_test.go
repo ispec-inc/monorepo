@@ -38,7 +38,7 @@ func TestArticleModel_Find(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "article_model_find", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "article_model_find", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -78,7 +78,7 @@ func TestArticleModel_Create(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "article_model_create", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "article_model_create", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -119,7 +119,7 @@ func TestArticleModel_Save(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "article_model_save", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "article_model_save", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -160,7 +160,7 @@ func TestArticleModel_Delete(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "article_model_delete", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "article_model_delete", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -198,7 +198,7 @@ func TestArticlesModel_Find(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.Prepare(t, "articles_model_find", []interface{}{
+	db, cleanup := testool.PrepareDB(t, "articles_model_find", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
