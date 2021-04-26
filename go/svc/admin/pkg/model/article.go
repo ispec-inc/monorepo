@@ -22,36 +22,36 @@ func NewArticle(userID int64, title, body string) *Article {
 }
 
 func (u *Article) Find(id int64) error {
-	if err := database.Get().First(u, id).Error; err != nil {
-		return apperror.NewGormFind(err, entity.ArticleTableName)
-	}
-	return nil
+	return apperror.NewGormFind(
+		database.Get().First(u, id).Error,
+		entity.ArticleTableName,
+	)
 }
 
 func (u *Article) Create() error {
-	if err := database.Get().Create(u).Error; err != nil {
-		return apperror.NewGormCreate(err, entity.ArticleTableName)
-	}
-	return nil
+	return apperror.NewGormCreate(
+		database.Get().Create(u).Error,
+		entity.ArticleTableName,
+	)
 }
 
 func (u *Article) Save() error {
-	if err := database.Get().Save(u).Error; err != nil {
-		return apperror.NewGormSave(err, entity.ArticleTableName)
-	}
-	return nil
+	return apperror.NewGormSave(
+		database.Get().Save(u).Error,
+		entity.ArticleTableName,
+	)
 }
 
 func (u *Article) Delete() error {
-	if err := database.Get().Delete(u).Error; err != nil {
-		return apperror.NewGormDelete(err, entity.ArticleTableName)
-	}
-	return nil
+	return apperror.NewGormDelete(
+		database.Get().Delete(u).Error,
+		entity.ArticleTableName,
+	)
 }
 
 func (u *Articles) Find() error {
-	if err := database.Get().Find(u).Error; err != nil {
-		return apperror.NewGormFind(err, entity.ArticleTableName)
-	}
-	return nil
+	return apperror.NewGormFind(
+		database.Get().Find(u).Error,
+		entity.ArticleTableName,
+	)
 }

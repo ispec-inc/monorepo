@@ -13,6 +13,10 @@ type gormErr struct {
 }
 
 func newGorm(method, model string, err error) error {
+	if err == nil {
+		return nil
+	}
+
 	var code Code
 	switch err {
 	case gorm.ErrRecordNotFound:
