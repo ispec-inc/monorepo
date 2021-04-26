@@ -1,15 +1,10 @@
 package article
 
 import (
-	"bytes"
-	"context"
-	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/go-chi/chi"
-	"github.com/ispec-inc/monorepo/go/pkg/applog"
 	"github.com/ispec-inc/monorepo/go/pkg/infra/entity"
 	"github.com/ispec-inc/monorepo/go/pkg/testool"
 	pb "github.com/ispec-inc/monorepo/go/proto/admin/api/rest/article"
@@ -42,10 +37,9 @@ func TestArticleController_list(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			req := httptest.NewRequest(http.MethodGet, "/", nil)
-			req = req.WithContext(applog.WithTestContext(req.Context()))
+			req := testool.NewRequest(http.MethodGet, "/", nil)
 			res := httptest.NewRecorder()
-			newController().list(res, req)
+			newController().list(res, req.Parse(t))
 			assert.Equal(t, tt.want.status, res.Code)
 		})
 	}
@@ -86,15 +80,10 @@ func TestArticleController_get(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			req := httptest.NewRequest(http.MethodGet, "/", nil)
-			rctx := chi.NewRouteContext()
-			rctx.URLParams.Add("id", tt.give.id)
-			ctx := context.WithValue(req.Context(), chi.RouteCtxKey, rctx)
-			ctx = applog.WithTestContext(ctx)
-			req = req.WithContext(ctx)
+			req := testool.NewRequest(http.MethodGet, "/", nil)
+			req.AddURLParam("id", tt.give.id)
 			res := httptest.NewRecorder()
-
-			newController().get(res, req)
+			newController().get(res, req.Parse(t))
 			assert.Equal(t, tt.want.status, res.Code)
 		})
 	}
@@ -128,16 +117,9 @@ func TestArticleController_create(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			body := new(bytes.Buffer)
-			if err := json.NewEncoder(body).Encode(tt.give.req); err != nil {
-				t.Fatal(err)
-			}
-			req := httptest.NewRequest(http.MethodPost, "/", body)
-			ctx := applog.WithTestContext(req.Context())
-			req = req.WithContext(ctx)
+			req := testool.NewRequest(http.MethodPost, "/", tt.give.req)
 			res := httptest.NewRecorder()
-
-			newController().create(res, req)
+			newController().create(res, req.Parse(t))
 			assert.Equal(t, tt.want.status, res.Code)
 		})
 	}
@@ -179,19 +161,10 @@ func TestArticleController_update(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			body := new(bytes.Buffer)
-			if err := json.NewEncoder(body).Encode(tt.give.req); err != nil {
-				t.Fatal(err)
-			}
-			req := httptest.NewRequest(http.MethodPut, "/", body)
-			rctx := chi.NewRouteContext()
-			rctx.URLParams.Add("id", tt.give.id)
-			ctx := context.WithValue(req.Context(), chi.RouteCtxKey, rctx)
-			ctx = applog.WithTestContext(ctx)
-			req = req.WithContext(ctx)
+			req := testool.NewRequest(http.MethodPost, "/", tt.give.req)
+			req.AddURLParam("id", tt.give.id)
 			res := httptest.NewRecorder()
-
-			newController().update(res, req)
+			newController().update(res, req.Parse(t))
 			assert.Equal(t, tt.want.status, res.Code)
 		})
 	}
@@ -232,15 +205,10 @@ func TestArticleController_delete(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			req := httptest.NewRequest(http.MethodDelete, "/", nil)
-			rctx := chi.NewRouteContext()
-			rctx.URLParams.Add("id", tt.give.id)
-			ctx := context.WithValue(req.Context(), chi.RouteCtxKey, rctx)
-			ctx = applog.WithTestContext(ctx)
-			req = req.WithContext(ctx)
+			req := testool.NewRequest(http.MethodPost, "/", nil)
+			req.AddURLParam("id", tt.give.id)
 			res := httptest.NewRecorder()
-
-			newController().delete(res, req)
+			newController().delete(res, req.Parse(t))
 			assert.Equal(t, tt.want.status, res.Code)
 		})
 	}
