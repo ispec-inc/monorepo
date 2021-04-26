@@ -28,12 +28,12 @@ func (l AppLog) SetUser(ctx context.Context, userID int64, userName string) cont
 
 func (l AppLog) TestContext() context.Context {
 	ctx := context.Background()
-	ctx = context.WithValue(ctx, testModeKey, true)
+	ctx = context.WithValue(ctx, testModeKey, testModeValue{})
 	return ctx
 }
 
 func (l AppLog) Error(ctx context.Context, err error) {
-	if v := ctx.Value(testModeKey); v != nil && v.(bool) {
+	if v := ctx.Value(testModeKey); v != nil {
 		return
 	}
 
