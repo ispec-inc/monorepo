@@ -24,7 +24,7 @@ func NewRequest(method, path string, body interface{}) *request {
 	return &request{
 		method:   method,
 		path:     path,
-		urlparam: make(map[string]string, 0),
+		urlparam: make(map[string]string),
 		body:     body,
 	}
 }
