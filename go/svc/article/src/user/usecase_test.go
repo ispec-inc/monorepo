@@ -1,6 +1,7 @@
 package user
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -55,12 +56,11 @@ func TestUserUsecase_Get(t *testing.T) {
 			c := gomock.NewController(t)
 			defer c.Finish()
 
-			lg := applog.New(nil)
 			u := Usecase{
 				user: tt.userRepo(c),
-				log:  lg,
+				log:  applog.New(nil),
 			}
-			got, aerr := u.Get(lg.TestContext(), tt.give)
+			got, aerr := u.Get(applog.WithTestContext(context.TODO()), tt.give)
 
 			if tt.err {
 				assert.Error(t, aerr)
@@ -135,12 +135,11 @@ func TestUserUsecase_Create(t *testing.T) {
 			c := gomock.NewController(t)
 			defer c.Finish()
 
-			lg := applog.New(nil)
 			u := Usecase{
 				user: tt.userRepo(c),
-				log:  lg,
+				log:  applog.New(nil),
 			}
-			got, aerr := u.Create(lg.TestContext(), tt.give)
+			got, aerr := u.Create(applog.WithTestContext(context.TODO()), tt.give)
 
 			if tt.err {
 				assert.Error(t, aerr)

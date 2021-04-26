@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	if err := database.Init(); err != nil {
+	if err := database.Init(nil); err != nil {
 		panic(err)
 	}
 	cleanup, err := logger.Init()

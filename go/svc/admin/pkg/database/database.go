@@ -8,7 +8,11 @@ import (
 
 var db *gorm.DB
 
-func Init() (err error) {
+func Init(indb *gorm.DB) (err error) {
+	if indb != nil {
+		db = indb
+		return nil
+	}
 	db, err = mysql.New()
 	return err
 }
