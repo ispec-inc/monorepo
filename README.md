@@ -2,9 +2,23 @@
 
 ispec civlization project
 
-## Developer
+## Developement
 
-### Add a new endpoint
+### Branch & CI/CD Rules
+
+```
+.
+├── main (master) -> Deploy to stg. Run only all CI/CD whose "path" is changed.
+├── release/go-admin -> Deploy go/svc/admin to prd. Run go CI and go/svc/admin CD.
+├── release/go-article
+├── release/ts-admin
+├── release/ts-article
+├── release/mg-article -> Run migaration/article in prd.
+└── release/terraform -> Deploy terraform resources to prd.
+```
+
+
+### Create a new endpoint
 
 1. Add a new *.proto to /proto
 2. Open a pull request for 1
