@@ -8,7 +8,7 @@ ispec civlization project
 
 ```
 .
-├── main (master) -> Deploy to stg. Run only all CI/CD whose "path" is changed.
+├── main (master) -> Deploy all changed resource to stg. Run only CI/CD whose codes in "paths" are changed.
 ├── release/go-admin -> Deploy go/svc/admin to prd. Run go CI and go/svc/admin CD.
 ├── release/go-article
 ├── release/ts-admin
