@@ -1,9 +1,12 @@
 package model
 
 import (
+	"errors"
+
 	"github.com/ispec-inc/monorepo/go/pkg/apperror"
 	"github.com/ispec-inc/monorepo/go/pkg/infra/entity"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/database"
+	"go.uber.org/multierr"
 )
 
 type (
@@ -21,37 +24,60 @@ func NewArticle(userID int64, title, body string) *Article {
 	return atl
 }
 
-func (u *Article) Find(id int64) error {
+func (a *Article) validate() error {
+	var err error
+	if a.UserID == 0 {
+		err = multierr.Append(err, errors.New("article must have user"))
+	}
+	if a.Title == "" {
+		err = multierr.Append(err, errors.New("article must have title"))
+	}
+	if a.Body == "" {
+		err = multierr.Append(err, errors.New("article must have body"))
+	}
+	if err != nil {
+		return apperror.WithCode(apperror.CodeInvalid, err)
+	}
+	return nil
+}
+
+func (a *Article) Find(id int64) error {
 	return apperror.NewGormFind(
-		database.Get().First(u, id).Error,
+		database.Get().First(a, id).Error,
 		entity.ArticleTableName,
 	)
 }
 
-func (u *Article) Create() error {
+func (a *Article) Create() error {
+	if err := a.validate(); err != nil {
+		return err
+	}
 	return apperror.NewGormCreate(
-		database.Get().Create(u).Error,
+		database.Get().Create(a).Error,
 		entity.ArticleTableName,
 	)
 }
 
-func (u *Article) Save() error {
+func (a *Article) Save() error {
+	if err := a.validate(); err != nil {
+		return err
+	}
 	return apperror.NewGormSave(
-		database.Get().Save(u).Error,
+		database.Get().Save(a).Error,
 		entity.ArticleTableName,
 	)
 }
 
-func (u *Article) Delete() error {
+func (a *Article) Delete() error {
 	return apperror.NewGormDelete(
-		database.Get().Delete(u).Error,
+		database.Get().Delete(a).Error,
 		entity.ArticleTableName,
 	)
 }
 
-func (u *Articles) Find() error {
+func (a *Articles) Find() error {
 	return apperror.NewGormFind(
-		database.Get().Find(u).Error,
+		database.Get().Find(a).Error,
 		entity.ArticleTableName,
 	)
 }
