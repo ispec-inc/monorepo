@@ -1,4 +1,4 @@
-// source: admin/api/rest/article/article.proto
+// source: admin/api/rest/v1/article/article.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -15,7 +15,7 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var admin_view_article_pb = require('../../../../admin/view/article_pb.js');
+var admin_view_article_pb = require('../../../../../admin/view/article_pb.js');
 goog.object.extend(proto, admin_view_article_pb);
 goog.exportSymbol('proto.admin.api.article.CreateRequest', null, global);
 goog.exportSymbol('proto.admin.api.article.CreateResponse', null, global);

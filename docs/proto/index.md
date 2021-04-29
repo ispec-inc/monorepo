@@ -6,7 +6,7 @@
 - [admin/view/article.proto](#admin/view/article.proto)
     - [Article](#admin.view.Article)
   
-- [admin/api/rest/article/article.proto](#admin/api/rest/article/article.proto)
+- [admin/api/rest/v1/article/article.proto](#admin/api/rest/v1/article/article.proto)
     - [CreateRequest](#admin.api.article.CreateRequest)
     - [CreateResponse](#admin.api.article.CreateResponse)
     - [DeleteRequest](#admin.api.article.DeleteRequest)
@@ -21,7 +21,7 @@
 - [article/view/user.proto](#article/view/user.proto)
     - [User](#article.view.User)
   
-- [article/api/rest/user/user.proto](#article/api/rest/user/user.proto)
+- [article/api/rest/v1/user/user.proto](#article/api/rest/v1/user/user.proto)
     - [CreateRequest](#article.api.user.CreateRequest)
     - [CreateResponse](#article.api.user.CreateResponse)
     - [GetRequest](#article.api.user.GetRequest)
@@ -67,10 +67,10 @@
 
 
 
-<a name="admin/api/rest/article/article.proto"></a>
+<a name="admin/api/rest/v1/article/article.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## admin/api/rest/article/article.proto
+## admin/api/rest/v1/article/article.proto
 
 
 
@@ -258,10 +258,10 @@
 
 
 
-<a name="article/api/rest/user/user.proto"></a>
+<a name="article/api/rest/v1/user/user.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## article/api/rest/user/user.proto
+## article/api/rest/v1/user/user.proto
 
 
 

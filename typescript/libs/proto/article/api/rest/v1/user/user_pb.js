@@ -1,4 +1,4 @@
-// source: article/api/rest/user/user.proto
+// source: article/api/rest/v1/user/user.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -15,9 +15,9 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var article_view_user_pb = require('../../../../article/view/user_pb.js');
+var article_view_user_pb = require('../../../../../article/view/user_pb.js');
 goog.object.extend(proto, article_view_user_pb);
-var validate_validate_pb = require('../../../../validate/validate_pb.js');
+var validate_validate_pb = require('../../../../../validate/validate_pb.js');
 goog.object.extend(proto, validate_validate_pb);
 goog.exportSymbol('proto.article.api.user.CreateRequest', null, global);
 goog.exportSymbol('proto.article.api.user.CreateResponse', null, global);
