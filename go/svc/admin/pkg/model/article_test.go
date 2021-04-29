@@ -76,6 +76,12 @@ func TestArticleModel_Create(t *testing.T) {
 			want: want{changedCount: 1},
 			err:  false,
 		},
+		{
+			name: "empty body",
+			give: give{article: NewArticle(1, "title", "")},
+			want: want{changedCount: 0},
+			err:  true,
+		},
 	}
 
 	db, cleanup := testool.PrepareDB(t, "article_model_create", []interface{}{
@@ -113,9 +119,15 @@ func TestArticleModel_Save(t *testing.T) {
 	}{
 		{
 			name: "success",
-			give: give{article: NewArticle(1, "new title", "")},
+			give: give{article: NewArticle(1, "new title", "body")},
 			want: want{title: "new title"},
 			err:  false,
+		},
+		{
+			name: "empty title",
+			give: give{article: NewArticle(1, "", "body")},
+			want: want{title: ""},
+			err:  true,
 		},
 	}
 
