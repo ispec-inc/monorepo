@@ -10,7 +10,7 @@ import (
 func NewRouter() http.Handler {
 	r := chi.NewRouter()
 
-	r.Mount("articles", article.New())
+	r.Mount("/articles", article.New())
 
 	return r
 }
