@@ -7,10 +7,10 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
-	pb "github.com/ispec-inc/monorepo/go/proto/article/api/rest/user"
+	pb "github.com/ispec-inc/monorepo/go/proto/article/api/rest/v1/user"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/view"
-	"github.com/ispec-inc/monorepo/go/svc/article/src/user"
+	"github.com/ispec-inc/monorepo/go/svc/article/src/v1/user"
 )
 
 type Handler struct {
