@@ -1,8 +1,8 @@
 // package: admin.api.article
-// file: admin/api/rest/article/article.proto
+// file: admin/api/rest/v1/article/article.proto
 
 import * as jspb from "google-protobuf";
-import * as admin_view_article_pb from "../../../../admin/view/article_pb";
+import * as admin_view_article_pb from "../../../../../admin/view/article_pb";
 
 export class GetRequest extends jspb.Message {
   serializeBinary(): Uint8Array;

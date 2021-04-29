@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package article.api.user;
 
-option go_package = "github.com/ispec-inc/monorepo/go/proto/article/api/rest/user";
+option go_package = "github.com/ispec-inc/monorepo/go/proto/article/api/rest/v1/user";
 
 import "article/view/user.proto";
 import "validate/validate.proto";
