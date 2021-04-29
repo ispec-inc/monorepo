@@ -69,6 +69,11 @@ func TestArticleController_get(t *testing.T) {
 			give: give{id: "2"},
 			want: want{status: http.StatusNotFound},
 		},
+		{
+			name: "invalid path",
+			give: give{id: ""},
+			want: want{status: http.StatusBadRequest},
+		},
 	}
 
 	db, cleanup := testool.PrepareDB(t, "article_controller_get", []interface{}{
@@ -105,8 +110,13 @@ func TestArticleController_create(t *testing.T) {
 	}{
 		{
 			name: "ok",
-			give: give{req: &pb.CreateRequest{Title: "title"}},
+			give: give{req: &pb.CreateRequest{UserId: 1, Title: "title", Body: "body"}},
 			want: want{status: http.StatusOK},
+		},
+		{
+			name: "empty body",
+			give: give{req: nil},
+			want: want{status: http.StatusBadRequest},
 		},
 	}
 
@@ -142,13 +152,23 @@ func TestArticleController_update(t *testing.T) {
 	}{
 		{
 			name: "ok",
-			give: give{id: "1", req: &pb.UpdateRequest{Title: "title"}},
+			give: give{id: "1", req: &pb.UpdateRequest{UserId: 1, Title: "title", Body: "body"}},
 			want: want{status: http.StatusOK},
 		},
 		{
 			name: "not found",
-			give: give{id: "2", req: &pb.UpdateRequest{Title: "title"}},
+			give: give{id: "2", req: &pb.UpdateRequest{}},
 			want: want{status: http.StatusNotFound},
+		},
+		{
+			name: "invalid path",
+			give: give{id: "", req: nil},
+			want: want{status: http.StatusBadRequest},
+		},
+		{
+			name: "empty body",
+			give: give{id: "1", req: nil},
+			want: want{status: http.StatusBadRequest},
 		},
 	}
 
@@ -193,6 +213,11 @@ func TestArticleController_delete(t *testing.T) {
 			name: "not found",
 			give: give{id: "2"},
 			want: want{status: http.StatusNotFound},
+		},
+		{
+			name: "invalid path",
+			give: give{id: ""},
+			want: want{status: http.StatusBadRequest},
 		},
 	}
 
