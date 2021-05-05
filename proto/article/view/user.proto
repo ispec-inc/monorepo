@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package article.view;
 
-option go_package = "github.com/ispec-inc/monorepo/go/gen/article/view";
+option go_package = "github.com/ispec-inc/monorepo/go/proto/article/view";
 
 import "google/protobuf/timestamp.proto";
 

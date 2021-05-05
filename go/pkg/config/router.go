@@ -16,4 +16,5 @@ var Router router
 
 type router struct {
 	Timeout time.Duration `env:"ROUTER_TIMEOUT"`
+	Port    int           `env:"ROUTER_PORT"`
 }

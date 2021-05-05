@@ -5,7 +5,7 @@ COPY Gemfile /db
 COPY Gemfile.lock /db
 WORKDIR /db
 
-RUN apk add --no-cache build-base=0.5-r2 mariadb-dev=10.5.8-r0 && \
+RUN apk add --no-cache build-base mariadb-dev && \
     gem install bundler:2.2.13 && \
     bundle install
 

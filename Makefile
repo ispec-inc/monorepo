@@ -4,22 +4,22 @@
 .PHONY: protoc
 
 protoc: # protoc
-	rm -rf ./go/gen
-	mkdir ./go/gen
-	rm -rf ./docs/gen
-	mkdir ./docs/gen
-	rm -rf ./typescript/gen
-	mkdir ./typescript/gen
+	rm -rf ./go/proto
+	mkdir ./go/proto
+	rm -rf ./docs/proto
+	mkdir ./docs/proto
+	rm -rf ./typescript/libs/proto
+	mkdir ./typescript/libs/proto
 	docker-compose run --rm protoc \
 		-I=./proto \
 		-I=/go/src \
 		-I=/go/src/github.com/envoyproxy/protoc-gen-validate \
-		--go_out=paths=source_relative:./go/gen \
-		--validate_out=lang=go,paths=source_relative:./go/gen \
+		--go_out=paths=source_relative:./go/proto \
+		--validate_out=lang=go,paths=source_relative:./go/proto \
 		--plugin=protoc-gen-ts=/ts/node_modules/.bin/protoc-gen-ts \
-		--ts_out=./typescript/gen \
-		--js_out=import_style=commonjs,binary:./typescript/gen \
-		--doc_out=./docs/gen \
+		--ts_out=./typescript/libs/proto \
+		--js_out=import_style=commonjs,binary:./typescript/libs/proto \
+		--doc_out=./docs/proto \
 		--doc_opt=markdown,index.md \
 		$(shell find ./proto -name '*.proto')
 

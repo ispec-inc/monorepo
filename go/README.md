@@ -6,16 +6,16 @@
 単一のDBに対してやりとりをするようなシステムアーキテクチャにおけるGoのサーバーのテンプレートPJです．
 
 ## Usage
-1. [migration](github.com/ispec-inc/migration)をクローンする
-マイグレーションとアプリケーションを分離させていて，docker networkでそれらを繋げるような設計をしている．
-
-2. 以下のコマンドを実行
+1. 以下のコマンドを実行
 ```
+$ make build
 $ make init
+$ make article-migrate in ../migration
+$ make seed
 $ make server
-$ docker-compose up # in ispec-inc/migration
 ```
-3. ヘルスチェック
+
+2. ヘルスチェック
 ```
 $ curl localhost:9000/health
 {"message":"success"}
@@ -83,40 +83,4 @@ $ curl localhost:9000/health
    │   └── status_code.go
    └── registry -> repositoryを持つusecaseに対してdaoの実装をDIする軽量DIコンテナ
        └── repository.go
-```
-
-## Request Examples
-`GET /invitations`
-- 招待コードを取得
-- リクエスト
-```
-{
-  "id": 1
-}
-```
-- レスポンス
-```
-{
-  "id": 1,
-  "user_id": 1,
-  "code": "code"
-}
-```
-
-`POST /invitations`
-- 招待コードを作成
-- リクエスト
-```
-{
-  "user_id": 1,
-  "code": "code"
-}
-```
-- レスポンス
-```
-{
-  "id": 1,
-  "user_id": 1,
-  "code": "code"
-}
 ```

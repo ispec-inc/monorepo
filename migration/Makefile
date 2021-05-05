@@ -7,7 +7,7 @@ article-migrate: ## migrate
 	docker-compose run --rm article-migrate db:migrate
 	docker-compose run --rm -e DB_HOST=article-mysql-test article-migrate db:migrate
 
-article-command: cmd
+article-command: cmd :=
 article-command: ## rake $(cmd) - execute standalone-migration command
 	docker-compose run --rm article-migrate $(cmd)
 
