@@ -1625,10 +1625,10 @@
   "resolved" "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz"
   "version" "2.4.0"
 
-"@types/nuxtjs__auth@4.8.4":
-  "integrity" "sha512-K7F+MS1Yd5WGnfPwRfsiTxIrT5CIZWyCb42m+E2dsrkojBgK6EmboR3sA7eVajNQMLamrNHU7PAiiOnc0rx0Yw=="
-  "resolved" "https://registry.npmjs.org/@types/nuxtjs__auth/-/nuxtjs__auth-4.8.4.tgz"
-  "version" "4.8.4"
+"@types/nuxtjs__auth@4.8.7":
+  "integrity" "sha512-Y4msEIAW//Bl4+Ho0sz6E8vzIwpEGvN7hxog/AxNQTyqo5iJeStmOSeNfy0DTKUq2eyZA6Wg4sUOaUYyUyiq4Q=="
+  "resolved" "https://registry.npmjs.org/@types/nuxtjs__auth/-/nuxtjs__auth-4.8.7.tgz"
+  "version" "4.8.7"
   dependencies:
     "vue" "^2.6.10"
 
