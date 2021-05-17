@@ -8,6 +8,7 @@ require (
 	github.com/envoyproxy/protoc-gen-validate v0.5.1
 	github.com/getsentry/sentry-go v0.10.0
 	github.com/go-chi/chi v1.5.4
+	github.com/go-chi/cors v1.2.0 // indirect
 	github.com/golang/mock v1.5.0
 	github.com/k0kubun/pp v2.4.0+incompatible
 	github.com/lib/pq v1.10.0 // indirect
