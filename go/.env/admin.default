@@ -4,6 +4,7 @@ APP_ENVIRONMENT=development
 # Router
 ROUTER_PORT=9001
 ROUTER_TIMEOUT=10s
+ROUTER_ALLOW_ORIGINS=http://localhost:3000
 
 # DB
 DB_DRIVER=mysql

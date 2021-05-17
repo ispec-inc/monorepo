@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/ispec-inc/monorepo/go/pkg/config"
+	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/controller/rest"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/database"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/logger"
 )
@@ -20,5 +21,5 @@ func main() {
 	cleanup()
 
 	port := fmt.Sprintf(":%d", config.Router.Port)
-	http.ListenAndServe(port, NewRouter())
+	http.ListenAndServe(port, rest.NewRouter())
 }

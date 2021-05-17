@@ -1,10 +1,11 @@
-package main
+package rest
 
 import (
 	"net/http"
 
 	"github.com/go-chi/chi"
 
+	"github.com/ispec-inc/monorepo/go/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
 	v1 "github.com/ispec-inc/monorepo/go/svc/article/pkg/adapter/rest/v1"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
@@ -12,8 +13,7 @@ import (
 
 func NewRouter(rgst registry.Registry) http.Handler {
 	r := chi.NewRouter()
-
-	r = commonMiddleware(r)
+	r = middleware.Common(r)
 
 	r.Mount("/v1", v1.NewRouter(rgst))
 
