@@ -90,7 +90,7 @@ jobs:
       run: echo "::set-output name=timestamp::$(date +'%Y.%m%d.%H%M')"
 
     - name: create pull request if prd
-      if: ${{ github.ref == '?'' }}
+      if: ${{ github.ref == '?' }}
       uses: peter-evans/create-pull-request@v3
       with:
         commit-message: "auto: update go prd tag (${{ steps.timestamp.outputs.timestamp }})"
