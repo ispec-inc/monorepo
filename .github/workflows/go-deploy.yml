@@ -71,7 +71,7 @@ jobs:
         touch tmp
 
     - name: update prd's value 
-      if: ${{ github.ref == '?'' }}
+      if: ${{ github.ref == '?' }}
       run: |
         cd platform
         echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.prd.yaml -i"
