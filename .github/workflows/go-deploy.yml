@@ -18,22 +18,88 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+    # - name: Configure AWS credentials
+    #   uses: aws-actions/configure-aws-credentials@v1
+    #   with:
+    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #     aws-region: "ap-northeast-1"
+
+    # - name: Login to Amazon ECR
+    #   id: login-ecr
+    #   uses: aws-actions/amazon-ecr-login@v1
+
+    # - name: Build, tag, and push image to Amazon ECR
+    #   env:
+    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+    #     ECR_REPOSITORY: github-actions-test
+    #     IMAGE_TAG: latest
+    #   run: |
+    #     docker build -t ${{ secrets.AWS_ECR_REGISTRY }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }} .
+    #     docker push     ${{ secrets.AWS_ECR_REGISTRY }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }}
+
+  update-platform-tag:
+    name: update platform tag
+    needs: ecr-push
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+
+    - name: checkout platform
+      uses: actions/checkout@v2
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: "ap-northeast-1"
+        repository: ispec-inc/platform
+        # token: ${{ secrets.REPO_READ_TOKEN }}
+        path: ./_platform
 
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+    - name: setup go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '^1.13.1'
 
-    - name: Build, tag, and push image to Amazon ECR
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: github-actions-test
-        IMAGE_TAG: latest
+    - name: install yq
       run: |
-        docker build -t ${{ secrets.AWS_ECR_REGISTRY }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }} .
-        docker push     ${{ secrets.AWS_ECR_REGISTRY }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }}
+        export PATH=$PATH:$(go env GOPATH)/bin
+        go get -u github.com/mikefarah/yq
+
+    - name: update stg's value 
+      if: ${{ github.ref == "refs/heads/master" }}
+      run: |
+        cd platform
+        echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.stg.yaml -i"
+        touch tmp
+
+    - name: update prd's value 
+      if: ${{ github.ref == "?" }}
+      run: |
+        cd platform
+        echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.prd.yaml -i"
+        touch tmp
+
+    - name: commit & push changes if stg
+      if: ${{ github.ref == "refs/heads/master" }}
+      uses: actions-js/push@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        message: "auto: update go stg tag"
+        branch: master
+
+    - name: current datetime
+      id: timestamp
+      run: echo "::set-output name=timestamp::$(date +'%Y.%m%d.%H%M')"
+
+    - name: create pull request if prd
+      if: ${{ github.ref == "?" }}
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: "auto: update go prd tag (${{ steps.timestamp.outputs.timestamp }})"
+        branch: release/go/${{ steps.timestamp.outputs.timestamp }}
+        delete-branch: true
+        title: "[Auto] Release Go prd ${{ steps.timestamp.outputs.timestamp }}"
+        body: |
+          Auto Release Go to prd.
+        labels: |
+          release
+          auto
+        draft: false
