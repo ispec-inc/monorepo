@@ -3,7 +3,7 @@ name: go-deploy
 on: 
   workflow_run:
     workflows:
-      - gotest
+      - go-test
     branches:
       - master
     types:
@@ -64,21 +64,21 @@ jobs:
         go get -u github.com/mikefarah/yq
 
     - name: update stg's value 
-      if: ${{ github.ref == "refs/heads/master" }}
+      if: ${{ github.ref == 'refs/heads/master' }}
       run: |
         cd platform
         echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.stg.yaml -i"
         touch tmp
 
     - name: update prd's value 
-      if: ${{ github.ref == "?" }}
+      if: ${{ github.ref == '?'' }}
       run: |
         cd platform
         echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.prd.yaml -i"
         touch tmp
 
     - name: commit & push changes if stg
-      if: ${{ github.ref == "refs/heads/master" }}
+      if: ${{ github.ref == 'refs/heads/master' }}
       uses: actions-js/push@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -90,7 +90,7 @@ jobs:
       run: echo "::set-output name=timestamp::$(date +'%Y.%m%d.%H%M')"
 
     - name: create pull request if prd
-      if: ${{ github.ref == "?" }}
+      if: ${{ github.ref == '?'' }}
       uses: peter-evans/create-pull-request@v3
       with:
         commit-message: "auto: update go prd tag (${{ steps.timestamp.outputs.timestamp }})"
