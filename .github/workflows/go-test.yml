@@ -19,26 +19,26 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: initialize
-        run: |
-          cp .env/article.default .env/article
-          cp .env/admin.default .env/admin
-          make init
-        working-directory: go
+      # - name: initialize
+      #   run: |
+      #     cp .env/article.default .env/article
+      #     cp .env/admin.default .env/admin
+      #     make init
+      #   working-directory: go
       
-      - name: migration
-        run: make article-migrate
-        working-directory: migration
+      # - name: migration
+      #   run: make article-migrate
+      #   working-directory: migration
 
-      - name: run test
-        run: make test
-        working-directory: go
+      # - name: run test
+      #   run: make test
+      #   working-directory: go
 
-      - name: upload coverage to codecov
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.GO_DISTRIBUTED_MONOLITH_CODECOV_TOKEN }}
-          name: coverage
-          flags: unittests
-          fail_ci_if_error: true
-          directory: go
+      # - name: upload coverage to codecov
+      #   uses: codecov/codecov-action@v1
+      #   with:
+      #     token: ${{ secrets.GO_DISTRIBUTED_MONOLITH_CODECOV_TOKEN }}
+      #     name: coverage
+      #     flags: unittests
+      #     fail_ci_if_error: true
+      #     directory: go
