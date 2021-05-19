@@ -72,21 +72,22 @@ jobs:
       run: |
         cd _platform
         echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.stg.yaml -i"
-        touch tmp
+        touch stg
 
     - name: update prd's value 
       if: ${{ github.ref == '?' }}
       run: |
         cd _platform
         echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.prd.yaml -i"
-        touch tmp
+        touch prd
 
     - name: commit & push changes if stg
-      if: ${{ github.ref == 'refs/heads/master' }}
+      # if: ${{ github.ref == 'refs/heads/master' }}
+      if: ${{ github.ref == '?' }}
       uses: actions-js/push@master
       with:
         github_token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
-        message: "auto: update go stg tag"
+        message: 'auto: update go stg tag'
         repository: ispec-inc/platform
         branch: master
         directory: ./_platform
@@ -96,7 +97,8 @@ jobs:
       run: echo "::set-output name=timestamp::$(date +'%Y.%m%d.%H%M')"
 
     - name: create pull request if prd
-      if: ${{ github.ref == '?' }}
+      # if: ${{ github.ref == '?' }}
+      if: ${{ github.ref == 'refs/heads/master' }}
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
