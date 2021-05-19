@@ -53,15 +53,17 @@ jobs:
         token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
         path: ./_platform
 
-    - name: setup go
-      uses: actions/setup-go@v2
-      with:
-        go-version: '^1.13.1'
+    # - name: setup go
+    #   uses: actions/setup-go@v2
+    #   with:
+    #     go-version: '^1.13.1'
 
     - name: install yq
       run: |
-        export PATH=$PATH:$(go env GOPATH)/bin
-        go get -u github.com/mikefarah/yq
+        export YQ_VERSION=v4.2.0
+        export YQ_BINARY=yq_linux_amd64
+        wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY} -O /usr/bin/yq && \
+        tar xz && mv ${BINARY} /usr/bin/yq
 
     - name: update stg's value 
       if: ${{ github.ref == 'refs/heads/master' }}
