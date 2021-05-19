@@ -70,14 +70,14 @@ jobs:
     - name: update stg's value 
       if: ${{ github.ref == 'refs/heads/master' }}
       run: |
-        cd platform
+        cd _platform
         echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.stg.yaml -i"
         touch tmp
 
     - name: update prd's value 
       if: ${{ github.ref == '?' }}
       run: |
-        cd platform
+        cd _platform
         echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.prd.yaml -i"
         touch tmp
 
