@@ -89,6 +89,7 @@ jobs:
         message: "auto: update go stg tag"
         repository: ispec-inc/platform
         branch: master
+        directory: ./_platform
 
     - name: current datetime
       id: timestamp
