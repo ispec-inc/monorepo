@@ -53,11 +53,6 @@ jobs:
         token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
         path: ./_platform
 
-    # - name: setup go
-    #   uses: actions/setup-go@v2
-    #   with:
-    #     go-version: '^1.13.1'
-
     - name: install yq
       run: |
         mkdir ~/bin
@@ -72,18 +67,16 @@ jobs:
       run: |
         cd _platform
         echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.stg.yaml -i"
-        touch stg
+        rm tmp
 
     - name: update prd's value 
       if: ${{ github.ref == '?' }}
       run: |
         cd _platform
         echo "tag=${{ github.sha }} yq eval '.image.tag = env(tag)' somewhere/values.prd.yaml -i"
-        touch prd
 
     - name: commit & push changes if stg
-      # if: ${{ github.ref == 'refs/heads/master' }}
-      if: ${{ github.ref == '?' }}
+      if: ${{ github.ref == 'refs/heads/master' }}
       uses: actions-js/push@master
       with:
         github_token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
@@ -94,11 +87,10 @@ jobs:
 
     - name: current datetime
       id: timestamp
-      run: echo "::set-output name=timestamp::$(date +'%Y.%m%d.%H%M')"
+      run: echo "::set-output name=timestamp::$(TZ='Asia/Tokyo' date +'%Y.%m%d.%H%M')"
 
     - name: create pull request if prd
-      # if: ${{ github.ref == '?' }}
-      if: ${{ github.ref == 'refs/heads/master' }}
+      if: ${{ github.ref == '?' }}
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
