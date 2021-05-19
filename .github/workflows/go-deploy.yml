@@ -62,8 +62,9 @@ jobs:
       run: |
         export YQ_VERSION=v4.2.0
         export YQ_BINARY=yq_linux_amd64
-        wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY} -O /usr/bin/yq && \
-        tar xz && mv ${BINARY} /usr/bin/yq
+        export PATH=$PATH:~/bin
+        wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY} -O ~/bin/yq && \
+        tar xz && mv ${BINARY} ~/bin/yq
 
     - name: update stg's value 
       if: ${{ github.ref == 'refs/heads/master' }}
