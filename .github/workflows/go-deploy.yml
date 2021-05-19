@@ -60,6 +60,7 @@ jobs:
 
     - name: install yq
       run: |
+        mkdir ~/bin
         export YQ_VERSION=v4.2.0
         export YQ_BINARY=yq_linux_amd64
         export PATH=$PATH:~/bin
