@@ -108,3 +108,4 @@ jobs:
           release
           auto
         draft: false
+        path: ./_platform
