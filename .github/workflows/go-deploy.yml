@@ -87,6 +87,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         message: "auto: update go stg tag"
+        repository: platform
         branch: master
 
     - name: current datetime
