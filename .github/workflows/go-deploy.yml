@@ -85,9 +85,9 @@ jobs:
       if: ${{ github.ref == 'refs/heads/master' }}
       uses: actions-js/push@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
         message: "auto: update go stg tag"
-        repository: platform
+        repository: ispec-inc/platform
         branch: master
 
     - name: current datetime
@@ -98,6 +98,7 @@ jobs:
       if: ${{ github.ref == '?' }}
       uses: peter-evans/create-pull-request@v3
       with:
+        token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
         commit-message: "auto: update go prd tag (${{ steps.timestamp.outputs.timestamp }})"
         branch: release/go/${{ steps.timestamp.outputs.timestamp }}
         delete-branch: true
