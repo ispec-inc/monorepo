@@ -4,11 +4,12 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
+	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
 )
 
-func New() http.Handler {
+func New(bs msgbs.MessageBus) http.Handler {
 	r := chi.NewRouter()
-	h := newController()
+	h := newController(bs)
 
 	r.Get("/", h.list)
 	r.Get("/{id}", h.get)
