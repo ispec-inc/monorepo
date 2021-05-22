@@ -12,8 +12,8 @@ import (
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
 	"github.com/ispec-inc/monorepo/go/pkg/redis"
 	admin_rest "github.com/ispec-inc/monorepo/go/svc/admin/cmd/server/rest"
-	article_event "github.com/ispec-inc/monorepo/go/svc/article/cmd/server/event"
 	article_rest "github.com/ispec-inc/monorepo/go/svc/article/cmd/server/rest"
+	notification_event "github.com/ispec-inc/monorepo/go/svc/notification/cmd/server/event"
 )
 
 func main() {
@@ -58,7 +58,7 @@ func msgbsConn() (msgbs.MessageBus, error) {
 }
 
 func subscribeRouter(bs msgbs.MessageBus) (*msgbs.Subscriber, func() error, error) {
-	atclevnt, evntclnup, err := article_event.NewSubscriber(bs)
+	atclevnt, evntclnup, err := notification_event.NewSubscriber(bs)
 	if err != nil {
 		return nil, nil, err
 	}

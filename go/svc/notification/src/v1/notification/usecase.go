@@ -5,7 +5,7 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/ispec-inc/monorepo/go/pkg/applog"
-	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
+	"github.com/ispec-inc/monorepo/go/svc/notification/pkg/registry"
 )
 
 type Usecase struct {
