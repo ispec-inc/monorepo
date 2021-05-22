@@ -15,6 +15,7 @@ func init() {
 var Router router
 
 type router struct {
-	Timeout time.Duration `env:"ROUTER_TIMEOUT"`
-	Port    int           `env:"ROUTER_PORT"`
+	Timeout      time.Duration `env:"ROUTER_TIMEOUT"`
+	AllowOrigins []string      `env:"ROUTER_ALLOW_ORIGINS" envSeparator:","`
+	Port         int           `env:"ROUTER_PORT"`
 }
