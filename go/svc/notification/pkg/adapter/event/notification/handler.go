@@ -6,8 +6,8 @@ import (
 
 	"github.com/gomodule/redigo/redis"
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
-	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
-	"github.com/ispec-inc/monorepo/go/svc/article/src/v1/notification"
+	"github.com/ispec-inc/monorepo/go/svc/notification/pkg/registry"
+	"github.com/ispec-inc/monorepo/go/svc/notification/src/v1/notification"
 )
 
 type Subscriber struct {
