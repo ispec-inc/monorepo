@@ -8,7 +8,7 @@ import (
 )
 
 func NewSubscriber(rgst registry.Registry) (*msgbs.Subscriber, func() error, error) {
-	atclevnt, evntclnup, err := notification_event.NewRouter()
+	ntevnt, evntclnup, err := notification_event.NewRouter()
 	if err != nil {
 		return nil, nil, err
 	}
@@ -17,6 +17,6 @@ func NewSubscriber(rgst registry.Registry) (*msgbs.Subscriber, func() error, err
 		rgst.MessageBus().New(),
 		applog.New(rgst.Logger().New()),
 	)
-	sr.Mount(atclevnt)
+	sr.Mount(ntevnt)
 	return &sr, evntclnup, nil
 }
