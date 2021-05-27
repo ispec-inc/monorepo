@@ -30,8 +30,6 @@ func NewRouter() (http.Handler, func() error, error) {
 
 	r := chi.NewRouter()
 
-	r = commonMiddleware(r)
-
 	r.Mount("/v1", v1.NewRouter(rgst))
 
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
