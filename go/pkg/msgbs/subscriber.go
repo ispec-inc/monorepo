@@ -26,6 +26,12 @@ func (fr Router) Subscribe(evnt Event, subsc SubscribeFunc) {
 	fr[evnt] = subsc
 }
 
+func (fr Router) Mount(router Router) {
+	for evnt, subsc := range router {
+		fr[evnt] = subsc
+	}
+}
+
 func NewSubscriber(msgbs MessageBus, algr applog.AppLog) Subscriber {
 	return Subscriber{
 		MessageBus: msgbs,
