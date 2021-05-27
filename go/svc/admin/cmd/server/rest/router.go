@@ -22,7 +22,6 @@ func NewRouter(rgst registry.Registry) (http.Handler, func() error, error) {
 	}
 
 	r := chi.NewRouter()
-	r = commonMiddleware(r)
 
 	r.Mount("/v1", v1.NewRouter(rgst.MessageBus().New()))
 

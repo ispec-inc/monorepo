@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/ispec-inc/monorepo/go/pkg/config"
+	"github.com/ispec-inc/monorepo/go/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
 	"github.com/ispec-inc/monorepo/go/pkg/registry"
 	admin_rest "github.com/ispec-inc/monorepo/go/svc/admin/cmd/server/rest"
@@ -24,6 +25,7 @@ func NewHTTP(rgst registry.Registry) (*http.Server, func() error, error) {
 	}
 
 	r := chi.NewRouter()
+	r = middleware.Common(r)
 
 	r.Mount("/admin", adh)
 	r.Mount("/articles", atclh)
