@@ -1,8 +1,6 @@
 package database
 
 import (
-	"log"
-
 	"gorm.io/gorm"
 
 	"github.com/ispec-inc/monorepo/go/pkg/mysql"
@@ -20,6 +18,5 @@ func Init(indb *gorm.DB) (err error) {
 }
 
 func Get() *gorm.DB {
-	log.Println(db)
 	return db
 }
