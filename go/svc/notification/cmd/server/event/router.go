@@ -6,10 +6,10 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/notification/pkg/registry"
 )
 
-func NewRouter() (msgbs.FuncRouter, func() error, error) {
+func NewRouter() (msgbs.Router, func() error, error) {
 	lgr, lgrCleanup, err := registry.NewLogger()
 	if err != nil {
-		return msgbs.FuncRouter{}, nil, err
+		return msgbs.Router{}, nil, err
 	}
 	cleanup := func() error {
 		lgrCleanup()

@@ -19,8 +19,7 @@ func NewSubscriber(rgst registry.Registry) Subscriber {
 	return Subscriber{usecase}
 }
 
-// Print err handling
-func (s Subscriber) Notify(msg redis.Message) error {
+func (s Subscriber) Notify(ctx context.Context, msg redis.Message) error {
 	var m msgbs.Article
 	err := json.Unmarshal(msg.Data, &m)
 	if err != nil {
@@ -30,7 +29,7 @@ func (s Subscriber) Notify(msg redis.Message) error {
 	ipt := notification.Input{
 		Title: m.Title,
 	}
-	err = s.usecase.Send(context.Background(), &ipt)
+	err = s.usecase.Send(ctx, &ipt)
 	if err != nil {
 		return err
 	}
