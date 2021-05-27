@@ -39,7 +39,7 @@ func (s Server) Run(ctx context.Context) {
 	})
 
 	g.Go(func() error {
-		s.Subscriber.Serve()
+		s.Subscriber.Serve(ctx)
 		return nil
 	})
 

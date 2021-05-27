@@ -6,10 +6,10 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/notification/pkg/registry"
 )
 
-func NewSubscriber(bs msgbs.MessageBus) (msgbs.Subscriber, func() error, error) {
+func NewRouter() (msgbs.FuncRouter, func() error, error) {
 	lgr, lgrCleanup, err := registry.NewLogger()
 	if err != nil {
-		return msgbs.Subscriber{}, nil, err
+		return msgbs.FuncRouter{}, nil, err
 	}
 	cleanup := func() error {
 		lgrCleanup()
@@ -17,7 +17,8 @@ func NewSubscriber(bs msgbs.MessageBus) (msgbs.Subscriber, func() error, error) 
 	}
 
 	rgst := registry.NewRegistry(lgr)
-	r := msgbs.NewSubscriber(bs)
+
+	r := msgbs.NewRouter()
 
 	subsc := notification.NewSubscriber(rgst)
 
