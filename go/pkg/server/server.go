@@ -9,6 +9,8 @@ import (
 	"time"
 
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
+	"github.com/ispec-inc/monorepo/go/pkg/registry"
+	"github.com/ispec-inc/monorepo/go/pkg/router"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -18,13 +20,27 @@ type Server struct {
 }
 
 func New(
-	h *http.Server,
-	r *msgbs.Subscriber,
-) Server {
+	rgst registry.Registry,
+) (Server, func() error, error) {
+	h, hclnup, err := router.NewHTTP(rgst)
+	if err != nil {
+		return Server{}, nil, err
+	}
+
+	s, sclnup, err := router.NewSubscriber(rgst)
+	if err != nil {
+		return Server{}, nil, err
+	}
+
+	clnup := func() error {
+		hclnup()
+		sclnup()
+		return nil
+	}
 	return Server{
 		HTTPServer: h,
-		Subscriber: r,
-	}
+		Subscriber: s,
+	}, clnup, nil
 }
 
 func (s Server) Run(ctx context.Context) {
