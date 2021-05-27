@@ -5,23 +5,11 @@ import (
 
 	"github.com/ispec-inc/monorepo/go/pkg/registry"
 	"github.com/ispec-inc/monorepo/go/pkg/router"
+	"github.com/ispec-inc/monorepo/go/pkg/server"
 )
 
-func initRegistry() (registry.Registry, func() error, error) {
-	lgr, clnup, err := registry.NewLogger()
-	if err != nil {
-		return registry.Registry{}, nil, err
-	}
-	bs, err := registry.NewMessageBus()
-	if err != nil {
-		return registry.Registry{}, nil, err
-	}
-
-	return registry.New(lgr, bs), clnup, nil
-}
-
 func main() {
-	rgst, rclnup, err := initRegistry()
+	rgst, rclnup, err := registry.New()
 	if err != nil {
 		panic(err)
 	}
@@ -41,6 +29,6 @@ func main() {
 
 	ctx := context.Background()
 
-	server := NewServer(svr, sub)
+	server := server.New(svr, sub)
 	server.Run(ctx)
 }
