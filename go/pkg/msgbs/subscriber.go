@@ -8,21 +8,21 @@ import (
 	"github.com/ispec-inc/monorepo/go/pkg/applog"
 )
 
-type SubscribeFunc func(redis.Message) error
+type SubscribeFunc func(context.Context, redis.Message) error
 
 type Subscriber struct {
 	MessageBus MessageBus
-	Func       map[Event]SubscribeFunc
+	Router     map[Event]SubscribeFunc
 	AppLog     applog.AppLog
 }
 
-type FuncRouter map[Event]SubscribeFunc
+type Router map[Event]SubscribeFunc
 
-func NewRouter() FuncRouter {
-	return FuncRouter{}
+func NewRouter() Router {
+	return Router{}
 }
 
-func (fr FuncRouter) Subscribe(evnt Event, subsc SubscribeFunc) {
+func (fr Router) Subscribe(evnt Event, subsc SubscribeFunc) {
 	fr[evnt] = subsc
 }
 
@@ -30,29 +30,31 @@ func NewSubscriber(msgbs MessageBus, algr applog.AppLog) Subscriber {
 	return Subscriber{
 		MessageBus: msgbs,
 		AppLog:     algr,
-		Func:       map[Event]SubscribeFunc{},
+		Router:     map[Event]SubscribeFunc{},
 	}
 }
 
-func (r Subscriber) Mount(router FuncRouter) {
+func (r Subscriber) Mount(router Router) {
 	for evnt, subsc := range router {
-		r.Func[evnt] = subsc
+		r.Router[evnt] = subsc
 	}
 }
 
 func (r Subscriber) Subscribe(evnt Event, subsc SubscribeFunc) {
-	r.Func[evnt] = subsc
+	r.Router[evnt] = subsc
 }
 
 func (r Subscriber) Serve(ctx context.Context) {
-	for evnt, subsc := range r.Func {
+	for evnt, subsc := range r.Router {
 		r.MessageBus.Subscribe(evnt)
 		go func(subsc SubscribeFunc) {
 			for {
 				switch v := r.MessageBus.Receive().(type) {
 				case redis.Message:
-					err := subsc(v)
-					r.AppLog.Error(ctx, err)
+					err := subsc(ctx, v)
+					if err != nil {
+						r.AppLog.Error(ctx, err)
+					}
 				case redis.Subscription:
 					fmt.Printf("%s: %s %d\n", v.Channel, v.Kind, v.Count)
 				case error:
@@ -64,7 +66,7 @@ func (r Subscriber) Serve(ctx context.Context) {
 }
 
 func (r Subscriber) Shutdown() {
-	for evnt := range r.Func {
+	for evnt := range r.Router {
 		r.MessageBus.Unsubscribe(evnt)
 	}
 }
