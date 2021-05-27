@@ -20,9 +20,8 @@ func NewRouter() (msgbs.Router, func() error, error) {
 
 	r := msgbs.NewRouter()
 
-	subsc := notification.NewSubscriber(rgst)
+	nr := notification.NewRouter(rgst)
 
-	r.Subscribe(msgbs.AddArticle, subsc.Notify)
-
+	r.Mount(nr)
 	return r, cleanup, nil
 }
