@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/ispec-inc/monorepo/go/pkg/applog"
+	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
 	pb "github.com/ispec-inc/monorepo/go/proto/admin/api/rest/v1/article"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/logger"
@@ -16,11 +17,13 @@ import (
 
 type controller struct {
 	log applog.AppLog
+	bs  msgbs.MessageBus
 }
 
-func newController() controller {
+func newController(bs msgbs.MessageBus) controller {
 	return controller{
 		log: applog.New(logger.Get()),
+		bs:  bs,
 	}
 }
 
@@ -81,6 +84,7 @@ func (c controller) create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	c.bs.Publish(msgbs.AddArticle, msgbs.Article{Title: atl.Title})
 	presenter.Response(w, &pb.CreateResponse{
 		Articles: view.NewArticles(atls),
 	})

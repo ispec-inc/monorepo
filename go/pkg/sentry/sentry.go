@@ -3,7 +3,7 @@ package sentry
 import (
 	"time"
 
-	"github.com/getsentry/sentry-go"
+	sentry "github.com/getsentry/sentry-go"
 	"github.com/ispec-inc/monorepo/go/pkg/applog/logger"
 )
 

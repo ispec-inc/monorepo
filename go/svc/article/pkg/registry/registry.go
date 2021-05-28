@@ -5,17 +5,17 @@ type Registry struct {
 	lgr  Logger
 }
 
-func NewRegistry(r Repository, l Logger) Registry {
+func NewRegistry(repo Repository, l Logger) Registry {
 	return Registry{
-		repo: r,
+		repo: repo,
 		lgr:  l,
 	}
 }
 
-func (r Registry) Repository() Repository {
-	return r.repo
-}
-
 func (r Registry) Logger() Logger {
 	return r.lgr
+}
+
+func (r Registry) Repository() Repository {
+	return r.repo
 }
