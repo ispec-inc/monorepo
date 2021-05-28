@@ -7,12 +7,11 @@
 package article
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	view "github.com/ispec-inc/monorepo/go/proto/admin/view"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
