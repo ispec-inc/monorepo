@@ -9,17 +9,23 @@ import (
 	"github.com/ispec-inc/monorepo/go/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
 	"github.com/ispec-inc/monorepo/go/pkg/registry"
-	admin_rest "github.com/ispec-inc/monorepo/go/svc/admin/cmd/server/rest"
-	article_rest "github.com/ispec-inc/monorepo/go/svc/article/cmd/server/rest"
+	admin "github.com/ispec-inc/monorepo/go/svc/admin/cmd/server/rest"
+	article "github.com/ispec-inc/monorepo/go/svc/article/cmd/server/rest"
+	media "github.com/ispec-inc/monorepo/go/svc/media/cmd/server/rest"
 )
 
 func NewHTTP(rgst registry.Registry) (*http.Server, func() error, error) {
-	adh, adclnup, err := admin_rest.NewRouter(rgst)
+	adh, adclnup, err := admin.NewRouter(rgst)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	atclh, arclclnup, err := article_rest.NewRouter()
+	atclh, arclclnup, err := article.NewRouter()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	mdh, mdclnup, err := media.NewRouter()
 	if err != nil {
 		return nil, nil, err
 	}
@@ -29,18 +35,19 @@ func NewHTTP(rgst registry.Registry) (*http.Server, func() error, error) {
 
 	r.Mount("/admin", adh)
 	r.Mount("/articles", atclh)
+	r.Mount("/media", mdh)
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		presenter.Response(w, map[string]string{"messsage": "ok"})
 	})
 
 	clnup := func() error {
-		err := adclnup()
-		if err != nil {
+		if adclnup() != nil {
 			return err
 		}
-
-		err = arclclnup()
-		if err != nil {
+		if arclclnup() != nil {
+			return err
+		}
+		if mdclnup() != nil {
 			return err
 		}
 		return nil
