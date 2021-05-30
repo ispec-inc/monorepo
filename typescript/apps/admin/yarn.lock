@@ -7050,6 +7050,11 @@
   "resolved" "https://registry.npmjs.org/map-obj/-/map-obj-4.2.1.tgz"
   "version" "4.2.1"
 
+"map-obj@^4.1.0":
+  "integrity" "sha512-glc9y00wgtwcDmp7GaE/0b0OnxpNJsVf3ael/An6Fe2Q51LLwN1er6sdomLRzz5h0+yMpiYLhWYF5R7HeqVd4g=="
+  "resolved" "https://registry.npmjs.org/map-obj/-/map-obj-4.1.0.tgz"
+  "version" "4.1.0"
+
 "map-visit@^1.0.0":
   "integrity" "sha1-7Nyo8TFE5mDxtb1B8S80edmN+48="
   "resolved" "https://registry.npmjs.org/map-visit/-/map-visit-1.0.0.tgz"
@@ -10027,12 +10032,12 @@
   "resolved" "https://registry.npmjs.org/slice-ansi/-/slice-ansi-0.0.4.tgz"
   "version" "0.0.4"
 
-"snakecase-keys@3.2.0":
-  "integrity" "sha512-WTJ0NhCH/37J+PU3fuz0x5b6TvtWQChTcKPOndWoUy0pteKOe0hrHMzSRsJOWSIP48EQkzUEsgQPmrG3W8pFNQ=="
-  "resolved" "https://registry.npmjs.org/snakecase-keys/-/snakecase-keys-3.2.0.tgz"
-  "version" "3.2.0"
+"snakecase-keys@3.2.1":
+  "integrity" "sha512-CjU5pyRfwOtaOITYv5C8DzpZ8XA/ieRsDpr93HI2r6e3YInC6moZpSQbmUtg8cTk58tq2x3jcG2gv+p1IZGmMA=="
+  "resolved" "https://registry.npmjs.org/snakecase-keys/-/snakecase-keys-3.2.1.tgz"
+  "version" "3.2.1"
   dependencies:
-    "map-obj" "^4.0.0"
+    "map-obj" "^4.1.0"
     "to-snake-case" "^1.0.0"
 
 "snapdragon-node@^2.0.1":
