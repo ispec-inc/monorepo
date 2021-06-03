@@ -1,0 +1,14 @@
+{
+  "name": "proto-gen-ts",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.3.2",
+    "google-protobuf": "^3.17.2",
+    "protoc-gen-ts": "^0.3.6-rc4"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "^3.15.2",
+    "typescript": "^4.3.2"
+  }
+}

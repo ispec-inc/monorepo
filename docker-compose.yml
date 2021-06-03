@@ -9,6 +9,8 @@ services:
       - ./:/workspace
     networks:
       - monorepo
+    environment:
+      - GRPC_PACKAGE_NAME="@grpc/grpc-js"
 
 networks:
   monorepo:

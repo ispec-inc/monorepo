@@ -34,12 +34,20 @@ var (
 )
 
 // Validate checks the field values on Article with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is
-// returned. When asked to return all errors, validation continues after first
-// violation, and the result is a list of violation errors wrapped in
-// ArticleMultiError, or nil if none found. Otherwise, only the first error is
-// returned, if any.
-func (m *Article) Validate(all bool) error {
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Article) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Article with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in ArticleMultiError, or nil if none found.
+func (m *Article) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Article) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -54,31 +62,61 @@ func (m *Article) Validate(all bool) error {
 
 	// no validation rules for Body
 
-	if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate(bool) error }); ok {
-		if err := v.Validate(all); err != nil {
-			err = ArticleValidationError{
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ArticleValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ArticleValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ArticleValidationError{
 				field:  "CreatedAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
 		}
 	}
 
-	if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate(bool) error }); ok {
-		if err := v.Validate(all); err != nil {
-			err = ArticleValidationError{
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ArticleValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ArticleValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ArticleValidationError{
 				field:  "UpdatedAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
 		}
 	}
 
@@ -89,7 +127,7 @@ func (m *Article) Validate(all bool) error {
 }
 
 // ArticleMultiError is an error wrapping multiple validation errors returned
-// by Article.Validate(true) if the designated constraints aren't met.
+// by Article.ValidateAll() if the designated constraints aren't met.
 type ArticleMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.

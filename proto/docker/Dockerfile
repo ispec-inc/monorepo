@@ -22,7 +22,9 @@ WORKDIR /ts
 
 RUN apt-get -y -q install nodejs npm
 
-RUN npm install ts-protoc-gen
+COPY proto/docker/package.json package.json
+
+RUN npm install
 
 WORKDIR /workspace
 
