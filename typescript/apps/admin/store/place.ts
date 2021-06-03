@@ -1,5 +1,5 @@
 import { getterTree, mutationTree, actionTree } from 'typed-vuex'
-import { GetRequest } from '@monorepo/gen/admin/api/rest/article/article_pb'
+import { admin } from '@monorepo/proto/admin/api/rest/v1/article/article'
 import PlaceData from '~/types/place'
 
 export const state = () => ({
@@ -45,7 +45,8 @@ export const actions = actionTree(
       commit('setList', res.data)
     },
     async getPlace({ commit }, { id }) {
-      const req = new GetRequest()
+      const req = new admin.api.article.GetRequest()
+      console.log(req)
       const res = await this.$axios.get<PlaceData>(`/places/${id}`)
       commit('setCurrent', res.data)
     },
