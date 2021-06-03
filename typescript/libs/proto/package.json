@@ -1,0 +1,13 @@
+{
+  "name": "@monorepo/proto",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "typescript": "4.2.4"
+  },
+  "dependencies": {
+    "@types/google-protobuf": "3.15.1",
+    "google-protobuf": "3.15.8"
+  }
+}
