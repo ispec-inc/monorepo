@@ -15,8 +15,8 @@ import (
 )
 
 type Server struct {
-	HTTPServer *http.Server
-	Subscriber *msgbs.Subscriber
+	HTTPServer      *http.Server
+	SubscribeServer *msgbs.SubscribeServer
 }
 
 func New(
@@ -55,7 +55,7 @@ func (s Server) Run(ctx context.Context) {
 	})
 
 	g.Go(func() error {
-		s.Subscriber.Serve(ctx)
+		s.SubscribeServer.Serve(ctx)
 		return nil
 	})
 
@@ -81,5 +81,5 @@ func (s Server) Run(ctx context.Context) {
 	}
 
 	s.HTTPServer.Shutdown(ctx)
-	s.Subscriber.Shutdown()
+	s.SubscribeServer.Shutdown()
 }

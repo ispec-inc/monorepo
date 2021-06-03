@@ -15,7 +15,7 @@ import (
 )
 
 func NewHTTP(rgst registry.Registry) (*http.Server, func() error, error) {
-	adh, adclnup, err := admin.NewRouter(rgst)
+	adh, adclnup, err := admin.NewRouter()
 	if err != nil {
 		return nil, nil, err
 	}
