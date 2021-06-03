@@ -12,67 +12,83 @@ type SubscribeFunc func(context.Context, redis.Message) error
 
 type Subscriber struct {
 	MessageBus MessageBus
-	Router     map[Event]SubscribeFunc
+	Router     Router
 	AppLog     applog.AppLog
-}
-
-type Router map[Event]SubscribeFunc
-
-func NewRouter() Router {
-	return Router{}
-}
-
-func (fr Router) Subscribe(evnt Event, subsc SubscribeFunc) {
-	fr[evnt] = subsc
-}
-
-func (fr Router) Mount(router Router) {
-	for evnt, subsc := range router {
-		fr[evnt] = subsc
-	}
 }
 
 func NewSubscriber(msgbs MessageBus, algr applog.AppLog) Subscriber {
 	return Subscriber{
 		MessageBus: msgbs,
 		AppLog:     algr,
-		Router:     map[Event]SubscribeFunc{},
+		Router:     map[Event][]SubscribeFunc{},
 	}
 }
 
-func (r Subscriber) Mount(router Router) {
-	for evnt, subsc := range router {
-		r.Router[evnt] = subsc
+func (s Subscriber) Subscribe(evnt Event, subsc SubscribeFunc) {
+	s.Router.Subscribe(evnt, subsc)
+}
+
+func (s Subscriber) Mount(rtr Router) {
+	for evnt, sfuncs := range rtr {
+		for _, sfunc := range sfuncs {
+			s.Router[evnt] = append(s.Router[evnt], sfunc)
+		}
 	}
 }
 
-func (r Subscriber) Subscribe(evnt Event, subsc SubscribeFunc) {
-	r.Router[evnt] = subsc
-}
-
-func (r Subscriber) Serve(ctx context.Context) {
-	for evnt, subsc := range r.Router {
-		r.MessageBus.Subscribe(evnt)
-		go func(subsc SubscribeFunc) {
-			for {
-				switch v := r.MessageBus.Receive().(type) {
-				case redis.Message:
-					err := subsc(ctx, v)
-					if err != nil {
-						r.AppLog.Error(ctx, err)
+func (s Subscriber) Do(ctx context.Context) {
+	for evnt, sfuncs := range s.Router {
+		s.MessageBus.Subscribe(evnt)
+		for _, sfunc := range sfuncs {
+			go func(sfunc SubscribeFunc) {
+				for {
+					switch v := s.MessageBus.Receive().(type) {
+					case redis.Message:
+						err := sfunc(ctx, v)
+						if err != nil {
+							s.AppLog.Error(ctx, err)
+						}
+					case redis.Subscription:
+						fmt.Printf("%s: %s %d\n", v.Channel, v.Kind, v.Count)
+					case error:
+						s.AppLog.Error(ctx, v)
 					}
-				case redis.Subscription:
-					fmt.Printf("%s: %s %d\n", v.Channel, v.Kind, v.Count)
-				case error:
-					r.AppLog.Error(ctx, v)
 				}
-			}
-		}(subsc)
+			}(sfunc)
+		}
 	}
 }
 
-func (r Subscriber) Shutdown() {
-	for evnt := range r.Router {
-		r.MessageBus.Unsubscribe(evnt)
+type Router map[Event][]SubscribeFunc
+
+func NewRouter() Router {
+	return Router{}
+}
+
+func (r Router) Subscribe(evnt Event, subsc SubscribeFunc) {
+	r[evnt] = append(r[evnt], subsc)
+}
+
+type SubscribeServer []Subscriber
+
+func NewSubscribeServer() SubscribeServer {
+	return SubscribeServer{}
+}
+
+func (r SubscribeServer) Serve(ctx context.Context) {
+	for _, subsc := range r {
+		subsc.Do(ctx)
+	}
+}
+
+func (s SubscribeServer) Mount(subsc Subscriber) {
+	s = append(s, subsc)
+}
+
+func (s SubscribeServer) Shutdown() {
+	for _, subsc := range s {
+		for evnt := range subsc.Router {
+			subsc.MessageBus.Unsubscribe(evnt)
+		}
 	}
 }

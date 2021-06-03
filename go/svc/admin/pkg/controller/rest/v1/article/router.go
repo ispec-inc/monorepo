@@ -9,7 +9,7 @@ import (
 
 func New(bs msgbs.MessageBus) http.Handler {
 	r := chi.NewRouter()
-	h := newController(bs)
+	h := newController()
 
 	r.Get("/", h.list)
 	r.Get("/{id}", h.get)
