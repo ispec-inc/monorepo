@@ -18,7 +18,6 @@ export default class TopPage extends Vue {
   }
 
   get articleList() {
-    console.debug(articleModule.articles)
     return articleModule.articles
   }
 }
