@@ -5,20 +5,22 @@ import {
   Mutation,
   getModule,
 } from 'vuex-module-decorators'
-import { GetRequest, ListResponse } from '@monorepo/gen/admin/api/rest/article/article_pb'
+import {GetRequest, GetResponse, ListResponse} from '@monorepo/gen/admin/api/rest/article/article_pb'
 import { store } from '@/store'
 import { $axios } from '@/utils/api'
 import { Article } from "@monorepo/gen/admin/view/article_pb"
 import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb"
+import {types} from "node-sass";
 
 @Module({ name: 'article', dynamic: true, store, namespaced: true })
 export class ArticleModule extends VuexModule {
   private getRequest: GetRequest = new GetRequest()
+  private getResponse: GetResponse = new GetResponse()
   private listResponse: ListResponse = new ListResponse()
 
   @Mutation
-  SET_ARTICLES(value: Array<Article.AsObject>): void {
-    const articles = value.map((article: Article.AsObject) => {
+  SET_ARTICLES(value: { articles: Array<Article.AsObject> }): void {
+    const articles = value.articles.map((article: Article.AsObject) => {
       const articleInstance = new Article()
       const createdAt: Timestamp | undefined = article.createdAt ? new Timestamp() : undefined
       const updatedAt: Timestamp | undefined = article.updatedAt ? new Timestamp() : undefined
@@ -38,13 +40,17 @@ export class ArticleModule extends VuexModule {
       articleInstance.setUpdatedAt(updatedAt)
       return articleInstance
     })
-    this.listResponse.setArticlesList(articles)
+    const listResponse = new ListResponse()
+    listResponse.setArticlesList(articles)
+
+    this.listResponse = listResponse
   }
 
   @Action({rawError: true})
   fetch() {
-    $axios.get<Array<Article.AsObject>>('/v1/articles').then((response) => {
-      this.SET_ARTICLES(response.data)
+    $axios.get<{ articles: Array<Article.AsObject> }>('/v1/articles').then((response) => {
+      const { data } = response
+      this.SET_ARTICLES(data)
 
     })
   }
