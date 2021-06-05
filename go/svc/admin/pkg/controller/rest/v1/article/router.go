@@ -4,10 +4,9 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
 )
 
-func New(bs msgbs.MessageBus) http.Handler {
+func New() http.Handler {
 	r := chi.NewRouter()
 	h := newController()
 
