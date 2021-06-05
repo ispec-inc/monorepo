@@ -9,25 +9,22 @@ import (
 	"time"
 
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
-	"github.com/ispec-inc/monorepo/go/pkg/registry"
 	"github.com/ispec-inc/monorepo/go/pkg/router"
 	"golang.org/x/sync/errgroup"
 )
 
 type Server struct {
-	HTTPServer *http.Server
-	Subscriber *msgbs.Subscriber
+	HTTPServer      *http.Server
+	SubscribeServer *msgbs.SubscribeServer
 }
 
-func New(
-	rgst registry.Registry,
-) (Server, func() error, error) {
-	h, hclnup, err := router.NewHTTP(rgst)
+func New() (Server, func() error, error) {
+	h, hclnup, err := router.NewHTTP()
 	if err != nil {
 		return Server{}, nil, err
 	}
 
-	s, sclnup, err := router.NewSubscriber(rgst)
+	s, sclnup, err := router.NewSubscribeServer()
 	if err != nil {
 		return Server{}, nil, err
 	}
@@ -38,8 +35,8 @@ func New(
 		return nil
 	}
 	return Server{
-		HTTPServer: h,
-		Subscriber: s,
+		HTTPServer:      h,
+		SubscribeServer: s,
 	}, clnup, nil
 }
 
@@ -55,7 +52,7 @@ func (s Server) Run(ctx context.Context) {
 	})
 
 	g.Go(func() error {
-		s.Subscriber.Serve(ctx)
+		s.SubscribeServer.Serve(ctx)
 		return nil
 	})
 
@@ -81,5 +78,5 @@ func (s Server) Run(ctx context.Context) {
 	}
 
 	s.HTTPServer.Shutdown(ctx)
-	s.Subscriber.Shutdown()
+	s.SubscribeServer.Shutdown()
 }

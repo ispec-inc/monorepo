@@ -1,22 +1,17 @@
 package router
 
 import (
-	"github.com/ispec-inc/monorepo/go/pkg/applog"
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
-	"github.com/ispec-inc/monorepo/go/pkg/registry"
 	notification_event "github.com/ispec-inc/monorepo/go/svc/notification/cmd/server/event"
 )
 
-func NewSubscriber(rgst registry.Registry) (*msgbs.Subscriber, func() error, error) {
-	ntevnt, evntclnup, err := notification_event.NewRouter()
+func NewSubscribeServer() (*msgbs.SubscribeServer, func() error, error) {
+	ns, evntclnup, err := notification_event.NewSubscriber()
 	if err != nil {
 		return nil, nil, err
 	}
 
-	sr := msgbs.NewSubscriber(
-		rgst.MessageBus().New(),
-		applog.New(rgst.Logger().New()),
-	)
-	sr.Mount(ntevnt)
+	sr := msgbs.NewSubscribeServer()
+	sr.Mount(ns)
 	return &sr, evntclnup, nil
 }

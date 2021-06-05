@@ -12,6 +12,7 @@ import (
 	pb "github.com/ispec-inc/monorepo/go/proto/admin/api/rest/v1/article"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/logger"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/model"
+	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/redisbs"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/view"
 )
 
@@ -20,10 +21,10 @@ type controller struct {
 	bs  msgbs.MessageBus
 }
 
-func newController(bs msgbs.MessageBus) controller {
+func newController() controller {
 	return controller{
 		log: applog.New(logger.Get()),
-		bs:  bs,
+		bs:  redisbs.Get(),
 	}
 }
 
