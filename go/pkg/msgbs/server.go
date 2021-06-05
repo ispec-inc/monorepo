@@ -1,6 +1,8 @@
 package msgbs
 
-import "context"
+import (
+	"context"
+)
 
 type SubscribeServer []Subscriber
 
@@ -14,8 +16,8 @@ func (s SubscribeServer) Serve(ctx context.Context) {
 	}
 }
 
-func (s SubscribeServer) Mount(subsc Subscriber) {
-	s = append(s, subsc)
+func (s *SubscribeServer) Mount(subsc Subscriber) {
+	*s = append(*s, subsc)
 }
 
 func (s SubscribeServer) Shutdown() {

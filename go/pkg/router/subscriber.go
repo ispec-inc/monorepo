@@ -6,12 +6,12 @@ import (
 )
 
 func NewSubscribeServer() (*msgbs.SubscribeServer, func() error, error) {
-	ntevnt, evntclnup, err := notification_event.NewSubscriber()
+	ns, evntclnup, err := notification_event.NewSubscriber()
 	if err != nil {
 		return nil, nil, err
 	}
 
 	sr := msgbs.NewSubscribeServer()
-	sr.Mount(ntevnt)
+	sr.Mount(ns)
 	return &sr, evntclnup, nil
 }
