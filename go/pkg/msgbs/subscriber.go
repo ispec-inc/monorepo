@@ -20,7 +20,7 @@ func NewSubscriber(msgbs MessageBus, algr applog.AppLog) Subscriber {
 	return Subscriber{
 		MessageBus: msgbs,
 		AppLog:     algr,
-		Router:     map[Event][]SubscribeFunc{},
+		Router:     Router{},
 	}
 }
 
@@ -55,40 +55,6 @@ func (s Subscriber) Do(ctx context.Context) {
 					}
 				}
 			}(sfunc)
-		}
-	}
-}
-
-type Router map[Event][]SubscribeFunc
-
-func NewRouter() Router {
-	return Router{}
-}
-
-func (r Router) Subscribe(evnt Event, subsc SubscribeFunc) {
-	r[evnt] = append(r[evnt], subsc)
-}
-
-type SubscribeServer []Subscriber
-
-func NewSubscribeServer() SubscribeServer {
-	return SubscribeServer{}
-}
-
-func (r SubscribeServer) Serve(ctx context.Context) {
-	for _, subsc := range r {
-		subsc.Do(ctx)
-	}
-}
-
-func (s SubscribeServer) Mount(subsc Subscriber) {
-	s = append(s, subsc)
-}
-
-func (s SubscribeServer) Shutdown() {
-	for _, subsc := range s {
-		for evnt := range subsc.Router {
-			subsc.MessageBus.Unsubscribe(evnt)
 		}
 	}
 }
