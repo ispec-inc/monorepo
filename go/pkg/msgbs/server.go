@@ -8,8 +8,8 @@ func NewSubscribeServer() SubscribeServer {
 	return SubscribeServer{}
 }
 
-func (r SubscribeServer) Serve(ctx context.Context) {
-	for _, subsc := range r {
+func (s SubscribeServer) Serve(ctx context.Context) {
+	for _, subsc := range s {
 		subsc.Do(ctx)
 	}
 }
