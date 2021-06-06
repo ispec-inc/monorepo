@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/ispec-inc/monorepo/go/pkg/server"
+	"github.com/ispec-inc/monorepo/go/runner/server"
 )
 
 func main() {

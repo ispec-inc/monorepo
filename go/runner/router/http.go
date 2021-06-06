@@ -6,9 +6,9 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
-	admin "github.com/ispec-inc/monorepo/go/svc/admin/pkg/router"
-	article "github.com/ispec-inc/monorepo/go/svc/article/pkg/router"
-	media "github.com/ispec-inc/monorepo/go/svc/media/pkg/router"
+	admin "github.com/ispec-inc/monorepo/go/svc/admin/runner/router"
+	article "github.com/ispec-inc/monorepo/go/svc/article/runner/router"
+	media "github.com/ispec-inc/monorepo/go/svc/media/runner/router"
 )
 
 const PORT = 9000
