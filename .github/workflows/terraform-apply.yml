@@ -1,0 +1,54 @@
+name: terraform-apply
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - terraform/**
+
+jobs:
+  apply:
+    name: Apply
+    runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+    strategy:
+      matrix:
+        dir: [
+          terraform/resources/linebot/shd/ecr,
+          terraform/resources/linebot/prd/sg/rds,
+          terraform/resources/linebot/prd/rds,
+        ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v1.2.0
+        with:
+          terraform_version: 0.14.8
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+
+      - name: Apply
+        run: |
+          DIFF=$(git diff --name-only HEAD^ terraform/modules ${{ matrix.dir }})
+          if [[ ${DIFF} = *terraform/resources* || ${DIFF} = *terraform/modules* ]]; then
+            target="$(echo ${{ matrix.dir }} | cut -d' ' -f1 | sed -e "s%/$%%g")"
+            target_tfstate="$(echo ${target#*/} | sed -e "s%/%.%g")"
+            cp terraform/init/init.tf ${target}/
+            cd ${target}
+            terraform init --backend-config key=${target_tfstate}.tfstate -force-copy
+            terraform get
+            terraform apply -auto-approve
+          fi
+        shell: bash
