@@ -13,9 +13,9 @@ func init() {
 var MysqlArticleTest mysqlArticleTest
 
 type mysqlArticleTest struct {
-	User     string `env:"ADMIN_MYSQL_ARTICLE_TEST_USERNAME"`
+	User     string `env:"ADMIN_MYSQL_ARTICLE_TEST_USER"`
 	Password string `env:"ADMIN_MYSQL_ARTICLE_TEST_PASSWORD"`
-	Database string `env:"ADMIN_MYSQL_ARTICLE_TEST_NAME"`
+	Database string `env:"ADMIN_MYSQL_ARTICLE_TEST_DATABASE"`
 	Host     string `env:"ADMIN_MYSQL_ARTICLE_TEST_HOST"`
 	Port     string `env:"ADMIN_MYSQL_ARTICLE_TEST_PORT"`
 }
