@@ -4,8 +4,8 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/ispec-inc/monorepo/go/pkg/aws"
-	"github.com/ispec-inc/monorepo/go/pkg/config"
 	"github.com/ispec-inc/monorepo/go/pkg/mysql"
+	"github.com/ispec-inc/monorepo/go/svc/media/pkg/config"
 	"github.com/ispec-inc/monorepo/go/svc/media/pkg/domain/repository"
 	"github.com/ispec-inc/monorepo/go/svc/media/pkg/infra/dao"
 )
