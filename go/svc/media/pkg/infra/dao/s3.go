@@ -5,7 +5,7 @@ import (
 
 	"github.com/ispec-inc/monorepo/go/pkg/apperror"
 	"github.com/ispec-inc/monorepo/go/pkg/aws"
-	"github.com/ispec-inc/monorepo/go/pkg/config"
+	"github.com/ispec-inc/monorepo/go/svc/media/pkg/config"
 	"github.com/ispec-inc/monorepo/go/svc/media/pkg/domain/value"
 )
 
@@ -21,8 +21,8 @@ func (d S3) Create(localPath, remotePath string, mtype value.MediaType) (string,
 	remotePath = fmt.Sprintf("%s/%s", mtype.String(), remotePath)
 
 	url, err := d.aws.S3Upload(aws.S3UploadInput{
-		Bucket: config.AWS.S3MediaBucketName,
-		Region: config.AWS.S3MediaBucketRegion,
+		Bucket: config.AWS.S3BucketName,
+		Region: config.AWS.S3BucketRegion,
 		Path:   remotePath,
 		File:   localPath,
 		ACL:    aws.ACLPublicRead,
