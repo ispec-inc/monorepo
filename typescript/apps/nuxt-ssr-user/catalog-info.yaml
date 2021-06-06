@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nuxt-ssr-user
+  title: SPA Admin using Nuxt
+  description: |
+  annotations:
+    github.com/project-slug: ispec-inc/go-distributed-monolith
+    backstage.io/techdocs-ref: github:https://github.com/ispec-inc/go-distributed-monolith
+  tags:
+    - nuxt
+    - admin
+    - template
+spec:
+  type: service
+  owner: yamad07
+  lifecycle: production
+  providesApis:
+    - anipic-admin-front
+    - Placy-admin
