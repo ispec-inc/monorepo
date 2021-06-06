@@ -1,6 +1,5 @@
 ## Getting Started
-
-基本的にはDockerでセットアップする。
+Since we are setting up a container-based build, you need to install Docker.
 
 ## Running Server
 If you have Docker installed, you can start up the server by running the make command.
