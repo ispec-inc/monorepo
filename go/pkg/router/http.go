@@ -5,12 +5,13 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/ispec-inc/monorepo/go/pkg/config"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
 	admin "github.com/ispec-inc/monorepo/go/svc/admin/pkg/router"
 	article "github.com/ispec-inc/monorepo/go/svc/article/pkg/router"
 	media "github.com/ispec-inc/monorepo/go/svc/media/pkg/router"
 )
+
+const PORT = 9000
 
 func NewHTTP() (*http.Server, func() error, error) {
 	adr, adclnup, err := admin.NewREST()
@@ -50,7 +51,7 @@ func NewHTTP() (*http.Server, func() error, error) {
 		return nil
 	}
 
-	port := fmt.Sprintf(":%d", config.Router.Port)
+	port := fmt.Sprintf(":%d", PORT)
 	srv := &http.Server{Addr: port, Handler: r}
 	return srv, clnup, nil
 
