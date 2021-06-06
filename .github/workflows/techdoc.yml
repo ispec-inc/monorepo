@@ -1,0 +1,37 @@
+name: techdoc
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
+jobs:
+  techdoc:
+    name: runner / techdocs
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - source_dir: ./go
+            entity: default/Component/monorepo-go
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.TECHDOCS_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.TECHDOCS_AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-1
+
+    - run: npm install -g @techdocs/cli
+
+    - run: techdocs-cli build --source-dir ${{ matrix.source_dir }} --output-dir ${{ matrix.source_dir }}/site
+
+    - run: techdocs-cli publish --directory ${{ matrix.source_dir }}/site --publisher-type awsS3 --storage-name backstage-ispec --entity ${{ matrix.entity }}
