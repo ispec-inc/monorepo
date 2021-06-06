@@ -7,7 +7,7 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/notification/pkg/registry"
 )
 
-func NewSubscriber() (msgbs.Subscriber, func() error, error) { // TODO:
+func NewSubscriber() (msgbs.Subscriber, func() error, error) {
 	lgr, lgrCleanup, err := registry.NewLogger()
 	if err != nil {
 		return msgbs.Subscriber{}, nil, err
