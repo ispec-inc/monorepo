@@ -3,6 +3,7 @@ package registry
 import (
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
 	"github.com/ispec-inc/monorepo/go/pkg/redis"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/config"
 )
 
 type MessageBus struct {
@@ -11,12 +12,18 @@ type MessageBus struct {
 
 func NewMessageBus() (MessageBus, error) {
 
-	rcon, err := redis.New()
+	rcon, err := redis.New(redis.Config{
+		Host: config.RedisMsgbs.Host,
+		Port: config.RedisMsgbs.Port,
+	})
 	if err != nil {
 		return MessageBus{}, err
 	}
 
-	pscon, err := redis.NewPubSub()
+	pscon, err := redis.NewPubSub(redis.PubSubConfig{
+		Host: config.RedisMsgbs.Host,
+		Port: config.RedisMsgbs.Port,
+	})
 	if err != nil {
 		return MessageBus{}, err
 	}
