@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
-	"github.com/ispec-inc/monorepo/go/pkg/router"
+	"github.com/ispec-inc/monorepo/go/runner/router"
 	"golang.org/x/sync/errgroup"
 )
 

@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
-	notification_event "github.com/ispec-inc/monorepo/go/svc/notification/pkg/router"
+	notification_event "github.com/ispec-inc/monorepo/go/svc/notification/runner/router"
 )
 
 func NewSubscribeServer() (*msgbs.SubscribeServer, func() error, error) {
