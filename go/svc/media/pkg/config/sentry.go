@@ -11,7 +11,7 @@ func init() {
 var Sentry sentry
 
 type sentry struct {
-	DSN   string `env:"SENTRY_DSN"`
-	Env   string `env:"SENTRY_ENVIRONMENT"`
-	Debug bool   `env:"SENTRY_DEBUG"`
+	DSN   string `env:"MEDIA_SENTRY_DSN"`
+	Env   string `env:"MEDIA_SENTRY_ENVIRONMENT"`
+	Debug bool   `env:"MEDIA_SENTRY_DEBUG"`
 }
