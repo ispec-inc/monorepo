@@ -8,3 +8,6 @@ nav:
     - Architecture: design/architecture.md
   - Setting:
     - Error Logging: setting/error-logging.md
+
+plugins:
+  - techdocs-core
