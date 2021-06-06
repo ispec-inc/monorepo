@@ -6,35 +6,33 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/ispec-inc/monorepo/go/pkg/config"
-	"github.com/ispec-inc/monorepo/go/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
-	admin "github.com/ispec-inc/monorepo/go/svc/admin/cmd/server/rest"
-	article "github.com/ispec-inc/monorepo/go/svc/article/cmd/server/rest"
-	media "github.com/ispec-inc/monorepo/go/svc/media/cmd/server/rest"
+	admin "github.com/ispec-inc/monorepo/go/svc/admin/pkg/router"
+	article "github.com/ispec-inc/monorepo/go/svc/article/pkg/router"
+	media "github.com/ispec-inc/monorepo/go/svc/media/pkg/router"
 )
 
 func NewHTTP() (*http.Server, func() error, error) {
-	adh, adclnup, err := admin.NewRouter()
+	adr, adclnup, err := admin.NewREST()
 	if err != nil {
 		return nil, nil, err
 	}
 
-	atclh, arclclnup, err := article.NewRouter()
+	atclr, arclclnup, err := article.NewREST()
 	if err != nil {
 		return nil, nil, err
 	}
 
-	mdh, mdclnup, err := media.NewRouter()
+	mdr, mdclnup, err := media.NewREST()
 	if err != nil {
 		return nil, nil, err
 	}
 
 	r := chi.NewRouter()
-	r = middleware.Common(r)
 
-	r.Mount("/admin", adh)
-	r.Mount("/articles", atclh)
-	r.Mount("/media", mdh)
+	r.Mount("/admin", adr)
+	r.Mount("/articles", atclr)
+	r.Mount("/media", mdr)
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		presenter.Response(w, map[string]string{"messsage": "ok"})
 	})

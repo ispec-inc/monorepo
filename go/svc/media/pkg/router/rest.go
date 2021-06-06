@@ -5,12 +5,14 @@ import (
 
 	"github.com/go-chi/chi"
 
+	"github.com/ispec-inc/monorepo/go/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
-	v1 "github.com/ispec-inc/monorepo/go/svc/article/pkg/adapter/rest/v1"
-	"github.com/ispec-inc/monorepo/go/svc/article/pkg/registry"
+	"github.com/ispec-inc/monorepo/go/svc/media/pkg/adapter/rest"
+	"github.com/ispec-inc/monorepo/go/svc/media/pkg/config"
+	"github.com/ispec-inc/monorepo/go/svc/media/pkg/registry"
 )
 
-func NewRouter() (http.Handler, func() error, error) {
+func NewREST() (http.Handler, func() error, error) {
 	repo, repoCleanup, err := registry.NewRepository()
 	if err != nil {
 		return nil, nil, err
@@ -29,8 +31,12 @@ func NewRouter() (http.Handler, func() error, error) {
 	rgst := registry.NewRegistry(repo, lgr)
 
 	r := chi.NewRouter()
+	r = middleware.Common(r, middleware.CommonConfig{
+		Timeout:      config.Router.Timeout,
+		AllowOrigins: config.Router.AllowOrigins,
+	})
 
-	r.Mount("/v1", v1.NewRouter(rgst))
+	r.Mount("/", rest.NewRouter(rgst))
 
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		presenter.Response(w, map[string]string{"messsage": "ok"})
