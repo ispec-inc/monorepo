@@ -8,14 +8,13 @@ import (
 	"github.com/ispec-inc/monorepo/go/pkg/config"
 	"github.com/ispec-inc/monorepo/go/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
-	"github.com/ispec-inc/monorepo/go/pkg/registry"
 	admin "github.com/ispec-inc/monorepo/go/svc/admin/cmd/server/rest"
 	article "github.com/ispec-inc/monorepo/go/svc/article/cmd/server/rest"
 	media "github.com/ispec-inc/monorepo/go/svc/media/cmd/server/rest"
 )
 
-func NewHTTP(rgst registry.Registry) (*http.Server, func() error, error) {
-	adh, adclnup, err := admin.NewRouter(rgst)
+func NewHTTP() (*http.Server, func() error, error) {
+	adh, adclnup, err := admin.NewRouter()
 	if err != nil {
 		return nil, nil, err
 	}
