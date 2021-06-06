@@ -15,11 +15,8 @@ func Init() (func() error, error) {
 		err     error
 	)
 
-	switch "TODO" { // TODO:
-	case "TODO":
-		lgr = stdlog.New()
-		return func() error { return nil }, nil
-	default:
+	switch config.Logger.Type {
+	case config.LoggerTypeSentry:
 		lgr, cleanup, err = sentry.New(
 			sentry.Config{
 				Environment: config.Sentry.Env,
@@ -28,6 +25,9 @@ func Init() (func() error, error) {
 			},
 		)
 		return func() error { cleanup(); return nil }, err
+	default:
+		lgr = stdlog.New()
+		return func() error { return nil }, nil
 	}
 }
 
