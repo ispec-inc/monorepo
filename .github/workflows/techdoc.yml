@@ -32,6 +32,6 @@ jobs:
 
     - run: npm install -g @techdocs/cli
 
-    - run: techdocs-cli build --souce-dir ${{ matrix.source_dir }} --output-dir ${{ matrix.source_dir }}/site
+    - run: techdocs-cli build --source-dir ${{ matrix.source_dir }} --output-dir ${{ matrix.source_dir }}/site
 
     - run: techdocs-cli publish --directory ${{ matrix.source_dir }}/site --publisher-type awsS3 --storage-name backstage-ispec --entity ${{ matrix.entity }}
