@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/ispec-inc/monorepo/go/pkg/infra/entity"
 	"github.com/ispec-inc/monorepo/go/pkg/mysql"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/config"
 	"gorm.io/gorm"
 )
 
@@ -26,7 +27,17 @@ var seeds = []interface{}{
 }
 
 func main() {
-	db, err := mysql.New()
+	db, err := mysql.New(mysql.Config{
+		User:        config.MysqlArticle.User,
+		Password:    config.MysqlArticle.Password,
+		Host:        config.MysqlArticle.Host,
+		Port:        config.MysqlArticle.Port,
+		Database:    config.MysqlArticle.Database,
+		LogLevel:    mysql.LogLevelInfo, // TODO:
+		MaxIdleConn: config.MysqlArticle.MaxIdleConn,
+		MaxOpenConn: config.MysqlArticle.MaxOpenConn,
+		MaxLifetime: config.MysqlArticle.MaxLifetime,
+	})
 	if err != nil {
 		panic(err)
 	}
