@@ -23,7 +23,7 @@ services:
     container_name: test
     image: golang:1.16
     env_file:
-      - .env/test
+      - .env/server
     depends_on:
       - article-mysql-test
     volumes:
