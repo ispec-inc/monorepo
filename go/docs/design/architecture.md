@@ -8,7 +8,7 @@ The code in each directory is as follows.
 ├── bin
 │   └── server
 ├── cmd # Entry point to start the server, insert a seed, etc.
-├── docker # 開発用、本番用のDockerfile
+├── docker
 ├── mkdocs.yml
 ├── pkg # Common packages referenced by `svc`
 ├── proto # Generated from protocol buffer.
