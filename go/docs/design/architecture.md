@@ -28,6 +28,8 @@ Basically, the following rules should be followed.
 ## `go/svc` design
 
 Splitting `svc` is a very critical decision in development. Be sure to discuss it with your development team.
+
 A common way to do this is to use
+
 - Divide by load characteristics (Admin, User, etc.)
 - Divide by variability (notification system, media upload system, etc.)
