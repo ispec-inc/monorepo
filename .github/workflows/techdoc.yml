@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - source-dir: ./go
+          - source_dir: ./go
             entity: default/Component/monorepo-go
 
     steps:
