@@ -31,3 +31,25 @@ AWS_ACCESS_KEY=
 AWS_SECRET_KEY=
 AWS_S3_MEDIA_BUCKET_NAME=
 AWS_S3_MEDIA_BUCKET_REGION=
+
+
+##### Admin #####
+
+ADMIN_ROUTER_TIMEOUT=10s
+ADMIN_ROUTER_ALLOW_ORIGINS=http://localhost:3000
+
+
+##### Article #####
+
+ARTICLE_ROUTER_TIMEOUT=10s
+ARTICLE_ROUTER_ALLOW_ORIGINS=http://localhost:3000
+
+
+##### Media #####
+
+MEDIA_ROUTER_TIMEOUT=10s
+MEDIA_ROUTER_ALLOW_ORIGINS=http://localhost:3000
+
+
+##### Notification #####
+
