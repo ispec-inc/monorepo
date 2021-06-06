@@ -32,7 +32,7 @@ func NewHTTP() (*http.Server, func() error, error) {
 	r := chi.NewRouter()
 
 	r.Mount("/admin", adr)
-	r.Mount("/articles", atclr)
+	r.Mount("/article", atclr)
 	r.Mount("/media", mdr)
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		presenter.Response(w, map[string]string{"messsage": "ok"})
