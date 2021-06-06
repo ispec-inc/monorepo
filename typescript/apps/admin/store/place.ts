@@ -46,6 +46,7 @@ export const actions = actionTree(
     },
     async getPlace({ commit }, { id }) {
       const req = new GetRequest()
+      console.log(req)
       const res = await this.$axios.get<PlaceData>(`/places/${id}`)
       commit('setCurrent', res.data)
     },
