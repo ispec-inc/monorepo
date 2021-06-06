@@ -14,7 +14,7 @@ jobs:
       matrix:
         include:
           - source_dir: ./go
-            entity: default/Component/monorepo-go
+            entity: default/component/monorepo-go
 
     steps:
     - uses: actions/checkout@v2
