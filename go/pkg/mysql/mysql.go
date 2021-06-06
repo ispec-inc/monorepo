@@ -2,31 +2,10 @@ package mysql
 
 import (
 	"fmt"
-	"time"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-)
-
-const (
-	LogLevelInfo  = LogLevel(logger.Info)
-	LogLevelError = LogLevel(logger.Error)
-)
-
-type (
-	Config struct {
-		User        string
-		Password    string
-		Host        string
-		Port        string
-		Database    string
-		LogLevel    LogLevel
-		MaxIdleConn int
-		MaxOpenConn int
-		MaxLifetime time.Duration
-	}
-	LogLevel logger.LogLevel
 )
 
 func New(c Config) (*gorm.DB, error) {

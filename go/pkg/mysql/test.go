@@ -7,18 +7,14 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-
-	"github.com/ispec-inc/monorepo/go/pkg/config"
 )
 
 const driver = "txdb"
 
-func init() {
+func InitTest(c TestConfig) {
 	dsn := fmt.Sprintf(
 		"%s:%s@(%s:%s)/%s?charset=utf8mb4&parseTime=true",
-		config.RDS.User, config.RDS.Password,
-		config.RDS.Host, config.RDS.Port,
-		config.RDS.Database,
+		c.User, c.Password, c.Host, c.Port, c.Database,
 	)
 	txdb.Register(driver, "mysql", dsn)
 }
