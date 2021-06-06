@@ -15,12 +15,12 @@ func init() {
 var MysqlArticle mysqlArticle
 
 type mysqlArticle struct {
-	User        string        `env:"ARTICLE_MYSQL_ARTICLE_USERNAME"`
+	User        string        `env:"ARTICLE_MYSQL_ARTICLE_USER"`
 	Password    string        `env:"ARTICLE_MYSQL_ARTICLE_PASSWORD"`
-	Database    string        `env:"ARTICLE_MYSQL_ARTICLE_NAME"`
+	Database    string        `env:"ARTICLE_MYSQL_ARTICLE_DATABASE"`
 	Host        string        `env:"ARTICLE_MYSQL_ARTICLE_HOST"`
 	Port        string        `env:"ARTICLE_MYSQL_ARTICLE_PORT"`
-	MaxIdleConn int           `env:"ARTICLE_MYSQL_ARTICLE_MAX_IDLE_CONNS"`
-	MaxOpenConn int           `env:"ARTICLE_MYSQL_ARTICLE_MAX_OPEN_CONNS"`
+	MaxIdleConn int           `env:"ARTICLE_MYSQL_ARTICLE_MAX_IDLE_CONN"`
+	MaxOpenConn int           `env:"ARTICLE_MYSQL_ARTICLE_MAX_OPEN_CONN"`
 	MaxLifetime time.Duration `env:"ARTICLE_MYSQL_ARTICLE_MAX_CONN_LIFETIME"`
 }
