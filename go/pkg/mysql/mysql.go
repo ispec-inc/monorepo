@@ -2,32 +2,41 @@ package mysql
 
 import (
 	"fmt"
+	"time"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-
-	"github.com/ispec-inc/monorepo/go/pkg/config"
 )
 
-func New() (*gorm.DB, error) {
-	var logLevel logger.LogLevel
-	switch config.App.Env {
-	case config.EnvDev, config.EnvStg:
-		logLevel = logger.Info
-	case config.EnvProd:
-		logLevel = logger.Error
-	}
+const (
+	LogLevelInfo  = LogLevel(logger.Info)
+	LogLevelError = LogLevel(logger.Error)
+)
 
+type (
+	Config struct {
+		User        string
+		Password    string
+		Host        string
+		Port        string
+		Database    string
+		LogLevel    LogLevel
+		MaxIdleConn int
+		MaxOpenConn int
+		MaxLifetime time.Duration
+	}
+	LogLevel logger.LogLevel
+)
+
+func New(c Config) (*gorm.DB, error) {
 	conn := fmt.Sprintf(
 		"%s:%s@(%s:%s)/%s?charset=utf8mb4&parseTime=true",
-		config.RDS.User, config.RDS.Password,
-		config.RDS.Host, config.RDS.Port,
-		config.RDS.Database,
+		c.User, c.Password, c.Host, c.Port, c.Database,
 	)
 
 	db, err := gorm.Open(mysql.Open(conn), &gorm.Config{
-		Logger: logger.Default.LogMode(logLevel),
+		Logger: logger.Default.LogMode(logger.LogLevel(c.LogLevel)),
 	})
 	if err != nil {
 		return nil, err
@@ -38,9 +47,9 @@ func New() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	sqlDB.SetMaxIdleConns(config.RDS.MaxIdle)
-	sqlDB.SetMaxOpenConns(config.RDS.MaxOpen)
-	sqlDB.SetConnMaxLifetime(config.RDS.MaxLifetime)
+	sqlDB.SetMaxIdleConns(c.MaxIdleConn)
+	sqlDB.SetMaxOpenConns(c.MaxOpenConn)
+	sqlDB.SetConnMaxLifetime(c.MaxLifetime)
 
 	return db, nil
 }
