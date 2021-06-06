@@ -15,11 +15,7 @@ jobs:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     strategy:
       matrix:
-        dir: [
-          terraform/resources/linebot/shd/ecr,
-          terraform/resources/linebot/prd/sg/rds,
-          terraform/resources/linebot/prd/rds,
-        ]
+        dir: []
     steps:
       - name: Checkout
         uses: actions/checkout@v2
