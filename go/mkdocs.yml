@@ -1,10 +1,10 @@
 site_name: monorepo/go
 nav:
-  - Overview: overview.md
   - Getting Started:
     - Overview: getting-started/overview.md
-    - Write a Subscriber: getting-started/subscriber.md
     - Test: getting-started/test.md
     - Protocol Buffer: getting-started/protocol-buffer.md
+  - Design:
+    - Architecture: design/architecture.md
   - Setting:
     - Error Logging: setting/error-logging.md
