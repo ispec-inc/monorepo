@@ -22,7 +22,6 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import PlaceData from '~/types/place'
 import PlaceResource from '~/resources/place'
 import Resource from '~/resources/resource'
 
@@ -53,18 +52,6 @@ export default class PlacePage extends Vue {
   ]
 
   places: PlaceResource[] = []
-
-  async mounted() {
-    this.isFetching = true
-    await this.$store
-      .dispatch('place/getPlaceList')
-      .then()
-      .catch((error) => console.log(error))
-    this.places = this.$accessor.place.list.map(
-      (data: PlaceData) => new PlaceResource(data)
-    )
-    this.isFetching = false
-  }
 
   deleteItem() {
     if (this.target) {
