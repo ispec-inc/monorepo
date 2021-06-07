@@ -1,8 +1,8 @@
 export interface SampleInterface {
   id: number
-  name: string
+  userId: number
   title: string
   body: string
-  createdAt: string
-  updatedAt: string
+  createdAt?: string
+  updatedAt?: string
 }
