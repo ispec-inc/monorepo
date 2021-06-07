@@ -1,4 +1,4 @@
-export const numberRules: { [kay: string]: (number | string) => boolean | string } = {
+export const numberRules: { [key: string]: (v: number) => boolean | string } = {
   required: (v: number) => !!v || v === 0 || '入力してください',
   numeric: (v: number) => !v || /^(-?)\d*$/.test(v.toString()) || '入力が不正です',
   positive: (v: number) => !v || v >= 0 || '正の数で入力してください',
