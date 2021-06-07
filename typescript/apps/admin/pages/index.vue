@@ -17,6 +17,7 @@ export default class TopPage extends Vue {
     articleModule.fetch()
   }
 
+  number: number | null = null
   get articleList() {
     return articleModule.articles
   }
