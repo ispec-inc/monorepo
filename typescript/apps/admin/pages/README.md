@@ -5,9 +5,13 @@ Vuetifyプロジェクトでは、pagesにロジックを全てもたせ、vueti
 cssの記述をできる限り減らし、vuetifyの属性に直接スタイルを記述していく
 ([詳しくはドキュメント参照](https://vuetifyjs.com/ja/introduction/why-vuetify/))
 
-Vuetifyのコンポーネントを拡張して、よく使うパターンで使いまわしたい時は、`components/advanced`に新しく定義する。
+よく使うパターンを切り出して使いまわしたい時は、Vuetifyのコンポーネントを拡張して、`components/advanced`に新しく定義する。
+If you want to create the patterns you use frequently, you can extend the components of Vuetify and define new ones in `components/advanced`.
 
-その他、vuetifyコンポーネントは使わないけど、同一のレイアウトを使いまわしたいなどがあれば、適宜`components`配下にディレクトリを生やして配置する
+その他、vuetifyコンポーネントは使わないけど、同一のレイアウトを使いまわしたいなどがあれば、適宜`components`配下にディレクトリを生やして配置する。
+例：`components/layouts`など。
+If you don't want to use vuetify component but in such cases like you want to use the same layout in some pages, you can create a new directory under `components` and create components reserved for layout.
+For example, `components/layouts`.
 
 <br>
 This directory contains your Application Views and Routes.

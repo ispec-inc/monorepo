@@ -9,8 +9,13 @@ import { store } from '@/store'
 import { $axios } from '@/utils/api'
 import { SampleInterface } from '@/models/sample'
 
-// BFFの場合はAPIとPageが紐づくため、Storeでresponseのinterfaceを定義し、modelsからmodelを呼び出して使う。
-// そうでない場合は、レスポンスはmodelsで定義
+/**
+ * In the case of BFFs, the API is tied to the Page, so the response's interface is defined in Store and the model that be used in interface is called from /models.
+ * If not, the response is defined in models.
+ * BFFの場合はAPIとPageが紐づくため、Storeでresponseのinterfaceを定義し、modelsからmodelを呼び出して使う。
+ * そうでない場合は、レスポンスはmodelsで定義
+*/
+
 export interface SampleResponseState {
   articles: Array<SampleInterface>
 }
