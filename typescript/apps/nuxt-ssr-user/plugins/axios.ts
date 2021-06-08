@@ -1,7 +1,9 @@
+import { Context } from '@nuxt/types'
+import { AxiosError } from 'axios'
 import snakeCaseKeys from 'snakecase-keys'
 import camelCaseKeys from 'camelcase-keys'
 
-export default function ({ $axios, store }) {
+export default function ({ $axios, store }: Context) {
   $axios.onRequest((config) => {
     if (!store.$auth.loggedIn) {
       return config
@@ -32,8 +34,8 @@ export default function ({ $axios, store }) {
     return { ...res, data: camelCaseData }
   })
 
-  $axios.onResponseError((error) => {
-    const code = parseInt(error.response && error.response.status)
+  $axios.onResponseError((error: AxiosError) => {
+    const code = error.response?.status
     store.dispatch('error/addError', {
       message: error.response?.data?.error || 'exception occurred',
       status: code,
