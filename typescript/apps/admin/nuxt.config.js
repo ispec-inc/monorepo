@@ -95,6 +95,8 @@ export default {
   },
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    // All colors are defined here and applied directly to the component (no CSS)
+    // colorは全てここで定義し、コンポーネントに直接適用する(CSSを使わない)
     theme: {
       dark: false,
       themes: {

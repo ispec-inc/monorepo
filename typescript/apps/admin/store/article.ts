@@ -5,33 +5,41 @@ import {
   Mutation,
   getModule,
 } from 'vuex-module-decorators'
-import {GetRequest, GetResponse, ListResponse} from '@monorepo/gen/admin/api/rest/article/article_pb'
 import { store } from '@/store'
 import { $axios } from '@/utils/api'
-import { Article } from "@monorepo/gen/admin/view/article_pb"
+import { SampleInterface } from '@/models/sample'
+
+/**
+ * In the case of BFFs, the API is tied to the Page, so the response's interface is defined in Store and the model that be used in interface is called from /models.
+ * If not, the response is defined in models.
+ * BFFの場合はAPIとPageが紐づくため、Storeでresponseのinterfaceを定義し、modelsからmodelを呼び出して使う。
+ * そうでない場合は、レスポンスはmodelsで定義
+*/
+
+export interface SampleResponseState {
+  articles: Array<SampleInterface>
+}
 
 @Module({ name: 'article', dynamic: true, store, namespaced: true })
 export class ArticleModule extends VuexModule {
-  private getRequest: GetRequest = new GetRequest()
-  private getResponse: GetResponse = new GetResponse()
-  private listResponse: ListResponse = new ListResponse()
+  private sampleState: SampleResponseState | null = null
 
   @Mutation
-  SET_ARTICLES(value: { articles: Array<Article.AsObject> }): void {
-    // in progress
+  SET_ARTICLES(value: SampleResponseState): void {
+    this.sampleState = value
   }
 
   @Action({rawError: true})
   fetch() {
-    $axios.get<{ articles: Array<Article.AsObject> }>('/v1/articles').then((response) => {
+    $axios.get<SampleResponseState>('/v1/articles').then((response) => {
       const { data } = response
       this.SET_ARTICLES(data)
 
     })
   }
 
-  get articles() {
-    return this.listResponse.toObject(true).articlesList
+  get articles(): Array<SampleInterface> {
+    return this.sampleState?.articles ?? []
   }
 
 }

@@ -9,10 +9,6 @@
     "declaration": true,
     "pretty": true,
     "newLine": "lf",
-    "allowJs": true,
-    "outDir": "./",
-    "paths": {
-      "@monorepo/gen/*": ["./"]
-    }
+    "allowJs": true
   }
 }
