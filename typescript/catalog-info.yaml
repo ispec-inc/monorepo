@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: monorepo/typescript
+  title: TypeScript Best Practices in monorepo
+  description: |
+    TypeScript Best Practices in monorepo
+  annotations:
+    github.com/project-slug: ispec-inc/monorepo
+    backstage.io/techdocs-ref: github:https://github.com/ispec-inc/monorepo/tree/master/typescript
+  tags:
+    - recommended
+    - golang
+    - template
+spec:
+  type: service
+  owner: tanimutomo
+  lifecycle: experimental
