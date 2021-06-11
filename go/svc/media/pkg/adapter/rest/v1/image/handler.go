@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	MEDIA_TMP_DIR = "."
+	MediaTmpDir = "."
 )
 
 type handler struct {
@@ -29,7 +29,7 @@ func newHandler(rgst registry.Registry) handler {
 
 func (h handler) Create(w http.ResponseWriter, r *http.Request) {
 	reqimg, header, _ := r.FormFile("image")
-	path := fmt.Sprintf("%s/%s%s", MEDIA_TMP_DIR, uuid.GenerateTimeUUID(), filepath.Ext(header.Filename))
+	path := fmt.Sprintf("%s/%s%s", MediaTmpDir, uuid.GenerateTimeUUID(), filepath.Ext(header.Filename))
 	img, _ := os.Create(path)
 	defer img.Close()
 	io.Copy(img, reqimg)
