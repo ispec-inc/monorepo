@@ -30,9 +30,7 @@ func (s Subscriber) Subscribe(evnt Event, subsc SubscribeFunc) {
 
 func (s Subscriber) Mount(rtr Router) {
 	for evnt, sfuncs := range rtr {
-		for _, sfunc := range sfuncs {
-			s.Router[evnt] = append(s.Router[evnt], sfunc)
-		}
+		s.Router[evnt] = append(s.Router[evnt], sfuncs...)
 	}
 }
 
