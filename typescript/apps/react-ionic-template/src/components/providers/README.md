@@ -1,0 +1,2 @@
+Context APIを利用して階層をまたがった処理をしたい時に使います.
+サンプルとしてinternal server error的なのが起きて処理を続行できない場合に必用となるものを提供するproviderとそれを利用するhooksを置いときました.

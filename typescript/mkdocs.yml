@@ -1,0 +1,6 @@
+site_name: monorepo/typescript
+nav:
+  - Getting Started: getting-started.md
+
+plugins:
+  - techdocs-core

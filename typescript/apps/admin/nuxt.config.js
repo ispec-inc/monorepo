@@ -40,7 +40,10 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~plugins/axios.js'],
+  plugins: [
+    { src: '~plugins/axios.ts' },
+    { src: '~plugins/axios-accessor.ts' },
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -92,6 +95,8 @@ export default {
   },
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    // All colors are defined here and applied directly to the component (no CSS)
+    // colorは全てここで定義し、コンポーネントに直接適用する(CSSを使わない)
     theme: {
       dark: false,
       themes: {
@@ -120,5 +125,12 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-decorators', { legacy: true }],
+        ['@babel/plugin-proposal-private-methods', { loose: true }],
+      ],
+    },
+  },
 }
