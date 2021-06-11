@@ -25,6 +25,7 @@
     }
   },
   "dependencies": {
+    "@babel/preset-env": "7.12.17",
     "@monorepo/fast-form": "./libs/fast-form",
     "@monorepo/gen": "./libs/gen",
     "@nuxt/typescript-runtime": "0.4.10",
@@ -33,7 +34,7 @@
     "camelcase-keys": "6.2.2",
     "nuxt": "2.14.0",
     "nuxt-typed-vuex": "0.1.19",
-    "snakecase-keys": "3.2.0",
+    "snakecase-keys": "3.2.1",
     "typed-vuex": "0.1.19",
     "vee-validate": "3.4.3",
     "vue-class-component": "7.2.5",
@@ -53,7 +54,7 @@
     "cypress": "6.2.1",
     "eslint": "7.5.0",
     "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-cypress": "2.11.2",
+    "eslint-plugin-cypress": "2.11.3",
     "eslint-plugin-nuxt": "1.0.0",
     "eslint-plugin-prettier": "3.1.4",
     "husky": "4.2.5",

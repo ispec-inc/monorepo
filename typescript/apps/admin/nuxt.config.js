@@ -120,5 +120,12 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-decorators', { legacy: true }],
+        ['@babel/plugin-proposal-private-methods', { loose: true }],
+      ],
+    },
+  },
 }
