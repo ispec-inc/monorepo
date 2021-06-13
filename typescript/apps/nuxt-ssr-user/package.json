@@ -28,7 +28,7 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "0.4.10",
     "@nuxtjs/auth": "4.9.1",
-    "@nuxtjs/axios": "5.13.5",
+    "@nuxtjs/axios": "5.13.6",
     "camelcase-keys": "6.2.2",
     "nuxt": "2.15.6",
     "nuxt-typed-vuex": "0.1.22",
