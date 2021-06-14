@@ -1,10 +1,18 @@
 <template>
-  <div>トップ</div>
+  <div>
+    トップ
+    <index-container></index-container>
+  </div>
 </template>
 
-<script>
-import { Vue, Component } from 'vue-property-decorator'
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
+import IndexContainer from '@/components/containers/index-container/index.vue'
 
-@Component({})
+@Component({
+  components: {
+    IndexContainer,
+  },
+})
 export default class TopPage extends Vue {}
 </script>
