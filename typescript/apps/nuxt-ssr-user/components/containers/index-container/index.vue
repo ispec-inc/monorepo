@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="$router.push({ query: { q: 'text' } })">transition</button>
+    <button @click="pushToPlace">transition</button>
     <ul>
       <li v-for="repo in response" :key="repo.id">
         {{ repo.name }}
@@ -23,6 +23,10 @@ Component.registerHooks(['fetch'])
 export default class IndexContainer extends Vue {
   get response() {
     return sampleModule.response
+  }
+
+  pushToPlace() {
+    this.$router.push({ path: '/place' })
   }
 }
 </script>
