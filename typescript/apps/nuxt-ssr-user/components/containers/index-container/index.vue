@@ -1,7 +1,11 @@
 <template>
   <div>
     <button @click="$router.push({ query: { q: 'text' } })">transition</button>
-    <p>{{ response }}</p>
+    <ul>
+      <li v-for="repo in response" :key="repo.id">
+        {{ repo.name }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -13,17 +17,10 @@ Component.registerHooks(['fetch'])
 
 @Component({
   async fetch() {
-    console.debug('fetchinggggg')
     await sampleModule.fetch()
   },
 })
 export default class IndexContainer extends Vue {
-  // async created() {
-  //   console.debug(sampleModule)
-  //   console.debug('fetchinggggg')
-  //   await sampleModule.fetch()
-  // }
-
   get response() {
     return sampleModule.response
   }

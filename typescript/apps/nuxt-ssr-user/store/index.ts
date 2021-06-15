@@ -1,10 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { Store } from "vuex"
 
-Vue.use(Vuex)
+interface RootState {}
+export const store = new Vuex.Store<RootState>({
+  actions: {
+    nuxtServerInit: () => {}
+  }
+})
+const createStore = (): Store<RootState> => {
+  return store
+}
 
-const store = new Vuex.Store({})
-export { store }
+export default createStore
 
 // Import all your submodules
 // Keep your existing vanilla Vuex code for state, getters, mutations, actions, plugins, etc.

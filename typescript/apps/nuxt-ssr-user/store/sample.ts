@@ -19,7 +19,7 @@ export interface SampleResponseState {
 
 }
 
-@Module({ name: 'sampleModule', dynamic: true, store, namespaced: true })
+@Module({ name: 'sampleModule', store, dynamic: true, namespaced: true , stateFactory: true })
 export class SampleModule extends VuexModule {
   private sampleState: Array<any> = []
 
@@ -30,7 +30,6 @@ export class SampleModule extends VuexModule {
 
   @Action({rawError: true})
   fetch(): Promise<void> {
-    console.debug('fetch')
     return new Promise<void>(( resolve, reject) => {
       $axios.$get<Array<any>>('https://api.github.com/orgs/ispec-inc/repos')
         .then((response: any) => {
