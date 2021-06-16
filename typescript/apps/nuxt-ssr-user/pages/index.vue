@@ -2,9 +2,11 @@
   <div>トップ</div>
 </template>
 
-<script>
-import { Vue, Component } from 'vue-property-decorator'
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
 
-@Component({})
+@Component({
+  components: {},
+})
 export default class TopPage extends Vue {}
 </script>
