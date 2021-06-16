@@ -24,12 +24,12 @@ export class SampleModule extends VuexModule {
   private sampleState: Array<any> = []
 
   @Mutation
-  SET_RESPONSE(value: Array<any>): void {
+  private SET_RESPONSE(value: Array<any>): void {
     this.sampleState = value
   }
 
   @Action({rawError: true})
-  fetch(): Promise<void> {
+  public fetch(): Promise<void> {
     return new Promise<void>(( resolve, reject) => {
       $axios.$get<Array<any>>('https://api.github.com/orgs/ispec-inc/repos')
         .then((response: any) => {
@@ -42,11 +42,17 @@ export class SampleModule extends VuexModule {
     })
   }
 
-  get response(): Array<any> {
-    return this.sampleState
+  @Action( {rawError: true})
+  public setResponse(value: Array<any>) {
+    this.SET_RESPONSE(value)
   }
 
+
+  public get response(): Array<any> {
+    return this.sampleState
+  }
 }
 
 const sampleModule = getModule(SampleModule)
 export default sampleModule
+

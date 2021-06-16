@@ -1,4 +1,4 @@
-import Vuex, { Store } from "vuex"
+import Vuex, { Store } from 'vuex'
 
 interface RootState {}
 export const store = new Vuex.Store<RootState>({
