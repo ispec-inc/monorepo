@@ -15,10 +15,6 @@ import { $axios } from '@/utils/api'
  * そうでない場合は、レスポンスはmodelsで定義
 */
 
-export interface SampleResponseState {
-
-}
-
 @Module({ name: 'sampleModule', store, dynamic: true, namespaced: true , stateFactory: true })
 export class SampleModule extends VuexModule {
   private sampleState: Array<any> = []
@@ -47,9 +43,17 @@ export class SampleModule extends VuexModule {
     this.SET_RESPONSE(value)
   }
 
+  @Action( {rawError: true})
+  public setFirstResponse(value: any) {
+    this.SET_RESPONSE([value, ...this.response.slice(1)])
+  }
 
   public get response(): Array<any> {
-    return this.sampleState
+    return JSON.parse(JSON.stringify(this.sampleState))
+  }
+
+  public get firstResponse(): any {
+    return JSON.parse(JSON.stringify(this.sampleState[0]))
   }
 }
 
