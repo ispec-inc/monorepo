@@ -16,13 +16,12 @@ require (
 	github.com/google/uuid v1.2.0
 	github.com/k0kubun/pp v2.4.0+incompatible
 	github.com/lib/pq v1.10.0 // indirect
-	github.com/mattn/go-isatty v0.0.9 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.7.0
-	github.com/yamad07/monorepo/go v0.0.0-20210515073017-a02b57207d25
 	go.uber.org/multierr v1.6.0
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
 	google.golang.org/protobuf v1.26.0
 	gorm.io/driver/mysql v1.0.5
-	gorm.io/gorm v1.21.8
+	gorm.io/driver/postgres v1.1.0
+	gorm.io/gorm v1.21.9
 )
