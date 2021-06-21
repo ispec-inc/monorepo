@@ -1,4 +1,4 @@
-package mysql
+package rdb
 
 import (
 	"time"
@@ -9,22 +9,13 @@ import (
 const (
 	LogLevelInfo  = LogLevel(logger.Info)
 	LogLevelError = LogLevel(logger.Error)
+
+	DBMSMySQL      = DBMS("mysql")
+	DBMSPostgreSQL = DBMS("postgres")
 )
 
 type (
-	Config struct {
-		User        string
-		Password    string
-		Host        string
-		Port        string
-		Database    string
-		LogLevel    LogLevel
-		MaxIdleConn int
-		MaxOpenConn int
-		MaxLifetime time.Duration
-	}
-
-	TestConfig struct {
+	Connection struct {
 		User     string
 		Password string
 		Host     string
@@ -32,5 +23,21 @@ type (
 		Database string
 	}
 
+	Config struct {
+		DBMS        DBMS
+		Conn        Connection
+		LogLevel    LogLevel
+		MaxIdleConn int
+		MaxOpenConn int
+		MaxLifetime time.Duration
+	}
+
+	TestConfig struct {
+		DBMS DBMS
+		Conn Connection
+	}
+
 	LogLevel logger.LogLevel
+
+	DBMS string
 )

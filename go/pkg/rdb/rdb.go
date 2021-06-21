@@ -1,20 +1,17 @@
-package mysql
+package rdb
 
 import (
-	"fmt"
-
-	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
 
 func New(c Config) (*gorm.DB, error) {
-	conn := fmt.Sprintf(
-		"%s:%s@(%s:%s)/%s?charset=utf8mb4&parseTime=true",
-		c.User, c.Password, c.Host, c.Port, c.Database,
-	)
+	dlctr, err := dialector(c.DBMS, c.Conn)
+	if err != nil {
+		return nil, err
+	}
 
-	db, err := gorm.Open(mysql.Open(conn), &gorm.Config{
+	db, err := gorm.Open(dlctr, &gorm.Config{
 		Logger: logger.Default.LogMode(logger.LogLevel(c.LogLevel)),
 	})
 	if err != nil {

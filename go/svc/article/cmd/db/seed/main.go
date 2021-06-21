@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/ispec-inc/monorepo/go/pkg/infra/entity"
-	"github.com/ispec-inc/monorepo/go/pkg/mysql"
+	"github.com/ispec-inc/monorepo/go/pkg/rdb"
 	"github.com/ispec-inc/monorepo/go/svc/article/pkg/config"
 	"gorm.io/gorm"
 )
@@ -27,19 +27,22 @@ var seeds = []interface{}{
 }
 
 func main() {
-	var loglev mysql.LogLevel
+	var loglev rdb.LogLevel
 	if config.MysqlArticle.ShowAllLog {
-		loglev = mysql.LogLevelInfo
+		loglev = rdb.LogLevelInfo
 	} else {
-		loglev = mysql.LogLevelError
+		loglev = rdb.LogLevelError
 	}
 
-	db, err := mysql.New(mysql.Config{
-		User:        config.MysqlArticle.User,
-		Password:    config.MysqlArticle.Password,
-		Host:        config.MysqlArticle.Host,
-		Port:        config.MysqlArticle.Port,
-		Database:    config.MysqlArticle.Database,
+	db, err := rdb.New(rdb.Config{
+		DBMS: rdb.DBMSMySQL,
+		Conn: rdb.Connection{
+			User:     config.MysqlArticle.User,
+			Password: config.MysqlArticle.Password,
+			Host:     config.MysqlArticle.Host,
+			Port:     config.MysqlArticle.Port,
+			Database: config.MysqlArticle.Database,
+		},
 		LogLevel:    loglev,
 		MaxIdleConn: config.MysqlArticle.MaxIdleConn,
 		MaxOpenConn: config.MysqlArticle.MaxOpenConn,
