@@ -9,46 +9,42 @@ import (
 	admin "github.com/ispec-inc/monorepo/go/svc/admin/runner/router"
 	article "github.com/ispec-inc/monorepo/go/svc/article/runner/router"
 	media "github.com/ispec-inc/monorepo/go/svc/media/runner/router"
+	"go.uber.org/multierr"
 )
 
 const PORT = 9000
 
 func NewHTTP() (*http.Server, func() error, error) {
-	adr, adclnup, err := admin.NewREST()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	atclr, arclclnup, err := article.NewREST()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	mdr, mdclnup, err := media.NewREST()
-	if err != nil {
-		return nil, nil, err
+	routers := []struct {
+		new  func() (http.Handler, func() error, error)
+		path string
+	}{
+		{new: admin.NewREST, path: "/admin"},
+		{new: article.NewREST, path: "/article"},
+		{new: media.NewREST, path: "/media"},
 	}
 
 	r := chi.NewRouter()
-
-	r.Mount("/admin", adr)
-	r.Mount("/article", atclr)
-	r.Mount("/media", mdr)
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		presenter.Response(w, map[string]string{"messsage": "ok"})
 	})
 
+	clnups := make([]func() error, len(routers))
+	for i, router := range routers {
+		h, clnup, err := router.new()
+		if err != nil {
+			return nil, nil, err
+		}
+		r.Mount(router.path, h)
+		clnups[i] = clnup
+	}
+
 	clnup := func() error {
-		if adclnup() != nil {
-			return err
+		var errs error
+		for _, clnup := range clnups {
+			errs = multierr.Append(errs, clnup())
 		}
-		if arclclnup() != nil {
-			return err
-		}
-		if mdclnup() != nil {
-			return err
-		}
-		return nil
+		return errs
 	}
 
 	port := fmt.Sprintf(":%d", PORT)
