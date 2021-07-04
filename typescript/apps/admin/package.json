@@ -51,7 +51,7 @@
     "@nuxtjs/stylelint-module": "4.0.0",
     "@nuxtjs/vuetify": "1.12.1",
     "@types/nuxtjs__auth": "4.8.7",
-    "cypress": "6.2.1",
+    "cypress": "6.9.1",
     "eslint": "7.11.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-cypress": "2.11.3",
