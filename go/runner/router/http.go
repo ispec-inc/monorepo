@@ -8,6 +8,7 @@ import (
 	"github.com/ispec-inc/monorepo/go/pkg/presenter"
 	admin "github.com/ispec-inc/monorepo/go/svc/admin/runner/router"
 	article "github.com/ispec-inc/monorepo/go/svc/article/runner/router"
+	graphql_admin "github.com/ispec-inc/monorepo/go/svc/graphql-admin/runner/router"
 	media "github.com/ispec-inc/monorepo/go/svc/media/runner/router"
 	"go.uber.org/multierr"
 )
@@ -22,6 +23,7 @@ func NewHTTP() (*http.Server, func() error, error) {
 		{new: admin.NewREST, path: "/admin"},
 		{new: article.NewREST, path: "/article"},
 		{new: media.NewREST, path: "/media"},
+		{new: graphql_admin.NewGraphQL, path: "/graphql-admin"},
 	}
 
 	r := chi.NewRouter()
