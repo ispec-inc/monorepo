@@ -63,6 +63,7 @@ func (s Subscriber) Do(
 					case <-done:
 						wg.Done()
 						return
+					default:
 					}
 				}
 			}(ctx, sfunc)
