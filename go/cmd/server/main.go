@@ -3,10 +3,13 @@ package main
 import (
 	"context"
 
+	_ "net/http/pprof"
+
 	"github.com/ispec-inc/monorepo/go/runner/server"
 )
 
 func main() {
+
 	server, sclnup, err := server.New()
 	if err != nil {
 		panic(err)

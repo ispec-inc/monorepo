@@ -2,11 +2,11 @@ package server
 
 import (
 	"context"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
 	"github.com/ispec-inc/monorepo/go/runner/router"
@@ -45,6 +45,7 @@ func (s Server) Run(ctx context.Context) {
 	g.Go(func() error {
 		err := s.HTTPServer.ListenAndServe()
 		if err != nil && err != http.ErrServerClosed {
+			log.Println(err)
 			return err
 		}
 
@@ -69,14 +70,11 @@ func (s Server) Run(ctx context.Context) {
 		break
 	}
 
-	ctx, tcancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer tcancel()
+	s.HTTPServer.Shutdown(ctx)
+	s.SubscribeServer.Shutdown(ctx)
 
 	err := g.Wait()
 	if err != nil {
 		os.Exit(2)
 	}
-
-	s.HTTPServer.Shutdown(ctx)
-	s.SubscribeServer.Shutdown()
 }
