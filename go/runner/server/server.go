@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -45,7 +44,6 @@ func (s Server) Run(ctx context.Context) {
 	g.Go(func() error {
 		err := s.HTTPServer.ListenAndServe()
 		if err != nil && err != http.ErrServerClosed {
-			log.Println(err)
 			return err
 		}
 
