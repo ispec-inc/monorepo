@@ -1,0 +1,15 @@
+package {{ .PackageName }}
+
+import "github.com/graphql-go/graphql"
+
+var {{ .Definition.Name }} = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "{{ .Definition.Name }}",
+		Fields: graphql.Fields{
+			{{- range $field := .Definition.Fields }}
+			"{{ $field.Name }}": &graphql.Field{
+				Type: graphql.{{ $field.Type }},
+			},{{ end }}
+		},
+	},
+)

@@ -1,6 +1,7 @@
 package user
 
 import (
+	"github.com/davecgh/go-spew/spew"
 	"github.com/graphql-go/graphql"
 	"github.com/ispec-inc/monorepo/go/pkg/applog"
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
@@ -8,6 +9,8 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/model"
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/redisbs"
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/view"
+	gqlparser "github.com/vektah/gqlparser/v2"
+	"github.com/vektah/gqlparser/v2/ast"
 )
 
 type resolver struct {
@@ -24,6 +27,28 @@ func newResolver() resolver {
 
 func (r resolver) list(params graphql.ResolveParams) (interface{}, error) {
 	usrs := model.Users{}
+	if err := usrs.Find(); err != nil {
+		r.log.Error(params.Context, err)
+		return nil, err
+	}
+
+	src := &ast.Source{
+		Name: "./svc/graphql-admin/graphql/queries/user.graphql",
+		Input: `
+			type User{
+				id: Int
+				name: String
+				email: String
+			}
+		`,
+	}
+	s, err := gqlparser.LoadSchema(src)
+	if err != nil {
+		r.log.Error(params.Context, err)
+		return nil, err
+	}
+	spew.Dump(s.Types["User"].Fields[0].Name)
+
 	if err := usrs.Find(); err != nil {
 		r.log.Error(params.Context, err)
 		return nil, err
