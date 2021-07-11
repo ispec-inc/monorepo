@@ -1303,15 +1303,15 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@capacitor/android@2.4.7":
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-2.4.7.tgz#c7edc5322dbd1db79c61b1f4e579b7b81024ce5d"
-  integrity sha512-7jcmwheo94dJEOX1z4r3SlZrL+MvESav1xsUwC5ydLFZCpuvBKJ0szbDNWzCAglgpXmW9hC0WdwYBErgDrDPRg==
+"@capacitor/android@2.4.8":
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-2.4.8.tgz#7a60cfd0ae9e336d9064a988fc56a7763657f7f5"
+  integrity sha512-uFTXsh9YBR/eBgqTZRIpSWCp59wbIKJGfsGB6dufxV3fYkiGJkMVZ1QoBnqcY5hk+qIB0nM3ZyUDc6wMq+HLnw==
 
-"@capacitor/cli@2.4.7":
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/@capacitor/cli/-/cli-2.4.7.tgz#690089689b25cb22a25eb930b1dd04af757f2f95"
-  integrity sha512-RC5EO3oA2gWniZK0JWRlZa+7MFIoHYiAtt+W4Hqq74nyv1C0z/MvRY3pX2DX7kKy6Uc1Z/25D0uSXRk+erv3RQ==
+"@capacitor/cli@2.4.8":
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/@capacitor/cli/-/cli-2.4.8.tgz#77974f850823025bc74cdb878cf6140ca125c92f"
+  integrity sha512-9c9wjBTSg3QmwAl6ijO2slOdQJEEambZICG3D4Q2FfUbT6BU1zbFYfl1ISufbyzvKU2tu42JCcfoR+SYvACh6g==
   dependencies:
     chalk "^2.3.0"
     commander "^4.1.1"
@@ -1325,17 +1325,17 @@
     which "^1.3.0"
     xml2js "^0.4.19"
 
-"@capacitor/core@2.4.7":
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.4.7.tgz#f3b4d5728db7e764c1153da5e67d369bda35b772"
-  integrity sha512-ZPzXXQ4EPwR/ZhNDkmlxyzw4FvquIl/ROj8HMMM0MEd4xZfM8ulNGPIL6br9TWdlFLGBKq40eymPZjKaivGnig==
+"@capacitor/core@2.4.8":
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.4.8.tgz#c24c8ec0361b20da81608a569adde05127ee7d46"
+  integrity sha512-8WD5SntTA0wmX4hAlsZtLRara8Nu5g13GUKoo9R1uT2kcka//4WF7JJJ34WYko8599R87UalVCoOQhxMk+85uw==
   dependencies:
     tslib "^1.9.0"
 
-"@capacitor/ios@2.4.7":
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-2.4.7.tgz#03eecc5348d2ac84e62fc17ae37cc266bcc6a437"
-  integrity sha512-XKYU67ZM+yY4/vDJ3ZVfs+phjtWK8TcKwq75fGoxB9PKXuCmMi5bihPuA3Xs/sIFXuozpnaYnspp0eTRJ7bG0w==
+"@capacitor/ios@2.4.8":
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-2.4.8.tgz#61fd20ef84ebf23b6763830d14beb531c2e210b3"
+  integrity sha512-TTNa6j4JVPCxqXnJI2y8IfgprjucfbfNVol34M2dxRF3D3xtDbxB2KFi2M4dobp9vjHO7X+2AxZ99plSzLIJzw==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
