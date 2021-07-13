@@ -1,43 +1,43 @@
 package gqlgen
 
 import (
-	"os"
-	"text/template"
-
 	"github.com/vektah/gqlparser/v2/ast"
 )
 
-const (
-	typeTemplate = "./pkg/gqlgen/type.gotpl"
-)
-
-type TypeGenerator struct {
-	Definition  *ast.Definition
-	PackageName string
+type typeGenerator struct {
+	Definition          *ast.Definition
+	FieldDefinitionList []fieldGenerator
+	PackageName         string
 }
 
-func NewType(
-	def *ast.Definition,
-	pkg string,
-) TypeGenerator {
-	return TypeGenerator{
-		Definition:  def,
-		PackageName: pkg,
+func newTypeGenerator(def *ast.Definition) typeGenerator {
+	fgs := make([]fieldGenerator, len(def.Fields))
+
+	for i := range def.Fields {
+
+		fg := fieldGenerator{
+			Definition: def.Fields[i],
+			Arguments:  newArgGenerators(def.Fields[i].Arguments),
+		}
+		fgs = append(fgs, fg)
+	}
+
+	return typeGenerator{
+		Definition:          def,
+		FieldDefinitionList: fgs,
+		PackageName:         pkgName,
 	}
 }
 
-func (g TypeGenerator) To(out string) error {
-	tmpl, err := template.ParseFiles(typeTemplate)
-	if err != nil {
-		return err
+func newArgGenerators(adl ast.ArgumentDefinitionList) []argGenerator {
+	args := make([]argGenerator, len(adl))
+
+	for t := range adl {
+		args[t] = argGenerator{
+			Definition: adl[t],
+		}
 	}
 
-	f, err := os.Create(out)
-	if err != nil {
-		return err
-	}
+	return args
 
-	defer f.Close()
-
-	return tmpl.Execute(f, g)
 }

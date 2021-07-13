@@ -1,4 +1,4 @@
-package obj
+package gqlobj
 
 import "github.com/graphql-go/graphql"
 
@@ -7,13 +7,12 @@ var User = graphql.NewObject(
 		Name: "User",
 		Fields: graphql.Fields{
 			"id": &graphql.Field{
-				Type: graphql.Int,
+				Type: graphql.ID,
+                Description: "",
 			},
 			"name": &graphql.Field{
 				Type: graphql.String,
-			},
-			"email": &graphql.Field{
-				Type: graphql.String,
+                Description: "",
 			},
 		},
 	},
