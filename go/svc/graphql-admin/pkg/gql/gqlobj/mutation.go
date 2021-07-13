@@ -6,9 +6,9 @@ type MutationResolverRegistry interface {
 	CreateArticle() func(params graphql.ResolveParams) (interface{}, error)
 }
 
-func Mutation(r MutationResolverRegistry) graphql.ObjectConfig {
-	return graphql.ObjectConfig{
-		Name: "Mutation",
+func Mutation(r MutationResolverRegistry) *graphql.Object {
+	return graphql.NewObject(graphql.ObjectConfig{
+		Name: "RootMutation",
 		Fields: graphql.Fields{
 			"createArticle": &graphql.Field{
 				Type:        Article,
@@ -26,5 +26,5 @@ func Mutation(r MutationResolverRegistry) graphql.ObjectConfig {
 				},
 			},
 		},
-	}
+	})
 }

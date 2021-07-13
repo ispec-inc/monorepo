@@ -6,7 +6,8 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/graphql-go/graphql"
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/database"
-	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/gql/fields"
+	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/gql/gqlobj"
+	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/gql/resolver"
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/logger"
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/redisbs"
 )
@@ -33,9 +34,9 @@ func NewGraphQL() (http.Handler, func() error, error) {
 }
 
 func initHandler() (http.Handler, error) {
-	f := fields.New()
-	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: f}
-	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
+	schemaConfig := graphql.SchemaConfig{
+		Query: gqlobj.Query(resolver.NewQueryResolver()),
+	}
 
 	schema, err := graphql.NewSchema(schemaConfig)
 	if err != nil {

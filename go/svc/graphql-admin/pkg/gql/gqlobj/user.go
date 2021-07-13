@@ -14,6 +14,10 @@ var User = graphql.NewObject(
 				Type:        graphql.String,
 				Description: "",
 			},
+			"email": &graphql.Field{
+				Type:        graphql.String,
+				Description: "",
+			},
 		},
 	},
 )

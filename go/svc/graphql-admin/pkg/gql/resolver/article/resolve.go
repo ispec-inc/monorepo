@@ -10,19 +10,19 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/view"
 )
 
-type resolver struct {
+type Resolver struct {
 	log applog.AppLog
 	bs  msgbs.MessageBus
 }
 
-func newResolver() resolver {
-	return resolver{
+func NewResolver() Resolver {
+	return Resolver{
 		log: applog.New(logger.Get()),
 		bs:  redisbs.Get(),
 	}
 }
 
-func (r resolver) list(params graphql.ResolveParams) (interface{}, error) {
+func (r Resolver) List(params graphql.ResolveParams) (interface{}, error) {
 	atls := model.Articles{}
 	if err := atls.Find(); err != nil {
 		r.log.Error(params.Context, err)

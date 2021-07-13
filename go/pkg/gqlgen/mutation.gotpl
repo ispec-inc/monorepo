@@ -8,9 +8,9 @@ type MutationResolverRegistry interface {
     {{ .UpperCamelName }}() func(params graphql.ResolveParams) (interface{}, error){{- end }}{{- end }}{{- end }}
 }
 
-func Mutation(r MutationResolverRegistry) graphql.ObjectConfig {
-	return graphql.ObjectConfig{
-		Name: "{{ .Definition.Name }}",
+func Mutation(r MutationResolverRegistry) *graphql.Object {
+	return graphql.NewObject(graphql.ObjectConfig{
+		Name: "RootMutation",
 		Fields: graphql.Fields{
 			{{- range $field := .FieldDefinitionList }}
             {{- if .Definition }}{{- if not .IsPrivate }}
@@ -30,5 +30,5 @@ func Mutation(r MutationResolverRegistry) graphql.ObjectConfig {
                 {{ end }}
 			},{{ end }}{{ end }}{{ end }}
 		},
-	}
+	})
 }

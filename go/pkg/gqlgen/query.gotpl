@@ -9,9 +9,9 @@ type QueryResolverRegistry interface {
 {{- end }}{{- end }}{{- end }}
 }
 
-func Query(r QueryResolverRegistry) graphql.ObjectConfig {
-	return graphql.ObjectConfig{
-		Name: "{{ .Definition.Name }}",
+func Query(r QueryResolverRegistry) *graphql.Object {
+	return graphql.NewObject(graphql.ObjectConfig{
+		Name: "RootQuery",
 		Fields: graphql.Fields{
 			{{- range $field := .FieldDefinitionList }}
             {{- if .Definition }}{{- if not .IsPrivate }}
@@ -31,5 +31,5 @@ func Query(r QueryResolverRegistry) graphql.ObjectConfig {
                 {{ end }}
 			},{{ end }}{{ end }}{{ end }}
 		},
-	}
+	})
 }

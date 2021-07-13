@@ -1,6 +1,7 @@
 type User {
   id: ID
   name: String
+  email: String
 }
 
 type Article{
@@ -12,6 +13,7 @@ type Article{
 
 type Query {
   users(id: Int): [User]
+  articles(title: String): [Article]
 }
 
 type Mutation {
