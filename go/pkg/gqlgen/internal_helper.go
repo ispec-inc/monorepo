@@ -2,6 +2,7 @@ package gqlgen
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/vektah/gqlparser/v2/ast"
 )
@@ -12,6 +13,11 @@ var types = []string{
 	"ID",
 	"Int",
 	"String",
+}
+
+var specificTypes = []string{
+	"Mutation",
+	"Query",
 }
 
 func extractType(t *ast.Type) string {
@@ -55,6 +61,10 @@ func isDefiniedType(target string) bool {
 	return isContain(types, target)
 }
 
+func isNotGenerateType(target string) bool {
+	return isContain(specificTypes, target) || isPrivateType(target) || isDefiniedType(target)
+}
+
 func isContain(sa []string, target string) bool {
 	for _, s := range sa {
 		if s == target {
@@ -63,4 +73,10 @@ func isContain(sa []string, target string) bool {
 	}
 
 	return false
+}
+
+func lowerCamelToUpperCamel(s string) string {
+	s = strings.ToUpper(string(s[0])) + s[1:]
+
+	return s
 }

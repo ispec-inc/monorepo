@@ -3,6 +3,7 @@ package gqlgen
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"strings"
 	"text/template"
 
@@ -10,8 +11,12 @@ import (
 )
 
 const (
-	typeTemplate   = "./pkg/gqlgen/type.gotpl"
-	pkgName        = "gqlobj"
+	typeTemplate     = "./pkg/gqlgen/type.gotpl"
+	queryTemplate    = "./pkg/gqlgen/query.gotpl"
+	mutationTemplate = "./pkg/gqlgen/mutation.gotpl"
+
+	pkgName = "gqlobj"
+
 	typePrefix     = "type"
 	queryPrefix    = "query"
 	mutationPrefix = "mutation"
@@ -47,6 +52,16 @@ func (g Generator) To(dir string) error {
 		return err
 	}
 
+	err = g.generateQuery(dir, &funcs)
+	if err != nil {
+		return err
+	}
+
+	err = g.generateMutation(dir, &funcs)
+	if err != nil {
+		return err
+	}
+
 	defer func() error {
 		for _, f := range funcs {
 			err := f()
@@ -67,19 +82,92 @@ func (g Generator) generateType(baseDir string, defers *[]func() error) error {
 	}
 
 	for _, t := range g.Schema.Types {
+		tg := newTypeGenerator(t)
+		if isNotGenerateType(tg.Definition.Name) {
+			continue
+		}
+
 		f, err := g.openFile(t, baseDir)
 		if err != nil {
 			return err
 		}
 
-		tg := newTypeGenerator(t)
 		err = tmpl.Execute(f, tg)
+		if err != nil {
+			return err
+		}
+
+		_, err = exec.Command("gofmt", "-w", f.Name()).Output()
 		if err != nil {
 			return err
 		}
 
 		*defers = append(*defers, f.Close)
 	}
+
+	return nil
+}
+
+func (g Generator) generateQuery(baseDir string, defers *[]func() error) error {
+
+	if g.Schema.Query == nil {
+		return nil
+	}
+
+	tmpl, err := template.ParseFiles(queryTemplate)
+	if err != nil {
+		return err
+	}
+
+	f, err := g.openFile(g.Schema.Query, baseDir)
+	if err != nil {
+		return err
+	}
+
+	tg := newTypeGenerator(g.Schema.Query)
+	err = tmpl.Execute(f, tg)
+	if err != nil {
+		return err
+	}
+
+	_, err = exec.Command("gofmt", "-w", f.Name()).Output()
+	if err != nil {
+		return err
+	}
+
+	*defers = append(*defers, f.Close)
+
+	return nil
+}
+
+func (g Generator) generateMutation(baseDir string, defers *[]func() error) error {
+
+	if g.Schema.Mutation == nil {
+		return nil
+	}
+
+	tmpl, err := template.ParseFiles(mutationTemplate)
+	if err != nil {
+		return err
+	}
+
+	f, err := g.openFile(g.Schema.Mutation, baseDir)
+	if err != nil {
+		return err
+	}
+
+	tg := newTypeGenerator(g.Schema.Mutation)
+	err = tmpl.Execute(f, tg)
+	if err != nil {
+		return err
+	}
+
+	_, err = exec.Command("gofmt", "-w", f.Name()).Output()
+	if err != nil {
+		return err
+	}
+
+	*defers = append(*defers, f.Close)
 
 	return nil
 }

@@ -19,6 +19,10 @@ func (fd fieldGenerator) HasArgs() bool {
 	return len(fd.Arguments) != 0
 }
 
+func (fd fieldGenerator) UpperCamelName() string {
+	return lowerCamelToUpperCamel(fd.Definition.Name)
+}
+
 type argGenerator struct {
 	Definition *ast.ArgumentDefinition
 }
@@ -29,4 +33,8 @@ func (ag argGenerator) ExtractType() string {
 
 func (ag argGenerator) IsPrivate() bool {
 	return isPrivateType(extractType(ag.Definition.Type))
+}
+
+func (ag argGenerator) UpperCamelName() string {
+	return lowerCamelToUpperCamel(ag.Definition.Name)
 }

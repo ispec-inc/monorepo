@@ -31,7 +31,7 @@ func main() {
 
 	g := gqlgen.New(s, "obj")
 
-	err = g.To("./svc/graphql-admin/pkg/gql/obj")
+	err = g.To("./svc/graphql-admin/pkg/gql/gqlobj")
 	if err != nil {
 		log.Fatal(err)
 	}

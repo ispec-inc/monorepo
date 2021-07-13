@@ -7,12 +7,12 @@ var User = graphql.NewObject(
 		Name: "User",
 		Fields: graphql.Fields{
 			"id": &graphql.Field{
-				Type: graphql.ID,
-                Description: "",
+				Type:        graphql.ID,
+				Description: "",
 			},
 			"name": &graphql.Field{
-				Type: graphql.String,
-                Description: "",
+				Type:        graphql.String,
+				Description: "",
 			},
 		},
 	},

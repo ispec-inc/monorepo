@@ -2,25 +2,25 @@ package gqlobj
 
 import "github.com/graphql-go/graphql"
 
-var Query = graphql.NewObject(
-	graphql.ObjectConfig{
+type QueryResolverRegistry interface {
+	Users() func(params graphql.ResolveParams) (interface{}, error)
+}
+
+func Query(r QueryResolverRegistry) graphql.ObjectConfig {
+	return graphql.ObjectConfig{
 		Name: "Query",
 		Fields: graphql.Fields{
 			"users": &graphql.Field{
-				Type: graphql.NewList(User),
-                Description: "",
-                Args: graphql.FieldConfigArgument{
-                    "id": &graphql.ArgumentConfig{
-                        Type: graphql.Int,
-                        Description: "",
-                    },
-                },
-                
-			},
-			"__schema": &graphql.Field{
-			},
-			"__type": &graphql.Field{
+				Type:        graphql.NewList(User),
+				Description: "",
+				Resolve:     r.Users(),
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type:        graphql.Int,
+						Description: "",
+					},
+				},
 			},
 		},
-	},
-)
+	}
+}
