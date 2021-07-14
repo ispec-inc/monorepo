@@ -19,6 +19,8 @@ bin/*
 .env/*
 !.env/*.default
 !.env/test
+gen/.env
+!gen/.env.default
 
 .vscode/
 
