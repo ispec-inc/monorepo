@@ -1,6 +1,6 @@
 name: go-test
 
-on: 
+on:
   push:
     branches:
       - master
@@ -8,7 +8,7 @@ on:
     branches:
       - "*"
     paths:
-      - go/** 
+      - go/**
       - .github/workflows/gotest.yml
 
 jobs:
@@ -23,9 +23,10 @@ jobs:
         run: |
           cp .env/article.default .env/article
           cp .env/admin.default .env/admin
+          cp gen/.env.default gen/.env
           make init
         working-directory: go
-      
+
       - name: migration
         run: make article-migrate
         working-directory: migration
