@@ -16,7 +16,7 @@ type CommonConfig struct {
 func Common(r *chi.Mux, c CommonConfig) *chi.Mux {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
-	r.Use(middleware.Logger)
+	r.Use(RequestLogger)
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.Timeout(c.Timeout))
 	r.Use(cors.Handler(cors.Options{
