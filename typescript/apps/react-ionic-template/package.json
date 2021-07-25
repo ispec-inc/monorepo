@@ -7,7 +7,7 @@
     "@capacitor/core": "2.4.8",
     "@capacitor/ios": "2.4.8",
     "@ionic/react": "5.6.12",
-    "@ionic/react-router": "5.6.11",
+    "@ionic/react-router": "5.6.12",
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "9.5.0",
     "@testing-library/user-event": "8.1.3",
