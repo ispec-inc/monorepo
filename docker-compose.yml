@@ -10,6 +10,19 @@ services:
     networks:
       - monorepo
 
+  gen:
+    container_name: gen
+    build:
+      context: .
+      dockerfile: gen/docker/Dockerfile
+    env_file:
+      - gen/.env
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    networks:
+      - monorepo
+
 networks:
   monorepo:
     external: true
