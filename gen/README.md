@@ -17,12 +17,15 @@ gen/.env
 ```
 ##### Article #####
 
+DB_DRIVER=mysql
+...
+##### DB2 #####
+
 # DB_DRIVER=mysql
 ...
+##### DB3 #####
 
-##### Interview #####
-
-DB_DRIVER=mysql
+# DB_DRIVER=mysql
 ...
 ```
 
