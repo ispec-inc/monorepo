@@ -4,6 +4,8 @@
 
 ## Usage
 
+0. [DBをセットアップ](../go/README.md)
+
 1. 環境変数の設定
 ```
 cp gen/.env.default gen/.env
@@ -13,17 +15,14 @@ cp gen/.env.default gen/.env
 
 gen/.env
 ```
-TEMP_DIR="./gen/templates"
-OUT_DIR="./pkg/infra/entity"
-
 ##### Article #####
 
-DB_DRIVER=mysql
+# DB_DRIVER=mysql
 ...
 
-##### Admin #####
+##### Interview #####
 
-# DB_DRIVER=mysql
+DB_DRIVER=mysql
 ...
 ```
 
@@ -36,12 +35,20 @@ $ make gen
 
 - 上書き保存
 
-Makefile
 ```
-$ docker-compose run --rm gen \
-	gen --sqltype=$(sqltype) \
-    ...
-    --overwrite
+$ make gen opt=--overwrite
+```
+
+- .protoファイルを生成
+
+```
+$ make protogen
+```
+
+- .protoファイルを上書き保存
+
+```
+$ make protogen opt=--overwrite
 ```
 
 ## And more
