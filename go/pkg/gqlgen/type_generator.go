@@ -10,6 +10,11 @@ type typeGenerator struct {
 	PackageName         string
 }
 
+type typeGenerators struct {
+	Generators  []typeGenerator
+	PackageName string
+}
+
 func newTypeGenerator(def *ast.Definition) typeGenerator {
 	fgs := make([]fieldGenerator, len(def.Fields))
 
@@ -19,7 +24,7 @@ func newTypeGenerator(def *ast.Definition) typeGenerator {
 			Definition: def.Fields[i],
 			Arguments:  newArgGenerators(def.Fields[i].Arguments),
 		}
-		fgs = append(fgs, fg)
+		fgs[i] = fg
 	}
 
 	return typeGenerator{
@@ -40,4 +45,16 @@ func newArgGenerators(adl ast.ArgumentDefinitionList) []argGenerator {
 
 	return args
 
+}
+
+func (tg typeGenerator) IsPrivate() bool {
+	return isPrivateType(tg.Definition.Name)
+}
+
+func (tg typeGenerator) UpperCamelName() string {
+	return lowerCamelToUpperCamel(tg.Definition.Name)
+}
+
+func (tg typeGenerator) IsDefinedType() bool {
+	return isDefiniedType(tg.Definition.Name)
 }

@@ -11,6 +11,7 @@ import (
 )
 
 const (
+	typeDefTemplate  = "./pkg/gqlgen/type_def.gotpl"
 	typeTemplate     = "./pkg/gqlgen/type.gotpl"
 	queryTemplate    = "./pkg/gqlgen/query.gotpl"
 	mutationTemplate = "./pkg/gqlgen/mutation.gotpl"
@@ -76,16 +77,19 @@ func (g Generator) To(dir string) error {
 }
 
 func (g Generator) generateType(baseDir string, defers *[]func() error) error {
-	tmpl, err := template.ParseFiles(typeTemplate)
-	if err != nil {
-		return err
-	}
-
+	var gens []typeGenerator
 	for _, t := range g.Schema.Types {
+		tmpl, err := template.ParseFiles(typeDefTemplate)
+		if err != nil {
+			return err
+		}
+
 		tg := newTypeGenerator(t)
 		if isNotGenerateType(tg.Definition.Name) {
 			continue
 		}
+
+		gens = append(gens, tg)
 
 		f, err := g.openFile(t, baseDir)
 		if err != nil {
@@ -103,6 +107,26 @@ func (g Generator) generateType(baseDir string, defers *[]func() error) error {
 		}
 
 		*defers = append(*defers, f.Close)
+	}
+
+	tmpl, err := template.ParseFiles(typeTemplate)
+	if err != nil {
+		return err
+	}
+
+	fname := fmt.Sprintf("%s/type.go", baseDir)
+	f, err := os.Create(fname)
+	if err != nil {
+		return err
+	}
+
+	tgens := typeGenerators{
+		Generators:  gens,
+		PackageName: pkgName,
+	}
+	err = tmpl.Execute(f, tgens)
+	if err != nil {
+		return err
 	}
 
 	return nil

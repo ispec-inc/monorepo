@@ -29,7 +29,7 @@ func main() {
 		log.Fatal(gerr)
 	}
 
-	g := gqlgen.New(s, "obj")
+	g := gqlgen.New(s, "gqlobj")
 
 	err = g.To("./svc/graphql-admin/pkg/gql/gqlobj")
 	if err != nil {

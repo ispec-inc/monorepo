@@ -9,12 +9,13 @@ type QueryResolverRegistry interface {
 {{- end }}{{- end }}{{- end }}
 }
 
-func Query(r QueryResolverRegistry) *graphql.Object {
+func Query(r QueryResolverRegistry, tr TypeRegistry) *graphql.Object {
 	return graphql.NewObject(graphql.ObjectConfig{
 		Name: "RootQuery",
 		Fields: graphql.Fields{
 			{{- range $field := .FieldDefinitionList }}
-            {{- if .Definition }}{{- if not .IsPrivate }}
+            {{- if .Definition }}
+            {{- if not .IsPrivate }}
 			"{{ .Definition.Name }}": &graphql.Field{
 				Type: {{ .ExtractType }},
                 Description: "{{ .Definition.Description }}",

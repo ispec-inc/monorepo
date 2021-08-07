@@ -20,20 +20,22 @@ var specificTypes = []string{
 	"Query",
 }
 
+const typeRegistryVarName = "tr"
+
 func extractType(t *ast.Type) string {
 
 	if t.NamedType != "" {
 		if isDefiniedType(t.NamedType) {
 			return fmt.Sprintf("graphql.%s", t.NamedType)
 		}
-		return fmt.Sprintf(t.NamedType)
+		return fmt.Sprintf("%s.%s()", typeRegistryVarName, t.NamedType)
 	}
 
 	if isDefiniedType(t.NamedType) {
 		return fmt.Sprintf("graphql.NewList(graphql.%s)", t.Elem.String())
 	}
 
-	return fmt.Sprintf("graphql.NewList(%s)", extractOriginalElement(t.Elem))
+	return fmt.Sprintf("graphql.NewList(%s.%s())", typeRegistryVarName, extractOriginalElement(t.Elem))
 }
 
 func extractOriginalElement(elem *ast.Type) string {
@@ -51,12 +53,14 @@ func isPrivateType(typestr string) bool {
 	}
 
 	return typestr[:2] == "__"
+
 }
 
 func isNotNullElement(elem *ast.Type) bool {
 	return string(elem.String()[len(elem.String())-1]) == "!"
 }
 
+// isDefiniedType returns True if the type name passed as argument is a type defined on the GraphQL side.
 func isDefiniedType(target string) bool {
 	return isContain(types, target)
 }

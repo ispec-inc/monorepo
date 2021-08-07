@@ -7,12 +7,12 @@ type QueryResolverRegistry interface {
 	Articles() func(params graphql.ResolveParams) (interface{}, error)
 }
 
-func Query(r QueryResolverRegistry) *graphql.Object {
+func Query(r QueryResolverRegistry, tr TypeRegistry) *graphql.Object {
 	return graphql.NewObject(graphql.ObjectConfig{
 		Name: "RootQuery",
 		Fields: graphql.Fields{
 			"users": &graphql.Field{
-				Type:        graphql.NewList(User),
+				Type:        graphql.NewList(tr.User()),
 				Description: "",
 				Resolve:     r.Users(),
 				Args: graphql.FieldConfigArgument{
@@ -23,7 +23,7 @@ func Query(r QueryResolverRegistry) *graphql.Object {
 				},
 			},
 			"articles": &graphql.Field{
-				Type:        graphql.NewList(Article),
+				Type:        graphql.NewList(tr.Article()),
 				Description: "",
 				Resolve:     r.Articles(),
 				Args: graphql.FieldConfigArgument{

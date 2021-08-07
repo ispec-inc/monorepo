@@ -8,7 +8,7 @@ type MutationResolverRegistry interface {
     {{ .UpperCamelName }}() func(params graphql.ResolveParams) (interface{}, error){{- end }}{{- end }}{{- end }}
 }
 
-func Mutation(r MutationResolverRegistry) *graphql.Object {
+func Mutation(r MutationResolverRegistry, tr TypeRegistry) *graphql.Object {
 	return graphql.NewObject(graphql.ObjectConfig{
 		Name: "RootMutation",
 		Fields: graphql.Fields{

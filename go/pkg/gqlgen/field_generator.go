@@ -1,6 +1,8 @@
 package gqlgen
 
-import "github.com/vektah/gqlparser/v2/ast"
+import (
+	"github.com/vektah/gqlparser/v2/ast"
+)
 
 type fieldGenerator struct {
 	Definition *ast.FieldDefinition
@@ -12,7 +14,7 @@ func (fg fieldGenerator) ExtractType() string {
 }
 
 func (fg fieldGenerator) IsPrivate() bool {
-	return isPrivateType(extractType(fg.Definition.Type))
+	return isPrivateType(fg.Definition.Type.NamedType)
 }
 
 func (fd fieldGenerator) HasArgs() bool {
@@ -21,6 +23,10 @@ func (fd fieldGenerator) HasArgs() bool {
 
 func (fd fieldGenerator) UpperCamelName() string {
 	return lowerCamelToUpperCamel(fd.Definition.Name)
+}
+
+func (fd fieldGenerator) IsUserDefinedType() bool {
+	return !(isDefiniedType(fd.Definition.Type.NamedType) || fd.IsPrivate())
 }
 
 type argGenerator struct {
@@ -32,7 +38,7 @@ func (ag argGenerator) ExtractType() string {
 }
 
 func (ag argGenerator) IsPrivate() bool {
-	return isPrivateType(extractType(ag.Definition.Type))
+	return isPrivateType(ag.Definition.Type.NamedType)
 }
 
 func (ag argGenerator) UpperCamelName() string {
