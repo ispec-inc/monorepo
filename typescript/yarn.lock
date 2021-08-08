@@ -1506,10 +1506,10 @@
     ionicons "^5.5.3"
     tslib "^2.1.0"
 
-"@ionic/react-router@5.6.12":
-  version "5.6.12"
-  resolved "https://registry.yarnpkg.com/@ionic/react-router/-/react-router-5.6.12.tgz#19d9d8fe8ba5b1803558b13618e8c1c77b3ba82a"
-  integrity sha512-ald3uEUmbmb9xtvdBIF5mSJ8S8CJttEZvntCgTxCsekMuxc2cUJlmAI/+VewzsuIOxkf91iUTKnF5hhAGufUqQ==
+"@ionic/react-router@5.6.13":
+  version "5.6.13"
+  resolved "https://registry.yarnpkg.com/@ionic/react-router/-/react-router-5.6.13.tgz#456c7c741871ada0bcae5bf3c822a983a19285ab"
+  integrity sha512-0EIqvWLlZEdydISyKeNgS+EU3n9QVWwvIqQWRIHlhSRf0GGGwOBbYeW4n9mOd8etrkixYz7puTD6/6vKW3tbWQ==
   dependencies:
     tslib "*"
 
