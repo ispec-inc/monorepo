@@ -23,7 +23,6 @@ jobs:
         run: |
           cp .env/article.default .env/article
           cp .env/admin.default .env/admin
-          cp gen/.env.default gen/.env
           make init
         working-directory: go
 

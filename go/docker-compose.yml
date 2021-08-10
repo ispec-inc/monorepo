@@ -75,19 +75,6 @@ services:
     volumes:
       - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
-  gen:
-    container_name: gen
-    build:
-      context: .
-      dockerfile: docker/dev/gen.Dockerfile
-    env_file:
-      - gen/.env
-    volumes:
-      - ./:/app
-    working_dir: /app
-    networks:
-      - monorepo
-
   dockerize:
     image: jwilder/dockerize:0.6.1
     networks:
