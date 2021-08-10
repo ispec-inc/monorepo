@@ -26,8 +26,7 @@ protoc: # protoc
 gen: opt :=
 gen: ## generate entity from schema
 	docker-compose run --rm gen \
-	bash -c 'export $(cat gen/.env | grep -v ^#) \
-	&& gen --sqltype=$$DB_DRIVER \
+	bash -c 'gen --sqltype=$$DB_DRIVER \
 	--connstr=$$DSN \
 	--database=$$DB_NAME \
 	--exclude=ar_internal_metadata,schema_migrations \
@@ -43,8 +42,7 @@ gen: ## generate entity from schema
 protogen: opt :=
 protogen: ## generate proto file from schema
 	docker-compose run --rm gen \
-	bash -c 'export $(cat gen/.env | grep -v ^#) \
-	&& gen --sqltype=$$DB_DRIVER \
+	bash -c 'gen --sqltype=$$DB_DRIVER \
 	--connstr=$$DSN \
 	--database=$$DB_NAME \
 	--exclude=ar_internal_metadata,schema_migrations \
