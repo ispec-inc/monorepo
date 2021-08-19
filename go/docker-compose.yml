@@ -5,16 +5,21 @@ services:
     build:
       context: .
       dockerfile: docker/dev/Dockerfile
-    command: realize start --name article --run
+    command: air -c ./svc/article/.air.toml
     ports:
       - "9000:9000"
+      - "2345:2345"
     env_file:
       - .env/article
     depends_on:
       - article-mysql
     volumes:
-      - ./:/app
-    working_dir: /app
+      - ./:/go/src/app
+    working_dir: /go/src/app
+    security_opt:
+      - apparmor:unconfined
+    cap_add:
+      - SYS_PTRACE
     networks:
       - monorepo
 
@@ -23,16 +28,21 @@ services:
     build:
       context: .
       dockerfile: docker/dev/Dockerfile
-    command: realize start --name admin --run
+    command: air -c ./svc/admin/.air.toml
     ports:
       - "9001:9001"
+      - "2346:2345"
     env_file:
       - .env/admin
     depends_on:
       - article-mysql
     volumes:
-      - ./:/app
-    working_dir: /app
+      - ./:/go/src/app
+    working_dir: /go/src/app
+    security_opt:
+      - apparmor:unconfined
+    cap_add:
+      - SYS_PTRACE
     networks:
       - monorepo
 
@@ -44,8 +54,8 @@ services:
     depends_on:
       - article-mysql-test
     volumes:
-      - ./:/app
-    working_dir: /app
+      - ./:/go/src/app
+    working_dir: /go/src/app
     networks:
       - monorepo
 
