@@ -5,7 +5,7 @@ import "github.com/graphql-go/graphql"
 type UserTypeResolverRegistry interface {
 }
 
-func UserType(r UserTypeResolverRegistry, tr TypeRegistry) *graphql.Object {
+func UserType(r UserTypeResolverRegistry) *graphql.Object {
 	return graphql.NewObject(
 		graphql.ObjectConfig{
 			Name: "User",

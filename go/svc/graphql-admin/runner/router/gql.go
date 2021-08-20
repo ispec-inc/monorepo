@@ -8,6 +8,7 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/database"
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/gql/gqlobj"
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/gql/resolver"
+	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/gql/typedef"
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/logger"
 	"github.com/ispec-inc/monorepo/go/svc/graphql-admin/pkg/redisbs"
 )
@@ -34,8 +35,10 @@ func NewGraphQL() (http.Handler, func() error, error) {
 }
 
 func initHandler() (http.Handler, error) {
+	qr := resolver.NewQueryResolver()
+	tr := typedef.NewRegistry()
 	schemaConfig := graphql.SchemaConfig{
-		Query: gqlobj.Query(resolver.NewQueryResolver()),
+		Query: gqlobj.Query(qr, tr),
 	}
 
 	schema, err := graphql.NewSchema(schemaConfig)

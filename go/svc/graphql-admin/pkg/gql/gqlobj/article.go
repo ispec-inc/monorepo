@@ -26,7 +26,12 @@ func ArticleType(r ArticleTypeResolverRegistry, tr TypeRegistry) *graphql.Object
 				"user": &graphql.Field{
 					Type:        tr.User(),
 					Description: "",
-					Resolve:     r.User(),
+					Args: graphql.FieldConfigArgument{
+						"id": &graphql.ArgumentConfig{
+							Type: graphql.Int,
+						},
+					},
+					Resolve: r.User(),
 				},
 			},
 		},

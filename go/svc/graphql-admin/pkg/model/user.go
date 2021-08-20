@@ -81,3 +81,10 @@ func (a *Users) Find() error {
 		entity.UserTableName,
 	)
 }
+
+func (a Users) List(ids []int64) error {
+	return apperror.NewGormFind(
+		database.Get().Where("id in ?", ids).Find(a).Error,
+		entity.UserTableName,
+	)
+}
