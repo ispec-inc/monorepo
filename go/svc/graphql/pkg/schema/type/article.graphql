@@ -1,0 +1,5 @@
+type Article {
+    id: ID!
+    title: String!
+    writer: User!
+}
