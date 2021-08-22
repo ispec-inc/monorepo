@@ -16133,16 +16133,6 @@ type@^2.0.0:
   resolved "https://registry.yarnpkg.com/type/-/type-2.5.0.tgz#0a2e78c2e77907b252abe5f298c1b01c63f0db3d"
   integrity sha512-180WMDQaIMm3+7hGXWf12GtdniDEy7nYcyFMKJn/eZz/6tSLXrUN9V0wKSbMjej0I1WHWbpREDEKHtqPQa9NNw==
 
-typed-vuex@0.1.19:
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/typed-vuex/-/typed-vuex-0.1.19.tgz#81cffcad5e76b55bac562258f48dd56ff64088cf"
-  integrity sha512-ugrJwMEoQNncJA+ziocbaEYnu23m1ekFoRcP+cXg3SPhEqGu4u8/RoRYF4eKycvGKf3YdkRTAXn5czaDWUgrWw==
-
-typed-vuex@0.1.22:
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/typed-vuex/-/typed-vuex-0.1.22.tgz#e35a896fa7d76b37904041d38c55037b70ccf240"
-  integrity sha512-WJkYbLX9DbnjVnSKS1LNrqEXB6gbRCfk2qExAA+wa1RGQAURZpdSQ/A33YkgfQbzNitJbgR0qzjE7jclSWC6Ag==
-
 typed-vuex@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/typed-vuex/-/typed-vuex-0.2.0.tgz#1c1b60150926a764c0a5a2d5eb6620ef8e9096aa"
