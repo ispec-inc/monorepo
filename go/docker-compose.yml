@@ -38,7 +38,7 @@ services:
 
   test:
     container_name: test
-    image: golang:1.16
+    image: golang:1.17
     env_file:
       - .env/test
     depends_on:
