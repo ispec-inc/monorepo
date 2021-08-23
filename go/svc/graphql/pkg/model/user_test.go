@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestArticleModel_Find(t *testing.T) {
+func TestUserModel_Find(t *testing.T) {
 	type (
 		give struct {
 			id int64
@@ -39,8 +39,8 @@ func TestArticleModel_Find(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_find", []interface{}{
-		&entity.Article{ID: int64(1)},
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "user_model_find", []interface{}{
+		&entity.User{ID: int64(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -48,7 +48,7 @@ func TestArticleModel_Find(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			atl := &Article{}
+			atl := &User{}
 			err := atl.Find(tt.give.id)
 			assert.Equal(t, tt.err, err != nil)
 			assert.Equal(t, tt.want.id, atl.ID)
@@ -56,10 +56,10 @@ func TestArticleModel_Find(t *testing.T) {
 	}
 }
 
-func TestArticleModel_Create(t *testing.T) {
+func TestUserModel_Create(t *testing.T) {
 	type (
 		give struct {
-			article *Article
+			user *User
 		}
 		want struct {
 			changedCount int
@@ -73,20 +73,20 @@ func TestArticleModel_Create(t *testing.T) {
 	}{
 		{
 			name: "success",
-			give: give{article: NewArticle(1, "title", "body")},
+			give: give{user: NewUser("new name", "desc")},
 			want: want{changedCount: 1},
 			err:  false,
 		},
 		{
 			name: "empty body",
-			give: give{article: NewArticle(1, "title", "")},
+			give: give{user: NewUser("new name", "desc")},
 			want: want{changedCount: 0},
 			err:  true,
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_create", []interface{}{
-		&entity.Article{ID: int64(1)},
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "user_model_create", []interface{}{
+		&entity.User{ID: int64(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -94,22 +94,22 @@ func TestArticleModel_Create(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			bcnt := testool.CountRecord(t, db, entity.ArticleTableName)
-			err := tt.give.article.Create()
-			acnt := testool.CountRecord(t, db, entity.ArticleTableName)
+			bcnt := testool.CountRecord(t, db, entity.UserTableName)
+			err := tt.give.user.Create()
+			acnt := testool.CountRecord(t, db, entity.UserTableName)
 			assert.Equal(t, tt.err, err != nil)
 			assert.Equal(t, tt.want.changedCount, acnt-bcnt)
 		})
 	}
 }
 
-func TestArticleModel_Save(t *testing.T) {
+func TestUserModel_Save(t *testing.T) {
 	type (
 		give struct {
-			article *Article
+			user *User
 		}
 		want struct {
-			title string
+			name string
 		}
 	)
 	tests := []struct {
@@ -120,20 +120,20 @@ func TestArticleModel_Save(t *testing.T) {
 	}{
 		{
 			name: "success",
-			give: give{article: NewArticle(1, "new title", "body")},
-			want: want{title: "new title"},
+			give: give{user: NewUser("new name", "desc")},
+			want: want{name: "new name"},
 			err:  false,
 		},
 		{
-			name: "empty title",
-			give: give{article: NewArticle(1, "", "body")},
-			want: want{title: ""},
+			name: "empty name",
+			give: give{user: NewUser("", "desc")},
+			want: want{name: ""},
 			err:  true,
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_save", []interface{}{
-		&entity.Article{ID: int64(1)},
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "user_model_save", []interface{}{
+		&entity.User{ID: int64(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -141,16 +141,16 @@ func TestArticleModel_Save(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			err := tt.give.article.Save()
-			atl := &entity.Article{}
-			db.First(atl, tt.give.article.ID)
+			err := tt.give.user.Save()
+			atl := &entity.User{}
+			db.First(atl, tt.give.user.ID)
 			assert.Equal(t, tt.err, err != nil)
-			assert.Equal(t, tt.want.title, atl.Title)
+			assert.Equal(t, tt.want.name, atl.Name)
 		})
 	}
 }
 
-func TestArticleModel_Delete(t *testing.T) {
+func TestUserModel_Delete(t *testing.T) {
 	type (
 		give struct {
 			id int64
@@ -173,8 +173,8 @@ func TestArticleModel_Delete(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_delete", []interface{}{
-		&entity.Article{ID: int64(1)},
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "user_model_delete", []interface{}{
+		&entity.User{ID: int64(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -182,18 +182,18 @@ func TestArticleModel_Delete(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			atl := &Article{}
+			atl := &User{}
 			atl.Find(tt.give.id)
-			bcnt := testool.CountRecord(t, db, entity.ArticleTableName)
+			bcnt := testool.CountRecord(t, db, entity.UserTableName)
 			err := atl.Delete()
-			acnt := testool.CountRecord(t, db, entity.ArticleTableName)
+			acnt := testool.CountRecord(t, db, entity.UserTableName)
 			assert.Equal(t, tt.err, err != nil)
 			assert.Equal(t, tt.want.changedCount, acnt-bcnt)
 		})
 	}
 }
 
-func TestArticlesModel_Find(t *testing.T) {
+func TestUsersModel_Find(t *testing.T) {
 	type (
 		want struct {
 			count int
@@ -211,8 +211,8 @@ func TestArticlesModel_Find(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "articles_model_find", []interface{}{
-		&entity.Article{ID: int64(1)},
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "users_model_find", []interface{}{
+		&entity.User{ID: int64(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -220,7 +220,7 @@ func TestArticlesModel_Find(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			atls := &Articles{}
+			atls := &Users{}
 			err := atls.Find()
 			assert.Equal(t, tt.err, err != nil)
 			assert.Equal(t, tt.want.count, len(*atls))
