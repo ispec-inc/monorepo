@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-
 	server, sclnup, err := server.New()
 	if err != nil {
 		panic(err)
