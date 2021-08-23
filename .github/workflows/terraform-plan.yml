@@ -20,7 +20,7 @@ jobs:
 
       - name: Check diff
         id: diff
-        uses: technote-space/get-diff-action@v4.0.2
+        uses: technote-space/get-diff-action@v4.2.0
         with:
           PATTERNS: |
             terraform/modules/**/*.tf
@@ -36,7 +36,7 @@ jobs:
 
       - name: Setup terraform
         if: steps.diff.outputs.diff
-        uses: hashicorp/setup-terraform@v1.2.1
+        uses: hashicorp/setup-terraform@v1.3.2
         with:
           terraform_version: 0.14.8
 
@@ -76,7 +76,7 @@ jobs:
 
       - name: Comment
         if: steps.diff.outputs.diff
-        uses: actions/github-script@v3.0.0
+        uses: actions/github-script@v3.1.1
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:

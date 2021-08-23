@@ -1,0 +1,13 @@
+package {{.modelPackageName}}
+
+import "time"
+
+const (
+	{{singular .StructName}}ModelName = "{{singular .StructName}}"
+	{{singular .StructName}}TableName = "{{toSnakeCase .StructName}}"
+)
+
+type {{singular .StructName}} struct {
+    {{range .TableInfo.Fields}}commentDeleteFlag{{.}}
+    {{end}}
+}
