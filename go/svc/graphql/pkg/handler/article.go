@@ -13,7 +13,7 @@ type QueryArticleArgs struct {
 	UserID *graphql.ID
 }
 
-func (q Handler) Articles(
+func (h Handler) Articles(
 	ctx context.Context,
 	args QueryArticleArgs,
 ) (*[]*resolver.Article, error) {
@@ -36,7 +36,7 @@ type MutationArticleArgs struct {
 	Body  string
 }
 
-func (q Handler) CreateArticle(
+func (h Handler) CreateArticle(
 	ctx context.Context,
 	args MutationArticleArgs,
 ) (*resolver.Article, error) {
