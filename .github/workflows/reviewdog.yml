@@ -1,6 +1,6 @@
 name: reviewdog
 
-on: 
+on:
   push:
     branches:
       - master
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: reviewdog/action-staticcheck@v1
+      - uses: reviewdog/action-staticcheck@v1.7
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
