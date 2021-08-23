@@ -9,12 +9,11 @@ import (
 )
 
 type Article struct {
-	ctx     context.Context
 	article model.Article
 }
 
 func NewArticle(ctx context.Context, article model.Article) *Article {
-	return &Article{ctx: ctx, article: article}
+	return &Article{article: article}
 }
 
 func (a Article) ID() graphql.ID {
@@ -30,5 +29,5 @@ func (a Article) Body() string {
 }
 
 func (a Article) Writer(ctx context.Context) (*User, error) {
-	return NewUser(a.ctx, UserResolverArgs{ID: a.article.UserID})
+	return NewUser(ctx, UserResolverArgs{ID: a.article.UserID})
 }
