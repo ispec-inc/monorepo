@@ -2,9 +2,7 @@ package loader
 
 import (
 	"context"
-	"errors"
 	"fmt"
-	"strconv"
 
 	"github.com/graph-gophers/dataloader"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/model"
@@ -20,15 +18,10 @@ func LoadUsers(
 	ids []int64,
 ) ([]UserResult, error) {
 
-	keys := make([]string, len(ids))
-
-	for i := range ids {
-		keys[i] = fmt.Sprintf("%d", ids[i])
-	}
 	loader := dataloader.NewBatchedLoader(batchLoadUser)
 	thunk := loader.LoadMany(
 		context.TODO(),
-		dataloader.NewKeysFromStrings(keys),
+		NewKeysFromIDs(ids),
 	)
 	data, errs := thunk()
 
@@ -41,7 +34,7 @@ func LoadUsers(
 
 		a, ok := d.(model.User)
 		if !ok && e == nil {
-			e = errors.New("typing error")
+			e = ErrLoaderResultTyping
 		}
 
 		results[i] = UserResult{
@@ -70,35 +63,27 @@ func LoadUser(
 		return nil, err
 	}
 
-	us, ok := data.(*model.Users)
-	if !ok && err == nil {
-		err = errors.New("typing error")
-		return nil, err
+	u, ok := data.(model.User)
+	if !ok {
+		return nil, ErrLoaderResultTyping
 	}
-
-	for _, u := range *us {
-		if u.ID == id {
-			return &u, nil
-		}
-	}
-	return nil, nil
+	return &u, nil
 }
 
 func batchLoadUser(
 	ctx context.Context,
 	keys dataloader.Keys,
-) (rs []*dataloader.Result) {
-	as := &model.Users{}
-	ids := make([]int64, len(keys))
+) []*dataloader.Result {
+	ids := extractIDsFromKeys(keys)
 
-	for i := range keys {
-		id, err := strconv.Atoi(keys[i].String())
-		if err == nil {
-			ids[i] = int64(id)
-		}
-	}
+	as := &model.Users{}
 	err := as.List(ids)
-	rs = append(rs, &dataloader.Result{Data: as, Error: err})
+
+	rs := make([]*dataloader.Result, len(*as))
+
+	for i := range *as {
+		rs[i] = &dataloader.Result{Data: (*as)[i], Error: err}
+	}
 
 	return rs
 }

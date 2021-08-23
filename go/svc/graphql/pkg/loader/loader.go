@@ -10,8 +10,7 @@ import (
 type key string
 
 const (
-	userKey    = "user"
-	articleKey = "article"
+	userKey = "user"
 )
 
 type LookUp struct {
@@ -21,8 +20,7 @@ type LookUp struct {
 func NewLookUp() *LookUp {
 	return &LookUp{
 		lookup: map[key]dataloader.BatchFunc{
-			userKey:    batchLoadUser,
-			articleKey: batchLoadArticle,
+			userKey: batchLoadUser,
 		},
 	}
 }

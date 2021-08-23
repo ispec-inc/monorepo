@@ -7,8 +7,8 @@ import (
 	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/database"
+	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/handler"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/middleware"
-	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/resolver"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/schema"
 )
 
@@ -22,7 +22,7 @@ func NewGraphQL() (http.Handler, func() error, error) {
 		return nil, nil, err
 	}
 
-	schema := graphql.MustParseSchema(s, resolver.NewQuery())
+	schema := graphql.MustParseSchema(s, handler.New())
 
 	h := &relay.Handler{Schema: schema}
 	r := chi.NewRouter()

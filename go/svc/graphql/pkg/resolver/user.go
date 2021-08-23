@@ -17,12 +17,12 @@ type UserResolverArgs struct {
 	ID int64
 }
 
-func NewUser(ctx context.Context, args UserResolverArgs) *User {
+func NewUser(ctx context.Context, args UserResolverArgs) (*User, error) {
 	user, err := loader.LoadUser(ctx, args.ID)
-	if err != nil || user == nil {
-		return nil
+	if err != nil {
+		return nil, err
 	}
-	return &User{user: *user}
+	return &User{user: *user}, nil
 }
 
 func (u User) ID() graphql.ID {
