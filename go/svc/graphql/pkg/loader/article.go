@@ -3,6 +3,7 @@ package loader
 import (
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/graph-gophers/dataloader"
@@ -14,13 +15,29 @@ type ArticleResult struct {
 	Error   error
 }
 
-func LoadArticles(ctx context.Context) ([]ArticleResult, error) {
-	spew.Dump(ctx)
+type LoadArticlesArg struct {
+	IDs []int64
+}
 
-	loader := dataloader.NewBatchedLoader(batchLoadArticles)
-	thunk := loader.LoadMany(
+func LoadArticles(
+	ctx context.Context,
+	arg LoadArticlesArg,
+) ([]ArticleResult, error) {
+
+	keys := make([]string, len(arg.IDs))
+
+	for i := range arg.IDs {
+		keys[i] = fmt.Sprintf("%d", arg.IDs[i])
+	}
+	spew.Dump(keys)
+	ldr, err := getLoader(ctx, articleKey)
+	if err != nil {
+		return nil, err
+	}
+
+	thunk := ldr.LoadMany(
 		context.TODO(),
-		dataloader.NewKeysFromStrings([]string{}),
+		dataloader.NewKeysFromStrings(keys),
 	)
 	data, errs := thunk()
 
@@ -44,11 +61,11 @@ func LoadArticles(ctx context.Context) ([]ArticleResult, error) {
 	return results, nil
 }
 
-func batchLoadArticles(
+func batchLoadArticle(
 	ctx context.Context,
 	keys dataloader.Keys,
 ) (rs []*dataloader.Result) {
-	spew.Dump(keys)
+
 	as := &model.Articles{}
 
 	err := as.List([]int64{})

@@ -1,4 +1,5 @@
 type Query {
+    currentUser: User
     user(id: ID!): User
-    articles: [Article]
+    articles(userId: ID): [Article]
 }
