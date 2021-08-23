@@ -23,12 +23,12 @@ func NewUser(name, description string) *User {
 	return atl
 }
 
-func (a *User) validate() error {
+func (u *User) validate() error {
 	var err error
-	if a.Name == "" {
+	if u.Name == "" {
 		err = multierr.Append(err, errors.New("user must have name"))
 	}
-	if a.Description == "" {
+	if u.Description == "" {
 		err = multierr.Append(err, errors.New("user must have description"))
 	}
 	if err != nil {
@@ -37,43 +37,43 @@ func (a *User) validate() error {
 	return nil
 }
 
-func (a *User) Find(id int64) error {
+func (u *User) Find(id int64) error {
 	return apperror.NewGormFind(
-		database.Get().First(a, id).Error,
+		database.Get().First(u, id).Error,
 		entity.UserTableName,
 	)
 }
 
-func (a *User) Create() error {
-	if err := a.validate(); err != nil {
+func (u *User) Create() error {
+	if err := u.validate(); err != nil {
 		return err
 	}
 	return apperror.NewGormCreate(
-		database.Get().Create(a).Error,
+		database.Get().Create(u).Error,
 		entity.UserTableName,
 	)
 }
 
-func (a *User) Save() error {
-	if err := a.validate(); err != nil {
+func (u *User) Save() error {
+	if err := u.validate(); err != nil {
 		return err
 	}
 	return apperror.NewGormSave(
-		database.Get().Save(a).Error,
+		database.Get().Save(u).Error,
 		entity.UserTableName,
 	)
 }
 
-func (a *User) Delete() error {
+func (u *User) Delete() error {
 	return apperror.NewGormDelete(
-		database.Get().Delete(a).Error,
+		database.Get().Delete(u).Error,
 		entity.UserTableName,
 	)
 }
 
-func (a *Users) Find() error {
+func (u *Users) Find() error {
 	return apperror.NewGormFind(
-		database.Get().Find(a).Error,
+		database.Get().Find(u).Error,
 		entity.UserTableName,
 	)
 }
