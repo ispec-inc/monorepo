@@ -1,3 +1,11 @@
-FROM golang:1.16
+FROM golang:1.17
 
-RUN GO111MODULE=off go get github.com/oxequa/realize
+ENV GOPATH /go
+ENV GO111MODULE=on
+
+WORKDIR /go/src/app
+COPY go.mod go.sum ./
+
+RUN go mod download \
+    && go get -u github.com/cosmtrek/air@v1.27.3 \
+    && go install github.com/go-delve/delve/cmd/dlv@latest

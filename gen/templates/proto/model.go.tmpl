@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package {{.DatabaseName}}.view;
+
+option go_package = "github.com/ispec-inc/monorepo/go/proto/{{.DatabaseName}}/view";
+
+import "google/protobuf/timestamp.proto";
+
+message {{singular .TableInfo.StructName}} {
+    {{ range $i, $field := .TableInfo.CodeFields }}
+    {{ $field.ProtobufType}} {{ $field.ProtobufFieldName}} = {{  $field.ProtobufPos}};{{- end}}
+}

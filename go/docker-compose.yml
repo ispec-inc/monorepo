@@ -1,34 +1,39 @@
 version: '2.2'
 services:
-  api:
-    container_name: api
+  monorepo-api:
+    container_name: monorepo-api
     build:
       context: .
       dockerfile: docker/dev/Dockerfile
-    command: realize start --name server --run
+    command: air -c .air.toml
     ports:
       - "9000:9000"
+      - "2345:2345"
     env_file:
       - .env/server
     depends_on:
       - article-mysql
       - message-bus-redis
     volumes:
-      - ./:/app
-    working_dir: /app
+      - ./:/go/src/app
+    working_dir: /go/src/app
+    security_opt:
+      - apparmor:unconfined
+    cap_add:
+      - SYS_PTRACE
     networks:
       - monorepo
 
   test:
     container_name: test
-    image: golang:1.16
+    image: golang:1.17
     env_file:
       - .env/server
     depends_on:
       - article-mysql-test
     volumes:
-      - ./:/app
-    working_dir: /app
+      - ./:/go/src/app
+    working_dir: /go/src/app
     networks:
       - monorepo
 
