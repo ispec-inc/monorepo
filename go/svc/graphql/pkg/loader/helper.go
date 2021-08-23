@@ -1,6 +1,7 @@
 package loader
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 
@@ -19,11 +20,20 @@ func extractIDsFromKeys(keys dataloader.Keys) []int64 {
 	return ids
 }
 
-func NewKeysFromIDs(ids []int64) dataloader.Keys {
+func newKeysFromIDs(ids []int64) dataloader.Keys {
 	keys := make([]string, len(ids))
 
 	for i := range ids {
 		keys[i] = fmt.Sprintf("%d", ids[i])
 	}
 	return dataloader.NewKeysFromStrings(keys)
+}
+
+func getLoader(ctx context.Context, k key) (*dataloader.Loader, error) {
+	ldr, ok := ctx.Value(k).(*dataloader.Loader)
+	if !ok {
+		return nil, fmt.Errorf("unable to find %s loader on the request context", k)
+	}
+
+	return ldr, nil
 }
