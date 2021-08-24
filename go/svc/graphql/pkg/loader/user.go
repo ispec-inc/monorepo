@@ -20,7 +20,7 @@ func LoadUsers(
 
 	loader := dataloader.NewBatchedLoader(batchLoadUser)
 	thunk := loader.LoadMany(
-		context.TODO(),
+		ctx,
 		newKeysFromIDs(ids),
 	)
 	data, errs := thunk()

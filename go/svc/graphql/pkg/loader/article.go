@@ -18,8 +18,8 @@ func LoadArticlesByUserID(
 	userID int64,
 ) (*model.Articles, error) {
 
-	loader := dataloader.NewBatchedLoader(batchLoadArticleByUserIDs)
-	thunk := loader.Load(
+	ldr, err := getLoader(ctx, articleKey)
+	thunk := ldr.Load(
 		ctx,
 		dataloader.StringKey(fmt.Sprintf("%d", userID)),
 	)
