@@ -32,3 +32,16 @@ func (u User) ID() graphql.ID {
 func (u User) Name() string {
 	return u.user.Name
 }
+
+func (u User) Articles(ctx context.Context) ([]*Article, error) {
+	as, err := loader.LoadArticlesByUserID(ctx, u.user.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	rs := make([]*Article, len(*as))
+	for i := range *as {
+		rs[i] = NewArticle(ctx, (*as)[i])
+	}
+	return rs, nil
+}
