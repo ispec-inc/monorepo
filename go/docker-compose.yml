@@ -8,7 +8,7 @@ services:
     command: air -c .air.toml
     ports:
       - "9000:9000"
-      - "2345:2345"
+      # - "2345:2345"
     env_file:
       - .env/server
     depends_on:

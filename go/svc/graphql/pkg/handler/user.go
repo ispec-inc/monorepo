@@ -31,3 +31,9 @@ func (h Handler) User(
 
 	return query.User(ctx, int64(id))
 }
+
+func (h Handler) Users(
+	ctx context.Context,
+) (*[]*resolver.User, error) {
+	return query.Users(ctx)
+}
