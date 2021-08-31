@@ -70,6 +70,7 @@ func LoadUser(
 	return &u, nil
 }
 
+// lazy loadの関数
 func batchLoadUser(
 	ctx context.Context,
 	keys dataloader.Keys,

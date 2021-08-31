@@ -75,21 +75,47 @@ func (a *Article) Delete() error {
 	)
 }
 
-func (a *Articles) Find() error {
+func (as *Articles) Find() error {
 	return apperror.NewGormFind(
-		database.Get().Find(a).Error,
+		database.Get().Find(as).Error,
 		entity.ArticleTableName,
 	)
 }
 
-func (a *Articles) List(ids []int64) error {
+func (as *Articles) List(ids []int64) error {
 	q := database.Get()
 	if len(ids) > 0 {
 		q = q.Where("id in ?", ids)
 	}
 
 	return apperror.NewGormFind(
-		q.Find(a).Error,
+		q.Find(as).Error,
 		entity.ArticleTableName,
 	)
+}
+
+func (as *Articles) ListByUserID(id int64) error {
+	return apperror.NewGormFind(
+		database.Get().Where("user_id = ?", id).Find(as).Error,
+		entity.ArticleTableName,
+	)
+}
+
+func (as *Articles) ListByUserIDs(ids []int64) error {
+	return apperror.NewGormFind(
+		database.Get().Where("user_id in ?", ids).Find(as).Error,
+		entity.ArticleTableName,
+	)
+}
+
+func (as *Articles) ToMapByUserID() map[int64]*Articles {
+	data := make(map[int64]*Articles)
+	for _, a := range *as {
+		if data[a.UserID] == nil {
+			data[a.UserID] = &Articles{}
+		}
+		*data[a.UserID] = append(*data[a.UserID], a)
+	}
+
+	return data
 }

@@ -2,5 +2,5 @@ type User {
     id: ID!
     name: String!
     email: String!
-    // articles: [Article]
+    articles: [Article]
 }
