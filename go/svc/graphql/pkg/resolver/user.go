@@ -17,7 +17,11 @@ type UserResolverArgs struct {
 	ID int64
 }
 
-func NewUser(ctx context.Context, args UserResolverArgs) (*User, error) {
+func NewUser(ctx context.Context, u model.User) *User {
+	return &User{user: u}
+}
+
+func LoadUser(ctx context.Context, args UserResolverArgs) (*User, error) {
 	user, err := loader.LoadUser(ctx, args.ID)
 	if err != nil {
 		return nil, err
@@ -31,4 +35,20 @@ func (u User) ID() graphql.ID {
 
 func (u User) Name() string {
 	return u.user.Name
+}
+
+func (u User) Articles(ctx context.Context) (*[]*Article, error) {
+	// as := &model.Articles{}
+	// if err := as.ListByUserID(u.user.ID); err != nil {
+	// 	return nil, err
+	// }
+	as, err := loader.LoadArticlesByUserID(ctx, u.user.ID)
+	if err != nil {
+		return nil, err
+	}
+	rs := make([]*Article, len(*as))
+	for i, a := range *as {
+		rs[i] = NewArticle(ctx, a)
+	}
+	return &rs, nil
 }

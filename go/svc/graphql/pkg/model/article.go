@@ -93,3 +93,17 @@ func (a *Articles) List(ids []int64) error {
 		entity.ArticleTableName,
 	)
 }
+
+func (a *Articles) ListByUserID(id int64) error {
+	return apperror.NewGormFind(
+		database.Get().Find(a, "user_id = ?", id).Error,
+		entity.ArticleTableName,
+	)
+}
+
+func (a *Articles) ListByUserIDs(ids []int64) error {
+	return apperror.NewGormFind(
+		database.Get().Find(a, "user_id in (?)", ids).Error,
+		entity.ArticleTableName,
+	)
+}

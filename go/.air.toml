@@ -4,7 +4,7 @@ tmp_dir = "./bin"
 [build]
   cmd = "go build -o ./bin/server ./cmd/server"
   bin = "./bin/server"
-  full_bin = "APP_ENV=dev APP_USER=air dlv exec ./bin/server --listen=:2345 --headless --api-version=2 --continue --accept-multiclient"
+  # full_bin = "APP_ENV=dev APP_USER=air dlv exec ./bin/server --listen=:2345 --headless --api-version=2 --continue --accept-multiclient"
   exclude_dir = ["bin", "vendor"]
   exclude_file = []
   exclude_regex = []
