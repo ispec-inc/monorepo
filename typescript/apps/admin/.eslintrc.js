@@ -4,6 +4,11 @@ module.exports = {
     browser: true,
     node: true,
   },
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module',
+  },
   extends: [
     '@nuxtjs/eslint-config-typescript',
     'prettier',
@@ -14,7 +19,10 @@ module.exports = {
   globals: {
     cy: true,
   },
-  plugins: ['cypress'],
+  plugins: ['cypress', 'typescript'],
   // add your custom rules here
-  rules: {},
+  rules: {
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
+  },
 }
