@@ -10,6 +10,10 @@ import FormSwitchInputModule from "./form-switch-input";
 import FormTextInputModule from "./form-text-input";
 import FormModule from "./form";
 import Resource, { ResourceDetail } from "./resource";
+import { FormModule as RFormModule } from './refactor/form'
+import { FormTextInput as RFormTextInput } from './refactor/form-input/text'
+import { FormInputModule as RFormInputModule } from './refactor/form-input/module'
+import { FormStructure } from './types/form-structure'
 
 export {
   FormAbstructModule,
@@ -24,4 +28,8 @@ export {
   FormTextInputModule,
   FormModule,
   Resource,
+  RFormModule,
+  RFormTextInput,
+  RFormInputModule,
+  FormStructure
 }
