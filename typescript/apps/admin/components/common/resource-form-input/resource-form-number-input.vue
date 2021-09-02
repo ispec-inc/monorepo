@@ -1,8 +1,9 @@
 <template>
   <validation-provider v-slot="{ errors }" :name="label" :rules="rules">
     <v-text-field
-      v-model="value"
-      prepend-icon="mdi-format-text"
+      v-model.number="value"
+      prepend-icon="mdi-numeric"
+      type="number"
       :error-messages="errors"
       :label="label"
     ></v-text-field>
@@ -12,25 +13,25 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
-import { RFormTextInputModule } from '@monorepo/fast-form'
+import { RFormNumberInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
     ValidationProvider,
   },
 })
-export default class ResourceFormTextInput extends Vue {
-  @Prop() readonly input!: RFormTextInputModule
+export default class ResourceFormNumberInput extends Vue {
+  @Prop() readonly input!: RFormNumberInputModule
 
   get label(): string {
     return this.input.label
   }
 
-  get value(): string {
+  get value(): number {
     return this.input.value
   }
 
-  set value(value: string) {
+  set value(value: number) {
     this.input.value = value
   }
 
