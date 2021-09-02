@@ -3,7 +3,7 @@ import { InputModuleType } from "../../types/input-module-type"
 export abstract class FormInputModule<T> {
   private readonly _rules: string[]
 
-  private _value: T
+  protected _value: T
 
   readonly label: string
   readonly type: InputModuleType

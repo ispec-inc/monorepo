@@ -1,36 +1,31 @@
 <template>
   <validation-provider v-slot="{ errors }" :name="label" :rules="rules">
-    <v-text-field
-      v-model="value"
-      prepend-icon="mdi-format-text"
-      :error-messages="errors"
-      :label="label"
-    ></v-text-field>
+    <v-switch v-model="value" :label="label" :error-messages="errors" />
   </validation-provider>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
-import { RFormTextInputModule } from '@monorepo/fast-form'
+import { RFormSwitchInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
     ValidationProvider,
   },
 })
-export default class ResourceFormTextInput extends Vue {
-  @Prop() readonly input!: RFormTextInputModule
+export default class ResourceFormSwitchInput extends Vue {
+  @Prop() readonly input!: RFormSwitchInputModule
 
   get label(): string {
     return this.input.label
   }
 
-  get value(): string {
+  get value(): boolean {
     return this.input.value
   }
 
-  set value(value: string) {
+  set value(value: boolean) {
     this.input.value = value
   }
 
