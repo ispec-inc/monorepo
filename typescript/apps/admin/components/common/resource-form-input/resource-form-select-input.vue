@@ -1,6 +1,7 @@
 <template>
   <validation-provider v-slot="{ errors }" :name="label" :rules="rules">
     <v-select
+      v-if="isVisible"
       v-model="value"
       :items="choices"
       :label="label"
@@ -40,7 +41,11 @@ export default class ResourceFormSelectInput extends Vue {
   }
 
   get rules(): string {
-    return this.input.rules
+    return this.isVisible ? this.input.rules : ''
+  }
+
+  get isVisible(): boolean {
+    return this.input.isVisible
   }
 }
 </script>

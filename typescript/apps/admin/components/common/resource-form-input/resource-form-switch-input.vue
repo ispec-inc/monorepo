@@ -1,6 +1,12 @@
 <template>
   <validation-provider v-slot="{ errors }" :name="label" :rules="rules">
-    <v-switch v-model="value" :label="label" :error-messages="errors" />
+    <v-switch
+      v-if="isVisible"
+      v-model="value"
+      :label="label"
+      :error-messages="errors"
+      class="pl-3"
+    />
   </validation-provider>
 </template>
 
@@ -30,7 +36,11 @@ export default class ResourceFormSwitchInput extends Vue {
   }
 
   get rules(): string {
-    return this.input.rules
+    return this.isVisible ? this.input.rules : ''
+  }
+
+  get isVisible(): boolean {
+    return this.input.isVisible
   }
 }
 </script>
