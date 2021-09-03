@@ -1,9 +1,11 @@
 import FormInputModule from "../form-input";
+import { IFormModule } from "../interfaces/form-module";
 import { FormStructure } from "../types/form-structure";
 
-export class FormModule<T extends { [key: string]: unknown }> {
+export class FormModule<T extends { [key: string]: unknown }> implements IFormModule<T> {
   readonly structure: FormStructure<T>
   readonly order: (keyof T)[]
+  readonly isSeparated = false
 
   constructor(structure: FormStructure<T>, order: (keyof T)[]) {
     this.structure = structure
