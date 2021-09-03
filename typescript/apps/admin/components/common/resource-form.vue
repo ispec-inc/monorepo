@@ -2,7 +2,12 @@
   <validation-observer v-if="form" ref="observer">
     <form>
       <div class="resource-form pt-4 pb-10">
-        <resource-form-inputs :inputs="inputs" />
+        <template v-if="isSeparated">
+          <resource-separated-form :form="form" />
+        </template>
+        <template v-else>
+          <resource-form-inputs :inputs="inputs" />
+        </template>
       </div>
       <v-card-actions class="mt-4">
         <v-spacer></v-spacer>
@@ -30,28 +35,34 @@
   display: block;
   max-width: 600px;
   margin: auto;
-
-  .input-partial:not(:last-child) {
-    margin-bottom: 20px;
-  }
 }
 </style>
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Ref } from 'nuxt-property-decorator'
 import { ValidationObserver } from 'vee-validate'
-import { RFormInputModule, RFormModule } from '@monorepo/fast-form'
+import {
+  RFormInputModule,
+  RFormModule,
+  SeparatedFormModule,
+} from '@monorepo/fast-form'
 import ResourceFormInputs from './resource-form-inputs.vue'
+import ResourceSeparatedForm from './resource-separated-form.vue'
 
 @Component({
   components: {
     ValidationObserver,
     ResourceFormInputs,
+    ResourceSeparatedForm,
   },
 })
 export default class ResourceForm extends Vue {
   @Ref('observer') observerRef!: InstanceType<typeof ValidationObserver>
-  @Prop({ default: null }) readonly form!: RFormModule<{}> | null
+  @Prop({ default: null }) readonly form!:
+    | RFormModule<{}>
+    | SeparatedFormModule<{}>
+    | null
+
   @Prop({ default: false }) readonly isPost!: boolean
 
   @Emit()
@@ -64,7 +75,15 @@ export default class ResourceForm extends Vue {
   }
 
   get inputs(): RFormInputModule<unknown>[] {
-    return this.form?.inputs || []
+    if (!this.form) {
+      return []
+    }
+
+    return this.form.isSeparated ? [] : this.form.inputs
+  }
+
+  get isSeparated(): boolean {
+    return this.form?.isSeparated || false
   }
 
   async validateForm() {
