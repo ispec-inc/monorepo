@@ -6,3 +6,4 @@ export type InputModuleType =
 | 'date'
 | 'group'
 | 'switch'
+| 'list'

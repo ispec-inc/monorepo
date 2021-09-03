@@ -11,6 +11,7 @@ import FormTextInputModule from "./form-text-input";
 import FormModule from "./form";
 import Resource from "./resource";
 import { FormModule as RFormModule } from './refactor/form';
+import { SeparatedFormModule } from './refactor/separated-form';
 import { FormTextInputModule as RFormTextInputModule } from './refactor/form-input/text';
 import { FormNumberInputModule as RFormNumberInputModule } from './refactor/form-input/number';
 import { FormDateInputModule as RFormDateInputModule } from './refactor/form-input/date';
@@ -18,4 +19,6 @@ import { FormSelectInputModule as RFormSelectInputModule } from './refactor/form
 import { FormSwitchInputModule as RFormSwitchInputModule } from './refactor/form-input/switch';
 import { FormImageInputModule as RFormImageInputModule } from './refactor/form-input/image';
 import { FormInputModule as RFormInputModule } from './refactor/form-input/module';
-export { FormAbstructModule, FormDateInputModule, FormGroupListModule, FormGroupModule, FormImageInputModule, FormInputModule, FormNumberInputModule, FormSelectInputModule, FormSwitchInputModule, FormTextInputModule, FormModule, Resource, RFormModule, RFormTextInputModule, RFormNumberInputModule, RFormDateInputModule, RFormSelectInputModule, RFormSwitchInputModule, RFormImageInputModule, RFormInputModule };
+import { FormGroupModule as RFormGroupModule } from './refactor/form-input/group';
+import { FormGroupListModule as RFormGroupListModule } from './refactor/form-input/group-list';
+export { FormAbstructModule, FormDateInputModule, FormGroupListModule, FormGroupModule, FormImageInputModule, FormInputModule, FormNumberInputModule, FormSelectInputModule, FormSwitchInputModule, FormTextInputModule, FormModule, Resource, RFormModule, RFormTextInputModule, RFormNumberInputModule, RFormDateInputModule, RFormSelectInputModule, RFormSwitchInputModule, RFormImageInputModule, RFormInputModule, RFormGroupListModule, RFormGroupModule, SeparatedFormModule };

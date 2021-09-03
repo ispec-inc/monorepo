@@ -1,3 +1,3 @@
-import { FormInputModule } from "../refactor/form-input/module";
+import { IFormModuleItem } from "../interfaces/form-module-item";
 
-export type FormStructure<T> = { [P in keyof T]: FormInputModule<T[P]> }
+export type FormStructure<T> = { [P in keyof T]: IFormModuleItem<T[P]> }
