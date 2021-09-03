@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
-import { RFormNumberInputModule } from '@monorepo/fast-form'
+import { FormNumberInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
@@ -22,7 +22,7 @@ import { RFormNumberInputModule } from '@monorepo/fast-form'
   },
 })
 export default class ResourceFormNumberInput extends Vue {
-  @Prop() readonly input!: RFormNumberInputModule
+  @Prop() readonly input!: FormNumberInputModule
 
   get label(): string {
     return this.input.label

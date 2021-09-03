@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import { RFormGroupListModule, RFormGroupModule } from '@monorepo/fast-form'
+import { FormGroupListModule, FormGroupModule } from '@monorepo/fast-form'
 import ResourceFormGroup from './resource-form-group.vue'
 
 @Component({
@@ -32,7 +32,7 @@ import ResourceFormGroup from './resource-form-group.vue'
   },
 })
 export default class ResourceFormGroupList extends Vue {
-  @Prop() readonly input!: RFormGroupListModule<{}>
+  @Prop() readonly input!: FormGroupListModule<{}>
 
   get label(): string {
     return this.input.label
@@ -46,7 +46,7 @@ export default class ResourceFormGroupList extends Vue {
     this.input.openPanelIds = value
   }
 
-  get groups(): RFormGroupModule<{}>[] {
+  get groups(): FormGroupModule<{}>[] {
     return this.input.groups
   }
 

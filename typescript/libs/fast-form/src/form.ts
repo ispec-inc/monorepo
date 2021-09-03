@@ -1,61 +1,32 @@
-import { FormAbstructModule } from './form-abstruct-module'
-import FormGroupModule from './form-group'
-import FormImageInputModule from './form-image-input'
-import FormSwitchInputModule from './form-switch-input'
+import { FormInputModule } from "./form-input/module";
+import { IFormModule } from "./interfaces/form-module";
+import { FormStructure } from "./types/form-structure";
 
-export default class FormModule<
-  T extends FormAbstructModule<any> | FormGroupModule
-> {
-  inputs: T[]
-  tabs?: string[]
+export class FormModule<T extends { [key: string]: unknown }> implements IFormModule<T> {
+  readonly structure: FormStructure<T>
+  readonly order: (keyof T)[]
+  readonly isSeparated = false
 
-  constructor(inputs: T[]) {
-    this.inputs = inputs
-    this.inputs.forEach((input: FormAbstructModule<any> | FormGroupModule) => {
-      if (input instanceof FormGroupModule) {
-        if (this.tabs === undefined) {
-          this.tabs = []
-        }
-        this.tabs.push(input.label)
-      }
+  constructor(structure: FormStructure<T>, order: (keyof T)[]) {
+    this.structure = structure
+    this.order = order
+  }
+
+  getFormValue(): T {
+    const entries = Object.entries(this.structure).map(([key, module]: [string, FormInputModule<unknown>]) => {
+      return [key, module.value]
     })
+
+    return Object.fromEntries(entries)
   }
 
   clear(): void {
-    for (const input of this.inputs) {
-      input.clear()
+    for (const k of this.order) {
+      this.structure[k].clear()
     }
   }
 
-  formValue(): any {
-    let value: any = {}
-
-    this.inputs.forEach((input: FormAbstructModule<any> | FormGroupModule) => {
-      value = Object.assign(value, this.createFormValue(input))
-    })
-
-    return value
-  }
-
-  createFormValue(input: FormAbstructModule<any> | FormGroupModule): any {
-    let value: any = {}
-    if (input instanceof FormGroupModule) {
-      input.inputs.forEach(
-        (childInput: FormAbstructModule<any> | FormGroupModule) => {
-          value = Object.assign(value, this.createFormValue(childInput))
-        }
-      )
-    } else if (input instanceof FormImageInputModule) {
-      value[input.key] = input.file
-    } else if (input instanceof FormSwitchInputModule) {
-      value = Object.assign(value, input.getValueAll())
-    } else {
-      value[input.key] = input.value
-    }
-    return value
-  }
-
-  get isConstructedFormGroups(): boolean {
-    return this.tabs !== undefined
+  get inputs(): FormStructure<T>[keyof T][] {
+    return this.order.map((o) => this.structure[o])
   }
 }

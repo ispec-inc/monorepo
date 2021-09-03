@@ -31,7 +31,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
-import { RFormDateInputModule } from '@monorepo/fast-form'
+import { FormDateInputModule } from '@monorepo/fast-form'
 import dayjs from 'dayjs'
 
 @Component({
@@ -40,7 +40,7 @@ import dayjs from 'dayjs'
   },
 })
 export default class ResourceFormDateInput extends Vue {
-  @Prop() readonly input!: RFormDateInputModule
+  @Prop() readonly input!: FormDateInputModule
 
   isOpenDatePicker = false
 

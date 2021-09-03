@@ -63,7 +63,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationObserver } from 'vee-validate'
-import { RFormInputModule } from '@monorepo/fast-form'
+import { FormInputModule } from '@monorepo/fast-form'
 import ResourceFormTextInput from './resource-form-input/resource-form-text-input.vue'
 import ResourceFormNumberInput from './resource-form-input/resource-form-number-input.vue'
 import ResourceFormSwitchInput from './resource-form-input/resource-form-switch-input.vue'
@@ -85,6 +85,6 @@ import ResourceFormGroupList from './resource-form-input/resource-form-group-lis
   },
 })
 export default class ResourceFormInputs extends Vue {
-  @Prop() readonly inputs!: RFormInputModule<unknown>[]
+  @Prop() readonly inputs!: FormInputModule<unknown>[]
 }
 </script>

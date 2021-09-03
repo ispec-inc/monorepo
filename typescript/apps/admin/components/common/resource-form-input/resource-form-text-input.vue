@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
-import { RFormTextInputModule } from '@monorepo/fast-form'
+import { FormTextInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
@@ -21,7 +21,7 @@ import { RFormTextInputModule } from '@monorepo/fast-form'
   },
 })
 export default class ResourceFormTextInput extends Vue {
-  @Prop() readonly input!: RFormTextInputModule
+  @Prop() readonly input!: FormTextInputModule
 
   get label(): string {
     return this.input.label

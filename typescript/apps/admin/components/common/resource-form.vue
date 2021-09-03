@@ -42,8 +42,8 @@
 import { Vue, Component, Prop, Emit, Ref } from 'nuxt-property-decorator'
 import { ValidationObserver } from 'vee-validate'
 import {
-  RFormInputModule,
-  RFormModule,
+  FormInputModule,
+  FormModule,
   SeparatedFormModule,
 } from '@monorepo/fast-form'
 import ResourceFormInputs from './resource-form-inputs.vue'
@@ -59,7 +59,7 @@ import ResourceSeparatedForm from './resource-separated-form.vue'
 export default class ResourceForm extends Vue {
   @Ref('observer') observerRef!: InstanceType<typeof ValidationObserver>
   @Prop({ default: null }) readonly form!:
-    | RFormModule<{}>
+    | FormModule<{}>
     | SeparatedFormModule<{}>
     | null
 
@@ -74,7 +74,7 @@ export default class ResourceForm extends Vue {
     return this.form.getFormValue()
   }
 
-  get inputs(): RFormInputModule<unknown>[] {
+  get inputs(): FormInputModule<unknown>[] {
     if (!this.form) {
       return []
     }

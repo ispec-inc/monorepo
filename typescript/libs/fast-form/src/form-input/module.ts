@@ -1,5 +1,5 @@
-import { IFormModuleItem } from "../../interfaces/form-module-item"
-import { InputModuleType } from "../../types/input-module-type"
+import { IFormModuleItem } from "../interfaces/form-module-item"
+import { InputModuleType } from "../types/input-module-type"
 
 export abstract class FormInputModule<T> implements IFormModuleItem<T> {
   private readonly _rules: string[]

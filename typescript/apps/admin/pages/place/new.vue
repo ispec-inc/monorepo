@@ -17,14 +17,19 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { PlaceForm } from '~/form-providers/place'
+import ResourceForm from '~/components/common/resource-form.vue'
 
-@Component({})
+@Component({
+  components: {
+    ResourceForm,
+  },
+})
 export default class AnimeNewPage extends Vue {
   isFetching = false
-  form = PlaceForm()
+  form = PlaceForm.provideModule()
 
-  submit(_: any | null) {
-    console.log('submit')
+  submit(value: PlaceForm.AsObject) {
+    console.log(value)
   }
 }
 </script>

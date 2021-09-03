@@ -1,5 +1,5 @@
 import { FormInputModule } from "./module";
-import { SelectOption } from '../../types/select-option'
+import { SelectOption } from '../types/select-option'
 
 export class FormSelectInputModule<T> extends FormInputModule<T> {
   readonly choices: SelectOption<T>[]

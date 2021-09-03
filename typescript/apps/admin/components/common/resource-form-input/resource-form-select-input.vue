@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
-import { RFormSelectInputModule } from '@monorepo/fast-form'
+import { FormSelectInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
@@ -22,7 +22,7 @@ import { RFormSelectInputModule } from '@monorepo/fast-form'
   },
 })
 export default class ResourceFormSelectInput extends Vue {
-  @Prop() readonly input!: RFormSelectInputModule<unknown>
+  @Prop() readonly input!: FormSelectInputModule<unknown>
 
   get label(): string {
     return this.input.label
@@ -36,7 +36,7 @@ export default class ResourceFormSelectInput extends Vue {
     this.input.value = value
   }
 
-  get choices(): RFormSelectInputModule<unknown>['choices'] {
+  get choices(): FormSelectInputModule<unknown>['choices'] {
     return this.input.choices
   }
 

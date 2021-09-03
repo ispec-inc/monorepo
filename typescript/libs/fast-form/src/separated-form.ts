@@ -1,6 +1,6 @@
 import { FormModule } from "./form";
-import { IFormModule } from "../interfaces/form-module";
-import { IFormModuleItem } from "../interfaces/form-module-item";
+import { IFormModule } from "./interfaces/form-module";
+import { IFormModuleItem } from "./interfaces/form-module-item";
 
 export class SeparatedFormModule<T extends { [key: string]: { [key: string]: unknown } }> implements IFormModule<T> {
   readonly structure: { [P in keyof T]: FormModule<T[P]> }
