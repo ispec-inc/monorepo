@@ -4,9 +4,9 @@ import (
 	"context"
 
 	graphql "github.com/graph-gophers/graphql-go"
-	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/model"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/resolver"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/resolver/mutation"
+	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/resolver/query"
 )
 
 type QueryArticleArgs struct {
@@ -14,17 +14,7 @@ type QueryArticleArgs struct {
 }
 
 func (h Handler) Articles(ctx context.Context, args QueryArticleArgs) (*[]*resolver.Article, error) {
-	ms := model.Articles{}
-	if err := ms.Find(); err != nil {
-		return nil, err
-	}
-
-	as := make([]*resolver.Article, len(ms))
-	for i := range ms {
-		as[i] = resolver.NewArticle(ctx, ms[i])
-	}
-
-	return &as, nil
+	return query.Articles(ctx)
 }
 
 type MutationArticleArgs struct {
