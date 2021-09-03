@@ -13,11 +13,7 @@ type QueryArticleArgs struct {
 	UserID *graphql.ID
 }
 
-func (h Handler) Articles(
-	ctx context.Context,
-	args QueryArticleArgs,
-) (*[]*resolver.Article, error) {
-
+func (h Handler) Articles(ctx context.Context, args QueryArticleArgs) (*[]*resolver.Article, error) {
 	ms := model.Articles{}
 	if err := ms.Find(); err != nil {
 		return nil, err
@@ -36,9 +32,6 @@ type MutationArticleArgs struct {
 	Body  string
 }
 
-func (h Handler) CreateArticle(
-	ctx context.Context,
-	args MutationArticleArgs,
-) (*resolver.Article, error) {
+func (h Handler) CreateArticle(ctx context.Context, args MutationArticleArgs) (*resolver.Article, error) {
 	return mutation.CreateArticle(ctx, args.Title, args.Body)
 }

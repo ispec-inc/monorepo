@@ -7,11 +7,13 @@ import (
 type key string
 
 const (
-	userKey = "user"
+	userKey          = "user"
+	articleByUserKey = "articleByUser"
 )
 
 var (
 	LookUpTable = map[key]dataloader.BatchFunc{
-		userKey: batchLoadUser,
+		userKey:          batchLoadUser,
+		articleByUserKey: batchLoadArticlesByUserID,
 	}
 )

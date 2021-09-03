@@ -1,5 +1,7 @@
 .vscode/
 .idea/
+.bundle/
+vendor/
 
 # gen command
 gen/.env

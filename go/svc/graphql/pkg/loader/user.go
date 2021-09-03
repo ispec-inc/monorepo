@@ -13,11 +13,7 @@ type UserResult struct {
 	Error error
 }
 
-func LoadUsers(
-	ctx context.Context,
-	ids []int64,
-) ([]UserResult, error) {
-
+func LoadUsers(ctx context.Context, ids []int64) ([]UserResult, error) {
 	loader := dataloader.NewBatchedLoader(batchLoadUser)
 	thunk := loader.LoadMany(
 		context.TODO(),
@@ -45,10 +41,7 @@ func LoadUsers(
 	return results, nil
 }
 
-func LoadUser(
-	ctx context.Context,
-	id int64,
-) (*model.User, error) {
+func LoadUser(ctx context.Context, id int64) (*model.User, error) {
 	ldr, err := getLoader(ctx, userKey)
 	if err != nil {
 		return nil, err
@@ -70,10 +63,7 @@ func LoadUser(
 	return &u, nil
 }
 
-func batchLoadUser(
-	ctx context.Context,
-	keys dataloader.Keys,
-) []*dataloader.Result {
+func batchLoadUser(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {
 	ids := extractIDsFromKeys(keys)
 
 	as := &model.Users{}

@@ -1,5 +1,5 @@
 type User {
     id: ID!
     name: String!
-    // articles: [Article]
+    articles: [Article]
 }

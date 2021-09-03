@@ -29,5 +29,5 @@ func (a Article) Body() string {
 }
 
 func (a Article) Writer(ctx context.Context) (*User, error) {
-	return NewUser(ctx, UserResolverArgs{ID: a.article.UserID})
+	return LoadUser(ctx, UserResolverArgs{ID: a.article.UserID})
 }

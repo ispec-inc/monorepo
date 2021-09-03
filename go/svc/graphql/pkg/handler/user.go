@@ -13,21 +13,19 @@ type QueryUserArgs struct {
 	ID graphql.ID
 }
 
-func (h Handler) CurrentUser(
-	ctx context.Context,
-) (*resolver.User, error) {
+func (h Handler) CurrentUser(ctx context.Context) (*resolver.User, error) {
 	return query.CurrentUser(ctx)
 }
 
-func (h Handler) User(
-	ctx context.Context,
-	args QueryUserArgs,
-) (*resolver.User, error) {
-
+func (h Handler) User(ctx context.Context, args QueryUserArgs) (*resolver.User, error) {
 	id, err := strconv.Atoi(string(args.ID))
 	if err != nil {
 		return nil, err
 	}
 
 	return query.User(ctx, int64(id))
+}
+
+func (h Handler) Users(ctx context.Context) (*[]*resolver.User, error) {
+	return query.Users(ctx)
 }
