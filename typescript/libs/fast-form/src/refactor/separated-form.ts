@@ -1,5 +1,4 @@
 import { FormModule } from "./form";
-import FormInputModule from "../form-input";
 import { IFormModule } from "../interfaces/form-module";
 import { IFormModuleItem } from "../interfaces/form-module-item";
 
@@ -14,8 +13,8 @@ export class SeparatedFormModule<T extends { [key: string]: { [key: string]: unk
   }
 
   getFormValue(): T {
-    const entries = Object.entries(this.structure).map(([key, module]: [string, FormInputModule<unknown>]) => {
-      return [key, module.value]
+    const entries = Object.entries(this.structure).map(([key, module]: [string, FormModule<{}>]) => {
+      return [key, module.getFormValue()]
     })
 
     return Object.fromEntries(entries)
