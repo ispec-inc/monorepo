@@ -24,7 +24,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
-import { RFormImageInputModule } from '@monorepo/fast-form'
+import { FormImageInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
@@ -32,7 +32,7 @@ import { RFormImageInputModule } from '@monorepo/fast-form'
   },
 })
 export default class ResourceFormImageInput extends Vue {
-  @Prop() readonly input!: RFormImageInputModule
+  @Prop() readonly input!: FormImageInputModule
 
   get label(): string {
     return this.input.label

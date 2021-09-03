@@ -1,4 +1,4 @@
-import { IFormModuleItem } from "../../interfaces/form-module-item";
+import { IFormModuleItem } from "../interfaces/form-module-item";
 import { FormGroupModule } from "./group";
 
 export class FormGroupListModule<T extends { [key: string]: unknown }> implements IFormModuleItem<T[]> {

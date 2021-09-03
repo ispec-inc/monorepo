@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
-import { RFormSwitchInputModule } from '@monorepo/fast-form'
+import { FormSwitchInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
@@ -21,7 +21,7 @@ import { RFormSwitchInputModule } from '@monorepo/fast-form'
   },
 })
 export default class ResourceFormSwitchInput extends Vue {
-  @Prop() readonly input!: RFormSwitchInputModule
+  @Prop() readonly input!: FormSwitchInputModule
 
   get label(): string {
     return this.input.label

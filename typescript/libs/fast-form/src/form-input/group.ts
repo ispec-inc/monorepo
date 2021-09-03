@@ -1,6 +1,6 @@
-import FormInputModule from "../../form-input";
-import { IFormModuleItem } from "../../interfaces/form-module-item";
-import { FormStructure } from "../../types/form-structure";
+import { FormInputModule } from "./module";
+import { IFormModuleItem } from "../interfaces/form-module-item";
+import { FormStructure } from "../types/form-structure";
 
 export class FormGroupModule<T extends { [key: string]: unknown }> implements IFormModuleItem<T> {
   private readonly headingProvider: (value: T) => string

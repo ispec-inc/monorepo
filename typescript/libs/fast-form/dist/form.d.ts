@@ -1,11 +1,13 @@
-import { FormAbstructModule } from './form-abstruct-module';
-import FormGroupModule from './form-group';
-export default class FormModule<T extends FormAbstructModule<any> | FormGroupModule> {
-    inputs: T[];
-    tabs?: string[];
-    constructor(inputs: T[]);
+import { IFormModule } from "./interfaces/form-module";
+import { FormStructure } from "./types/form-structure";
+export declare class FormModule<T extends {
+    [key: string]: unknown;
+}> implements IFormModule<T> {
+    readonly structure: FormStructure<T>;
+    readonly order: (keyof T)[];
+    readonly isSeparated = false;
+    constructor(structure: FormStructure<T>, order: (keyof T)[]);
+    getFormValue(): T;
     clear(): void;
-    formValue(): any;
-    createFormValue(input: FormAbstructModule<any> | FormGroupModule): any;
-    get isConstructedFormGroups(): boolean;
+    get inputs(): FormStructure<T>[keyof T][];
 }

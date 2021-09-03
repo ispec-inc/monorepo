@@ -28,7 +28,8 @@
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { ValidationObserver } from 'vee-validate'
-import { RFormGroupModule, RFormInputModule } from '@monorepo/fast-form'
+// eslint-disable-next-line import/named
+import { FormGroupModule, IFormModuleItem } from '@monorepo/fast-form'
 
 @Component({
   components: {
@@ -38,7 +39,7 @@ import { RFormGroupModule, RFormInputModule } from '@monorepo/fast-form'
   },
 })
 export default class ResourceFormGroup extends Vue {
-  @Prop() readonly group!: RFormGroupModule<{}>
+  @Prop() readonly group!: FormGroupModule<{}>
   @Prop() readonly index!: number
 
   @Emit() remove(): number {
@@ -49,7 +50,7 @@ export default class ResourceFormGroup extends Vue {
     return this.group.heading
   }
 
-  get inputs(): RFormInputModule<unknown>[] {
+  get inputs(): IFormModuleItem<unknown>[] {
     return this.group.inputs
   }
 }
