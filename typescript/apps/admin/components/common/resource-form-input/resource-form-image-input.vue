@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isVisible">
     <validation-provider v-slot="{ errors }" :name="label" :rules="rules">
       <v-file-input
         :value="input.file"
@@ -47,11 +47,15 @@ export default class ResourceFormImageInput extends Vue {
   }
 
   get rules(): string {
-    return this.input.rules
+    return this.isVisible ? this.input.rules : ''
   }
 
   inputFile(value: File | undefined | null) {
     this.input.file = value || undefined
+  }
+
+  get isVisible(): boolean {
+    return this.input.isVisible
   }
 }
 </script>

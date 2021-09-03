@@ -1,6 +1,7 @@
 <template>
   <validation-provider v-slot="{ errors }" :name="label" :rules="rules">
     <v-text-field
+      v-if="isVisible"
       v-model="value"
       prepend-icon="mdi-format-text"
       :error-messages="errors"
@@ -35,7 +36,11 @@ export default class ResourceFormTextInput extends Vue {
   }
 
   get rules(): string {
-    return this.input.rules
+    return this.isVisible ? this.input.rules : ''
+  }
+
+  get isVisible(): boolean {
+    return this.input.isVisible
   }
 }
 </script>

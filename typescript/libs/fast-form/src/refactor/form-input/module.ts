@@ -3,6 +3,7 @@ import { InputModuleType } from "../../types/input-module-type"
 
 export abstract class FormInputModule<T> implements IFormModuleItem<T> {
   private readonly _rules: string[]
+  private displayConditionFn?: () => boolean
 
   protected _value: T
 
@@ -26,6 +27,14 @@ export abstract class FormInputModule<T> implements IFormModuleItem<T> {
 
   get value(): T {
     return this._value
+  }
+
+  get isVisible(): boolean {
+    return this.displayConditionFn ? this.displayConditionFn() : true
+  }
+
+  setDisplayConditionFn(displayConditionFn: () => boolean): void {
+    this.displayConditionFn = displayConditionFn
   }
 
   abstract clear(): void

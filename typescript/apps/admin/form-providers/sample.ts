@@ -31,12 +31,18 @@ export namespace SampleForm {
       return new FastForm.RFormGroupModule(formStructure, ['name'], headingProvider)
     }
 
+    const publishedInputModule = new FastForm.RFormSwitchInputModule('公開する', false)
+    const endAtInputModule = new FastForm.RFormDateInputModule('公開終了日', '', 'YYYY-MM-DD', ['required'])
+
+    // 他のフォームの値など、条件に応じて非表示にする必要がある場合は.setDisplayConditionFn()を用いる
+    endAtInputModule.setDisplayConditionFn(() => publishedInputModule.value === true)
+
     const basicInfoFormStructure: FastForm.FormStructure<AsObject['basicInfo']> = {
       title: new FastForm.RFormTextInputModule('タイトル', '', ['required']),
       description: new FastForm.RFormTextInputModule('説明', ''),
       price: new FastForm.RFormNumberInputModule('価格', 0),
-      published: new FastForm.RFormSwitchInputModule('公開する', false),
-      endAt: new FastForm.RFormDateInputModule('公開終了日', '', 'YYYY-MM-DD'),
+      published: publishedInputModule,
+      endAt: endAtInputModule,
       type: new FastForm.RFormSelectInputModule<number>('種別', 1, [{ text: 'タイプA', value: 1 }, { text: 'タイプB', value: 2 }], 1),
       image: new FastForm.RFormImageInputModule('画像', 'https://picsum.photos/200/300'),
     }
