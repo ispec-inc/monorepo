@@ -1,3 +1,4 @@
 type Mutation {
     createArticle(title: String!, body: String!): Article
+    createHero(name: String!, age: Int!, isJedi: Boolean): Hero
 }

@@ -6,6 +6,7 @@ import (
 
 	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/resolver"
+	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/resolver/mutation"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/resolver/query"
 )
 
@@ -23,4 +24,8 @@ func (h Handler) Hero(ctx context.Context, args QueryHeroArgs) (*resolver.Hero, 
 
 func (h Handler) Heroes(ctx context.Context) (*[]*resolver.Hero, error) {
 	return query.Heroes(ctx)
+}
+
+func (h Handler) CreateHero(ctx context.Context, args mutation.CreateHeroArgs) (*resolver.Hero, error) {
+	return mutation.CreateHero(ctx, args)
 }
