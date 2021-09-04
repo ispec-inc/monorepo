@@ -1,0 +1,6 @@
+type Hero {
+    id: ID!
+    name: String!
+    age: Int!
+    isJedi: Boolean!
+}

@@ -3,4 +3,6 @@ type Query {
     user(id: ID!): User
     users: [User]
     articles(userId: ID): [Article]
+    hero(id: ID!): Hero
+    heroes: [Hero]
 }
