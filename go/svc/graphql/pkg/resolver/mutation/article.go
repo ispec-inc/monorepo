@@ -7,8 +7,13 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/resolver"
 )
 
-func CreateArticle(ctx context.Context, title, body string) (*resolver.Article, error) {
-	a := model.NewArticle(1, title, body)
+type ArticleInput struct {
+	Title string
+	Body  string
+}
+
+func CreateArticle(ctx context.Context, input ArticleInput) (*resolver.Article, error) {
+	a := model.NewArticle(1, input.Title, input.Body)
 	if err := a.Create(); err != nil {
 		return nil, err
 	}

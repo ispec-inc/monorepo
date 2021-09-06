@@ -18,14 +18,9 @@ func (h Handler) Articles(ctx context.Context, args QueryArticleArgs) (*[]*resol
 }
 
 type MutationArticleArgs struct {
-	Input *ArticleInput
-}
-
-type ArticleInput struct {
-	Title string
-	Body  string
+	Input mutation.ArticleInput
 }
 
 func (h Handler) CreateArticle(ctx context.Context, args MutationArticleArgs) (*resolver.Article, error) {
-	return mutation.CreateArticle(ctx, args.Input.Title, args.Input.Body)
+	return mutation.CreateArticle(ctx, args.Input)
 }
