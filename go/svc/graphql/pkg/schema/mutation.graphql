@@ -1,9 +1,15 @@
 type Mutation {
     createArticle(input: ArticleInput!): Article
-    createHero(name: String!, age: Int!, isJedi: Boolean): Hero
+    createHero(input: HeroInput!): Hero
 }
 
 input ArticleInput {
     title: String!
     body: String!
+}
+
+input HeroInput {
+    name: String!
+    age: Int!
+    isJedi: Boolean
 }

@@ -7,14 +7,14 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/resolver"
 )
 
-type CreateHeroArgs struct {
+type HeroInput struct {
 	Name   string
 	Age    int32
 	IsJedi *bool
 }
 
-func CreateHero(ctx context.Context, args CreateHeroArgs) (*resolver.Hero, error) {
-	h := model.NewHero(args.Name, int(args.Age), *args.IsJedi)
+func CreateHero(ctx context.Context, input HeroInput) (*resolver.Hero, error) {
+	h := model.NewHero(input.Name, int(input.Age), *input.IsJedi)
 	if err := h.Create(); err != nil {
 		return nil, err
 	}

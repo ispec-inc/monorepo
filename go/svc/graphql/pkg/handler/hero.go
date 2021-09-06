@@ -26,6 +26,10 @@ func (h Handler) Heroes(ctx context.Context) (*[]*resolver.Hero, error) {
 	return query.Heroes(ctx)
 }
 
-func (h Handler) CreateHero(ctx context.Context, args mutation.CreateHeroArgs) (*resolver.Hero, error) {
-	return mutation.CreateHero(ctx, args)
+type MutationHeroArgs struct {
+	Input mutation.HeroInput
+}
+
+func (h Handler) CreateHero(ctx context.Context, args MutationHeroArgs) (*resolver.Hero, error) {
+	return mutation.CreateHero(ctx, args.Input)
 }
