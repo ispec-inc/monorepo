@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-card-title>サンプルデータ登録</v-card-title>
+      <v-card-title>サンプルフォーム</v-card-title>
       <v-divider></v-divider>
       <v-card-text>
         <resource-form
@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { SampleForm } from '~/form-providers/sample'
+import { SampleSeparatedForm } from '~/form-providers/sample-separated-form'
 import ResourceForm from '~/components/common/resource-form.vue'
 
 @Component({
@@ -24,10 +24,10 @@ import ResourceForm from '~/components/common/resource-form.vue'
     ResourceForm,
   },
 })
-export default class AnimeNewPage extends Vue {
-  form = SampleForm.provideModule()
+export default class SampleSeparatedFormPage extends Vue {
+  form = SampleSeparatedForm.provideModule()
 
-  submit(value: SampleForm.AsObject) {
+  submit(value: SampleSeparatedForm.AsObject) {
     console.log(value)
   }
 }
