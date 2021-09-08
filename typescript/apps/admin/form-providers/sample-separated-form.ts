@@ -1,6 +1,6 @@
 import * as FastForm from "@monorepo/fast-form";
 
-export namespace SampleForm {
+export namespace SampleSeparatedForm {
   type Tag = {
     name: string
   }

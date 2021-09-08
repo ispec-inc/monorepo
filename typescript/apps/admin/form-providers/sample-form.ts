@@ -1,7 +1,7 @@
 import * as FastForm from "@monorepo/fast-form";
 import PlaceResource from "~/resources/place";
 
-export namespace PlaceForm {
+export namespace SampleForm {
   export type AsObject = {
     nameJa: string
     nameEn: string
