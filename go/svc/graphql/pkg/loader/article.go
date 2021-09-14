@@ -17,7 +17,7 @@ type ArticleResult struct {
 func LoadArticlesByUserID(
 	ctx context.Context,
 	userID int64,
-) (*model.Articles, error) {
+) ([]ArticleResult, error) {
 	// ctxからloaderを取ってくる (requestのスコープでloaderを共有)
 	ldr, err := getLoader(ctx, articleByUserKey)
 	if err != nil {
@@ -39,9 +39,18 @@ func LoadArticlesByUserID(
 		return nil, ErrLoaderResultTyping
 	}
 
-	return as, nil
+	rs := make([]ArticleResult, len(*as))
+	for i := range *as {
+		rs[i] = ArticleResult{
+			Article: (*as)[i],
+			Error:   err,
+		}
+	}
+
+	return rs, nil
 }
 
+// userIDを束ねてまとめてarticlesを取得!!
 func batchLoadArticleByUserIDs(
 	ctx context.Context,
 	keys dataloader.Keys,
