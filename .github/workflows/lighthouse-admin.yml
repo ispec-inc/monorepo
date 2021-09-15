@@ -1,0 +1,43 @@
+name: lighthouse-admin
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
+    paths:
+      - typescript/apps/admin/**
+      - .github/workflows/lighthouse-admin.yml
+
+commands:
+  restore_npm_cache:
+    description: "Restore npm cache"
+    steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+  save_npm_cache:
+    description: "Save npm cache"
+    steps:
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+jobs:
+  lighthouse:
+    docker:
+      - image: circleci/node:12.3-browsers
+    working_directory: typescript/apps/admin
+    steps:
+      - checkout
+      - restore_npm_cache
+      - run: yarn install
+      - save_npm_cache
+      - run: yarn build
+      - run:
+          name: lhci autorun
+          command: yarn lhci || echo "LHCI failed!"

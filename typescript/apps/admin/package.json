@@ -10,7 +10,8 @@
     "serve": "nuxt-ts serve",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
-    "lint": "yarn lint:js && yarn lint:style"
+    "lint": "yarn lint:js && yarn lint:style",
+    "lhci": "lhci autorun"
   },
   "lint-staged": {
     "*.{js,vue}": [
@@ -26,6 +27,7 @@
   },
   "dependencies": {
     "@babel/preset-env": "7.15.6",
+    "@lhci/cli": "^0.8.1",
     "@monorepo/fast-form": "./libs/fast-form",
     "@monorepo/proto": "./libs/proto",
     "@nuxt/typescript-build": "2.1.0",
