@@ -15,13 +15,15 @@ jobs:
   lighthouse:
     name: runner / lighthouse
     runs-on: ubuntu-latest
-    working_directory: typescript/apps/admin
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
       - run: yarn install && yarn add @lhci/cli@0.6.x
+        working-directory: typescript/apps/admin
       - run: yarn run build
+        working-directory: typescript/apps/admin
       - run: yarn run lhci
+        working-directory: typescript/apps/admin
 
     env:
       LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
