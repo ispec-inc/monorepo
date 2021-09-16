@@ -21,6 +21,7 @@ jobs:
         with:
           node-version: '14.17.1'
       - run: |
+          yarn install
           yarn workspace @monorepo/fast-form build
           rm -rf node_modules
           yarn workspace @monorepo/admin install
