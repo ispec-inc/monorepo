@@ -10,15 +10,17 @@
                   v-model="email"
                   label="メール"
                   name="email"
-                  prepend-icon="mdi-account"
+                  :prepend-icon="icons.mdiAccount"
                   type="text"
                 ></v-text-field>
                 <v-text-field
                   v-model="password"
                   label="パスワード"
                   name="password"
-                  prepend-icon="mdi-lock"
-                  :append-icon="passwordDisplay ? 'mdi-eye-off' : 'mdi-eye'"
+                  :prepend-icon="icons.mdiLock"
+                  :append-icon="
+                    passwordDisplay ? icons.mdiEyeOff : icons.mdiEye
+                  "
                   :type="passwordDisplay ? 'text' : 'password'"
                   @click:append="() => (passwordDisplay = !passwordDisplay)"
                 ></v-text-field>
@@ -41,6 +43,7 @@
 
 <script>
 import { Vue, Component } from 'vue-property-decorator'
+import { mdiAccount, mdiLock, mdiEye, mdiEyeOff } from '@mdi/js'
 
 @Component({
   layout: 'centered',
@@ -49,6 +52,7 @@ export default class LoginPage extends Vue {
   passwordDisplay = false
   email = ''
   password = ''
+  icons = { mdiAccount, mdiLock, mdiEye, mdiEyeOff }
 
   async login() {
     try {

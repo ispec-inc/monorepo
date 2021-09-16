@@ -8,7 +8,7 @@
         :loading="isFetching"
         :disabled="isFetching"
         :error="isFetching"
-        prepend-icon="mdi-file-image"
+        :prepend-icon="icons.mdiFileImage"
         accept="image/png, image/jpeg, image/bmp"
         @change="inputFile"
       >
@@ -25,6 +25,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
 import { FormImageInputModule } from '@monorepo/fast-form'
+import { mdiFileImage } from '@mdi/js'
 
 @Component({
   components: {
@@ -33,6 +34,8 @@ import { FormImageInputModule } from '@monorepo/fast-form'
 })
 export default class ResourceFormImageInput extends Vue {
   @Prop() readonly input!: FormImageInputModule
+
+  icons = { mdiFileImage }
 
   get label(): string {
     return this.input.label

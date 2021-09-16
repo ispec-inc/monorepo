@@ -3,7 +3,7 @@
     <v-text-field
       v-if="isVisible"
       v-model.number="value"
-      prepend-icon="mdi-numeric"
+      :prepend-icon="icons.mdiNumeric"
       type="number"
       :error-messages="errors"
       :label="label"
@@ -15,6 +15,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
 import { FormNumberInputModule } from '@monorepo/fast-form'
+import { mdiNumeric } from '@mdi/js'
 
 @Component({
   components: {
@@ -23,6 +24,8 @@ import { FormNumberInputModule } from '@monorepo/fast-form'
 })
 export default class ResourceFormNumberInput extends Vue {
   @Prop() readonly input!: FormNumberInputModule
+
+  icons = { mdiNumeric }
 
   get label(): string {
     return this.input.label

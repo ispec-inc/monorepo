@@ -5,9 +5,12 @@
       "startServerCommand": "yarn run dev",
       "url": [
         "http://localhost:3000/",
-        "http://localhost:3000/about",
-        "http://localhost:3000/contact"
-      ]
+        "http://localhost:3000/sample/form",
+        "http://localhost:3000/sample/separated-form"
+      ],
+      "settings": {
+        "preset": "desktop"
+      }
     },
     "assert": {
       "preset": "lighthouse:no-pwa",

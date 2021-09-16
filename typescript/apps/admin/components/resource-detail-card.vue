@@ -10,7 +10,7 @@
           :to="$route.params.id + '/edit'"
           class="font-weight-bold mr-2 pr-4"
         >
-          <v-icon left>mdi-pencil</v-icon>
+          <v-icon left>{{ icons.mdiPencil }}</v-icon>
           編集
         </v-btn>
         <v-btn
@@ -18,7 +18,7 @@
           class="font-weight-bold pr-4"
           @click="dialog = true"
         >
-          <v-icon left>mdi-delete</v-icon>
+          <v-icon left>{{ icons.mdiDelete }}</v-icon>
           削除
         </v-btn>
       </template>
@@ -35,10 +35,13 @@
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { Resource } from '@monorepo/fast-form'
+import { mdiPencil, mdiDelete } from '@mdi/js'
 
 @Component({})
 export default class ResourceDetailCard extends Vue {
   @Prop({ type: Object, default: null }) readonly resource!: Resource | null
+
+  icons = { mdiPencil, mdiDelete }
 
   @Emit('delete')
   deleteItem() {

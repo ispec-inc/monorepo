@@ -44,7 +44,7 @@
         </v-list-group>
         <v-list-item @click="logout()">
           <v-list-item-action>
-            <v-icon>mdi-logout</v-icon>
+            <v-icon>{{ icons.mdiLogout }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="'ログアウト'" />
@@ -98,9 +98,24 @@
 
 <script>
 import { Vue, Component } from 'vue-property-decorator'
+import {
+  mdiLogout,
+  mdiMapMarker,
+  mdiFormatListBulleted,
+  mdiShapeSquareRoundedPlus,
+  mdiAccountMusic,
+} from '@mdi/js'
 
 @Component({})
 export default class DefaultLayout extends Vue {
+  icons = {
+    mdiLogout,
+    mdiMapMarker,
+    mdiFormatListBulleted,
+    mdiShapeSquareRoundedPlus,
+    mdiAccountMusic,
+  }
+
   clipped = false
   drawer = true
   fixed = false
@@ -108,34 +123,34 @@ export default class DefaultLayout extends Vue {
   errorMessage = ''
   items = [
     {
-      icon: 'mdi-map-marker',
+      icon: this.icons.mdiMapMarker,
       title: 'プレイス',
       items: [
         {
-          icon: 'mdi-format-list-bulleted',
+          icon: this.icons.mdiFormatListBulleted,
           title: '一覧',
           to: '/place',
           separate: 'place-new',
         },
         {
-          icon: 'mdi-shape-square-rounded-plus',
+          icon: this.icons.mdiShapeSquareRoundedPlus,
           title: '登録',
           to: '/place/new',
         },
       ],
     },
     {
-      icon: 'mdi-account-music',
+      icon: this.icons.mdiAccountMusic,
       title: 'アーティスト',
       items: [
         {
-          icon: 'mdi-format-list-bulleted',
+          icon: this.icons.mdiFormatListBulleted,
           title: '一覧',
           to: '/anime',
           separate: 'anime-new',
         },
         {
-          icon: 'mdi-shape-square-rounded-plus',
+          icon: this.icons.mdiShapeSquareRoundedPlus,
           title: '登録',
           to: '/anime/new',
         },

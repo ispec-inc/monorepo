@@ -4,7 +4,7 @@
       <v-expansion-panel-header>
         <v-row no-gutters align="center">
           <v-col v-if="invalid" cols="auto" class="mr-2">
-            <v-icon color="error">mdi-alert-circle</v-icon>
+            <v-icon color="error">{{ icons.mdiAlertCircle }}</v-icon>
           </v-col>
           <v-col>
             {{ heading }}
@@ -16,7 +16,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="error" class="font-weight-bold pr-4" @click="remove">
-            <v-icon left>mdi-delete</v-icon>
+            <v-icon left>{{ icons.mdiDelete }}</v-icon>
             削除
           </v-btn>
         </v-card-actions>
@@ -30,6 +30,7 @@ import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { ValidationObserver } from 'vee-validate'
 // eslint-disable-next-line import/named
 import { FormGroupModule, IFormModuleItem } from '@monorepo/fast-form'
+import { mdiAlertCircle, mdiDelete } from '@mdi/js'
 
 @Component({
   components: {
@@ -45,6 +46,8 @@ export default class ResourceFormGroup extends Vue {
   @Emit() remove(): number {
     return this.index
   }
+
+  icons = { mdiAlertCircle, mdiDelete }
 
   get heading(): string {
     return this.group.heading

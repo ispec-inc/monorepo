@@ -5,7 +5,7 @@
       v-model="value"
       :items="choices"
       :label="label"
-      prepend-icon="mdi-form-select"
+      :prepend-icon="icons.mdiFormSelect"
       :error-messages="errors"
     ></v-select>
   </validation-provider>
@@ -15,6 +15,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
 import { FormSelectInputModule } from '@monorepo/fast-form'
+import { mdiFormSelect } from '@mdi/js'
 
 @Component({
   components: {
@@ -23,6 +24,8 @@ import { FormSelectInputModule } from '@monorepo/fast-form'
 })
 export default class ResourceFormSelectInput extends Vue {
   @Prop() readonly input!: FormSelectInputModule<unknown>
+
+  icons = { mdiFormSelect }
 
   get label(): string {
     return this.input.label

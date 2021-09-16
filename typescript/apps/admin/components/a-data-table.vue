@@ -12,10 +12,10 @@
       <template v-slot:top></template>
       <template v-slot:[`item.actions`]="{ item }">
         <button class="action-button" @click.stop="edit(item)">
-          <v-icon small color="primary"> mdi-pencil </v-icon>
+          <v-icon small color="primary">{{ icons.mdiPencil }}</v-icon>
         </button>
         <button class="action-button" @click.stop="deleteItem(item)">
-          <v-icon small color="primary"> mdi-delete </v-icon>
+          <v-icon small color="primary">{{ icons.mdiDelete }}</v-icon>
         </button>
       </template>
     </v-data-table>
@@ -32,6 +32,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import { mdiPencil, mdiDelete } from '@mdi/js'
 
 @Component({})
 export default class AnipicDataTable extends Vue {
@@ -39,6 +40,8 @@ export default class AnipicDataTable extends Vue {
   @Prop({ type: Array, required: true }) readonly headers!: string[]
   @Prop({ type: Array, default: [] }) readonly items!: string[]
   @Prop({ type: Boolean, default: false }) readonly loading!: boolean
+
+  icons = { mdiPencil, mdiDelete }
 
   @Emit()
   detail(item: any) {

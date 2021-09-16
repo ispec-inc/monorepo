@@ -63,7 +63,12 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/dotenv', '@nuxtjs/axios', '@nuxtjs/auth'],
+  modules: [
+    '@nuxtjs/dotenv',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    'nuxt-webfontloader',
+  ],
   env: {
     API_URL,
   },
@@ -121,6 +126,10 @@ export default {
         },
       },
     },
+    icons: {
+      iconfont: 'mdiSvg',
+    },
+    defaultAssets: false,
   },
   /*
    ** Build configuration
@@ -132,6 +141,11 @@ export default {
         ['@babel/plugin-proposal-decorators', { legacy: true }],
         ['@babel/plugin-proposal-private-methods', { loose: true }],
       ],
+    },
+  },
+  webfontloader: {
+    google: {
+      families: ['Roboto:100,300,400,500,700,900&display=swap'],
     },
   },
 }

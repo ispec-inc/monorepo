@@ -18,8 +18,8 @@
           <v-icon left>
             {{
               isPost
-                ? 'mdi-shape-square-rounded-plus'
-                : 'mdi-circle-edit-outline'
+                ? icons.mdiShapeSquareRoundedPlus
+                : icons.mdiCircleEditOutline
             }}
           </v-icon>
           {{ isPost ? '登録する' : '更新する' }}
@@ -46,6 +46,7 @@ import {
   FormModule,
   SeparatedFormModule,
 } from '@monorepo/fast-form'
+import { mdiShapeSquareRoundedPlus, mdiCircleEditOutline } from '@mdi/js'
 import ResourceFormInputs from './resource-form-inputs.vue'
 import ResourceSeparatedForm from './resource-separated-form.vue'
 
@@ -64,6 +65,8 @@ export default class ResourceForm extends Vue {
     | null
 
   @Prop({ default: false }) readonly isPost!: boolean
+
+  icons = { mdiShapeSquareRoundedPlus, mdiCircleEditOutline }
 
   @Emit()
   submit(): unknown {

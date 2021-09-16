@@ -3,7 +3,7 @@
     <v-text-field
       v-if="isVisible"
       v-model="value"
-      prepend-icon="mdi-format-text"
+      :prepend-icon="icons.mdiFormatText"
       :error-messages="errors"
       :label="label"
     ></v-text-field>
@@ -14,6 +14,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
 import { FormTextInputModule } from '@monorepo/fast-form'
+import { mdiFormatText } from '@mdi/js'
 
 @Component({
   components: {
@@ -22,6 +23,8 @@ import { FormTextInputModule } from '@monorepo/fast-form'
 })
 export default class ResourceFormTextInput extends Vue {
   @Prop() readonly input!: FormTextInputModule
+
+  icons = { mdiFormatText }
 
   get label(): string {
     return this.input.label

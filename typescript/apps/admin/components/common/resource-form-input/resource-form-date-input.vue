@@ -14,7 +14,7 @@
           v-model="valueForDisplay"
           :label="label"
           :error-messages="errors"
-          prepend-icon="mdi-calendar"
+          :prepend-icon="icons.mdiCalendar"
           readonly
           v-bind="attrs"
           v-on="on"
@@ -33,6 +33,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationProvider } from 'vee-validate'
 import { FormDateInputModule } from '@monorepo/fast-form'
 import dayjs from 'dayjs'
+import { mdiCalendar } from '@mdi/js'
 
 @Component({
   components: {
@@ -43,6 +44,7 @@ export default class ResourceFormDateInput extends Vue {
   @Prop() readonly input!: FormDateInputModule
 
   isOpenDatePicker = false
+  icons = { mdiCalendar }
 
   get label(): string {
     return this.input.label
