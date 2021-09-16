@@ -20,8 +20,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.17.1'
-      - run: yarn install && yarn add @lhci/cli
-        working-directory: typescript/apps/admin
+      - run: |
+          yarn workspace @monorepo/fast-form build
+          rm -rf node_modules
+          yarn workspace @monorepo/admin install
+        working-directory: typescript
       - run: yarn run build
         working-directory: typescript/apps/admin
       - run: yarn run lhci
