@@ -64,13 +64,20 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationObserver } from 'vee-validate'
 import { FormInputModule } from '@monorepo/fast-form'
-import ResourceFormTextInput from './resource-form-input/resource-form-text-input.vue'
-import ResourceFormNumberInput from './resource-form-input/resource-form-number-input.vue'
-import ResourceFormSwitchInput from './resource-form-input/resource-form-switch-input.vue'
-import ResourceFormDateInput from './resource-form-input/resource-form-date-input.vue'
-import ResourceFormSelectInput from './resource-form-input/resource-form-select-input.vue'
-import ResourceFormImageInput from './resource-form-input/resource-form-image-input.vue'
-import ResourceFormGroupList from './resource-form-input/resource-form-group-list.vue'
+const ResourceFormTextInput = () =>
+  import('./resource-form-input/resource-form-text-input.vue')
+const ResourceFormNumberInput = () =>
+  import('./resource-form-input/resource-form-number-input.vue')
+const ResourceFormSwitchInput = () =>
+  import('./resource-form-input/resource-form-switch-input.vue')
+const ResourceFormDateInput = () =>
+  import('./resource-form-input/resource-form-date-input.vue')
+const ResourceFormSelectInput = () =>
+  import('./resource-form-input/resource-form-select-input.vue')
+const ResourceFormImageInput = () =>
+  import('./resource-form-input/resource-form-image-input.vue')
+const ResourceFormGroupList = () =>
+  import('./resource-form-input/resource-form-group-list.vue')
 
 @Component({
   components: {
