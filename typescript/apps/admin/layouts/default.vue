@@ -11,7 +11,13 @@
       <v-list nav>
         <v-list-item>
           <v-list-item-content class="logo-wrapper">
-            <img src="/logo.png" class="logo" width="188" height="50" />
+            <img
+              src="/logo.png"
+              class="logo"
+              width="188"
+              height="50"
+              alt="logo"
+            />
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
@@ -53,7 +59,10 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" color="primary" :dark="true" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon
+        aria-label="サイドバーを開く"
+        @click.stop="drawer = !drawer"
+      />
       <v-toolbar-title v-text="title" />
     </v-app-bar>
     <v-main class="main">
