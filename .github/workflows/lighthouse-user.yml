@@ -1,0 +1,30 @@
+name: lighthouse-user
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
+    paths:
+      - typescript/apps/nuxt-ssr-user/**
+      - .github/workflows/lighthouse-user.yml
+
+jobs:
+  lighthouse:
+    name: runner / lighthouse
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.17.1'
+      - run: |
+          yarn install
+          yarn run build
+          yarn run lhci
+        working-directory: typescript/apps/nuxt-ssr-user
+
+    env:
+      LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
