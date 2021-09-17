@@ -11,7 +11,7 @@
       <v-list nav>
         <v-list-item>
           <v-list-item-content class="logo-wrapper">
-            <img src="/logo.png" class="logo" />
+            <img src="/logo.png" class="logo" width="188" height="50" />
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>

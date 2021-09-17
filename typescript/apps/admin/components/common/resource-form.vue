@@ -47,8 +47,8 @@ import {
   SeparatedFormModule,
 } from '@monorepo/fast-form'
 import { mdiShapeSquareRoundedPlus, mdiCircleEditOutline } from '@mdi/js'
-import ResourceFormInputs from './resource-form-inputs.vue'
-import ResourceSeparatedForm from './resource-separated-form.vue'
+const ResourceFormInputs = () => import('./resource-form-inputs.vue')
+const ResourceSeparatedForm = () => import('./resource-separated-form.vue')
 
 @Component({
   components: {

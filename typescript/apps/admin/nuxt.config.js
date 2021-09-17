@@ -68,6 +68,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     'nuxt-webfontloader',
+    'nuxt-lazy-load',
   ],
   env: {
     API_URL,
@@ -130,6 +131,7 @@ export default {
       iconfont: 'mdiSvg',
     },
     defaultAssets: false,
+    treeShake: true,
   },
   /*
    ** Build configuration
@@ -142,6 +144,7 @@ export default {
         ['@babel/plugin-proposal-private-methods', { loose: true }],
       ],
     },
+    extractCSS: true,
   },
   webfontloader: {
     google: {

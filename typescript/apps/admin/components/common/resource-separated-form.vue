@@ -18,7 +18,7 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ValidationObserver } from 'vee-validate'
 // eslint-disable-next-line import/named
 import { IFormModuleItem, SeparatedFormModule } from '@monorepo/fast-form'
-import ResourceFormInputs from './resource-form-inputs.vue'
+const ResourceFormInputs = () => import('./resource-form-inputs.vue')
 
 @Component({
   components: {

@@ -39,6 +39,7 @@
     "camelcase-keys": "6.2.2",
     "eslint-plugin-typescript": "0.14.0",
     "nuxt": "2.15.8",
+    "nuxt-lazy-load": "^1.2.7",
     "nuxt-typed-vuex": "0.2.0",
     "nuxt-webfontloader": "^1.1.0",
     "sass": "1.38.2",
