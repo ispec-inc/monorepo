@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@types/node@14.17.15":
-  "integrity" "sha512-D1sdW0EcSCmNdLKBGMYb38YsHUS6JcM7yQ6sLQ9KuZ35ck7LYCKE7kYFHOO59ayFOY3zobWVZxf4KXhYHcHYFA=="
-  "resolved" "https://registry.npmjs.org/@types/node/-/node-14.17.15.tgz"
-  "version" "14.17.15"
+"@types/node@14.17.17":
+  "integrity" "sha512-niAjcewgEYvSPCZm3OaM9y6YQrL2SEPH9PymtE6fuZAvFiP6ereCcvApGl2jKTq7copTIguX3PBvfP08LN4LvQ=="
+  "resolved" "https://registry.npmjs.org/@types/node/-/node-14.17.17.tgz"
+  "version" "14.17.17"
 
 "dayjs@^1.10.6":
   "integrity" "sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig=="
