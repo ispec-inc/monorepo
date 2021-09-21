@@ -1,13 +1,13 @@
 <template>
   <form>
-    <h4>v-modelパターンのorganism</h4>
+    <h2>v-modelパターンのorganism</h2>
     <p>
-      <label>name</label>
-      <input v-model="name" />
+      <label for="v-model-pattern-repository-form-name">name</label>
+      <input id="v-model-pattern-repository-form-name" v-model="name" />
     </p>
     <p>
-      <label>lang</label>
-      <input v-model="language" />
+      <label for="v-model-pattern-repository-form-lang">lang</label>
+      <input id="v-model-pattern-repository-form-lang" v-model="language" />
     </p>
   </form>
 </template>

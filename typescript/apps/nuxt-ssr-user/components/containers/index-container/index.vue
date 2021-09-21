@@ -9,7 +9,8 @@
       </li>
     </ul>
     <form>
-      <input v-model="firstResponseName" />
+      <label for="first-response-name">name</label>
+      <input id="first-response-name" v-model="firstResponseName" />
     </form>
     <!-- Recommend writing v-model-pattern-repository-form -->
     <!-- v-model-pattern-repository-formの書き方を推奨 -->

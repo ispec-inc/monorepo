@@ -1,9 +1,10 @@
 <template>
   <form>
-    <h4>key valueでemitするパターンのorganism</h4>
+    <h2>key valueでemitするパターンのorganism</h2>
     <p>
-      <label>name</label>
+      <label for="key-value-pattern-repository-form-name">name</label>
       <input
+        id="key-value-pattern-repository-form-name"
         :value="formData.name"
         @input="
           updateValue({
@@ -14,8 +15,9 @@
       />
     </p>
     <p>
-      <label>lang</label>
+      <label for="key-value-pattern-repository-form-lang">lang</label>
       <input
+        id="key-value-pattern-repository-form-lang"
         :value="formData.language"
         @input="
           updateValue({
