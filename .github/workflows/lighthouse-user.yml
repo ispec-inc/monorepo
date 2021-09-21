@@ -22,7 +22,7 @@ jobs:
           node-version: '14.17.1'
       - run: |
           yarn install
-          yarn run build
+          yarn run generate
           yarn run lhci
         working-directory: typescript/apps/nuxt-ssr-user
 
