@@ -72,6 +72,7 @@ export default {
     '@nuxtjs/auth',
     'nuxt-webfontloader',
     'nuxt-lazy-load',
+    'nuxt-compress',
   ],
   env: {
     API_URL,
@@ -152,6 +153,14 @@ export default {
   webfontloader: {
     google: {
       families: ['Roboto:100,300,400,500,700,900&display=swap'],
+    },
+  },
+  'nuxt-compress': {
+    gzip: {
+      threshold: 8192,
+    },
+    brotli: {
+      threshold: 8192,
     },
   },
 }

@@ -2,7 +2,7 @@
   "ci": {
     "collect": {
       "numberOfRuns": 1,
-      "startServerCommand": "yarn run dev",
+      "staticDistDir": "./dist",
       "url": [
         "http://localhost:3000/",
         "http://localhost:3000/sample/form",
