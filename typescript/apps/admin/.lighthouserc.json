@@ -4,7 +4,6 @@
       "numberOfRuns": 1,
       "staticDistDir": "./dist",
       "url": [
-        "http://localhost:3000/",
         "http://localhost:3000/sample/form",
         "http://localhost:3000/sample/separated-form"
       ],
@@ -13,11 +12,11 @@
       }
     },
     "assert": {
-      "preset": "lighthouse:no-pwa",
       "assertions": {
-        "offscreen-images": "off",
-        "uses-webp-images": "off",
-        "uses-http2": "off"
+        "categories:performance": ["error", { "minScore": 0.95 }],
+        "categories:accessibility": ["error", { "minScore": 0.95 }],
+        "categories:best-practices": ["error", { "minScore": 0.95 }],
+        "categories:seo": ["error", { "minScore": 0.95 }]
       }
     },
     "upload": {
