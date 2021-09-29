@@ -23,6 +23,7 @@ jobs:
           node-version: '14.17.4'
 
       - name: initialize
+        run: yarn workspace @monorepo/util-functions install
         run: yarn workspace @monorepo/util-functions update
         working-directory: typescript
 
