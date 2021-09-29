@@ -5,6 +5,8 @@ on:
     branches:
       - master
   pull_request:
+    branches:
+      - "*"
     paths:
       - typescript/libs/util-functions/**
       - .github/workflows/util-functions-ts-test.yml
