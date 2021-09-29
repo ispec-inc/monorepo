@@ -5,8 +5,6 @@ on:
     branches:
       - master
   pull_request:
-    branches:
-      - "*"
     paths:
       - typescript/libs/util-functions/**
       - .github/workflows/util-functions-ts-test.yml
@@ -25,8 +23,9 @@ jobs:
           node-version: '14.17.4'
 
       - name: initialize
-        run: yarn workspace @monorepo/util-functions install
-        run: yarn workspace @monorepo/util-functions update
+        run: |
+          yarn workspace @monorepo/util-functions install
+          yarn workspace @monorepo/util-functions update
         working-directory: typescript
 
       - name: run test
