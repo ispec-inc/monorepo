@@ -2,6 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "lib": ["ES2019.Object", "DOM"],
+    "lib": ["ES2019.Object", "DOM", "esnext"],
+    "types": [
+      "@types/jest"
+    ]
   }
 }

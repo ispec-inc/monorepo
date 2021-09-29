@@ -14,6 +14,9 @@ $ yarn start
 
 # generate static project
 $ yarn generate
+
+# install util-functions
+$ yarn workspace @monorepo/util-functions update
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
@@ -65,8 +68,8 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
     - colorの一覧は[こちら](https://vuetifyjs.com/en/styles/colors/#material-colors)
 - Logo
     - `/static`に画像を入れて`/layout`から呼んでいるので、画像をここに入れる。
- 
- 
+
+
 ## Testing
 
 ### 起動方法/ファイルの置き場など
