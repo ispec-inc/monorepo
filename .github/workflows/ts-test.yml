@@ -23,9 +23,9 @@ jobs:
           node-version: '14.17.4'
 
       - name: initialize
-        run: yarn workspace @bewin-mid/admin install
+        run: yarn workspace @monorepo/admin install
         working-directory: typescript
 
       - name: run test
-        run: yarn workspace @bewin-mid/admin test
+        run: yarn workspace @monorepo/admin test
         working-directory: typescript
