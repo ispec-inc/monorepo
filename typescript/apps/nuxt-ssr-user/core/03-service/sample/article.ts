@@ -19,6 +19,10 @@ export class SampleArticleIndexPageService {
     return this.fetchHelper.run()
   }
 
+  fetchById(id: number) {
+    this.repository.findById(id)
+  }
+
   private constructFetchHelper(): FetchHelper {
     return new AsyncProcessHelper(this.repository.list.bind(this.repository))
       .onSuccess((res, setError) => {

@@ -9,7 +9,8 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import IndexContainer from '@/components/containers/index-container/index.vue'
 import { SampleArticleIndexPageService } from '~/core/03-service/sample/article'
-import { pageServicesModule } from '~/store/page-services'
+import { SampleArticleRepositoryImpl } from '~/core/02-repository/sample/article'
+import { SampleArticleGatewayImpl } from '~/core/01-gateway/sample/article'
 
 @Component({
   components: {
@@ -17,6 +18,10 @@ import { pageServicesModule } from '~/store/page-services'
   },
 })
 export default class SamplePage extends Vue {
-  readonly service: SampleArticleIndexPageService = pageServicesModule.getService('sampleArticle')
+  readonly service = new SampleArticleIndexPageService(new SampleArticleRepositoryImpl(new SampleArticleGatewayImpl()))
+
+  created() {
+    this.service.fetch()
+  }
 }
 </script>
