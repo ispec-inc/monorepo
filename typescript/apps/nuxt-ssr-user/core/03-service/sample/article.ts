@@ -6,7 +6,7 @@ import { AsyncProcessHelper } from "~/utils/async-process-helper";
 
 type FetchHelper = AsyncProcessHelper<ResolvedApiResponse<void>, Parameters<ISampleArticleRepository['list']>>
 
-export class ArticleIndexPageService {
+export class SampleArticleIndexPageService {
   private readonly repository: ISampleArticleRepository
   private readonly fetchHelper: FetchHelper
 
