@@ -13,7 +13,7 @@ export class PageServicesModule extends VuexModule {
   private cache: Partial<ServiceIndex.AsObject> = {}
 
   @Mutation
-  CACHE_SERVICE<T extends keyof ServiceIndex.AsObject>(payload: { key: T, service: ServiceIndex.AsObject[T] }): void {
+  private CACHE_SERVICE<T extends keyof ServiceIndex.AsObject>(payload: { key: T, service: ServiceIndex.AsObject[T] }): void {
     this.cache[payload.key] = payload.service
   }
 
