@@ -7,6 +7,8 @@ import { resolvedResponseBasedOperation } from "~/utils/api-response-hander";
 export interface ISampleArticleRepository {
   findById(id: number): Promise<ResolvedApiResponse<void>>
   list(): Promise<ResolvedApiResponse<void>>
+  readonly article: Maybe<SampleArticleModel>
+  readonly articleList: Maybe<SampleArticleModel[]>
 }
 
 export class SampleArticleRepositoryImpl implements ISampleArticleRepository {
