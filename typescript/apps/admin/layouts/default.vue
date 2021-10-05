@@ -97,8 +97,9 @@
 <script lang="ts">
 import { Vue, Component, Ref } from 'vue-property-decorator'
 import { Subscription } from 'rxjs'
-import SnackbarContainer, { ISnackbarConteiner } from '~/components/advanced/snackbar-container/index.vue'
+import SnackbarContainer from '~/components/advanced/snackbar-container/index.vue'
 import { GlobalEventBus } from '~/surface/event-bus/global'
+import { ISnackbarConteiner } from '~/types/snackbar-container'
 
 @Component({
   components: {

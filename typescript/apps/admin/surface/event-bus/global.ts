@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs'
-import { SnackbarData } from '~/components/advanced/snackbar-container/types'
+import { SnackbarData } from '~/types/snackbar-container'
 
 export class GlobalEventBus {
   private static instance: GlobalEventBus | null = null
