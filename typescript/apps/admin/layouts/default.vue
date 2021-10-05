@@ -160,9 +160,11 @@ export default class DefaultLayout extends Vue {
   }
 
   created() {
-    this.subscription = GlobalEventBus.getInstance().snackbarEventStream.subscribe((data) => {
-      this.snackbarContainer.addSnackbar(data, data.duration)
-    })
+    this.subscription.add(
+      GlobalEventBus.getInstance().snackbarEventStream.subscribe((data) => {
+        this.snackbarContainer.addSnackbar(data, data.duration)
+      })
+    )
   }
 
   beforeDestroy() {
