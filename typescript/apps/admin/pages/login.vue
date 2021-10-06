@@ -62,7 +62,7 @@ export default class LoginPage extends Vue {
         .then((res) => {
           localStorage.setItem('email', res.data.id.toString())
         })
-      this.$router.push('/place')
+      this.$router.push(this.$pagesPath.place.$url())
     } catch (error) {
       console.log(error)
     }
