@@ -1,4 +1,4 @@
-name: ts-test
+name: ts-test-user
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - master
   pull_request:
     paths:
-      - typescript/apps/admin/**
-      - .github/workflows/ts-test.yml
+      - typescript/apps/nuxt-ssr-user/**
+      - .github/workflows/ts-test-user.yml
 
 jobs:
   test:
@@ -23,9 +23,9 @@ jobs:
           node-version: '14.17.4'
 
       - name: initialize
-        run: yarn workspace @monorepo/admin install
+        run: yarn workspace @monorepo/nuxt-ssr-user install
         working-directory: typescript
 
       - name: run test
-        run: yarn workspace @monorepo/admin test
+        run: yarn workspace @monorepo/nuxt-ssr-user test
         working-directory: typescript
