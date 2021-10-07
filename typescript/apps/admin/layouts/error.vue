@@ -10,7 +10,13 @@
   </v-app>
 </template>
 
-<script>
+<style scoped>
+h1 {
+  font-size: 20px;
+}
+</style>
+
+<script lang="ts">
 export default {
   layout: 'empty',
   props: {
@@ -19,13 +25,13 @@ export default {
       default: null,
     },
   },
-  data() {
+  data(): { pageNotFound: string, otherError: string } {
     return {
       pageNotFound: '404 Not Found',
       otherError: 'An error occurred',
     }
   },
-  head() {
+  head(): { title: string } {
     const title =
       this.error.statusCode === 404 ? this.pageNotFound : this.otherError
     return {
@@ -34,9 +40,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-h1 {
-  font-size: 20px;
-}
-</style>

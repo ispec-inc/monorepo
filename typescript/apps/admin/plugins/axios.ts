@@ -3,7 +3,7 @@ import { AxiosError } from 'axios'
 import snakeCaseKeys from 'snakecase-keys'
 import camelCaseKeys from 'camelcase-keys'
 
-export default function ({ $axios, store }: Context) {
+export default function ({ $axios, store }: Context): void {
   $axios.onRequest((config) => {
     if (!store.$auth.loggedIn) {
       return config

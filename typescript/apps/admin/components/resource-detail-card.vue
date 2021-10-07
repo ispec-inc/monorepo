@@ -41,7 +41,7 @@ export default class ResourceDetailCard extends Vue {
   @Prop({ type: Object, default: null }) readonly resource!: Resource | null
 
   @Emit('delete')
-  deleteItem() {
+  deleteItem(): void {
     this.dialog = false
   }
 

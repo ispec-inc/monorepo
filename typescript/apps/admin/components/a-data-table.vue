@@ -41,17 +41,17 @@ export default class AnipicDataTable extends Vue {
   @Prop({ type: Boolean, default: false }) readonly loading!: boolean
 
   @Emit()
-  detail(item: any) {
+  detail(item: any): any {
     return item
   }
 
   @Emit()
-  edit(item: any) {
+  edit(item: any): any {
     return item
   }
 
   @Emit('delete')
-  deleteItem(item: any) {
+  deleteItem(item: any): any {
     return item
   }
 }

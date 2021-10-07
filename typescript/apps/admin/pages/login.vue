@@ -39,7 +39,7 @@
   </v-main>
 </template>
 
-<script>
+<script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 
 @Component({
@@ -50,7 +50,7 @@ export default class LoginPage extends Vue {
   email = ''
   password = ''
 
-  async login() {
+  async login(): Promise<void> {
     try {
       await this.$auth
         .loginWith('local', {
@@ -59,8 +59,8 @@ export default class LoginPage extends Vue {
             password: this.password,
           },
         })
-        .then((res) => {
-          localStorage.setItem('email', res.data.id.toString())
+        .then((_) => {
+          // localStorage.setItem('email', res.data.id.toString())
         })
       this.$router.push('/place')
     } catch (error) {

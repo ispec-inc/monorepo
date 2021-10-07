@@ -50,11 +50,11 @@ export default class ResourceFormGroupList extends Vue {
     return this.input.groups
   }
 
-  appendNewGroup() {
+  appendNewGroup(): void {
     this.input.appendNewGroup()
   }
 
-  removeGroupByIndex(index: number) {
+  removeGroupByIndex(index: number): void {
     this.input.removeGroupByIndex(index)
   }
 }

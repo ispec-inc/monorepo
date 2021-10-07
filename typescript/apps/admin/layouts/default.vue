@@ -96,7 +96,7 @@
 }
 </style>
 
-<script>
+<script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 
 @Component({})
@@ -146,16 +146,16 @@ export default class DefaultLayout extends Vue {
   miniVariant = false
   title = 'Placy Admin'
 
-  mounted() {
+  mounted(): void {
     this.$store.subscribe((mutation) => {
       if (mutation.type === 'error/setCurrent') {
-        this.errorMessage = this.$accessor.error.current?.message
+        // this.errorMessage = this.$accessor.error.current?.message
         this.snackbar = true
       }
     })
   }
 
-  logout() {
+  logout(): void {
     this.$auth.logout()
     localStorage.removeItem('userId')
     this.$router.push('login')

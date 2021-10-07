@@ -30,5 +30,6 @@ module.exports = {
         order: ['template', 'style', 'script'],
       },
     ],
+    '@typescript-eslint/explicit-function-return-type': 'error'
   },
 }

@@ -27,7 +27,7 @@ import ResourceForm from '~/components/common/resource-form.vue'
 export default class SampleFormPage extends Vue {
   form = SampleForm.provideModule()
 
-  submit(value: SampleForm.AsObject) {
+  submit(value: SampleForm.AsObject): void {
     console.log(value)
   }
 }

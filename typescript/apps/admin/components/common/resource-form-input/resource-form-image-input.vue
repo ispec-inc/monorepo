@@ -50,7 +50,7 @@ export default class ResourceFormImageInput extends Vue {
     return this.isVisible ? this.input.rules : ''
   }
 
-  inputFile(value: File | undefined | null) {
+  inputFile(value: File | undefined | null): void {
     this.input.file = value || undefined
   }
 
