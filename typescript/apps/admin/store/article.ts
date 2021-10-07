@@ -17,7 +17,7 @@ import { SampleInterface } from '@/models/sample'
 */
 
 export interface SampleResponseState {
-  articles: Array<SampleInterface>
+  articles: SampleInterface[]
 }
 
 @Module({ name: 'article', dynamic: true, store, namespaced: true })
@@ -38,7 +38,7 @@ export class ArticleModule extends VuexModule {
     })
   }
 
-  get articles(): Array<SampleInterface> {
+  get articles(): SampleInterface[] {
     return this.sampleState?.articles ?? []
   }
 
