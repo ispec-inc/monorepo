@@ -39,5 +39,12 @@ module.exports = {
       }
     ],
     'github/array-foreach': 'error',
+    'use-isnan': 'error',
+    'curly': 'error',
+    'no-fallthrough': 'error',
+    'no-warning-comments': 'warn',
+    'comma-spacing': 'error',
+    'max-statements': 'warn',
+    'no-negated-condition': 'error',
   },
 }
