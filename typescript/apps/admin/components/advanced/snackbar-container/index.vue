@@ -1,11 +1,9 @@
 <template>
   <transition-group tag="div" name="snackbar" class="snackbar-container d-flex flex-column pa-5 align-end">
     <template v-for="s of snackbarList">
-      <v-card :key="s.id" :color="s.type" width="400px" class="snackbar-item">
-        <v-card-text class="white--text font-weight-bold">
-          {{ s.message }}
-        </v-card-text>
-      </v-card>
+      <v-alert :key="s.id" :type="s.type" width="400px" class="snackbar-item" elevation="2">
+        {{ s.message }}
+      </v-alert>
     </template>
   </transition-group>
 </template>
@@ -17,7 +15,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  gap: 20px;
+  gap: 8px;
   pointer-events: none;
   z-index: 100;
 }
