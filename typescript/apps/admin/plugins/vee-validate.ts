@@ -1,4 +1,4 @@
-import { required, numeric, excluded, integer } from 'vee-validate/dist/rules'
+import { required, numeric, excluded, integer, email } from 'vee-validate/dist/rules'
 import { extend, setInteractionMode } from 'vee-validate'
 
 setInteractionMode('eager')
@@ -21,4 +21,9 @@ extend('excluded', {
 extend('integer', {
   ...integer,
   message: '{_field_}は正の整数で入力してください',
+})
+
+extend('email', {
+  ...email,
+  message: '{_field_}に正しいメールアドレスを入力してください',
 })
