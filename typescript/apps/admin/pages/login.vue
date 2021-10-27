@@ -28,10 +28,9 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import { LoginForm } from '~/form-providers/login-form'
 import LoginPageForm from '~/components/pages/login-page-form.vue'
-import { LoginPageService } from '~/core/03-service/login'
-import { AuthRepositoryImpl } from '~/core/02-repository/auth'
-import { AuthGatewayImpl } from '~/core/01-gateway/auth'
 import UseSubscription from '~/components/mixins/use-subscription'
+import { pageServicesModule } from '~/store/page-services'
+import { LoginPageService } from '~/core/03-service/login'
 
 @Component({
   layout: 'centered',
@@ -40,9 +39,7 @@ import UseSubscription from '~/components/mixins/use-subscription'
   },
 })
 export default class LoginPage extends mixins(UseSubscription) {
-  readonly service = new LoginPageService(
-    new AuthRepositoryImpl(new AuthGatewayImpl())
-  )
+  readonly service: LoginPageService = pageServicesModule.getService('login')
 
   form = LoginForm.provideModule()
 
