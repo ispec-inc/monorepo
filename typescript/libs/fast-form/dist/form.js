@@ -1,49 +1,21 @@
-import FormGroupModule from './form-group';
-import FormImageInputModule from './form-image-input';
-import FormSwitchInputModule from './form-switch-input';
-export default class FormModule {
-    constructor(inputs) {
-        this.inputs = inputs;
-        this.inputs.forEach((input) => {
-            if (input instanceof FormGroupModule) {
-                if (this.tabs === undefined) {
-                    this.tabs = [];
-                }
-                this.tabs.push(input.label);
-            }
+export class FormModule {
+    constructor(structure, order) {
+        this.isSeparated = false;
+        this.structure = structure;
+        this.order = order;
+    }
+    getFormValue() {
+        const entries = Object.entries(this.structure).map(([key, module]) => {
+            return [key, module.value];
         });
+        return Object.fromEntries(entries);
     }
     clear() {
-        for (const input of this.inputs) {
-            input.clear();
+        for (const k of this.order) {
+            this.structure[k].clear();
         }
     }
-    formValue() {
-        let value = {};
-        this.inputs.forEach((input) => {
-            value = Object.assign(value, this.createFormValue(input));
-        });
-        return value;
-    }
-    createFormValue(input) {
-        let value = {};
-        if (input instanceof FormGroupModule) {
-            input.inputs.forEach((childInput) => {
-                value = Object.assign(value, this.createFormValue(childInput));
-            });
-        }
-        else if (input instanceof FormImageInputModule) {
-            value[input.key] = input.file;
-        }
-        else if (input instanceof FormSwitchInputModule) {
-            value = Object.assign(value, input.getValueAll());
-        }
-        else {
-            value[input.key] = input.value;
-        }
-        return value;
-    }
-    get isConstructedFormGroups() {
-        return this.tabs !== undefined;
+    get inputs() {
+        return this.order.map((o) => this.structure[o]);
     }
 }

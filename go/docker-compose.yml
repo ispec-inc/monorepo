@@ -1,6 +1,6 @@
 version: '2.2'
 services:
-  monorepo-api:
+  api:
     container_name: monorepo-api
     build:
       context: .
@@ -25,7 +25,7 @@ services:
       - monorepo
 
   test:
-    container_name: test
+    container_name: monorepo-test
     image: golang:1.17
     env_file:
       - .env/server
@@ -38,7 +38,7 @@ services:
       - monorepo
 
   message-bus-redis:
-    container_name: message-bus-redis
+    container_name: monorepo-message-bus-redis
     image: redis:6.2
     networks:
       - monorepo
@@ -46,7 +46,7 @@ services:
       - ./data/redis:/data
 
   article-mysql:
-    container_name: article-mysql
+    container_name: monorepo-article-mysql
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: article
@@ -59,7 +59,7 @@ services:
       - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
   article-mysql-test:
-    container_name: article-mysql-test
+    container_name: monorepo-article-mysql-test
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: article

@@ -1,27 +1,33 @@
-import { FormInputType, FormAbstructModule } from "./form-abstruct-module";
-import FormDateInputModule from "./form-date-input";
-import FormGroupListModule, { FormGroupTempleteProvider } from "./form-group-list";
-import FormGroupModule from "./form-group";
-import FormImageInputModule from "./form-image-input";
-import FormInputModule from "./form-input";
-import FormNumberInputModule from "./form-number-input";
-import FormSelectInputModule, { SelectFormChoice } from "./form-select-input";
-import FormSwitchInputModule from "./form-switch-input";
-import FormTextInputModule from "./form-text-input";
-import FormModule from "./form";
-import Resource, { ResourceDetail } from "./resource";
+import Resource from "./resource";
+import { FormModule } from './form'
+import { SeparatedFormModule } from './separated-form'
+import { FormTextInputModule } from './form-input/text'
+import { FormPasswordInputModule } from "./form-input/password"
+import { FormNumberInputModule } from './form-input/number'
+import { FormDateInputModule } from './form-input/date'
+import { FormSelectInputModule } from './form-input/select'
+import { FormSwitchInputModule } from './form-input/switch'
+import { FormImageInputModule } from './form-input/image'
+import { FormInputModule } from './form-input/module'
+import { FormGroupModule } from './form-input/group'
+import { FormGroupListModule } from './form-input/group-list'
+import { IFormModuleItem } from './interfaces/form-module-item'
+import { FormStructure } from './types/form-structure'
 
 export {
-  FormAbstructModule,
-  FormDateInputModule,
-  FormGroupListModule,
-  FormGroupModule,
-  FormImageInputModule,
-  FormInputModule,
+  Resource,
+  FormModule,
+  FormTextInputModule,
+  FormPasswordInputModule,
   FormNumberInputModule,
+  FormDateInputModule,
   FormSelectInputModule,
   FormSwitchInputModule,
-  FormTextInputModule,
-  FormModule,
-  Resource,
+  FormImageInputModule,
+  FormInputModule,
+  FormGroupListModule,
+  FormGroupModule,
+  FormStructure,
+  SeparatedFormModule,
+  IFormModuleItem,
 }
