@@ -3,7 +3,7 @@
 
 .PHONY: protoc gen protogen
 
-run: init run-middleware article-migrate server
+run: init article-migrate server
 
 ci-test: init test
 
