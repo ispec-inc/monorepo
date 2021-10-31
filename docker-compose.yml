@@ -23,6 +23,95 @@ services:
     networks:
       - monorepo
 
+  api:
+    container_name: monorepo-api
+    build:
+      context: go
+      dockerfile: docker/dev/Dockerfile
+    command: air -c .air.toml
+    ports:
+      - "9000:9000"
+      - "2345:2345"
+    env_file:
+      - go/.env/server
+    depends_on:
+      - article-mysql
+      - message-bus-redis
+    volumes:
+      - ./go:/go/src/app
+    working_dir: /go/src/app
+    security_opt:
+      - apparmor:unconfined
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - monorepo
+
+  test:
+    container_name: monorepo-test
+    image: golang:1.17
+    env_file:
+      - go/.env/server
+    depends_on:
+      - article-mysql-test
+    volumes:
+      - ./go:/go/src/app
+    working_dir: /go/src/app
+    networks:
+      - monorepo
+
+  article-migrate:
+    container_name: article-migrate
+    build:
+      context: ./migration/article
+      dockerfile: Dockerfile
+    env_file:
+      - ./migration/article/.env
+    volumes:
+      - ./migration/article:/db
+    networks:
+      - monorepo
+
+  message-bus-redis:
+    container_name: monorepo-message-bus-redis
+    image: redis:6.2
+    networks:
+      - monorepo
+    volumes:
+      - ./data/redis:/data
+
+  article-mysql:
+    container_name: monorepo-article-mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: article
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33071:3306"
+    networks:
+      - monorepo
+    volumes:
+      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+
+  article-mysql-test:
+    container_name: monorepo-article-mysql-test
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: article
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33072:3306"
+    networks:
+      - monorepo
+    volumes:
+      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+
+  dockerize:
+    image: jwilder/dockerize:0.6.1
+    networks:
+      - monorepo
+    command: dockerize
+
 networks:
   monorepo:
     external: true

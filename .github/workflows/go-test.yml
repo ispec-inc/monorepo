@@ -7,7 +7,7 @@ on:
   pull_request:
     paths:
       - go/**
-      - .github/workflows/gotest.yml
+      - .github/workflows/go-test.yml
 
 jobs:
   test:
@@ -19,17 +19,9 @@ jobs:
 
       - name: initialize
         run: |
-          cp .env/server.default .env/server
-          make init
-        working-directory: go
-
-      - name: migration
-        run: make article-migrate
-        working-directory: migration
-
-      - name: run test
-        run: make test
-        working-directory: go
+          cp go/.env/server.default go/.env/server
+          cp gen/.env.default gen/.env
+          make ci-test
 
       - name: upload coverage to codecov
         uses: codecov/codecov-action@v1
