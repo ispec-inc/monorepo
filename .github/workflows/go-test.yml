@@ -19,7 +19,7 @@ jobs:
 
       - name: initialize
         run: |
-          cp .env/server.default .env/server
+          cp go/.env/server.default go/.env/server
           make test
 
       - name: upload coverage to codecov
