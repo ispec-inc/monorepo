@@ -20,16 +20,7 @@ jobs:
       - name: initialize
         run: |
           cp .env/server.default .env/server
-          make init
-        working-directory: go
-
-      - name: migration
-        run: make article-migrate
-        working-directory: migration
-
-      - name: run test
-        run: make test
-        working-directory: go
+          make test
 
       - name: upload coverage to codecov
         uses: codecov/codecov-action@v1
