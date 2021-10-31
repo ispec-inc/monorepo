@@ -2,7 +2,7 @@ import Resource from "./resource";
 import { FormModule } from './form';
 import { SeparatedFormModule } from './separated-form';
 import { FormTextInputModule } from './form-input/text';
-import { FormPasswordInputModule } from './form-input/password';
+import { FormPasswordInputModule } from "./form-input/password";
 import { FormNumberInputModule } from './form-input/number';
 import { FormDateInputModule } from './form-input/date';
 import { FormSelectInputModule } from './form-input/select';
