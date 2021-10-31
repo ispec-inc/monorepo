@@ -21,7 +21,7 @@ jobs:
         run: |
           cp go/.env/server.default go/.env/server
           cp gen/.env.default gen/.env
-          make test
+          make ci-test
 
       - name: upload coverage to codecov
         uses: codecov/codecov-action@v1

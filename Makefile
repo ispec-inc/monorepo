@@ -3,7 +3,9 @@
 
 .PHONY: protoc gen protogen
 
-run: init article-migrate server
+run: init run-middleware article-migrate server
+
+ci-test: init test
 
 init: ## setup docker build, network, and databases
 	docker network create monorepo || true
@@ -26,6 +28,7 @@ server: ## go run server
 test: pkg = ./...
 test: ## go test
 	docker-compose up -d article-mysql-test
+	docker-compose up -d message-bus-redis
 	docker-compose run --rm dockerize -wait tcp://article-mysql-test:3306 -timeout 20s
 	docker-compose run --rm -e DB_HOST=article-mysql-test article-migrate db:migrate
 	docker-compose run --rm test go test -v -cover -coverprofile=coverage.out $(pkg)
