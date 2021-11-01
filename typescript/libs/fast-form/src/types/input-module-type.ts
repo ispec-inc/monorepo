@@ -1,9 +1,10 @@
 export type InputModuleType =
-| 'text'
-| 'select'
-| 'image'
-| 'number'
-| 'date'
-| 'group'
-| 'switch'
-| 'list'
+| "text"
+| "select"
+| "image"
+| "number"
+| "date"
+| "group"
+| "switch"
+| "list"
+| "password"
