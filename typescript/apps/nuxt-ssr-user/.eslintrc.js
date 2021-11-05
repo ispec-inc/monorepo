@@ -19,11 +19,11 @@ module.exports = {
   globals: {
     cy: true,
   },
-  plugins: ['cypress'],
+  plugins: ['cypress', 'typescript'],
   // add your custom rules here
   rules: {
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
     'vue/component-tags-order': [
       'error',
       {
