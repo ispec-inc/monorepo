@@ -59,9 +59,7 @@
     <v-main class="main">
       <v-container class="main-container">
         <nuxt />
-        <v-snackbar v-model="snackbar" color="primary">
-          {{ errorMessage }}
-        </v-snackbar>
+        <snackbar-container ref="snackbarContainer" />
       </v-container>
     </v-main>
   </v-app>
@@ -96,16 +94,25 @@
 }
 </style>
 
-<script>
-import { Vue, Component } from 'vue-property-decorator'
+<script lang="ts">
+import { Vue, Component, Ref } from 'vue-property-decorator'
+import { Subscription } from 'rxjs'
+import SnackbarContainer from '~/components/advanced/snackbar-container/index.vue'
+import { GlobalEventBus } from '~/surface/event-bus/global'
+import { ISnackbarConteiner } from '~/types/snackbar-container'
 
-@Component({})
+@Component({
+  components: {
+    SnackbarContainer,
+  },
+})
 export default class DefaultLayout extends Vue {
+  @Ref('snackbarContainer') snackbarContainer!: ISnackbarConteiner
+
   clipped = false
   drawer = true
   fixed = false
-  snackbar = false
-  errorMessage = ''
+  subscription = new Subscription()
   items = [
     {
       icon: 'mdi-map-marker',
@@ -146,19 +153,22 @@ export default class DefaultLayout extends Vue {
   miniVariant = false
   title = 'Placy Admin'
 
-  mounted() {
-    this.$store.subscribe((mutation) => {
-      if (mutation.type === 'error/setCurrent') {
-        this.errorMessage = this.$accessor.error.current?.message
-        this.snackbar = true
-      }
-    })
-  }
-
   logout() {
     this.$auth.logout()
     localStorage.removeItem('userId')
     this.$router.push(this.$pagesPath.login.$url())
+  }
+
+  created() {
+    this.subscription.add(
+      GlobalEventBus.getInstance().snackbarEventStream.subscribe((data) => {
+        this.snackbarContainer.addSnackbar(data, data.duration)
+      })
+    )
+  }
+
+  beforeDestroy() {
+    this.subscription.unsubscribe()
   }
 }
 </script>

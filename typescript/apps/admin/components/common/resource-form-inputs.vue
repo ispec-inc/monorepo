@@ -8,6 +8,13 @@
           class="input-partial"
         />
       </template>
+      <template v-if="input.type === 'password'">
+        <resource-form-password-input
+          :key="i"
+          :input="input"
+          class="input-partial"
+        />
+      </template>
       <template v-else-if="input.type === 'number'">
         <resource-form-number-input
           :key="i"
@@ -65,6 +72,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidationObserver } from 'vee-validate'
 import { FormInputModule } from '@monorepo/fast-form'
 import ResourceFormTextInput from './resource-form-input/resource-form-text-input.vue'
+import ResourceFormPasswordInput from './resource-form-input/resource-form-password-input.vue'
 import ResourceFormNumberInput from './resource-form-input/resource-form-number-input.vue'
 import ResourceFormSwitchInput from './resource-form-input/resource-form-switch-input.vue'
 import ResourceFormDateInput from './resource-form-input/resource-form-date-input.vue'
@@ -76,6 +84,7 @@ import ResourceFormGroupList from './resource-form-input/resource-form-group-lis
   components: {
     ValidationObserver,
     ResourceFormTextInput,
+    ResourceFormPasswordInput,
     ResourceFormNumberInput,
     ResourceFormSwitchInput,
     ResourceFormDateInput,
