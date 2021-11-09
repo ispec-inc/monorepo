@@ -10,7 +10,7 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class UserPage extends Vue {}
 </script>
