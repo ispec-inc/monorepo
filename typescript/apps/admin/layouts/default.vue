@@ -103,8 +103,8 @@ import { ISnackbarConteiner } from '~/types/snackbar-container'
 
 @Component({
   components: {
-    SnackbarContainer
-  }
+    SnackbarContainer,
+  },
 })
 export default class DefaultLayout extends Vue {
   @Ref('snackbarContainer') snackbarContainer!: ISnackbarConteiner
@@ -156,7 +156,7 @@ export default class DefaultLayout extends Vue {
   logout() {
     this.$auth.logout()
     localStorage.removeItem('userId')
-    this.$router.push('login')
+    this.$router.push(this.$pagesPath.login.$url())
   }
 
   created() {

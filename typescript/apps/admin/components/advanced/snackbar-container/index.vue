@@ -1,7 +1,17 @@
 <template>
-  <transition-group tag="div" name="snackbar" class="snackbar-container d-flex flex-column pa-5 align-end">
+  <transition-group
+    tag="div"
+    name="snackbar"
+    class="snackbar-container d-flex flex-column pa-5 align-end"
+  >
     <template v-for="s of snackbarList">
-      <v-alert :key="s.id" :type="s.type" width="400px" class="snackbar-item" elevation="2">
+      <v-alert
+        :key="s.id"
+        :type="s.type"
+        width="400px"
+        class="snackbar-item"
+        elevation="2"
+      >
         {{ s.message }}
       </v-alert>
     </template>
@@ -46,24 +56,32 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 import { ISnackbarConteiner, SnackbarData } from '~/types/snackbar-container'
 
 @Component({})
-export default class SnackbarContainer extends Vue implements ISnackbarConteiner {
+export default class SnackbarContainer
+  extends Vue
+  implements ISnackbarConteiner
+{
   private snackbarList: SnackbarData[] = []
 
-  addSnackbar(data: Omit<SnackbarData, 'id' | 'duration'>, duration: number = 3000) {
+  addSnackbar(
+    data: Omit<SnackbarData, 'id' | 'duration'>,
+    duration: number = 3000
+  ) {
     const id = uuidv4()
-    this.snackbarList = [{
-      id,
-      duration,
-      ...data
-    }].concat(this.snackbarList)
+    this.snackbarList = [
+      {
+        id,
+        duration,
+        ...data,
+      },
+    ].concat(this.snackbarList)
 
     setTimeout(() => {
       this.snackbarList = this.snackbarList.filter((s) => s.id !== id)
-    }, duration);
+    }, duration)
   }
 }
 </script>
