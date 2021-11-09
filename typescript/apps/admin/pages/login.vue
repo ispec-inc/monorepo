@@ -5,33 +5,18 @@
         <v-col cols="12" sm="8" md="4">
           <v-card class="elevation-12">
             <v-card-text>
-              <v-form>
-                <v-text-field
-                  v-model="email"
-                  label="メール"
-                  name="email"
-                  prepend-icon="mdi-account"
-                  type="text"
-                ></v-text-field>
-                <v-text-field
-                  v-model="password"
-                  label="パスワード"
-                  name="password"
-                  prepend-icon="mdi-lock"
-                  :append-icon="passwordDisplay ? 'mdi-eye-off' : 'mdi-eye'"
-                  :type="passwordDisplay ? 'text' : 'password'"
-                  @click:append="() => (passwordDisplay = !passwordDisplay)"
-                ></v-text-field>
-              </v-form>
+              <login-page-form
+                :form="form"
+                :is-post="true"
+                :loading="isAwaitingResponse"
+                @submit="login"
+              ></login-page-form>
               <!--
               <p class="red--text">
                 ユーザ名 またはパスワードが間違っています
               </p>
               -->
             </v-card-text>
-            <v-card-actions class="justify-center">
-              <v-btn color="primary" @click="login()">ログイン</v-btn>
-            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
@@ -40,32 +25,50 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
+import { LoginForm } from '~/form-providers/login-form'
+import LoginPageForm from '~/components/pages/login-page-form.vue'
+import UseSubscription from '~/components/mixins/use-subscription'
+import { pageServicesModule } from '~/store/page-services'
+import { LoginPageService } from '~/core/03-service/login'
 
 @Component({
   layout: 'centered',
+  components: {
+    LoginPageForm,
+  },
 })
-export default class LoginPage extends Vue {
-  passwordDisplay = false
-  email = ''
-  password = ''
+export default class LoginPage extends mixins(UseSubscription) {
+  readonly service: LoginPageService = pageServicesModule.getService('login')
 
-  async login(): Promise<void> {
-    try {
-      await this.$auth
-        .loginWith('local', {
-          data: {
-            email: this.email,
-            password: this.password,
-          },
-        })
-        .then((_) => {
-          // localStorage.setItem('email', res.data.id.toString())
-        })
-      this.$router.push('/place')
-    } catch (error) {
-      console.log(error)
-    }
+  form = LoginForm.provideModule()
+
+  created(): void {
+    this.service.loginSuccessEventStream
+      .subscribeAsDisposable(() => {
+        this.pushToIndexPage()
+      })
+      .disposedBy(this.subscription)
+  }
+
+  login(value: LoginForm.AsObject): void {
+    this.service.submit(value.email, value.password)
+  }
+
+  get errorMessage(): string | null {
+    return this.service.postErrorMessage
+  }
+
+  get isAwaitingResponse(): boolean | null {
+    return this.service.isAwaitingResponse
+  }
+
+  get isError(): boolean {
+    return !!this.errorMessage
+  }
+
+  pushToIndexPage(): void {
+    this.$router.push('/')
   }
 }
 </script>

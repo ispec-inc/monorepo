@@ -15,16 +15,17 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import { SampleForm } from '~/form-providers/sample-form'
 import ResourceForm from '~/components/common/resource-form.vue'
+import BeforeUnloadGuardMixin from '~/components/mixins/beforeunload-guard'
 
 @Component({
   components: {
     ResourceForm,
   },
 })
-export default class SampleFormPage extends Vue {
+export default class SampleFormPage extends mixins(BeforeUnloadGuardMixin) {
   form = SampleForm.provideModule()
 
   submit(value: SampleForm.AsObject): void {

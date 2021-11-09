@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_04_22_081610) do
 
-  create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "title", null: false
     t.string "body", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_04_22_081610) do
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
     t.string "description", null: false
     t.string "email", null: false

@@ -22,12 +22,15 @@
       "@types/node",
       "@nuxt/types",
       "@nuxtjs/axios",
-      "@nuxtjs/auth"
+      "@nuxtjs/auth",
+      "@types/jest"
     ]
   },
   "exclude": [
     "node_modules",
     ".nuxt",
-    "dist"
+    "dist",
+    "cypress/**/*.js",
+    "*.js"
   ]
 }
