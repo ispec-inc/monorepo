@@ -5,11 +5,9 @@ on:
     branches:
       - master
   pull_request:
-    branches:
-      - "*"
     paths:
       - go/**
-      - .github/workflows/gotest.yml
+      - .github/workflows/go-test.yml
 
 jobs:
   test:
@@ -21,18 +19,9 @@ jobs:
 
       - name: initialize
         run: |
-          cp .env/article.default .env/article
-          cp .env/admin.default .env/admin
-          make init
-        working-directory: go
-
-      - name: migration
-        run: make article-migrate
-        working-directory: migration
-
-      - name: run test
-        run: make test
-        working-directory: go
+          cp go/.env/server.default go/.env/server
+          cp gen/.env.default gen/.env
+          make ci-test
 
       - name: upload coverage to codecov
         uses: codecov/codecov-action@v1
