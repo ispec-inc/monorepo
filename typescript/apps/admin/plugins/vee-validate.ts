@@ -1,29 +1,21 @@
-import { required, numeric, excluded, integer, email } from 'vee-validate/dist/rules'
-import { extend, setInteractionMode } from 'vee-validate'
+import Vue from 'vue'
+import { ValidationProvider, ValidationObserver, localize, extend, setInteractionMode } from 'vee-validate'
+import * as Rules from 'vee-validate/dist/rules'
+import { ValidationRule } from 'vee-validate/dist/types/types'
+import ja from '~/lang/vee-validate/ja'
+import * as CustomRules from '~/utils/validation'
 
 setInteractionMode('eager')
 
-extend('required', {
-  ...required,
-  message: '{_field_}を入力してください',
-})
+for (const rule in Rules) {
+  extend(rule, (Rules as { [key: string]: ValidationRule })[rule])
+}
 
-extend('numeric', {
-  ...numeric,
-  message: '{_field_}は正の整数で入力してください',
-})
+for (const rule in CustomRules) {
+  extend(rule, (CustomRules as { [key: string]: ValidationRule })[rule])
+}
 
-extend('excluded', {
-  ...excluded,
-  message: '無効な値です',
-})
-
-extend('integer', {
-  ...integer,
-  message: '{_field_}は正の整数で入力してください',
-})
-
-extend('email', {
-  ...email,
-  message: '{_field_}に正しいメールアドレスを入力してください',
-})
+// 下記は固定で書く
+Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('ValidationObserver', ValidationObserver)
+localize('ja', ja)
