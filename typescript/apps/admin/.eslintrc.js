@@ -33,14 +33,14 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/array-type': [
-      "error",
+      'error',
       {
-        "default": "array"
-      }
+        default: 'array-simple',
+      },
     ],
     'github/array-foreach': 'error',
     'use-isnan': 'error',
-    'curly': 'error',
+    curly: 'error',
     'no-fallthrough': 'error',
     'no-warning-comments': 'warn',
     'comma-spacing': 'error',
