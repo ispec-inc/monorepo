@@ -68,7 +68,7 @@ export default class LoginPage extends mixins(UseSubscription) {
   }
 
   pushToIndexPage(): void {
-    this.$router.push('/')
+    this.$router.push(this.$pagesPath.$url())
   }
 }
 </script>

@@ -60,11 +60,11 @@ export default class PlacePage extends Vue {
   }
 
   goDetailPage(place: PlaceResource): void {
-    this.$router.push(`/place/${place.id}`)
+    this.$router.push(this.$pagesPath.place._id(place.id).$url())
   }
 
   goEditPage(place: PlaceResource): void {
-    this.$router.push(`/place/${place.id}/edit`)
+    this.$router.push(this.$pagesPath.place._id(place.id).edit.$url()) // `/place/${place.id}/edit`
   }
 
   openDialogDelete(place: PlaceResource): void {

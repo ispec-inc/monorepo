@@ -156,7 +156,7 @@ export default class DefaultLayout extends Vue {
   logout(): void {
     this.$auth.logout()
     localStorage.removeItem('userId')
-    this.$router.push('login')
+    this.$router.push(this.$pagesPath.login.$url())
   }
 
   created(): void {
