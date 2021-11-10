@@ -44,6 +44,8 @@ export default {
     { src: '~plugins/axios.ts' },
     { src: '~plugins/axios-accessor.ts' },
     { src: '~plugins/vee-validate.ts' },
+    { src: '~/plugins/$path.ts' },
+    { src: '~plugins/hooks.ts' },
   ],
   /*
    ** Auto import components

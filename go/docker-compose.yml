@@ -1,41 +1,19 @@
 version: '2.2'
 services:
-  article-api:
-    container_name: article-api
+  api:
+    container_name: monorepo-api
     build:
       context: .
       dockerfile: docker/dev/Dockerfile
-    command: air -c ./svc/article/.air.toml
+    command: air -c .air.toml
     ports:
       - "9000:9000"
       - "2345:2345"
     env_file:
-      - .env/article
+      - .env/server
     depends_on:
       - article-mysql
-    volumes:
-      - ./:/go/src/app
-    working_dir: /go/src/app
-    security_opt:
-      - apparmor:unconfined
-    cap_add:
-      - SYS_PTRACE
-    networks:
-      - monorepo
-
-  admin-api:
-    container_name: admin-api
-    build:
-      context: .
-      dockerfile: docker/dev/Dockerfile
-    command: air -c ./svc/admin/.air.toml
-    ports:
-      - "9001:9001"
-      - "2346:2345"
-    env_file:
-      - .env/admin
-    depends_on:
-      - article-mysql
+      - message-bus-redis
     volumes:
       - ./:/go/src/app
     working_dir: /go/src/app
@@ -47,10 +25,10 @@ services:
       - monorepo
 
   test:
-    container_name: test
+    container_name: monorepo-test
     image: golang:1.17
     env_file:
-      - .env/test
+      - .env/server
     depends_on:
       - article-mysql-test
     volumes:
@@ -59,8 +37,16 @@ services:
     networks:
       - monorepo
 
+  message-bus-redis:
+    container_name: monorepo-message-bus-redis
+    image: redis:6.2
+    networks:
+      - monorepo
+    volumes:
+      - ./data/redis:/data
+
   article-mysql:
-    container_name: article-mysql
+    container_name: monorepo-article-mysql
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: article
@@ -73,7 +59,7 @@ services:
       - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
   article-mysql-test:
-    container_name: article-mysql-test
+    container_name: monorepo-article-mysql-test
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: article
