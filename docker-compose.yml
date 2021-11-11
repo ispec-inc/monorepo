@@ -107,7 +107,7 @@ services:
       - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
   dockerize:
-    image: jwilder/dockerize:0.6.1
+    image: jasonwoodland/dockerize:0.6.1
     networks:
       - monorepo
     command: dockerize
