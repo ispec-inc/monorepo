@@ -7,13 +7,13 @@ import {
 } from 'vuex-module-decorators'
 import { store } from '@/store'
 import { ApiResponseCache, CacheModule } from '~/utils/api-with-cache-enabled'
+import { SampleGetResponse } from '~/types/response/sample/get'
+import { SampleGetRequest } from '~/types/request/sample/get'
 
-type Payload = { id: number }
-type Response = { title: string, author: string, content: string }
-type Cache = ApiResponseCache<Response, Payload>
+type Cache = ApiResponseCache<SampleGetResponse, SampleGetRequest>
 
 @Module({ name: 'cache_sample', dynamic: true, store, namespaced: true })
-export class CacheSampleModule extends VuexModule implements CacheModule<Response, Payload> {
+export class CacheSampleModule extends VuexModule implements CacheModule<SampleGetResponse, SampleGetRequest> {
   private _cachedData: Cache | null = null
 
   @Mutation
@@ -22,12 +22,12 @@ export class CacheSampleModule extends VuexModule implements CacheModule<Respons
   }
 
   @Action({rawError: true})
-  cache(payload: Cache) {
+  cache(payload: Cache): void {
     this.SET_CACHED_DATA(payload)
   }
 
   @Action({rawError: true})
-  clear() {
+  clear(): void {
     this.SET_CACHED_DATA(null)
   }
 

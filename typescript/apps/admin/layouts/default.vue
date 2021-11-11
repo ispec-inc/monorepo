@@ -18,7 +18,6 @@
         <v-list-group
           v-for="children in items"
           :key="children.title"
-          v-model="children.active"
           :prepend-icon="children.icon"
           no-action
         >

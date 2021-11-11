@@ -50,7 +50,7 @@ export default class ResourceFormGroup extends Vue {
     return this.group.heading
   }
 
-  get inputs(): IFormModuleItem<unknown>[] {
+  get inputs(): Array<IFormModuleItem<unknown>> {
     return this.group.inputs
   }
 }

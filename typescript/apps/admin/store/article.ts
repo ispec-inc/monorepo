@@ -7,7 +7,7 @@ import {
 } from 'vuex-module-decorators'
 import { store } from '@/store'
 import { $axios } from '@/utils/api'
-import { SampleInterface } from '@/models/sample'
+import { SampleInterface } from '~/types/sample'
 
 /**
  * In the case of BFFs, the API is tied to the Page, so the response's interface is defined in Store and the model that be used in interface is called from /models.

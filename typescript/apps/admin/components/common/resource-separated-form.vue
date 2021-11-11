@@ -35,7 +35,7 @@ export default class ResourceSeparatedForm extends Vue {
     return this.form?.separatedInputs.map(([name, _]) => name) || []
   }
 
-  get inputGroups(): IFormModuleItem<unknown>[][] {
+  get inputGroups(): Array<Array<IFormModuleItem<unknown>>> {
     return this.form?.separatedInputs.map(([_, inputs]) => inputs) || []
   }
 }

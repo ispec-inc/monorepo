@@ -74,7 +74,7 @@ export default class ResourceForm extends Vue {
     return this.form.getFormValue()
   }
 
-  get inputs(): FormInputModule<unknown>[] {
+  get inputs(): Array<FormInputModule<unknown>> {
     if (!this.form) {
       return []
     }

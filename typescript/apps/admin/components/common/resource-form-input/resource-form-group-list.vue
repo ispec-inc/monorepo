@@ -46,7 +46,7 @@ export default class ResourceFormGroupList extends Vue {
     this.input.openPanelIds = value
   }
 
-  get groups(): FormGroupModule<{}>[] {
+  get groups(): Array<FormGroupModule<{}>> {
     return this.input.groups
   }
 

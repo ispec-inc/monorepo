@@ -4,17 +4,16 @@
     name="snackbar"
     class="snackbar-container d-flex flex-column pa-5 align-end"
   >
-    <template v-for="s of snackbarList">
-      <v-alert
-        :key="s.id"
-        :type="s.type"
-        width="400px"
-        class="snackbar-item"
-        elevation="2"
-      >
-        {{ s.message }}
-      </v-alert>
-    </template>
+    <v-alert
+      v-for="s of snackbarList"
+      :key="s.id"
+      :type="s.type"
+      width="400px"
+      class="snackbar-item"
+      elevation="2"
+    >
+      {{ s.message }}
+    </v-alert>
   </transition-group>
 </template>
 
@@ -64,7 +63,7 @@ export default class SnackbarContainer
   extends Vue
   implements ISnackbarConteiner
 {
-  private snackbarList: SnackbarData[] = []
+  snackbarList: SnackbarData[] = []
 
   addSnackbar(
     data: Omit<SnackbarData, 'id' | 'duration'>,

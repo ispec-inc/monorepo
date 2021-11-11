@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import articleModule from '@/store/article'
-import { SampleInterface } from '~/models/sample'
+import { SampleInterface } from '~/types/sample'
 import { GlobalEventBus } from '~/surface/event-bus/global'
 import { SampleGatewayImpl } from '~/core/sample/gateway'
 
