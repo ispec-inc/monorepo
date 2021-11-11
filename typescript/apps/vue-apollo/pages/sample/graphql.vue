@@ -42,17 +42,21 @@ import BeforeUnloadGuardMixin from '~/components/mixins/beforeunload-guard'
   components: {
     ResourceForm,
   },
-  apollo: {
-    articles: {
-      query: getArticles,
-      prefetch: true,
-    },
-  },
 })
 export default class GraphqlPage extends mixins(BeforeUnloadGuardMixin) {
   articles: {}[] = []
 
   form = ArticleForm.provideModule()
+
+  created() {
+    this.$apollo
+      .query({
+        query: getArticles,
+      })
+      .then((res) => {
+        this.articles = res.data.articles
+      })
+  }
 
   submit(value: ArticleForm.AsObject) {
     try {
