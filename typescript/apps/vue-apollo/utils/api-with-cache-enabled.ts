@@ -13,10 +13,10 @@ export interface CacheModule<T, U extends Object> {
 
 export class ApiWithCacheEnabled<T, U extends Object> {
   private readonly endpoint: (payload: U) => Promise<T>
-  private readonly cahceModule: CacheModule<T, U>
+  private readonly cacheModule: CacheModule<T, U>
 
-  constructor(endpoint: (payload: U) => Promise<T>, cahceModule: CacheModule<T, U>) {
-    this.cahceModule = cahceModule
+  constructor(endpoint: (payload: U) => Promise<T>, cacheModule: CacheModule<T, U>) {
+    this.cacheModule = cacheModule
     this.endpoint = endpoint
   }
 
@@ -29,7 +29,7 @@ export class ApiWithCacheEnabled<T, U extends Object> {
     return new Promise((resolve, reject) => {
       this.endpoint(payload)
         .then((response) => {
-          this.cahceModule.cache({ payload, response })
+          this.cacheModule.cache({ payload, response })
           resolve(response)
         })
         .catch(reject)
@@ -37,10 +37,10 @@ export class ApiWithCacheEnabled<T, U extends Object> {
   }
 
   clearCache(): void {
-    this.cahceModule.clear()
+    this.cacheModule.clear()
   }
 
   private get cachedData(): ApiResponseCache<T, U> | null {
-    return this.cahceModule.cachedData
+    return this.cacheModule.cachedData
   }
 }
