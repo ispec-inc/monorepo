@@ -65,7 +65,12 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/dotenv', '@nuxtjs/axios', '@nuxtjs/auth'],
+  modules: [
+    '@nuxtjs/dotenv',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    '@nuxtjs/apollo',
+  ],
   env: {
     API_URL,
   },
@@ -90,6 +95,17 @@ export default {
           logout: false,
           user: false,
         },
+      },
+    },
+  },
+  apollo: {
+    clientConfigs: {
+      default: '~/plugins/apollo.ts',
+    },
+    defaultOptions: {
+      $query: {
+        loadingKey: 'loading',
+        fetchPolicy: 'cache-and-network',
       },
     },
   },

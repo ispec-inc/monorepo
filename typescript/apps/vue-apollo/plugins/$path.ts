@@ -28,10 +28,16 @@ export const pagesPath = {
     form: {
       $url: (url?: { hash?: string }) => ({ path: '/sample/form', hash: url?.hash })
     },
+    graphql: {
+      $url: (url?: { hash?: string }) => ({ path: '/sample/graphql', hash: url?.hash })
+    },
     separated_form: {
       $url: (url?: { hash?: string }) => ({ path: '/sample/separated-form', hash: url?.hash })
     },
     $url: (url: { query: Query0, hash?: string }) => ({ path: '/sample', query: url.query as any, hash: url.hash })
+  },
+  user: {
+    $url: (url?: { hash?: string }) => ({ path: '/user', hash: url?.hash })
   },
   $url: (url?: { hash?: string }) => ({ path: '/', hash: url?.hash })
 }

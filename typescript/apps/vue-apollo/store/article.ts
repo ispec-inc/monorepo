@@ -31,7 +31,7 @@ export class ArticleModule extends VuexModule {
 
   @Action({rawError: true})
   fetch() {
-    $axios.get<SampleResponseState>('/v1/articles').then((response) => {
+    $axios.get<SampleResponseState>('/admin/v1/articles').then((response) => {
       const { data } = response
       this.SET_ARTICLES(data)
 
