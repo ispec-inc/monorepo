@@ -18,7 +18,6 @@
         <v-list-group
           v-for="children in items"
           :key="children.title"
-          v-model="children.active"
           :prepend-icon="children.icon"
           no-action
         >
@@ -95,7 +94,7 @@
 </style>
 
 <script lang="ts">
-import { Vue, Component, Ref } from 'vue-property-decorator'
+import { Vue, Component, Ref } from 'nuxt-property-decorator'
 import { Subscription } from 'rxjs'
 import SnackbarContainer from '~/components/advanced/snackbar-container/index.vue'
 import { GlobalEventBus } from '~/surface/event-bus/global'
@@ -153,13 +152,13 @@ export default class DefaultLayout extends Vue {
   miniVariant = false
   title = 'Placy Admin'
 
-  logout() {
+  logout(): void {
     this.$auth.logout()
     localStorage.removeItem('userId')
     this.$router.push(this.$pagesPath.login.$url())
   }
 
-  created() {
+  created(): void {
     this.subscription.add(
       GlobalEventBus.getInstance().snackbarEventStream.subscribe((data) => {
         this.snackbarContainer.addSnackbar(data, data.duration)
@@ -167,7 +166,7 @@ export default class DefaultLayout extends Vue {
     )
   }
 
-  beforeDestroy() {
+  beforeDestroy(): void {
     this.subscription.unsubscribe()
   }
 }

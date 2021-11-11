@@ -46,15 +46,15 @@ export default class ResourceFormGroupList extends Vue {
     this.input.openPanelIds = value
   }
 
-  get groups(): FormGroupModule<{}>[] {
+  get groups(): Array<FormGroupModule<{}>> {
     return this.input.groups
   }
 
-  appendNewGroup() {
+  appendNewGroup(): void {
     this.input.appendNewGroup()
   }
 
-  removeGroupByIndex(index: number) {
+  removeGroupByIndex(index: number): void {
     this.input.removeGroupByIndex(index)
   }
 }

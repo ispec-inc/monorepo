@@ -7,7 +7,7 @@ import {
 } from 'vuex-module-decorators'
 import { store } from '@/store'
 import { $axios } from '@/utils/api'
-import { SampleInterface } from '@/models/sample'
+import { SampleInterface } from '~/types/sample'
 
 /**
  * In the case of BFFs, the API is tied to the Page, so the response's interface is defined in Store and the model that be used in interface is called from /models.
@@ -17,7 +17,7 @@ import { SampleInterface } from '@/models/sample'
 */
 
 export interface SampleResponseState {
-  articles: Array<SampleInterface>
+  articles: SampleInterface[]
 }
 
 @Module({ name: 'article', dynamic: true, store, namespaced: true })
@@ -30,7 +30,7 @@ export class ArticleModule extends VuexModule {
   }
 
   @Action({rawError: true})
-  fetch() {
+  fetch(): void {
     $axios.get<SampleResponseState>('/v1/articles').then((response) => {
       const { data } = response
       this.SET_ARTICLES(data)
@@ -38,7 +38,7 @@ export class ArticleModule extends VuexModule {
     })
   }
 
-  get articles(): Array<SampleInterface> {
+  get articles(): SampleInterface[] {
     return this.sampleState?.articles ?? []
   }
 

@@ -58,7 +58,7 @@ export default class LoginPageForm extends Vue {
     return this.form.getFormValue()
   }
 
-  get inputs(): FormInputModule<unknown>[] {
+  get inputs(): Array<FormInputModule<unknown>> {
     if (!this.form) {
       return []
     }
@@ -66,7 +66,7 @@ export default class LoginPageForm extends Vue {
     return this.form.inputs
   }
 
-  async validateForm() {
+  async validateForm(): Promise<void> {
     const result = await this.observerRef.validate()
 
     if (result === true) {
@@ -74,7 +74,7 @@ export default class LoginPageForm extends Vue {
     }
   }
 
-  clear() {
+  clear(): void {
     if (this.form) {
       this.form.clear()
     }

@@ -12,6 +12,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import articleModule from '@/store/article'
+import { SampleInterface } from '~/types/sample'
 import { GlobalEventBus } from '~/surface/event-bus/global'
 import { SampleGatewayImpl } from '~/core/sample/gateway'
 
@@ -19,7 +20,7 @@ import { SampleGatewayImpl } from '~/core/sample/gateway'
 export default class TopPage extends Vue {
   gateway = new SampleGatewayImpl()
 
-  created() {
+  created(): void {
     articleModule.fetch()
 
     this.callApi(1)
@@ -33,25 +34,25 @@ export default class TopPage extends Vue {
     }, 2000)
   }
 
-  get articleList() {
+  get articleList(): SampleInterface[] {
     return articleModule.articles
   }
 
-  addSuccessSnackbar() {
+  addSuccessSnackbar(): void {
     GlobalEventBus.getInstance().dispatchSnackbarEvent({
       message: 'sample',
       type: 'success',
     })
   }
 
-  addErrorSnackbar() {
+  addErrorSnackbar(): void {
     GlobalEventBus.getInstance().dispatchSnackbarEvent({
       message: 'error',
       type: 'error',
     })
   }
 
-  callApi(id: number) {
+  callApi(id: number): void {
     this.gateway.fetchById(id).then((res) => {
       console.log('response', res)
     })

@@ -43,7 +43,7 @@ export default class LoginPage extends mixins(UseSubscription) {
 
   form = LoginForm.provideModule()
 
-  created() {
+  created(): void {
     this.service.loginSuccessEventStream
       .subscribeAsDisposable(() => {
         this.pushToIndexPage()
@@ -51,7 +51,7 @@ export default class LoginPage extends mixins(UseSubscription) {
       .disposedBy(this.subscription)
   }
 
-  login(value: LoginForm.AsObject) {
+  login(value: LoginForm.AsObject): void {
     this.service.submit(value.email, value.password)
   }
 
@@ -63,11 +63,11 @@ export default class LoginPage extends mixins(UseSubscription) {
     return this.service.isAwaitingResponse
   }
 
-  get isError() {
+  get isError(): boolean {
     return !!this.errorMessage
   }
 
-  pushToIndexPage() {
+  pushToIndexPage(): void {
     this.$router.push(this.$pagesPath.$url())
   }
 }
