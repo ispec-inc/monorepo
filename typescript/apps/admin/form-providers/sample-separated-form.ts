@@ -25,7 +25,7 @@ export namespace SampleSeparatedForm {
       const formStructure: FastForm.FormGroupModule<Tag>['structure'] = {
         name: new FastForm.FormTextInputModule('名前', value?.name || '', ['required'])
       }
-      const headingProvider = (value: Tag) => {
+      const headingProvider = (value: Tag): string => {
         return `${value.name}`
       }
       return new FastForm.FormGroupModule(formStructure, ['name'], headingProvider)

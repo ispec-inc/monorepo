@@ -22,12 +22,12 @@ export class CacheSampleModule extends VuexModule implements CacheModule<SampleG
   }
 
   @Action({rawError: true})
-  cache(payload: Cache) {
+  cache(payload: Cache): void {
     this.SET_CACHED_DATA(payload)
   }
 
   @Action({rawError: true})
-  clear() {
+  clear(): void {
     this.SET_CACHED_DATA(null)
   }
 

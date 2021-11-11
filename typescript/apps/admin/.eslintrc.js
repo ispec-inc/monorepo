@@ -19,7 +19,7 @@ module.exports = {
   globals: {
     cy: true,
   },
-  plugins: ['cypress', 'typescript'],
+  plugins: ['cypress', 'typescript', 'github'],
   // add your custom rules here
   rules: {
     'no-unused-vars': 'off',
@@ -30,5 +30,21 @@ module.exports = {
         order: ['template', 'style', 'script'],
       },
     ],
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/array-type': [
+      'error',
+      {
+        default: 'array-simple',
+      },
+    ],
+    'github/array-foreach': 'error',
+    'use-isnan': 'error',
+    curly: 'error',
+    'no-fallthrough': 'error',
+    'no-warning-comments': 'warn',
+    'comma-spacing': 'error',
+    'max-statements': 'warn',
+    'no-negated-condition': 'error',
   },
 }

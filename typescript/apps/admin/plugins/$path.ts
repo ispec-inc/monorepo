@@ -33,6 +33,9 @@ export const pagesPath = {
     },
     $url: (url: { query: Query0, hash?: string }) => ({ path: '/sample', query: url.query as any, hash: url.hash })
   },
+  user: {
+    $url: (url?: { hash?: string }) => ({ path: '/user', hash: url?.hash })
+  },
   $url: (url?: { hash?: string }) => ({ path: '/', hash: url?.hash })
 }
 

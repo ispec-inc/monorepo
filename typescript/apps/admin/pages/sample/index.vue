@@ -23,7 +23,7 @@ export default class SamplePage extends Vue {
     return isNaN(num) ? 0 : num
   }
 
-  pushToSamplePage(userId: number) {
+  pushToSamplePage(userId: number): void {
     this.$router.push(this.$pagesPath.sample.$url({ query: { userId } }))
   }
 }

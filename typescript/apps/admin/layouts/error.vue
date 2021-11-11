@@ -16,27 +16,22 @@ h1 {
 }
 </style>
 
-<script>
-export default {
-  layout: 'empty',
-  props: {
-    error: {
-      type: Object,
-      default: null,
-    },
-  },
-  data() {
+<script lang="ts">
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
+import { NuxtError } from '@nuxt/types'
+
+@Component({})
+export default class ErrorLayout extends Vue {
+  @Prop() error!: NuxtError
+
+  readonly pageNotFound = '404 Not Found'
+  readonly otherError = 'An error occurred'
+
+  head(): { title: string } {
     return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred',
+      title:
+        this.error.statusCode === 404 ? this.pageNotFound : this.otherError,
     }
-  },
-  head() {
-    const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
-    return {
-      title,
-    }
-  },
+  }
 }
 </script>

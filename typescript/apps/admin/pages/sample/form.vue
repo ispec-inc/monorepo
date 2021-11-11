@@ -28,7 +28,7 @@ import BeforeUnloadGuardMixin from '~/components/mixins/beforeunload-guard'
 export default class SampleFormPage extends mixins(BeforeUnloadGuardMixin) {
   form = SampleForm.provideModule()
 
-  submit(value: SampleForm.AsObject) {
+  submit(value: SampleForm.AsObject): void {
     console.log(value)
   }
 }

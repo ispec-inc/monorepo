@@ -22,9 +22,9 @@ export default class DialogDelete extends Vue {
   @Prop({ required: true }) readonly target!: Resource | null
 
   @Emit()
-  cancel() {}
+  cancel(): void {}
 
   @Emit('delete')
-  deleteItem() {}
+  deleteItem(): void {}
 }
 </script>

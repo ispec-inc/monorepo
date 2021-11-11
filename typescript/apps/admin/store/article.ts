@@ -17,7 +17,7 @@ import { SampleInterface } from '~/types/sample'
 */
 
 export interface SampleResponseState {
-  articles: Array<SampleInterface>
+  articles: SampleInterface[]
 }
 
 @Module({ name: 'article', dynamic: true, store, namespaced: true })
@@ -30,7 +30,7 @@ export class ArticleModule extends VuexModule {
   }
 
   @Action({rawError: true})
-  fetch() {
+  fetch(): void {
     $axios.get<SampleResponseState>('/v1/articles').then((response) => {
       const { data } = response
       this.SET_ARTICLES(data)
@@ -38,7 +38,7 @@ export class ArticleModule extends VuexModule {
     })
   }
 
-  get articles(): Array<SampleInterface> {
+  get articles(): SampleInterface[] {
     return this.sampleState?.articles ?? []
   }
 
