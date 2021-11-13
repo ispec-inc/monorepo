@@ -20,16 +20,17 @@ h1 {
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { NuxtError } from '@nuxt/types'
 
 @Component({})
-export default class error extends Vue {
-  @Prop() error: Object
+export default class Error extends Vue {
+  @Prop() error?: NuxtError
 
   pageNotFound: string = '404 Not Found'
   otherError: string = 'An error occurred'
 
-  head(): void {
-    const title = this.error.statusCode === 404
+  head(): { title: string } {
+    const title = this.error?.statusCode === 404
       ? this.pageNotFound
       : this.otherError
 

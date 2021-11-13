@@ -61,7 +61,7 @@ export default class GraphqlPage extends Vue {
       })
   }
 
-  submit(value: ArticleForm.AsObject): Promise<void> {
+  submit(value: ArticleForm.AsObject): void {
     try {
       const res = this.$apollo.mutate({
         mutation: CreateArticle,
