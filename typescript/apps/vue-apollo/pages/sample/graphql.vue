@@ -32,8 +32,8 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import 'vue-apollo'
-import { getArticles } from '~/apollo/queries/articles'
-import { CreateArticle } from '~/apollo/mutations/articles'
+import getArticles from '~/apollo/queries/articles.gql'
+import CreateArticle from '~/apollo/mutations/articles.gql'
 import { ArticleForm } from '~/form-providers/article-form'
 import ResourceForm from '~/components/common/resource-form.vue'
 import BeforeUnloadGuardMixin from '~/components/mixins/beforeunload-guard'

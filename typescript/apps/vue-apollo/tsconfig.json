@@ -2,11 +2,19 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "experimentalDecorators": true,
-    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "dom"
+    ],
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"],
-      "@/*": ["./*"]
+      "~/*": [
+        "./*"
+      ],
+      "@/*": [
+        "./*"
+      ]
     },
     "types": [
       "@types/node",
@@ -16,7 +24,7 @@
       "@types/jest"
     ]
   },
-  "files": ["index.d.ts"],
-  "include": ["~/apollo/*.gql", "~/apollo/**/*.gql"],
-  "exclude": ["node_modules", ".nuxt", "dist", "cypress/**/*.js", "*.js"]
+  "files": ["@types"],
+  "exclude": ["node_modules", ".nuxt", "dist", "cypress/**/*.js", "*.js"],
+  "include": ["**/*"]
 }
