@@ -18,10 +18,10 @@
     "husky": "husky"
   },
   "lint-staged": {
-    "src/**/*.ts": [
+    "**/*.{ts,vue}": [
       "eslint --fix"
     ],
-    "src/**/*.scss": [
+    "**/*.{scss,vue}": [
       "stylelint --fix"
     ]
   },
