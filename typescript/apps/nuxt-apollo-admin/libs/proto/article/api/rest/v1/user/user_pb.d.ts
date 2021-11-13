@@ -2,7 +2,7 @@
 // file: article/api/rest/v1/user/user.proto
 
 import * as jspb from "google-protobuf";
-import * as article_view_user_pb from "../../../../../article/view/user_pb";
+import * as article_view_user_pb from "../../../../view/user_pb";
 import * as validate_validate_pb from "../../../../../validate/validate_pb";
 
 export class GetRequest extends jspb.Message {
@@ -92,4 +92,3 @@ export namespace CreateResponse {
     usersList: Array<article_view_user_pb.User.AsObject>,
   }
 }
-

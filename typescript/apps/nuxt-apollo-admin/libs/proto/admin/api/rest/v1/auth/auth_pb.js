@@ -15,9 +15,9 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var admin_view_auth_pb = require('../../../../../admin/view/auth_pb.js');
+var admin_view_auth_pb = require('../../../../view/auth_pb.js');
 goog.object.extend(proto, admin_view_auth_pb);
-var validate_validate_pb = require('../../../../../validate/validate_pb.js');
+var validate_validate_pb = require('../../../../../validate/validate_pb.js.js');
 goog.object.extend(proto, validate_validate_pb);
 goog.exportSymbol('proto.admin.api.auth.LoginRequest', null, global);
 goog.exportSymbol('proto.admin.api.auth.LoginResponse', null, global);

@@ -2,7 +2,7 @@
 // file: admin/api/rest/v1/auth/auth.proto
 
 import * as jspb from "google-protobuf"
-import * as admin_view_auth_pb from "../../../../../admin/view/auth_pb"
+import * as admin_view_auth_pb from "../../../../view/auth_pb"
 import * as validate_validate_pb from "../../../../../validate/validate_pb"
 
 export class LoginRequest extends jspb.Message {
