@@ -16,18 +16,17 @@
     "hygen": "hygen",
     "test": "jest"
   },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "prettier --write",
+      "eslint"
+    ],
+    "*.{css,vue}": "stylelint"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "lint-staged": {
-    "src/**/*.ts": [
-      "eslint --fix"
-    ],
-    "src/**/*.scss": [
-      "stylelint --fix"
-    ]
   },
   "dependencies": {
     "@babel/preset-env": "7.15.8",
