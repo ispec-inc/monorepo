@@ -76,7 +76,7 @@ export default class GraphqlPage extends Vue {
         console.log('no res')
       }
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
 
     location.reload()

@@ -16,8 +16,7 @@
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "hygen": "hygen",
     "test": "jest",
-    "prepare": "cd ../../../ && husky install typescript/apps/nuxt-apollo-admin/.husky",
-    "husky pre-c": "cd ../../../ && husky add typescript/apps/nuxt-apollo-admin/.husky/pre-commit \"cd ./typescript/apps/user && npx lint-staged\""
+    "prepare": "cd ../../../ && husky install typescript/apps/nuxt-apollo-admin/.husky"
   },
   "husky": {
     "hooks": {
