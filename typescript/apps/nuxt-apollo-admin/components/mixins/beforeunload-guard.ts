@@ -7,30 +7,30 @@ export default class BeforeUnloadGuardMixin extends Vue {
   protected beforeUnloadGuardMessage = '入力した内容が失われる可能性があります。よろしいですか？';
   protected disableBlockUnload = false;
 
-  created() {
+  created(): void {
     if (process.client) {
-      window.addEventListener("beforeunload", this.checkWindow);
+      window.addEventListener('beforeunload', this.checkWindow)
     }
   }
 
-  beforeDestroy() {
-    window.removeEventListener("beforeunload", this.checkWindow);
+  beforeDestroy(): void {
+    window.removeEventListener('beforeunload', this.checkWindow)
   }
 
-  protected checkWindow(event: BeforeUnloadEvent) {
+  protected checkWindow(event: BeforeUnloadEvent): void {
     if (this.disableBlockUnload) {
       return
     }
-    event.preventDefault();
-    event.returnValue = this.beforeUnloadGuardMessage;
+    event.preventDefault()
+    event.returnValue = this.beforeUnloadGuardMessage
   }
 
-  beforeRouteLeave(_to: Route, _from: Route, next: Function) {
+  beforeRouteLeave(_to: Route, _from: Route, next: Function): void {
     if (this.disableBlockUnload) {
       next()
       return
     }
-    const answer = window.confirm(this.beforeUnloadGuardMessage);
-    next(answer);
+    const answer = window.confirm(this.beforeUnloadGuardMessage)
+    next(answer)
   }
 }

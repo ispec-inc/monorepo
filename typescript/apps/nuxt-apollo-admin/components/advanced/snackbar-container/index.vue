@@ -62,25 +62,24 @@ import { ISnackbarConteiner, SnackbarData } from '~/types/snackbar-container'
 @Component({})
 export default class SnackbarContainer
   extends Vue
-  implements ISnackbarConteiner
-{
+  implements ISnackbarConteiner {
   private snackbarList: SnackbarData[] = []
 
   addSnackbar(
     data: Omit<SnackbarData, 'id' | 'duration'>,
     duration: number = 3000
-  ) {
+  ): void {
     const id = uuidv4()
     this.snackbarList = [
       {
         id,
         duration,
-        ...data,
-      },
+        ...data
+      }
     ].concat(this.snackbarList)
 
     setTimeout(() => {
-      this.snackbarList = this.snackbarList.filter((s) => s.id !== id)
+      this.snackbarList = this.snackbarList.filter(s => s.id !== id)
     }, duration)
   }
 }

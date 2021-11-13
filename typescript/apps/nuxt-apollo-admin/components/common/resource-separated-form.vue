@@ -23,8 +23,8 @@ import ResourceFormInputs from './resource-form-inputs.vue'
 @Component({
   components: {
     ValidationObserver,
-    ResourceFormInputs,
-  },
+    ResourceFormInputs
+  }
 })
 export default class ResourceSeparatedForm extends Vue {
   @Prop({ default: null }) readonly form!: SeparatedFormModule<{}> | null
@@ -35,7 +35,7 @@ export default class ResourceSeparatedForm extends Vue {
     return this.form?.separatedInputs.map(([name, _]) => name) || []
   }
 
-  get inputGroups(): IFormModuleItem<unknown>[][] {
+  get inputGroups(): Array<Array<IFormModuleItem<unknown>>> {
     return this.form?.separatedInputs.map(([_, inputs]) => inputs) || []
   }
 }

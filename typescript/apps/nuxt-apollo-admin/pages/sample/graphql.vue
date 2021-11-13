@@ -3,11 +3,15 @@
     <div>
       <v-card class="mb-4">
         <v-card-title>GraphQL Sample Page</v-card-title>
-        <v-divider></v-divider>
+        <v-divider />
         <div>
           <v-card-text v-for="article in articles" :key="article.id">
-            <div class="body-1">title: {{ article.title }}</div>
-            <div class="body-1">body: {{ article.body }}</div>
+            <div class="body-1">
+              title: {{ article.title }}
+            </div>
+            <div class="body-1">
+              body: {{ article.body }}
+            </div>
           </v-card-text>
         </div>
       </v-card>
@@ -16,13 +20,13 @@
     <div>
       <v-card class="mb-4">
         <v-card-title>登録</v-card-title>
-        <v-divider></v-divider>
+        <v-divider />
         <v-card-text>
           <resource-form
             :form="form"
             :is-post="true"
             @submit="submit"
-          ></resource-form>
+          />
         </v-card-text>
       </v-card>
     </div>
@@ -30,42 +34,41 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import 'vue-apollo'
 import getArticles from '~/apollo/queries/articles.gql'
 import CreateArticle from '~/apollo/mutations/articles.gql'
 import { ArticleForm } from '~/form-providers/article-form'
 import ResourceForm from '~/components/common/resource-form.vue'
-import BeforeUnloadGuardMixin from '~/components/mixins/beforeunload-guard'
 
 @Component({
   components: {
-    ResourceForm,
-  },
+    ResourceForm
+  }
 })
-export default class GraphqlPage extends mixins(BeforeUnloadGuardMixin) {
-  articles: {}[] = []
+export default class GraphqlPage extends Vue {
+  articles: Array<{}> = []
 
   form = ArticleForm.provideModule()
 
-  created() {
+  created(): void {
     this.$apollo
       .query({
-        query: getArticles,
+        query: getArticles
       })
       .then((res) => {
         this.articles = res.data.articles
       })
   }
 
-  submit(value: ArticleForm.AsObject) {
+  submit(value: ArticleForm.AsObject): Promise<void> {
     try {
       const res = this.$apollo.mutate({
         mutation: CreateArticle,
         variables: {
           title: value.title,
-          body: value.body,
-        },
+          body: value.body
+        }
       })
       if (res) {
         console.log(res)

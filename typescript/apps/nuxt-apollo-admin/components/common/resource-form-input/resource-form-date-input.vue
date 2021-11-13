@@ -18,13 +18,13 @@
           readonly
           v-bind="attrs"
           v-on="on"
-        ></v-text-field>
+        />
       </validation-provider>
     </template>
     <v-date-picker
       v-model="value"
       @input="isOpenDatePicker = false"
-    ></v-date-picker>
+    />
   </v-menu>
 </template>
 
@@ -36,8 +36,8 @@ import dayjs from 'dayjs'
 
 @Component({
   components: {
-    ValidationProvider,
-  },
+    ValidationProvider
+  }
 })
 export default class ResourceFormDateInput extends Vue {
   @Prop() readonly input!: FormDateInputModule

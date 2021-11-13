@@ -6,7 +6,9 @@
       no-gutters
       class="info-container__row"
     >
-      <v-col class="subtitle-2 font-weight-bold">{{ item.label }}:</v-col>
+      <v-col class="subtitle-2 font-weight-bold">
+        {{ item.label }}:
+      </v-col>
       <v-col class="subtitle-2 font-weight-regular">
         <template v-if="item.isUrl">
           <a :href="item.value">{{ item.value }}</a>

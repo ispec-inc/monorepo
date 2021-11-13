@@ -10,7 +10,7 @@
                 :is-post="true"
                 :loading="isAwaitingResponse"
                 @submit="login"
-              ></login-page-form>
+              />
               <!--
               <p class="red--text">
                 ユーザ名 またはパスワードが間違っています
@@ -35,15 +35,15 @@ import { LoginPageService } from '~/core/03-service/login'
 @Component({
   layout: 'centered',
   components: {
-    LoginPageForm,
-  },
+    LoginPageForm
+  }
 })
 export default class LoginPage extends mixins(UseSubscription) {
   readonly service: LoginPageService = pageServicesModule.getService('login')
 
   form = LoginForm.provideModule()
 
-  created() {
+  created(): void {
     this.service.loginSuccessEventStream
       .subscribeAsDisposable(() => {
         this.pushToIndexPage()
@@ -51,7 +51,7 @@ export default class LoginPage extends mixins(UseSubscription) {
       .disposedBy(this.subscription)
   }
 
-  login(value: LoginForm.AsObject) {
+  login(value: LoginForm.AsObject): void {
     this.service.submit(value.email, value.password)
   }
 
@@ -63,11 +63,11 @@ export default class LoginPage extends mixins(UseSubscription) {
     return this.service.isAwaitingResponse
   }
 
-  get isError() {
+  get isError(): boolean {
     return !!this.errorMessage
   }
 
-  pushToIndexPage() {
+  pushToIndexPage(): void {
     this.$router.push(this.$pagesPath.$url())
   }
 }

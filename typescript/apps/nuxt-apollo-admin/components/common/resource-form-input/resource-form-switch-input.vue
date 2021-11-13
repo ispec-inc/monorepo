@@ -17,8 +17,8 @@ import { FormSwitchInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
-    ValidationProvider,
-  },
+    ValidationProvider
+  }
 })
 export default class ResourceFormSwitchInput extends Vue {
   @Prop() readonly input!: FormSwitchInputModule

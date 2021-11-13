@@ -9,13 +9,17 @@
       loading-text="データ取得中"
       @click:row="(item) => detail(item)"
     >
-      <template v-slot:top></template>
+      <template v-slot:top />
       <template v-slot:[`item.actions`]="{ item }">
         <button class="action-button" @click.stop="edit(item)">
-          <v-icon small color="primary"> mdi-pencil </v-icon>
+          <v-icon small color="primary">
+            mdi-pencil
+          </v-icon>
         </button>
         <button class="action-button" @click.stop="deleteItem(item)">
-          <v-icon small color="primary"> mdi-delete </v-icon>
+          <v-icon small color="primary">
+            mdi-delete
+          </v-icon>
         </button>
       </template>
     </v-data-table>
@@ -34,24 +38,24 @@
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 
 @Component({})
-export default class AnipicDataTable extends Vue {
+export default class DataTable extends Vue {
   @Prop({ type: String, required: true }) readonly title!: string
   @Prop({ type: Array, required: true }) readonly headers!: string[]
   @Prop({ type: Array, default: [] }) readonly items!: string[]
   @Prop({ type: Boolean, default: false }) readonly loading!: boolean
 
   @Emit()
-  detail(item: any) {
+  detail(item: unknown): unknown {
     return item
   }
 
   @Emit()
-  edit(item: any) {
+  edit(item: unknown): unknown {
     return item
   }
 
   @Emit('delete')
-  deleteItem(item: any) {
+  deleteItem(item: unknown): unknown {
     return item
   }
 }

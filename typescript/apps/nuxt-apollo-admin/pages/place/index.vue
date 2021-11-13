@@ -9,14 +9,14 @@
         @detail="goDetailPage"
         @edit="goEditPage"
         @delete="openDialogDelete"
-      ></a-data-table>
+      />
     </v-card>
     <dialog-delete
       :dialog="dialog"
       :target="target"
       @cancel="dialog = false"
       @delete="deleteItem"
-    ></dialog-delete>
+    />
   </div>
 </template>
 
@@ -33,41 +33,41 @@ export default class PlacePage extends Vue {
   headers = [
     {
       text: 'ID',
-      value: 'id',
+      value: 'id'
     },
     {
       text: '名前(日本語)',
-      value: 'nameJa',
+      value: 'nameJa'
     },
     {
       text: 'タイトル(英語)',
-      value: 'nameEn',
+      value: 'nameEn'
     },
     {
       text: '編集/削除',
       value: 'actions',
       align: 'center',
-      sortable: false,
-    },
+      sortable: false
+    }
   ]
 
   places: PlaceResource[] = []
 
-  deleteItem() {
+  deleteItem(): void {
     if (this.target) {
       this.dialog = false
     }
   }
 
-  goDetailPage(place: PlaceResource) {
+  goDetailPage(place: PlaceResource): void {
     this.$router.push(this.$pagesPath.place._id(place.id).$url())
   }
 
-  goEditPage(place: PlaceResource) {
+  goEditPage(place: PlaceResource): void {
     this.$router.push(this.$pagesPath.place._id(place.id).edit.$url()) // `/place/${place.id}/edit`
   }
 
-  openDialogDelete(place: PlaceResource) {
+  openDialogDelete(place: PlaceResource): void {
     this.target = place
     this.dialog = true
   }

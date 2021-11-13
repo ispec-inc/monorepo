@@ -27,10 +27,10 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || '',
-      },
+        content: process.env.npm_package_description || ''
+      }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*
    ** Global CSS
@@ -45,7 +45,7 @@ export default {
     { src: '~plugins/axios-accessor.ts' },
     { src: '~plugins/vee-validate.ts' },
     { src: '~/plugins/$path.ts' },
-    { src: '~plugins/hooks.ts' },
+    { src: '~plugins/hooks.ts' }
   ],
   /*
    ** Auto import components
@@ -60,7 +60,7 @@ export default {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     '@nuxtjs/vuetify',
-    'nuxt-typed-vuex',
+    'nuxt-typed-vuex'
   ],
   /*
    ** Nuxt.js modules
@@ -69,20 +69,20 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/apollo',
+    '@nuxtjs/apollo'
   ],
   env: {
-    API_URL,
+    API_URL
   },
   axios: {
-    baseUrl: API_URL,
+    baseUrl: API_URL
   },
   auth: {
     redirect: {
       login: '/login',
       logout: '/login',
       callback: false,
-      home: '/',
+      home: '/'
     },
     strategies: {
       local: {
@@ -90,24 +90,24 @@ export default {
           login: {
             url: '/sessions',
             method: 'post',
-            propertyName: 'accessToken',
+            propertyName: 'accessToken'
           },
           logout: false,
-          user: false,
-        },
-      },
-    },
+          user: false
+        }
+      }
+    }
   },
   apollo: {
     clientConfigs: {
-      default: '~/plugins/apollo.ts',
+      default: '~/plugins/apollo.ts'
     },
     defaultOptions: {
       $query: {
         loadingKey: 'loading',
-        fetchPolicy: 'cache-and-network',
-      },
-    },
+        fetchPolicy: 'cache-and-network'
+      }
+    }
   },
   router: {
     // middleware: ['auth'],
@@ -126,7 +126,7 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          success: colors.green.accent3
         },
         light: {
           primary: colors.grey.darken4,
@@ -135,10 +135,10 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent4,
-        },
-      },
-    },
+          success: colors.green.accent4
+        }
+      }
+    }
   },
   /*
    ** Build configuration
@@ -148,8 +148,8 @@ export default {
     babel: {
       plugins: [
         ['@babel/plugin-proposal-decorators', { legacy: true }],
-        ['@babel/plugin-proposal-private-methods', { loose: true }],
-      ],
-    },
-  },
+        ['@babel/plugin-proposal-private-methods', { loose: true }]
+      ]
+    }
+  }
 }

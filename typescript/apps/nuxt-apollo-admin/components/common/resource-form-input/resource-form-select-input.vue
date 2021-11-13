@@ -7,7 +7,7 @@
       :label="label"
       prepend-icon="mdi-form-select"
       :error-messages="errors"
-    ></v-select>
+    />
   </validation-provider>
 </template>
 
@@ -18,8 +18,8 @@ import { FormSelectInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
-    ValidationProvider,
-  },
+    ValidationProvider
+  }
 })
 export default class ResourceFormSelectInput extends Vue {
   @Prop() readonly input!: FormSelectInputModule<unknown>

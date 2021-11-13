@@ -11,11 +11,12 @@
         prepend-icon="mdi-file-image"
         accept="image/png, image/jpeg, image/bmp"
         @change="inputFile"
-      >
-      </v-file-input>
+      />
     </validation-provider>
     <template v-if="value !== ''">
-      <v-subheader class="pa-0">画像のプレビュー</v-subheader>
+      <v-subheader class="pa-0">
+        画像のプレビュー
+      </v-subheader>
       <v-img width="100%" max-height="400px" contain :src="value" />
     </template>
   </div>
@@ -28,8 +29,8 @@ import { FormImageInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
-    ValidationProvider,
-  },
+    ValidationProvider
+  }
 })
 export default class ResourceFormImageInput extends Vue {
   @Prop() readonly input!: FormImageInputModule
@@ -50,7 +51,7 @@ export default class ResourceFormImageInput extends Vue {
     return this.isVisible ? this.input.rules : ''
   }
 
-  inputFile(value: File | undefined | null) {
+  inputFile(value: File | undefined | null): void {
     this.input.file = value || undefined
   }
 

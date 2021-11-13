@@ -7,7 +7,7 @@
           indeterminate
           color="white"
           class="mb-0 mt-2"
-        ></v-progress-linear>
+        />
       </v-card-text>
     </v-card>
   </v-dialog>

@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: nuxt-spa-admin
+  name: nuxt-apollo-admin
   title: SPA Admin using Nuxt
   description: |
   annotations:
