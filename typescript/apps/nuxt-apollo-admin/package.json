@@ -1,6 +1,7 @@
 {
   "name": "@monorepo/nuxt-apollo-admin",
   "version": "1.0.0",
+  "packageManager": "yarn@1.22.11",
   "private": true,
   "scripts": {
     "dev": "run-p dev:*",
@@ -15,7 +16,12 @@
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "hygen": "hygen",
     "test": "jest",
-    "husky": "husky"
+    "prepare": "cd ../../../ && husky install typescript/apps/nuxt-apollo-admin/.husky"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "**/*.{ts,vue}": [
