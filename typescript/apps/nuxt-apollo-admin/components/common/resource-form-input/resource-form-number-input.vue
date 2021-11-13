@@ -7,7 +7,7 @@
       type="number"
       :error-messages="errors"
       :label="label"
-    ></v-text-field>
+    />
   </validation-provider>
 </template>
 
@@ -18,8 +18,8 @@ import { FormNumberInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
-    ValidationProvider,
-  },
+    ValidationProvider
+  }
 })
 export default class ResourceFormNumberInput extends Vue {
   @Prop() readonly input!: FormNumberInputModule

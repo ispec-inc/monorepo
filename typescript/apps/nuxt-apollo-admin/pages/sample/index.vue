@@ -1,9 +1,15 @@
 <template>
   <div>
     <span>{{ userId }}</span>
-    <v-btn @click="pushToSamplePage(1)">userId 1</v-btn>
-    <v-btn @click="pushToSamplePage(2)">userId 2</v-btn>
-    <v-btn @click="pushToSamplePage(3)">userId 3</v-btn>
+    <v-btn @click="pushToSamplePage(1)">
+      userId 1
+    </v-btn>
+    <v-btn @click="pushToSamplePage(2)">
+      userId 2
+    </v-btn>
+    <v-btn @click="pushToSamplePage(3)">
+      userId 3
+    </v-btn>
   </div>
 </template>
 
@@ -15,7 +21,7 @@ export type Query = {
 }
 
 @Component({
-  components: {},
+  components: {}
 })
 export default class SamplePage extends Vue {
   get userId(): number {
@@ -23,7 +29,7 @@ export default class SamplePage extends Vue {
     return isNaN(num) ? 0 : num
   }
 
-  pushToSamplePage(userId: number) {
+  pushToSamplePage(userId: number): void {
     this.$router.push(this.$pagesPath.sample.$url({ query: { userId } }))
   }
 }

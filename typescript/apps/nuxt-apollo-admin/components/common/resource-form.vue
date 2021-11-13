@@ -10,7 +10,7 @@
         </template>
       </div>
       <v-card-actions class="mt-4">
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn
           class="mr-4 primary font-weight-bold pr-3 mr-2"
           @click="validateForm"
@@ -24,7 +24,9 @@
           </v-icon>
           {{ isPost ? '登録する' : '更新する' }}
         </v-btn>
-        <v-btn class="font-weight-bold px-3" @click="clear">クリア</v-btn>
+        <v-btn class="font-weight-bold px-3" @click="clear">
+          クリア
+        </v-btn>
       </v-card-actions>
     </form>
   </validation-observer>
@@ -44,7 +46,7 @@ import { ValidationObserver } from 'vee-validate'
 import {
   FormInputModule,
   FormModule,
-  SeparatedFormModule,
+  SeparatedFormModule
 } from '@monorepo/fast-form'
 import ResourceFormInputs from './resource-form-inputs.vue'
 import ResourceSeparatedForm from './resource-separated-form.vue'
@@ -53,8 +55,8 @@ import ResourceSeparatedForm from './resource-separated-form.vue'
   components: {
     ValidationObserver,
     ResourceFormInputs,
-    ResourceSeparatedForm,
-  },
+    ResourceSeparatedForm
+  }
 })
 export default class ResourceForm extends Vue {
   @Ref('observer') observerRef!: InstanceType<typeof ValidationObserver>
@@ -74,7 +76,7 @@ export default class ResourceForm extends Vue {
     return this.form.getFormValue()
   }
 
-  get inputs(): FormInputModule<unknown>[] {
+  get inputs(): Array<FormInputModule<unknown>> {
     if (!this.form) {
       return []
     }
@@ -86,7 +88,7 @@ export default class ResourceForm extends Vue {
     return this.form?.isSeparated || false
   }
 
-  async validateForm() {
+  async validateForm(): Promise<void> {
     const result = await this.observerRef.validate()
 
     if (result === true) {
@@ -94,7 +96,7 @@ export default class ResourceForm extends Vue {
     }
   }
 
-  clear() {
+  clear(): void {
     if (this.form) {
       this.form.clear()
     }

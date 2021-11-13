@@ -1,5 +1,5 @@
 <template>
-  <div class="user-page"></div>
+  <div class="user-page" />
 </template>
 
 <style lang="scss" scoped>
@@ -10,7 +10,7 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component({
-  components: {},
+  components: {}
 })
 export default class UserPage extends Vue {}
 </script>

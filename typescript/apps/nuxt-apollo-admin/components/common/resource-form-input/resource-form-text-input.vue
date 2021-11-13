@@ -6,7 +6,7 @@
       prepend-icon="mdi-format-text"
       :error-messages="errors"
       :label="label"
-    ></v-text-field>
+    />
   </validation-provider>
 </template>
 
@@ -17,8 +17,8 @@ import { FormTextInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
-    ValidationProvider,
-  },
+    ValidationProvider
+  }
 })
 export default class ResourceFormTextInput extends Vue {
   @Prop() readonly input!: FormTextInputModule

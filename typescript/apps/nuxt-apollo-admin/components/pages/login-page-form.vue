@@ -5,7 +5,7 @@
         <resource-form-inputs :inputs="inputs" />
       </div>
       <v-card-actions class="mt-4">
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn
           class="primary font-weight-bold pr-2"
           width="200px"
@@ -14,7 +14,7 @@
         >
           ログイン
         </v-btn>
-        <v-spacer></v-spacer>
+        <v-spacer />
       </v-card-actions>
     </form>
   </validation-observer>
@@ -37,8 +37,8 @@ import ResourceFormInputs from '~/components/common/resource-form-inputs.vue'
 @Component({
   components: {
     ValidationObserver,
-    ResourceFormInputs,
-  },
+    ResourceFormInputs
+  }
 })
 export default class LoginPageForm extends Vue {
   @Ref('observer') observerRef!: InstanceType<typeof ValidationObserver>
@@ -58,7 +58,7 @@ export default class LoginPageForm extends Vue {
     return this.form.getFormValue()
   }
 
-  get inputs(): FormInputModule<unknown>[] {
+  get inputs(): Array<FormInputModule<unknown>> {
     if (!this.form) {
       return []
     }
@@ -66,7 +66,7 @@ export default class LoginPageForm extends Vue {
     return this.form.inputs
   }
 
-  async validateForm() {
+  async validateForm(): Promise<void> {
     const result = await this.observerRef.validate()
 
     if (result === true) {
@@ -74,7 +74,7 @@ export default class LoginPageForm extends Vue {
     }
   }
 
-  clear() {
+  clear(): void {
     if (this.form) {
       this.form.clear()
     }

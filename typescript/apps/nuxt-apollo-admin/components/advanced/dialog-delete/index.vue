@@ -4,9 +4,13 @@
       <v-card-title>{{ target.itemName }} を本当に削除しますか？</v-card-title>
       <v-card-text> この操作は取り消せません </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="primary" text @click="cancel"> キャンセル </v-btn>
-        <v-btn color="primary" text @click="deleteItem"> 削除する </v-btn>
+        <v-spacer />
+        <v-btn color="primary" text @click="cancel">
+          キャンセル
+        </v-btn>
+        <v-btn color="primary" text @click="deleteItem">
+          削除する
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -22,9 +26,9 @@ export default class DialogDelete extends Vue {
   @Prop({ required: true }) readonly target!: Resource | null
 
   @Emit()
-  cancel() {}
+  cancel(): void {}
 
   @Emit('delete')
-  deleteItem() {}
+  deleteItem(): void {}
 }
 </script>

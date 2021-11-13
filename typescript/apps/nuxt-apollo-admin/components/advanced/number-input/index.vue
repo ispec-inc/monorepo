@@ -12,13 +12,14 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import { Maybe } from '~/types/advanced'
 
 @Component({})
 export default class NumberInput extends Vue {
   @Prop() value!: number | null
   @Prop() label!: string
-  @Prop() rules?: ((value: number) => boolean | string)[]
-  @Emit() input(value: number | null) {
+  @Prop() rules?: Array<(value: number) => boolean | string>
+  @Emit() input(value: number | null): Maybe<number> {
     return value
   }
 

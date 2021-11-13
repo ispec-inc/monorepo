@@ -7,7 +7,7 @@
       :error-messages="errors"
       :label="label"
       type="password"
-    ></v-text-field>
+    />
   </validation-provider>
 </template>
 
@@ -18,8 +18,8 @@ import { FormTextInputModule } from '@monorepo/fast-form'
 
 @Component({
   components: {
-    ValidationProvider,
-  },
+    ValidationProvider
+  }
 })
 export default class ResourceFormPasswordInput extends Vue {
   @Prop() readonly input!: FormTextInputModule

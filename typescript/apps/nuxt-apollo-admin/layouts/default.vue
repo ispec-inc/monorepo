@@ -11,10 +11,10 @@
       <v-list nav>
         <v-list-item>
           <v-list-item-content class="logo-wrapper">
-            <img src="/logo.png" class="logo" />
+            <img src="/logo.png" class="logo">
           </v-list-item-content>
         </v-list-item>
-        <v-divider></v-divider>
+        <v-divider />
         <v-list-group
           v-for="children in items"
           :key="children.title"
@@ -103,8 +103,8 @@ import { ISnackbarConteiner } from '~/types/snackbar-container'
 
 @Component({
   components: {
-    SnackbarContainer,
-  },
+    SnackbarContainer
+  }
 })
 export default class DefaultLayout extends Vue {
   @Ref('snackbarContainer') snackbarContainer!: ISnackbarConteiner
@@ -122,14 +122,14 @@ export default class DefaultLayout extends Vue {
           icon: 'mdi-format-list-bulleted',
           title: '一覧',
           to: '/place',
-          separate: 'place-new',
+          separate: 'place-new'
         },
         {
           icon: 'mdi-shape-square-rounded-plus',
           title: '登録',
-          to: '/place/new',
-        },
-      ],
+          to: '/place/new'
+        }
+      ]
     },
     {
       icon: 'mdi-account-music',
@@ -139,27 +139,27 @@ export default class DefaultLayout extends Vue {
           icon: 'mdi-format-list-bulleted',
           title: '一覧',
           to: '/anime',
-          separate: 'anime-new',
+          separate: 'anime-new'
         },
         {
           icon: 'mdi-shape-square-rounded-plus',
           title: '登録',
-          to: '/anime/new',
-        },
-      ],
-    },
+          to: '/anime/new'
+        }
+      ]
+    }
   ]
 
   miniVariant = false
   title = 'Placy Admin'
 
-  logout() {
+  logout(): void {
     this.$auth.logout()
     localStorage.removeItem('userId')
     this.$router.push(this.$pagesPath.login.$url())
   }
 
-  created() {
+  created(): void {
     this.subscription.add(
       GlobalEventBus.getInstance().snackbarEventStream.subscribe((data) => {
         this.snackbarContainer.addSnackbar(data, data.duration)
@@ -167,7 +167,7 @@ export default class DefaultLayout extends Vue {
     )
   }
 
-  beforeDestroy() {
+  beforeDestroy(): void {
     this.subscription.unsubscribe()
   }
 }

@@ -90,10 +90,10 @@ import ResourceFormGroupList from './resource-form-input/resource-form-group-lis
     ResourceFormDateInput,
     ResourceFormSelectInput,
     ResourceFormImageInput,
-    ResourceFormGroupList,
-  },
+    ResourceFormGroupList
+  }
 })
 export default class ResourceFormInputs extends Vue {
-  @Prop() readonly inputs!: FormInputModule<unknown>[]
+  @Prop() readonly inputs!: Array<FormInputModule<unknown>>
 }
 </script>

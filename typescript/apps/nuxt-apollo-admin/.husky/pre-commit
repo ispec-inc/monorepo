@@ -1,0 +1,3 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+cd ./typescript/apps/nuxt-apollo-admin && npx lint-staged
