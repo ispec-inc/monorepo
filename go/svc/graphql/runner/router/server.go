@@ -8,6 +8,8 @@ import (
 	"github.com/graph-gophers/graphql-go/relay"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/database"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/handler"
+	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/config"
+	mw "github.com/ispec-inc/monorepo/go/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/schema"
 )
@@ -26,6 +28,10 @@ func NewGraphQL() (http.Handler, func() error, error) {
 
 	h := &relay.Handler{Schema: schema}
 	r := chi.NewRouter()
+	r = mw.Common(r, mw.CommonConfig{
+		Timeout:      config.Router.Timeout,
+		AllowOrigins: config.Router.AllowOrigins,
+	})
 	r.Use(middleware.AttatchDataLoader)
 	r.Mount("/", h)
 	return r, nil, nil
