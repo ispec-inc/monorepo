@@ -18283,10 +18283,10 @@ snake-case@^3.0.4:
     dot-case "^3.0.4"
     tslib "^2.0.3"
 
-snakecase-keys@3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/snakecase-keys/-/snakecase-keys-3.2.1.tgz#ce5d1a2de8a93c939d7992f76f2743aa59f3d5ad"
-  integrity sha512-CjU5pyRfwOtaOITYv5C8DzpZ8XA/ieRsDpr93HI2r6e3YInC6moZpSQbmUtg8cTk58tq2x3jcG2gv+p1IZGmMA==
+snakecase-keys@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/snakecase-keys/-/snakecase-keys-4.0.1.tgz#1ba511be38226a2a1d54bb433666bc127458eeed"
+  integrity sha512-oZsXfKe9oe/Cb7EEReYtYfWM+2kR67Vt0yYNjckh1PsEoP/zDoezPN6GLtDba7EBGujGw5vl/h5se/RiBdWUKA==
   dependencies:
     map-obj "^4.1.0"
     to-snake-case "^1.0.0"
