@@ -1,4 +1,4 @@
-mutation CreateArticle($title: String!, $body: String!) {
+mutation createArticle($title: String!, $body: String!) {
   createArticle(title: $title, body: $body) {
     id
     title

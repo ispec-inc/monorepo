@@ -36,10 +36,11 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import 'vue-apollo'
-import getArticles from '~/apollo/queries/articles.gql'
-import CreateArticle from '~/apollo/mutations/articles.gql'
+import CreateArticle from '~/types/request/create-article/mutation.gql'
 import { ArticleForm } from '~/form-providers/article-form'
 import ResourceForm from '~/components/common/resource-form.vue'
+import { pageServicesModule } from '~/store/page-services'
+import { IGraphqlPageService } from '~/core/03-service/sample-graphql'
 
 @Component({
   components: {
@@ -47,18 +48,20 @@ import ResourceForm from '~/components/common/resource-form.vue'
   }
 })
 export default class GraphqlPage extends Vue {
-  articles: Array<{}> = []
+  service!: IGraphqlPageService
 
+  articles: Array<{}> = []
   form = ArticleForm.provideModule()
 
-  created(): void {
-    this.$apollo
-      .query({
-        query: getArticles
-      })
-      .then((res) => {
-        this.articles = res.data.articles
-      })
+  async created(): Promise<void> {
+    this.service = await pageServicesModule.getService<IGraphqlPageService>('sampleGraphql')
+    // this.$apollo
+    //   .query({
+    //     query: getArticles
+    //   })
+    //   .then((res) => {
+    //     this.articles = res.data.articles
+    //   })
   }
 
   submit(value: ArticleForm.AsObject): void {
