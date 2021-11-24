@@ -3,5 +3,9 @@ mutation createArticle($title: String!, $body: String!) {
     id
     title
     body
+    writer {
+      id
+      name
+    }
   }
 }

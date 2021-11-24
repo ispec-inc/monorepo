@@ -3,5 +3,8 @@ query getArticles {
       id
       title
       body
+      writer {
+        name
+      }
     }
 }

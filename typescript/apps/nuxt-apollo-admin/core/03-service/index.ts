@@ -2,8 +2,9 @@ import { AuthGatewayImpl } from '../01-gateway/auth'
 import { AuthRepositoryImpl } from '../02-repository/auth'
 import { LoginPageService } from './login'
 import { GraphqlPageService, IGraphqlPageService } from '~/core/03-service/sample-graphql'
-import { SampleGraphqlRepositoryImpl } from '~/core/02-repository/articles'
-import { ArticlesGatewayImpl } from '~/core/01-gateway/articles'
+import { ViewSampleGraphqlRepositoryImpl } from '~/core/02-repository/articles'
+import { ViewSampleGraphqlGatewayImpl } from '~/core/01-gateway/sample-graphql'
+import { CreateArticleGatewayImpl } from '~/core/01-gateway/create-article'
 
 export namespace ServiceIndex {
   export const constructors = {
@@ -11,7 +12,12 @@ export namespace ServiceIndex {
       return new LoginPageService(new AuthRepositoryImpl(new AuthGatewayImpl()))
     },
     sampleGraphql: (): IGraphqlPageService => {
-      return new GraphqlPageService(new SampleGraphqlRepositoryImpl(new ArticlesGatewayImpl()))
+      return new GraphqlPageService(
+        new ViewSampleGraphqlRepositoryImpl(
+          new ViewSampleGraphqlGatewayImpl(),
+          new CreateArticleGatewayImpl()
+        )
+      )
     }
   }
 

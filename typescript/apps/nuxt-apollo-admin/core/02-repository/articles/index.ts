@@ -1,22 +1,28 @@
-import { IArticlesGateway } from '~/core/01-gateway/articles'
 import { ViewSampleGraphqlModel } from '~/core/00-model/view/view-sample-graphql'
 import { Maybe } from '~/types/advanced'
+import { IViewSampleGraphqlGateway } from '~/core/01-gateway/sample-graphql'
+import { ICreateArticleGateway } from '~/core/01-gateway/create-article'
+import { ICreateArticleMutateModel } from '~/core/00-model/mutate/article'
 
-export interface ISampleGraphqlRepository {
+export interface IViewSampleGraphqlRepository {
   fetch(): Promise<void>
+  create(mutateModel: ICreateArticleMutateModel): Promise<void>
+  viewSampleGraphqlModel: Maybe<ViewSampleGraphqlModel>
 }
 
-export class SampleGraphqlRepositoryImpl implements ISampleGraphqlRepository {
-  private readonly gateway: IArticlesGateway
-  private readonly _ViewSampleGraphqlModel: Maybe<ViewSampleGraphqlModel> = null
+export class ViewSampleGraphqlRepositoryImpl implements IViewSampleGraphqlRepository {
+  private readonly queryGateway: IViewSampleGraphqlGateway
+  private readonly mutateGateway: ICreateArticleGateway
+  private readonly _viewSampleGraphqlModel: Maybe<ViewSampleGraphqlModel> = null
 
-  constructor(gateway: IArticlesGateway) {
-    this.gateway = gateway
+  constructor(queryGateway: IViewSampleGraphqlGateway, mutateGateway: ICreateArticleGateway) {
+    this.queryGateway = queryGateway
+    this.mutateGateway = mutateGateway
   }
 
   fetch(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.gateway
+      this.queryGateway
         .fetch()
         .then(() => {
           // this._ViewSampleGraphqlModels =
@@ -26,5 +32,22 @@ export class SampleGraphqlRepositoryImpl implements ISampleGraphqlRepository {
           reject(err)
         })
     })
+  }
+
+  create(mutateModel: ICreateArticleMutateModel): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.mutateGateway
+        .mutate(mutateModel)
+        .then(() => {
+          resolve()
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  }
+
+  get viewSampleGraphqlModel(): Maybe<ViewSampleGraphqlModel> {
+    return this._viewSampleGraphqlModel
   }
 }

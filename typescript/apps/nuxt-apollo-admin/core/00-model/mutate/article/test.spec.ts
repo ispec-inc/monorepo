@@ -1,4 +1,4 @@
-describe('view sample graphql', () => {
+describe('create article mutate', () => {
   it('sample', () => {
     expect<string>(' ').toBe(' ')
   })
