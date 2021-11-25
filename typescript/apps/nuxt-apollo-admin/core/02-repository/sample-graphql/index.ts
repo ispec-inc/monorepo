@@ -13,7 +13,13 @@ export interface IViewSampleGraphqlRepository {
 export class ViewSampleGraphqlRepositoryImpl implements IViewSampleGraphqlRepository {
   private readonly queryGateway: IViewSampleGraphqlGateway
   private readonly mutateGateway: ICreateArticleGateway
-  private readonly _viewSampleGraphqlModel: Maybe<ViewSampleGraphqlModel> = null
+  private _viewSampleGraphqlModel: Maybe<ViewSampleGraphqlModel> = null
+  // 必要に応じてvuexに保存する
+
+  /**
+   * @param queryGateway viewSampleGraphqlModelを取得できるquery gateway
+   * @param mutateGateway viewSampleGraphqlModelを作成できるmutation gateway
+   */
 
   constructor(queryGateway: IViewSampleGraphqlGateway, mutateGateway: ICreateArticleGateway) {
     this.queryGateway = queryGateway
@@ -24,8 +30,8 @@ export class ViewSampleGraphqlRepositoryImpl implements IViewSampleGraphqlReposi
     return new Promise<void>((resolve, reject) => {
       this.queryGateway
         .fetch()
-        .then(() => {
-          // this._ViewSampleGraphqlModels =
+        .then((response) => {
+          this._viewSampleGraphqlModel = new ViewSampleGraphqlModel(response)
           resolve()
         })
         .catch((err) => {
@@ -38,7 +44,8 @@ export class ViewSampleGraphqlRepositoryImpl implements IViewSampleGraphqlReposi
     return new Promise<void>((resolve, reject) => {
       this.mutateGateway
         .mutate(mutateModel)
-        .then(() => {
+        .then((response) => {
+          this._viewSampleGraphqlModel = new ViewSampleGraphqlModel(response)
           resolve()
         })
         .catch((err) => {

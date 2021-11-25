@@ -2,7 +2,7 @@ import { AuthGatewayImpl } from '../01-gateway/auth'
 import { AuthRepositoryImpl } from '../02-repository/auth'
 import { LoginPageService } from './login'
 import { GraphqlPageService, IGraphqlPageService } from '~/core/03-service/sample-graphql'
-import { ViewSampleGraphqlRepositoryImpl } from '~/core/02-repository/articles'
+import { ViewSampleGraphqlRepositoryImpl } from '~/core/02-repository/sample-graphql'
 import { ViewSampleGraphqlGatewayImpl } from '~/core/01-gateway/sample-graphql'
 import { CreateArticleGatewayImpl } from '~/core/01-gateway/create-article'
 

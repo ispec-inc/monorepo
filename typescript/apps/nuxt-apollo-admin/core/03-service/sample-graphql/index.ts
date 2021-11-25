@@ -2,7 +2,7 @@ import { CONNECTION_ERROR_MESSAGE } from '~/constants/error-message'
 import { Stream } from '~/utils/stream'
 import { IViewSampleGraphqlModel } from '~/core/00-model/view/view-sample-graphql'
 import { Maybe } from '~/types/advanced'
-import { IViewSampleGraphqlRepository } from '~/core/02-repository/articles'
+import { IViewSampleGraphqlRepository } from '~/core/02-repository/sample-graphql'
 import { ICreateArticleMutateModel } from '~/core/00-model/mutate/article'
 
 export interface IGraphqlPageService {
