@@ -2,13 +2,13 @@ import { Article } from '~/types/model/article'
 import { ArticleOption } from '~/types/article-option'
 import { ArticleModelHelper } from '~/core/00-model/other/article/helper'
 import { ArticleContent } from '~/types/article-content'
-import { IUserModel, UserModel } from '~/core/00-model/other/user'
+// import { IUserModel, UserModel } from '~/core/00-model/other/user'
 
 export interface IArticleModel {
   id: string
   title: string
   body: string
-  writer: IUserModel
+  // writer: IUserModel
   articleOption: ArticleOption
   titleBody: ArticleContent
 }
@@ -17,13 +17,13 @@ export class ArticleModel implements IArticleModel {
   private readonly _id: string
   private readonly _title: string
   private readonly _body: string
-  private readonly _writer: IUserModel
+  // private readonly _writer: IUserModel
 
   constructor(data: Article) {
     this._id = data.id
     this._title = data.title
     this._body = data.body
-    this._writer = new UserModel(data.writer)
+    // this._writer = new UserModel(data.writer)
   }
 
   get id(): string {
@@ -38,9 +38,9 @@ export class ArticleModel implements IArticleModel {
     return this._body
   }
 
-  get writer(): IUserModel {
-    return this._writer
-  }
+  // get writer(): IUserModel {
+  //   return this._writer
+  // }
 
   get articleOption(): ArticleOption {
     return ArticleModelHelper.pairIdTitle(this._id, this._title)

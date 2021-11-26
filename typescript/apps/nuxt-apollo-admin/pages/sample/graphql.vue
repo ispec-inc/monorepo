@@ -22,11 +22,7 @@
         <v-card-title>登録</v-card-title>
         <v-divider />
         <v-card-text>
-          <resource-form
-            :form="form"
-            :is-post="true"
-            @submit="submit"
-          />
+          <resource-form :form="form" :is-post="true" @submit="submit" />
         </v-card-text>
       </v-card>
     </div>
@@ -56,7 +52,9 @@ export default class GraphqlPage extends Vue {
   form = ArticleForm.provideModule()
 
   async created(): Promise<void> {
-    this.service = await pageServicesModule.getService<IGraphqlPageService>('sampleGraphql')
+    this.service = await pageServicesModule.getService<IGraphqlPageService>(
+      'sampleGraphql'
+    )
     await this.service.fetch()
     // this.$apollo
     //   .query({
