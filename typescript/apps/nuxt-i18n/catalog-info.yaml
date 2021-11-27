@@ -1,15 +1,15 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: nuxt-spa-admin
-  title: SPA Admin using Nuxt
+  name: nuxt-i18n
+  title: Test i18n using Nuxt
   description: |
   annotations:
     github.com/project-slug: ispec-inc/go-distributed-monolith
     backstage.io/techdocs-ref: github:https://github.com/ispec-inc/go-distributed-monolith
   tags:
     - nuxt
-    - admin
+    - i18n
     - template
 spec:
   type: service

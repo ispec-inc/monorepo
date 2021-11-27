@@ -22,10 +22,17 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import ADataTable from '~/components/general/a-data-table/index.vue'
+import DialogDelete from '~/components/general/dialog-delete/index.vue'
 import PlaceResource from '~/resources/place'
 import Resource from '~/resources/resource'
 
-@Component({})
+@Component({
+  components: {
+    ADataTable,
+    DialogDelete
+  }
+})
 export default class PlacePage extends Vue {
   isFetching = false
   dialog = false

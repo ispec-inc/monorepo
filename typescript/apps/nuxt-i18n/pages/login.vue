@@ -27,7 +27,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { LoginForm } from '~/form-providers/login-form'
-import LoginPageForm from '~/components/pages/login-page-form.vue'
+import LoginPageForm from '~/components/page-ui-parts/login-page-form/index.vue'
 import UseSubscription from '~/components/mixins/use-subscription'
 import { pageServicesModule } from '~/store/page-services'
 import { LoginPageService } from '~/core/03-service/login'
