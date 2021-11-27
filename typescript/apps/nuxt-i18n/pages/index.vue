@@ -6,6 +6,7 @@
     </div>
     <v-btn @click="addSuccessSnackbar">add success snackbar</v-btn>
     <v-btn @click="addErrorSnackbar">add error snackbar</v-btn>
+        <v-btn @click="toi18nPage">i18n Page</v-btn>
   </div>
 </template>
 
@@ -50,6 +51,10 @@ export default class TopPage extends Vue {
       message: 'error',
       type: 'error',
     })
+  }
+
+  toi18nPage(): void{
+    this.$router.push('/sample/i18n')
   }
 
   callApi(id: number): void {

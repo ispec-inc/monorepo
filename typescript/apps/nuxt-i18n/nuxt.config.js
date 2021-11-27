@@ -1,36 +1,36 @@
-import colors from 'vuetify/es5/util/colors'
+import colors from "vuetify/es5/util/colors";
 
-require('dotenv').config()
-const { API_URL } = process.env
+require("dotenv").config();
+const { API_URL } = process.env;
 
 export default {
   /*
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
-  mode: 'spa',
+  mode: "spa",
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: 'server',
+  target: "server",
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    titleTemplate: "%s - " + process.env.npm_package_name,
+    title: process.env.npm_package_name || "",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || '',
+        hid: "description",
+        name: "description",
+        content: process.env.npm_package_description || "",
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   /*
    ** Global CSS
@@ -41,11 +41,11 @@ export default {
    ** https://nuxtjs.org/guide/plugins
    */
   plugins: [
-    { src: '~plugins/axios.ts' },
-    { src: '~plugins/axios-accessor.ts' },
-    { src: '~plugins/vee-validate.ts' },
-    { src: '~/plugins/$path.ts' },
-    { src: '~plugins/hooks.ts' },
+    { src: "~plugins/axios.ts" },
+    { src: "~plugins/axios-accessor.ts" },
+    { src: "~plugins/vee-validate.ts" },
+    { src: "~/plugins/$path.ts" },
+    { src: "~plugins/hooks.ts" },
   ],
   /*
    ** Auto import components
@@ -56,16 +56,16 @@ export default {
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    '@nuxt/typescript-build',
+    "@nuxt/typescript-build",
     // Doc: https://github.com/nuxt-community/stylelint-module
-    '@nuxtjs/stylelint-module',
-    '@nuxtjs/vuetify',
-    'nuxt-typed-vuex',
+    "@nuxtjs/stylelint-module",
+    "@nuxtjs/vuetify",
+    "nuxt-typed-vuex",
   ],
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/dotenv', '@nuxtjs/axios', '@nuxtjs/auth'],
+  modules: ["@nuxtjs/dotenv", "@nuxtjs/axios", "@nuxtjs/auth", "@nuxtjs/i18n"],
   env: {
     API_URL,
   },
@@ -74,18 +74,18 @@ export default {
   },
   auth: {
     redirect: {
-      login: '/login',
-      logout: '/login',
+      login: "/login",
+      logout: "/login",
       callback: false,
-      home: '/',
+      home: "/",
     },
     strategies: {
       local: {
         endpoints: {
           login: {
-            url: '/sessions',
-            method: 'post',
-            propertyName: 'accessToken',
+            url: "/sessions",
+            method: "post",
+            propertyName: "accessToken",
           },
           logout: false,
           user: false,
@@ -93,11 +93,37 @@ export default {
       },
     },
   },
+  i18n: {
+    locales: [
+      {
+        code: "ja",
+        iso: "ja-JP",
+        name: "日本語",
+        file: "ja-JP.js",
+      },
+      {
+        code: "en",
+        iso: "en-US",
+        name: "English",
+        file: "en-US.js",
+      },
+    ],
+    defaultLocale: "en",
+    strategy: "prefix_and_default",
+    detectBrowserLanguage: {
+      useCookie: true,
+    },
+    lazy: true,
+    langDir: "lang/",
+    vueI18n: {
+      fallbackLocale: "en",
+    },
+  },
   router: {
     // middleware: ['auth'],
   },
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ["~/assets/variables.scss"],
     // All colors are defined here and applied directly to the component (no CSS)
     // colorは全てここで定義し、コンポーネントに直接適用する(CSSを使わない)
     theme: {
@@ -131,9 +157,9 @@ export default {
   build: {
     babel: {
       plugins: [
-        ['@babel/plugin-proposal-decorators', { legacy: true }],
-        ['@babel/plugin-proposal-private-methods', { loose: true }],
+        ["@babel/plugin-proposal-decorators", { legacy: true }],
+        ["@babel/plugin-proposal-private-methods", { loose: true }],
       ],
     },
   },
-}
+};

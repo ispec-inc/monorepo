@@ -28,6 +28,9 @@ export const pagesPath = {
     form: {
       $url: (url?: { hash?: string }) => ({ path: '/sample/form', hash: url?.hash })
     },
+    i18n: {
+      $url: (url?: { hash?: string }) => ({ path: '/sample/i18n', hash: url?.hash })
+    },
     separated_form: {
       $url: (url?: { hash?: string }) => ({ path: '/sample/separated-form', hash: url?.hash })
     },
