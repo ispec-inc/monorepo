@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.4.17",
+    "@apollo/client": "3.4.17",
     "@babel/preset-env": "7.15.8",
     "@monorepo/fast-form": "./libs/fast-form",
     "@monorepo/util-functions": "./libs/util-functions",
@@ -51,7 +51,7 @@
     "camelcase-keys": "6.2.2",
     "eslint-plugin-typescript": "0.14.0",
     "graphql": "16.0.1",
-    "graphql-tag": "^2.12.6",
+    "graphql-tag": "2.12.6",
     "husky": "7.0.4",
     "hygen": "6.1.0",
     "jest": "27.3.1",

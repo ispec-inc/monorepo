@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@apollo/client@^3.1.5", "@apollo/client@^3.4.17":
+"@apollo/client@3.4.17", "@apollo/client@^3.1.5":
   version "3.4.17"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.4.17.tgz#4972e19a49809e16d17c5adc67f45623a6dac135"
   integrity sha512-MDt2rwMX1GqodiVEKJqmDmAz8xr0qJmq5PdWeIt0yDaT4GOkKYWZiWkyfhfv3raTk8PyJvbsNG9q2CqmUrlGfg==
@@ -10698,7 +10698,7 @@ graphql-tag@2.12.4:
   dependencies:
     tslib "^2.1.0"
 
-graphql-tag@^2.10.1, graphql-tag@^2.10.3, graphql-tag@^2.11.0, graphql-tag@^2.12.3, graphql-tag@^2.12.6:
+graphql-tag@2.12.6, graphql-tag@^2.10.1, graphql-tag@^2.10.3, graphql-tag@^2.11.0, graphql-tag@^2.12.3:
   version "2.12.6"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.6.tgz#d441a569c1d2537ef10ca3d1633b48725329b5f1"
   integrity sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==
