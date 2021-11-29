@@ -16,7 +16,6 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import articleModule from '@/store/article'
-import { SampleInterface } from '~/models/sample'
 import { GlobalEventBus } from '~/surface/event-bus/global'
 import { SampleGatewayImpl } from '~/core/sample/gateway'
 
@@ -38,7 +37,7 @@ export default class TopPage extends Vue {
     }, 2000)
   }
 
-  get articleList(): SampleInterface[] {
+  get articleList(): unknown[] {
     return articleModule.articles
   }
 

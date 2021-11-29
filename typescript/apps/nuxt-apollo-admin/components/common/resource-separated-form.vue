@@ -32,11 +32,13 @@ export default class ResourceSeparatedForm extends Vue {
   tab = 0
 
   get tabNames(): string[] {
-    return this.form?.separatedInputs.map(([name, _]) => name) || []
+    return this.form?.separatedInputs
+      .map(([name, _]: [tabName: string, inputs: Array<IFormModuleItem<unknown>>]) => name) || []
   }
 
   get inputGroups(): Array<Array<IFormModuleItem<unknown>>> {
-    return this.form?.separatedInputs.map(([_, inputs]) => inputs) || []
+    return this.form?.separatedInputs
+      .map(([_, inputs]: [tabName: string, inputs: Array<IFormModuleItem<unknown>>]) => inputs) || []
   }
 }
 </script>

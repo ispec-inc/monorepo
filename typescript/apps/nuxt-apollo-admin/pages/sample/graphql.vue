@@ -22,11 +22,7 @@
         <v-card-title>登録</v-card-title>
         <v-divider />
         <v-card-text>
-          <resource-form
-            :form="form"
-            :is-post="true"
-            @submit="submit"
-          />
+          <resource-form :form="form" :is-post="true" @submit="submit" />
         </v-card-text>
       </v-card>
     </div>
@@ -36,10 +32,14 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import 'vue-apollo'
-import getArticles from '~/apollo/queries/articles.gql'
-import CreateArticle from '~/apollo/mutations/articles.gql'
+// import CreateArticle from '~/types/request/create-article/mutation.gql'
 import { ArticleForm } from '~/form-providers/article-form'
 import ResourceForm from '~/components/common/resource-form.vue'
+import { pageServicesModule } from '~/store/page-services'
+import { IGraphqlPageService } from '~/core/03-service/sample-graphql'
+import { ArticleContent } from '~/types/article-content'
+import { CreateArticleMutateModel } from '~/core/00-model/mutate/article'
+import { Maybe } from '~/types/advanced'
 
 @Component({
   components: {
@@ -47,39 +47,47 @@ import ResourceForm from '~/components/common/resource-form.vue'
   }
 })
 export default class GraphqlPage extends Vue {
-  articles: Array<{}> = []
+  service: Maybe<IGraphqlPageService> = null
 
   form = ArticleForm.provideModule()
 
-  created(): void {
-    this.$apollo
-      .query({
-        query: getArticles
-      })
-      .then((res) => {
-        this.articles = res.data.articles
-      })
+  async created(): Promise<void> {
+    this.service = await pageServicesModule.getService<IGraphqlPageService>(
+      'sampleGraphql'
+    )
+    await this.service.fetch()
+    // this.$apollo
+    //   .query({
+    //     query: getArticles
+    //   })
+    //   .then((res) => {
+    //     this.sample-graphql = res.data.sample-graphql
+    //   })
   }
 
-  submit(value: ArticleForm.AsObject): void {
-    try {
-      const res = this.$apollo.mutate({
-        mutation: CreateArticle,
-        variables: {
-          title: value.title,
-          body: value.body
-        }
-      })
-      if (res) {
-        console.log(res)
-      } else {
-        console.log('no res')
-      }
-    } catch (err) {
-      console.error(err)
-    }
+  get articles(): ArticleContent[] {
+    return this.service?.viewSampleGraphqlModel?.contents ?? []
+  }
 
-    location.reload()
+  async submit(value: ArticleForm.AsObject): Promise<void> {
+    const mutateModel = new CreateArticleMutateModel(value.title, value.body)
+    await this.service?.create(mutateModel)
+    // try {
+    //   const res = this.$apollo.mutate({
+    //     mutation: CreateArticle,
+    //     variables: {
+    //       title: value.title,
+    //       body: value.body
+    //     }
+    //   })
+    //   if (res) {
+    //     console.log(res)
+    //   } else {
+    //     console.log('no res')
+    //   }
+    // } catch (err) {
+    //   console.error(err)
+    // }
   }
 }
 </script>

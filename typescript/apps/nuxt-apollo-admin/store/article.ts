@@ -3,11 +3,10 @@ import {
   VuexModule,
   Action,
   Mutation,
-  getModule,
+  getModule
 } from 'vuex-module-decorators'
 import { store } from '@/store'
 import { $axios } from '@/utils/api'
-import { SampleInterface } from '@/models/sample'
 
 /**
  * In the case of BFFs, the API is tied to the Page, so the response's interface is defined in Store and the model that be used in interface is called from /models.
@@ -17,7 +16,7 @@ import { SampleInterface } from '@/models/sample'
 */
 
 export interface SampleResponseState {
-  articles: Array<SampleInterface>
+  articles: unknown[]
 }
 
 @Module({ name: 'article', dynamic: true, store, namespaced: true })
@@ -29,19 +28,17 @@ export class ArticleModule extends VuexModule {
     this.sampleState = value
   }
 
-  @Action({rawError: true})
-  fetch() {
-    $axios.get<SampleResponseState>('/admin/v1/articles').then((response) => {
+  @Action({ rawError: true })
+  fetch(): void {
+    $axios.get<SampleResponseState>('/admin/v1/sample-graphql').then((response) => {
       const { data } = response
       this.SET_ARTICLES(data)
-
     })
   }
 
-  get articles(): Array<SampleInterface> {
+  get articles(): unknown[] {
     return this.sampleState?.articles ?? []
   }
-
 }
 
 const articleModule = getModule(ArticleModule)

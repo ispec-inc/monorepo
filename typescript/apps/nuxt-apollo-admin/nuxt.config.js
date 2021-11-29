@@ -42,6 +42,7 @@ export default {
    */
   plugins: [
     { src: '~plugins/axios.ts' },
+    { src: '~plugins/apollo-client.ts' },
     { src: '~plugins/axios-accessor.ts' },
     { src: '~plugins/vee-validate.ts' },
     { src: '~/plugins/$path.ts' },
