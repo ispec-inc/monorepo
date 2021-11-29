@@ -1,5 +1,5 @@
 export interface ArticleResponse {
-  article: {
+  article: Array<{
     id: string
     title: string
     body: string
@@ -7,5 +7,5 @@ export interface ArticleResponse {
     //    id: string
     //    name: string
     //  }
-  }
+  }>
 }

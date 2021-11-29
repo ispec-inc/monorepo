@@ -1,4 +1,4 @@
-import { ViewSampleGraphqlModel } from '~/core/00-model/view/view-sample-graphql'
+import { IViewSampleGraphqlModel, ViewSampleGraphqlModel } from '~/core/00-model/view/view-sample-graphql'
 import { Maybe } from '~/types/advanced'
 import { IViewSampleGraphqlGateway } from '~/core/01-gateway/sample-graphql'
 import { ICreateArticleGateway } from '~/core/01-gateway/create-article'
@@ -13,7 +13,7 @@ export interface IViewSampleGraphqlRepository {
 export class ViewSampleGraphqlRepositoryImpl implements IViewSampleGraphqlRepository {
   private readonly queryGateway: IViewSampleGraphqlGateway
   private readonly mutateGateway: ICreateArticleGateway
-  private _viewSampleGraphqlModel: Maybe<ViewSampleGraphqlModel> = null
+  private _viewSampleGraphqlModel: Maybe<IViewSampleGraphqlModel> = null
   // 必要に応じてvuexに保存する
 
   /**
@@ -45,7 +45,13 @@ export class ViewSampleGraphqlRepositoryImpl implements IViewSampleGraphqlReposi
       this.mutateGateway
         .mutate(mutateModel)
         .then((response) => {
-          this._viewSampleGraphqlModel = new ViewSampleGraphqlModel(response)
+          const data = this._viewSampleGraphqlModel?.rawData ?? {
+            articles: []
+          }
+          data?.articles.push(response.createArticle)
+          this._viewSampleGraphqlModel = new ViewSampleGraphqlModel(
+            data
+          )
           resolve()
         })
         .catch((err) => {

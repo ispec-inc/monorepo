@@ -11,42 +11,35 @@ export interface IArticleModel {
   // writer: IUserModel
   articleOption: ArticleOption
   titleBody: ArticleContent
+  rawData: Article
 }
 
 export class ArticleModel implements IArticleModel {
-  private readonly _id: string
-  private readonly _title: string
-  private readonly _body: string
-  // private readonly _writer: IUserModel
+  readonly id: string
+  readonly title: string
+  readonly body: string
+  // readonly _writer: IUserModel
 
   constructor(data: Article) {
-    this._id = data.id
-    this._title = data.title
-    this._body = data.body
-    // this._writer = new UserModel(data.writer)
+    this.id = data.id
+    this.title = data.title
+    this.body = data.body
+    // this.writer = new UserModel(data.writer)
   }
-
-  get id(): string {
-    return this._id
-  }
-
-  get title(): string {
-    return this._title
-  }
-
-  get body(): string {
-    return this._body
-  }
-
-  // get writer(): IUserModel {
-  //   return this._writer
-  // }
 
   get articleOption(): ArticleOption {
-    return ArticleModelHelper.pairIdTitle(this._id, this._title)
+    return ArticleModelHelper.pairIdTitle(this.id, this.title)
   }
 
   get titleBody(): ArticleContent {
-    return ArticleModelHelper.createContent(this._title, this._body)
+    return ArticleModelHelper.createContent(this.title, this.body)
+  }
+
+  get rawData(): Article {
+    return {
+      id: this.id,
+      title: this.title,
+      body: this.body
+    }
   }
 }

@@ -1,19 +1,16 @@
-import ApolloClient from 'apollo-boost'
-import { ArticleResponse } from '~/types/response/articles/mono'
 import createArticle from '~/types/request/create-article/mutation.gql'
 import { ICreateArticleMutateModel } from '~/core/00-model/mutate/article'
+import { CreateArticleResponse } from '~/types/response/create-article'
+import { apollo } from '~/utils/apollo'
 
 export interface ICreateArticleGateway {
-  mutate(mutateModel: ICreateArticleMutateModel): Promise<ArticleResponse>
+  mutate(mutateModel: ICreateArticleMutateModel): Promise<CreateArticleResponse>
 }
 
 export class CreateArticleGatewayImpl implements ICreateArticleGateway {
-  mutate(mutateModel: ICreateArticleMutateModel): Promise<ArticleResponse> {
-    const apolloClient = new ApolloClient({
-      uri: 'http://localhost:9000/graphql'
-    })
-    return apolloClient
-      .mutate<ArticleResponse>({
+  mutate(mutateModel: ICreateArticleMutateModel): Promise<CreateArticleResponse> {
+    return apollo
+      .mutate<CreateArticleResponse>({
         mutation: createArticle,
         variables: mutateModel.variables
       })

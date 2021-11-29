@@ -88,8 +88,6 @@ export default class GraphqlPage extends Vue {
     // } catch (err) {
     //   console.error(err)
     // }
-
-    location.reload()
   }
 }
 </script>

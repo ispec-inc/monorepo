@@ -1,23 +1,33 @@
 import { ArticlesResponse } from '~/types/response/articles'
-import { ArticleModel } from '~/core/00-model/other/article'
+import { ArticleModel, IArticleModel } from '~/core/00-model/other/article'
 import { ArticleContent } from '~/types/article-content'
 
 export interface IViewSampleGraphqlModel {
+  articles: ArticleModel[]
   contents: ArticleContent[]
+  rawData: ArticlesResponse
 }
 
 export class ViewSampleGraphqlModel implements IViewSampleGraphqlModel {
-  _articles: ArticleModel[]
+  readonly articles: IArticleModel[]
 
   constructor(data: ArticlesResponse) {
-    this._articles = data.article.map((value) => {
+    this.articles = data.articles.map((value) => {
       return new ArticleModel(value)
     })
   }
 
   get contents(): ArticleContent[] {
-    return this._articles.map((value) => {
+    return this.articles.map((value) => {
       return value.titleBody
     })
+  }
+
+  get rawData(): ArticlesResponse {
+    return {
+      articles: this.articles.map((value) => {
+        return value.rawData
+      })
+    }
   }
 }
