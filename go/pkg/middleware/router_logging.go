@@ -16,7 +16,6 @@ func RequestLogger(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
 
-		t1 := time.Now()
 		reqID := r.Header.Get("x-request-id")
 		if reqID == "" {
 			reqID = uuid.New().String()
@@ -24,7 +23,7 @@ func RequestLogger(next http.Handler) http.Handler {
 
 		ww.Header().Set("request-id", reqID)
 		defer func() {
-			logRequestInfo(ww, r, t1, reqID)
+			logRequestInfo(ww, r, time.Now(), reqID)
 		}()
 
 		next.ServeHTTP(ww, r)
