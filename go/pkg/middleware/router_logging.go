@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/middleware"
+	"github.com/google/uuid"
 )
 
 const logType = "request"
@@ -16,8 +17,14 @@ func RequestLogger(next http.Handler) http.Handler {
 		ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
 
 		t1 := time.Now()
+		reqID := r.Header.Get("x-request-id")
+		if reqID == "" {
+			reqID = uuid.New().String()
+		}
+
+		ww.Header().Set("request-id", reqID)
 		defer func() {
-			logRequestInfo(ww, r, t1)
+			logRequestInfo(ww, r, t1, reqID)
 		}()
 
 		next.ServeHTTP(ww, r)
@@ -25,7 +32,12 @@ func RequestLogger(next http.Handler) http.Handler {
 	return http.HandlerFunc(fn)
 }
 
-func logRequestInfo(ww middleware.WrapResponseWriter, r *http.Request, timeFrom time.Time) {
+func logRequestInfo(
+	ww middleware.WrapResponseWriter,
+	r *http.Request,
+	timeFrom time.Time,
+	requestID string,
+) {
 	scheme := "http"
 	if r.TLS != nil {
 		scheme = "https"
@@ -40,6 +52,7 @@ func logRequestInfo(ww middleware.WrapResponseWriter, r *http.Request, timeFrom 
 		Status:    ww.Status(),
 		Bytes:     ww.BytesWritten(),
 		Elapsed:   time.Since(timeFrom).String(),
+		RequestID: requestID,
 	}
 	fmt.Println(info.JSONString())
 }
@@ -54,6 +67,7 @@ type requestInfo struct {
 	Status    int    `json:"status"`
 	Bytes     int    `json:"bytes(B)"`
 	Elapsed   string `json:"elapsed"`
+	RequestID string `json:"request_id"`
 }
 
 func (i requestInfo) JSONString() string {
