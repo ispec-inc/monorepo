@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const ts = require("typescript");
-const file = "./lang.d.ts"; // 元にするinterfaceのファイル
+const file = './i18n/lang/i18n-declare.d.ts'; // 元にするinterfaceのファイル
 function getIdentifer(ps) {
     if (ps.name.kind === ts.SyntaxKind.Identifier) {
         const psname = ps.name;
@@ -10,21 +10,21 @@ function getIdentifer(ps) {
             return name;
         }
     }
-    return "";
+    return '';
 }
 function getType(ps) {
     if (!ps.type) {
-        return "invalid";
+        return 'invalid';
     }
     if (ps.type.kind === ts.SyntaxKind.StringKeyword) {
-        return "string";
+        return 'string';
     }
     if (ps.type.kind === ts.SyntaxKind.TypeLiteral) {
         return ps.type;
     }
-    return "invalid";
+    return 'invalid';
 }
-function parseMembers(members, path = "") {
+function parseMembers(members, path = '') {
     const result = {};
     members.map((member) => {
         if (member.kind !== ts.SyntaxKind.PropertySignature) {
@@ -35,11 +35,11 @@ function parseMembers(members, path = "") {
             return;
         }
         const type = getType(member);
-        if (type === "invalid") {
+        if (type === 'invalid') {
             return;
         }
-        const val = path.length === 0 ? name : path + "." + name;
-        if (type === "string") {
+        const val = path.length === 0 ? name : path + '.' + name;
+        if (type === 'string') {
             result[name] = val;
             return;
         }
@@ -51,32 +51,32 @@ function parseInterface(itrfc) {
     return parseMembers(itrfc.members);
 }
 function createIndent(nest) {
-    let result = "";
+    let result = '';
     for (let i = 0; i < nest; i++) {
-        result += "  ";
+        result += '  ';
     }
     return result;
 }
 function toString(data, nest = 0) {
     const indent = createIndent(nest);
-    let result = indent + "{\n";
+    let result = indent + '{\n';
     const indent2 = createIndent(nest + 1);
     Object.keys(data).map((key) => {
         const v = data[key];
-        if (typeof v === "string") {
+        if (typeof v === 'string') {
             result += indent2 + key + ": '" + v + "',\n";
         }
         else {
-            result += indent2 + key + ": " + toString(v, nest + 1) + ",\n";
+            result += indent2 + key + ': ' + toString(v, nest + 1) + ',\n';
         }
     });
-    return result + indent + "}";
+    return result + indent + '}';
 }
 function toTS(data) {
-    return ("import { I18n } from '~/i18n/lang';\n\n" +
-        "export const i18nComplements: I18n = " +
+    return ("import { I18n } from '~/i18n/lang/i18n-declare';\n\n" +
+        'export const i18nComplements: I18n = ' +
         toString(data) +
-        ";\n");
+        ';\n');
 }
 const program = ts.createProgram([file], {});
 const source = program.getSourceFile(file);

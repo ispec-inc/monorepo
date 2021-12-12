@@ -1,4 +1,5 @@
 import colors from "vuetify/es5/util/colors";
+import messages from "./lang/message";
 
 require("dotenv").config();
 const { API_URL } = process.env;
@@ -46,6 +47,7 @@ export default {
     { src: "~plugins/vee-validate.ts" },
     { src: "~/plugins/$path.ts" },
     { src: "~plugins/hooks.ts" },
+    { src: "~/plugins/i18n.ts" },
   ],
   /*
    ** Auto import components
@@ -99,25 +101,25 @@ export default {
         code: "ja",
         iso: "ja-JP",
         name: "日本語",
-        file: "ja-JP.js",
       },
       {
         code: "en",
         iso: "en-US",
         name: "English",
-        file: "en-US.js",
       },
     ],
-    defaultLocale: "en",
-    strategy: "prefix_and_default",
+    defaultLocale: "ja",
+    strategy: "no_prefix",
     detectBrowserLanguage: {
       useCookie: true,
+      cookieKey: "i18n_locale",
+      alwaysRedirect: true,
     },
-    lazy: true,
-    langDir: "lang/",
     vueI18n: {
       fallbackLocale: "en",
+      messages,
     },
+    vueI18nLoader: true,
   },
   router: {
     // middleware: ['auth'],
