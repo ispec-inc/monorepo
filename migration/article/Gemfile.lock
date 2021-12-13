@@ -35,8 +35,12 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     method_source (1.0.0)
+    mini_portile2 (2.5.3)
     minitest (5.14.4)
     mysql2 (0.5.3)
+    nokogiri (1.11.2)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nokogiri (1.11.2-x86_64-darwin)
       racc (~> 1.4)
     racc (1.5.2)
@@ -55,6 +59,9 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
     rake (13.0.3)
+    seed-fu (2.3.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
     standalone_migrations (6.0.0)
       activerecord (>= 4.2.7, < 6.1.0, != 5.2.3.rc1, != 5.2.3)
       railties (>= 4.2.7, < 6.1.0, != 5.2.3.rc1, != 5.2.3)
@@ -66,10 +73,14 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  ruby
   x86_64-darwin-20
 
 DEPENDENCIES
+  activerecord
+  activesupport
   mysql2
+  seed-fu
   standalone_migrations
 
 BUNDLED WITH
