@@ -1,6 +1,16 @@
 # monorepo
 
-ispec civlization project
+monorepoは、ゼロイチ開発の品質、速度をあげることを目的として、ispecがプロジェクトを通じて得たプラクティスを蓄積、集約し、新しくプロジェクトを始める際のテンプレートとして利用できるようにするためのOSSプロジェクトです。
+
+monorepo is an OSS project that aims to improve the quality and speed of MVP development by accumulating and consolidating the practices that ispec has learned through its projects and making them available as templates for starting new projects.
+
+
+## Features
+- [Gen](./gen)
+- [Migration](./migration)
+- [Go](./go)
+- [TypeScript](./typescript)
+- [Terraform](./terraform)
 
 ## Developement
 
@@ -17,11 +27,3 @@ ispec civlization project
 └── release/terraform -> Deploy terraform resources to prd.
 ```
 
-
-### Create a new endpoint
-
-1. Add a new *.proto to /proto
-2. Open a pull request for 1
-3. Review the pull request by both frontend and backend engineers
-4. Merge the pull request
-5. Implement frontend and backend in parallel
