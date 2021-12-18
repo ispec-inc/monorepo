@@ -1,0 +1,5 @@
+type Company {
+  id: ID!
+  name: String!
+  iconUrl: String!
+}

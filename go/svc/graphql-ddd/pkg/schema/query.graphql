@@ -1,0 +1,7 @@
+type Query {
+    callsByParticipant(input: PaginationInput!): CallConnection
+    callsByTeam(input: PaginationInput!): CallConnection
+    call(id: ID!): Call!
+    currentUser(): User
+    company(): Company
+}

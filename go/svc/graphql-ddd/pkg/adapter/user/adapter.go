@@ -1,0 +1,13 @@
+package user
+
+import "github.com/ispec-inc/monorepo/go/svc/graphql-ddd/pkg/registry"
+
+type Adapter struct {
+	registry registry.Registry
+}
+
+func NewAdapter(
+	r registry.Registry,
+) Adapter {
+	return Adapter{registry: r}
+}

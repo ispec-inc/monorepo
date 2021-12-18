@@ -1,0 +1,6 @@
+type User{
+  id: ID!
+  name: String!
+  icon: String!
+  privilege: String!
+}

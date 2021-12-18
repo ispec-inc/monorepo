@@ -1,0 +1,28 @@
+input PaginationInput {
+  first: Int
+  after: String
+  last: Int
+  before: String
+}
+
+type PageInfo {
+  startCursor: ID
+  endCursor: ID
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+}
+
+interface Connection {
+  totalCount: Int!
+  pageInfo: PageInfo!
+  edges: [Edge!]!
+}
+
+interface Edge {
+  cursor: ID!
+  node: Node!
+}
+
+interface Node {
+  id: ID!
+}

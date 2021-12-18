@@ -1,0 +1,39 @@
+type Call implements Node {
+  id: ID!
+  title: String!
+  host: User!
+  participants: [User!]!
+  recording: Recording!
+  startedAt: String!
+}
+
+type Recording {
+  id: ID!
+  time: RecordingTime!
+  url: String!
+  thumbnailURL: String!
+  transcriptURL: String!
+}
+
+type RecordingTime {
+  hour: Int!
+  min: Int!
+  secound: Int!
+}
+
+type SeekThumbnail {
+  recordingID: ID!
+  time: RecordingTime!
+  url: String!
+}
+
+type CallConnection implements Connection {
+  totalCount: Int!
+  pageInfo: PageInfo!
+  edges: [CallEdge]
+}
+
+type CallEdge implements Edge {
+  cursor: ID!
+  node: Call
+}
