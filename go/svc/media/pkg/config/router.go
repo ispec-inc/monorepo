@@ -15,6 +15,6 @@ func init() {
 var Router router
 
 type router struct {
-	Timeout      time.Duration `env:"MEDIA_ROUTER_TIMEOUT"`
+	Timeout      time.Duration `env:"MEDIA_ROUTER_TIMEOUT" envDefault:"10s"`
 	AllowOrigins []string      `env:"MEDIA_ROUTER_ALLOW_ORIGINS" envSeparator:","`
 }

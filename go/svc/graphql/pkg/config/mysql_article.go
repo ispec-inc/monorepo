@@ -20,8 +20,8 @@ type mysqlArticle struct {
 	Database    string        `env:"ADMIN_MYSQL_ARTICLE_DATABASE"`
 	Host        string        `env:"ADMIN_MYSQL_ARTICLE_HOST"`
 	Port        string        `env:"ADMIN_MYSQL_ARTICLE_PORT"`
-	ShowAllLog  bool          `env:"ADMIN_MYSQL_ARTICLE_SHOW_ALL_LOG"`
-	MaxIdleConn int           `env:"ADMIN_MYSQL_ARTICLE_MAX_IDLE_CONN"`
-	MaxOpenConn int           `env:"ADMIN_MYSQL_ARTICLE_MAX_OPEN_CONN"`
-	MaxLifetime time.Duration `env:"ADMIN_MYSQL_ARTICLE_MAX_CONN_LIFETIME"`
+	ShowAllLog  bool          `env:"ADMIN_MYSQL_ARTICLE_SHOW_ALL_LOG" envDefault:"true"`
+	MaxIdleConn int           `env:"ADMIN_MYSQL_ARTICLE_MAX_IDLE_CONN" envDefault:"25"`
+	MaxOpenConn int           `env:"ADMIN_MYSQL_ARTICLE_MAX_OPEN_CONN" envDefault:"25"`
+	MaxLifetime time.Duration `env:"ADMIN_MYSQL_ARTICLE_MAX_CONN_LIFETIME" envDefault:"25s"`
 }
