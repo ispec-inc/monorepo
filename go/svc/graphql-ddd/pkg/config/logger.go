@@ -14,12 +14,10 @@ type LoggerType string
 func init() {
 	typ := os.Getenv("JAM_ROLL_LOGGER_TYPE")
 	switch typ {
-	case string(LoggerTypeStdlog):
-		Logger.Type = LoggerTypeStdlog
 	case string(LoggerTypeSentry):
 		Logger.Type = LoggerTypeSentry
 	default:
-		panic("invalid LOGGER_TYPE")
+		Logger.Type = LoggerTypeStdlog
 	}
 }
 
