@@ -1,4 +1,4 @@
-version: '2.2'
+version: "2.2"
 services:
   protoc:
     container_name: protoc
@@ -111,6 +111,27 @@ services:
     networks:
       - monorepo
     command: dockerize
+
+  typescript:
+    environment:
+      - "DIR=${DIR}"
+    container_name: monorepo-typescript-${DIR}
+    build:
+      context: typescript
+      dockerfile: docker/dev/Dockerfile
+    image: node:lts-slim
+    volumes:
+      - ./typescript:/typescript/src/app:cached
+      - ./typescript/apps/${DIR}/node_modules:/typescript/src/app/apps/${DIR}/node_modules
+      - /typescript/src/app/node_modules
+    working_dir: /typescript/src/app
+    ports:
+      - "3000:3000"
+    command: sh -c "yarn && yarn workspace @monorepo/${DIR} run dev"
+    depends_on:
+      - api
+    networks:
+      - monorepo
 
 networks:
   monorepo:

@@ -3,6 +3,7 @@
 
 # gen command
 gen/.env
+data/
 
 # OS X
 .DS_Store
