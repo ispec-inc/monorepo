@@ -22,7 +22,7 @@ require (
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/multierr v1.6.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	google.golang.org/protobuf v1.26.0
+	google.golang.org/protobuf v1.27.1
 	gorm.io/driver/mysql v1.0.5
 	gorm.io/driver/postgres v1.1.0
 	gorm.io/gorm v1.21.9
