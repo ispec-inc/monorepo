@@ -45,7 +45,7 @@ export class AsyncProcessHelper<T, U extends unknown[]> {
       })
   }
 
-  setErrorMessage(message: Maybe<string>) {
+  setErrorMessage(message: Maybe<string>): void {
     const msg = message || null
     this._errorMessage = msg
 
