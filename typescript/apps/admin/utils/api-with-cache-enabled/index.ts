@@ -1,4 +1,4 @@
-import { compareObject } from "./compare-object"
+import { compareObject } from "../compare-object"
 
 export type ApiResponseCache<T, U extends Object> = {
   response: T
