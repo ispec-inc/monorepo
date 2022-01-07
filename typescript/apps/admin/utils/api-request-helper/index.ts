@@ -1,6 +1,6 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { AxiosResponse, AxiosRequestConfig } from 'axios'
-import { $axios } from './api'
+import { $axios } from '../api'
 import { ModifyType } from '~/types/advanced'
 
 export namespace ApiRequestHelper {
