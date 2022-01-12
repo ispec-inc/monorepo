@@ -9,7 +9,7 @@ export const resolvedResponseBasedOperation = <T>(
   onNext: (data: T) => void,
   onError: (err: ApiErrorModel) => void
 ) => {
-  return (response: ResolvedApiResponse<T>) => {
+  return (response: ResolvedApiResponse<T>): void => {
     if ('error' in response) {
       onError(response.error)
       return
