@@ -16,6 +16,7 @@ require (
 	github.com/google/uuid v1.2.0
 	github.com/graph-gophers/dataloader v5.0.0+incompatible
 	github.com/graph-gophers/graphql-go v1.1.0
+	github.com/graph-gophers/graphql-transport-ws v0.0.1 // indirect
 	github.com/k0kubun/pp v2.4.0+incompatible
 	github.com/lib/pq v1.10.0 // indirect
 	github.com/pkg/errors v0.9.1

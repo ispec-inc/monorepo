@@ -151,11 +151,15 @@ github.com/gorilla/context v1.1.1/go.mod h1:kBGZzfjB9CEq2AlWe17Uuf7NDRt0dE0s8S51
 github.com/gorilla/mux v1.6.2/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
 github.com/gorilla/mux v1.7.3/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
 github.com/gorilla/websocket v0.0.0-20170926233335-4201258b820c/go.mod h1:E7qHFY5m1UJ88s3WnNqhKjPHQ0heANvMoAMk2YaljkQ=
+github.com/gorilla/websocket v1.4.0/go.mod h1:E7qHFY5m1UJ88s3WnNqhKjPHQ0heANvMoAMk2YaljkQ=
+github.com/gorilla/websocket v1.4.1 h1:q7AeDBpnBk8AogcD4DSag/Ukw/KV+YhzLj2bP5HvKCM=
 github.com/gorilla/websocket v1.4.1/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/graph-gophers/dataloader v5.0.0+incompatible h1:R+yjsbrNq1Mo3aPG+Z/EKYrXrXXUNJHOgbRt+U6jOug=
 github.com/graph-gophers/dataloader v5.0.0+incompatible/go.mod h1:jk4jk0c5ZISbKaMe8WsVopGB5/15GvGHMdMdPtwlRp4=
 github.com/graph-gophers/graphql-go v1.1.0 h1:wVVEPeC5IXelyaQ8UyWKugIyNIFOVF9Kn+gu/1/tXTE=
 github.com/graph-gophers/graphql-go v1.1.0/go.mod h1:9CQHMSxwO4MprSdzoIEobiHpoLtHm77vfxsvsIN5Vuc=
+github.com/graph-gophers/graphql-transport-ws v0.0.1 h1:w4bTkZ0bAVuV1z5AduAfDlsPTM9QVy5SEp2rrOvZMzQ=
+github.com/graph-gophers/graphql-transport-ws v0.0.1/go.mod h1:NIGAcH2JJLkVA0X1qArIk2c4mvrvGzJDzzg09TTbc/w=
 github.com/grpc-ecosystem/go-grpc-middleware v1.0.1-0.20190118093823-f849b5445de4/go.mod h1:FiyG127CGDf3tlThmgyCl78X/SZQqEOJBCDaAfeWzPs=
 github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0/go.mod h1:8NvIoxWQoOIhqOTXgfV/d3M/q6VIi02HzZEHgUlZvzk=
 github.com/grpc-ecosystem/grpc-gateway v1.9.5/go.mod h1:vNeuVxBJEsws4ogUvrchl83t/GYV9WGTSLVdBhOQFDY=
