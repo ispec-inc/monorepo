@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go v1.38.50
 	github.com/caarlos0/env/v6 v6.6.2
 	github.com/davecgh/go-spew v1.1.1
-	github.com/envoyproxy/protoc-gen-validate v0.6.2
+	github.com/envoyproxy/protoc-gen-validate v0.6.3
 	github.com/getsentry/sentry-go v0.11.0
 	github.com/go-chi/chi v1.5.4
 	github.com/go-chi/cors v1.2.0
