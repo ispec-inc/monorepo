@@ -13,9 +13,9 @@ func init() {
 var MysqlAuthnTest mysqlAuthnTest
 
 type mysqlAuthnTest struct {
-	User     string `env:"AUTHN_MYSQL_MEETING_TEST_USER"`
-	Password string `env:"AUTHN_MYSQL_MEETING_TEST_PASSWORD"`
-	Database string `env:"AUTHN_MYSQL_MEETING_TEST_DATABASE"`
-	Host     string `env:"AUTHN_MYSQL_MEETING_TEST_HOST"`
-	Port     string `env:"AUTHN_MYSQL_MEETING_TEST_PORT"`
+	User     string `env:"AUTHN_MYSQL_TEST_USER"`
+	Password string `env:"AUTHN_MYSQL_TEST_PASSWORD"`
+	Database string `env:"AUTHN_MYSQL_TEST_DATABASE"`
+	Host     string `env:"AUTHN_MYSQL_TEST_HOST"`
+	Port     string `env:"AUTHN_MYSQL_TEST_PORT"`
 }
