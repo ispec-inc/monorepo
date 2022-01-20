@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_22_081610) do
+ActiveRecord::Schema.define(version: 2022_01_20_102236) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -20,6 +20,28 @@ ActiveRecord::Schema.define(version: 2021_04_22_081610) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_at"], name: "index_articles_on_created_at"
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "firebase_account_details", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "firebase_account_id"
+    t.string "firebase_service_id", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["firebase_account_id"], name: "index_firebase_account_details_on_firebase_account_id"
+  end
+
+  create_table "firebase_account_users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "firebase_account_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["firebase_account_id"], name: "index_firebase_account_users_on_firebase_account_id"
+    t.index ["user_id"], name: "index_firebase_account_users_on_user_id"
+  end
+
+  create_table "firebase_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|

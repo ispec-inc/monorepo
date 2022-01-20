@@ -11,7 +11,7 @@ class CreateFirebaseAccounts < ActiveRecord::Migration[6.0]
     end
 
     create_table :firebase_account_users do |t|
-      t.references :firebase_accounts
+      t.references :firebase_account
       t.references :user
       t.timestamps
     end

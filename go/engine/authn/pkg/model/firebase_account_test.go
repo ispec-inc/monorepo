@@ -2,11 +2,12 @@ package model
 
 import (
 	"testing"
+	"time"
 
 	"github.com/ispec-inc/monorepo/go/engine/authn/pkg/database"
 	"github.com/ispec-inc/monorepo/go/engine/authn/pkg/entity"
-	"github.com/ispec-inc/monorepo/go/pkg/testool"
 	"github.com/ispec-inc/monorepo/go/pkg/rdb"
+	"github.com/ispec-inc/monorepo/go/pkg/testool"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -46,7 +47,11 @@ func TestFirebaseAccountModel_FindByFirebaseServiceID(t *testing.T) {
 				ID:                int64(1),
 				FirebaseAccountID: int64(1),
 				FirebaseServiceID: "test1",
+				CreatedAt:         time.Now(),
+				UpdatedAt:         time.Now(),
 			},
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
 		},
 	})
 	database.Init(db)
@@ -99,7 +104,11 @@ func TestFirebaseAccountModel_FindByUserID(t *testing.T) {
 				ID:                int64(1),
 				FirebaseAccountID: int64(1),
 				UserID:            int64(1),
+				CreatedAt:         time.Now(),
+				UpdatedAt:         time.Now(),
 			},
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
 		},
 	})
 	database.Init(db)

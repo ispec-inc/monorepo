@@ -21,7 +21,7 @@ func NewFirebaseAccount(userID int64, firebaseServiceID string) *FirebaseAccount
 func (fa *FirebaseAccount) FindByFirebaseServiceID(firebaseServiceID string) error {
 	return apperror.NewGormFind(
 		fa.defaultScope().
-			Joins("LEFT JOIN firebase_account_details ON firebase_account_details.firebase_accounts_id = firebase_accounts.id").
+			Joins("LEFT JOIN firebase_account_details ON firebase_account_details.firebase_account_id = firebase_accounts.id").
 			Find(fa, "firebase_service_id = ?", firebaseServiceID).
 			Limit(1).
 			Error,
@@ -32,8 +32,8 @@ func (fa *FirebaseAccount) FindByFirebaseServiceID(firebaseServiceID string) err
 func (fa *FirebaseAccount) FindByUserID(userID int64) error {
 	return apperror.NewGormFind(
 		fa.defaultScope().
-			Joins("LEFT JOIN firebase_account_users ON firebase_accounts.id = firebase_account_users.firebase_accounts_id").
-			Find(fa, "users_id = ?", userID).
+			Joins("LEFT JOIN firebase_account_users ON firebase_accounts.id = firebase_account_users.firebase_account_id").
+			Find(fa, "user_id = ?", userID).
 			Limit(1).
 			Error,
 		entity.FirebaseAccountTableName,
