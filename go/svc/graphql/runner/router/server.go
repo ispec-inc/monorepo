@@ -6,10 +6,10 @@ import (
 	"github.com/go-chi/chi"
 	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
+	mw "github.com/ispec-inc/monorepo/go/pkg/middleware"
+	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/config"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/database"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/handler"
-	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/config"
-	mw "github.com/ispec-inc/monorepo/go/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/schema"
 )
@@ -33,6 +33,7 @@ func NewGraphQL() (http.Handler, func() error, error) {
 		AllowOrigins: config.Router.AllowOrigins,
 	})
 	r.Use(middleware.AttatchDataLoader)
+	r.Use(middleware.NewAuth().VerifyUser)
 	r.Mount("/", h)
 	return r, nil, nil
 }

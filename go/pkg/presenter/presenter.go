@@ -42,3 +42,14 @@ func Response(w http.ResponseWriter, body interface{}) {
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(body)
 }
+
+func UnauthorizedError(w http.ResponseWriter, err error) {
+	w.Header().Add("Content-type", "application/json")
+	w.WriteHeader(http.StatusUnauthorized)
+
+	body := newErrorResponse(
+		apperror.CodeUnauthorized,
+		err.Error(),
+	)
+	json.NewEncoder(w).Encode(body)
+}
