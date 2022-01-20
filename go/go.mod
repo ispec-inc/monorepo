@@ -3,6 +3,7 @@ module github.com/ispec-inc/monorepo/go
 go 1.16
 
 require (
+	firebase.google.com/go v3.13.0+incompatible
 	github.com/DATA-DOG/go-txdb v0.1.5
 	github.com/aws/aws-sdk-go v1.38.50
 	github.com/caarlos0/env/v6 v6.6.2
@@ -14,6 +15,7 @@ require (
 	github.com/golang/mock v1.5.0
 	github.com/gomodule/redigo v1.7.1-0.20190724094224-574c33c3df38
 	github.com/google/uuid v1.2.0
+	github.com/googleapis/gax-go v1.0.3 // indirect
 	github.com/graph-gophers/dataloader v5.0.0+incompatible
 	github.com/graph-gophers/graphql-go v1.1.0
 	github.com/k0kubun/pp v2.4.0+incompatible
