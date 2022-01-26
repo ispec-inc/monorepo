@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/gomodule/redigo/redis"
 	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/ispec-inc/monorepo/go/pkg/msgbs"
@@ -52,10 +51,8 @@ func (h Handler) CreateArticle(
 func (h Handler) ArticleAdded(
 	ctx context.Context,
 ) <-chan *resolver.Article {
-	spew.Dump("article handler subscribe")
 	c := make(chan *resolver.Article)
 	subscription.Subscribe(ctx, msgbs.AddArticle, func(msg redis.Message) {
-		spew.Dump("subscriber got message")
 		var ma msgbs.Article
 		err := json.Unmarshal(msg.Data, &ma)
 		if err != nil {
