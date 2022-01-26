@@ -2,7 +2,6 @@ package subscription
 
 import (
 	"fmt"
-	"log"
 
 	"context"
 
@@ -27,7 +26,7 @@ func Subscribe(
 		defer func() {
 			if r := recover(); r != nil {
 				err := fmt.Errorf("panic recovered: %v", r)
-				log.Printf(err.Error())
+				print(err)
 			}
 		}()
 		for {
