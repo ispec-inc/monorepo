@@ -54,7 +54,7 @@ func (h Handler) ArticleAdded(
 ) <-chan *resolver.Article {
 	spew.Dump("article handler subscribe")
 	c := make(chan *resolver.Article)
-	subscription.Subscribe(msgbs.AddArticle, func(msg redis.Message) {
+	subscription.Subscribe(ctx, msgbs.AddArticle, func(msg redis.Message) {
 		spew.Dump("subscriber got message")
 		var ma msgbs.Article
 		err := json.Unmarshal(msg.Data, &ma)
