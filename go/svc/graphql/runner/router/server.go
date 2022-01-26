@@ -13,6 +13,7 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/handler"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/middleware"
 	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/schema"
+	"github.com/ispec-inc/monorepo/go/svc/graphql/pkg/subscription"
 )
 
 func NewGraphQL() (http.Handler, func() error, error) {
@@ -33,6 +34,7 @@ func NewGraphQL() (http.Handler, func() error, error) {
 		Timeout:      config.Router.Timeout,
 		AllowOrigins: config.Router.AllowOrigins,
 	})
+	subscription.SubscribeRedis()
 	r.Use(middleware.AttatchDataLoader)
 	r.Mount("/", h)
 	return r, nil, nil
