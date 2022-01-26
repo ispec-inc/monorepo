@@ -3,6 +3,7 @@ module github.com/ispec-inc/monorepo/go
 go 1.16
 
 require (
+	github.com/99designs/gqlgen v0.15.1 // indirect
 	github.com/DATA-DOG/go-txdb v0.1.5
 	github.com/aws/aws-sdk-go v1.38.50
 	github.com/caarlos0/env/v6 v6.6.2
