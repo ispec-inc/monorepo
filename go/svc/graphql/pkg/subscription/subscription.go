@@ -20,17 +20,9 @@ func Subscribe(
 	evnt msgbs.Event,
 	handler func(msg redis.Message),
 ) {
-	id := uuid.New().String()
 	bs := redisbs.Get()
-
 	bs.Subscribe(evnt)
-
-	if message[evnt] == nil {
-		message[evnt] = make(chan redis.Message)
-	}
-
-	subscribers[evnt] = append(subscribers[evnt], id)
-
+	id := addSubscriber(evnt)
 	go func() {
 		defer func() {
 			if r := recover(); r != nil {
@@ -41,7 +33,7 @@ func Subscribe(
 		for {
 			select {
 			case <-ctx.Done():
-				removeSubscriberForEvent(evnt, id)
+				removeSubscriber(evnt, id)
 				return
 			case msg := <-message[evnt]:
 				handler(msg)
@@ -69,7 +61,16 @@ func SubscribeRedis() {
 	}()
 }
 
-func removeSubscriberForEvent(evnt msgbs.Event, id string) {
+func addSubscriber(evnt msgbs.Event) (id string) {
+	id = uuid.New().String()
+	if message[evnt] == nil {
+		message[evnt] = make(chan redis.Message)
+	}
+	subscribers[evnt] = append(subscribers[evnt], id)
+	return
+}
+
+func removeSubscriber(evnt msgbs.Event, id string) {
 	for i := range subscribers[evnt] {
 		if subscribers[evnt][i] == id {
 			newSubs := subscribers[evnt][:i]
