@@ -34,7 +34,7 @@ func NewGraphQL() (http.Handler, func() error, error) {
 		Timeout:      config.Router.Timeout,
 		AllowOrigins: config.Router.AllowOrigins,
 	})
-	subscription.SubscribeRedis()
+	subscription.Init()
 	r.Use(middleware.AttatchDataLoader)
 	r.Mount("/", h)
 	return r, nil, nil

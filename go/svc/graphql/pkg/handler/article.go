@@ -52,7 +52,7 @@ func (h Handler) ArticleAdded(
 	ctx context.Context,
 ) <-chan *resolver.Article {
 	c := make(chan *resolver.Article)
-	subscription.Subscribe(ctx, msgbs.AddArticle, func(msg redis.Message) {
+	subscription.Get().Subscribe(ctx, msgbs.AddArticle, func(msg redis.Message) {
 		var ma msgbs.Article
 		err := json.Unmarshal(msg.Data, &ma)
 		if err != nil {

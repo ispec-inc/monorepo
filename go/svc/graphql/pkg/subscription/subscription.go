@@ -1,9 +1,8 @@
 package subscription
 
 import (
-	"fmt"
-
 	"context"
+	"fmt"
 
 	"github.com/gomodule/redigo/redis"
 	"github.com/google/uuid"
@@ -11,17 +10,44 @@ import (
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/redisbs"
 )
 
-var subscribers = make(map[msgbs.Event][]string)
-var message = make(map[msgbs.Event]chan redis.Message)
+type Subscription struct {
+	bs          *msgbs.RedisMessageBus
+	subscribers map[msgbs.Event][]string
+	messages    map[msgbs.Event]chan redis.Message
+}
 
-func Subscribe(
+func newSubscription(bs *msgbs.RedisMessageBus) Subscription {
+	return Subscription{
+		bs:          bs,
+		subscribers: make(map[msgbs.Event][]string),
+		messages:    make(map[msgbs.Event]chan redis.Message),
+	}
+}
+
+func (s Subscription) Listen() {
+	for {
+		switch msg := s.bs.Receive().(type) {
+		case redis.Message:
+			evnt := msgbs.Event(msg.Channel)
+			if s.messages[evnt] == nil {
+				s.messages[evnt] = make(chan redis.Message)
+			}
+			ch := s.messages[evnt]
+			for range s.subscribers[evnt] {
+				ch <- msg
+			}
+		}
+	}
+}
+
+func (s Subscription) Subscribe(
 	ctx context.Context,
 	evnt msgbs.Event,
 	handler func(msg redis.Message),
 ) {
 	bs := redisbs.Get()
 	bs.Subscribe(evnt)
-	id := addSubscriber(evnt)
+	id := s.addSubscriber(evnt)
 	go func() {
 		defer func() {
 			if r := recover(); r != nil {
@@ -32,51 +58,32 @@ func Subscribe(
 		for {
 			select {
 			case <-ctx.Done():
-				removeSubscriber(evnt, id)
+				s.removeSubscriber(evnt, id)
 				return
-			case msg := <-message[evnt]:
+			case msg := <-s.messages[evnt]:
 				handler(msg)
 			}
 		}
 	}()
 }
 
-func SubscribeRedis() {
-	bs := redisbs.Get()
-	go func() {
-		for {
-			switch msg := bs.Receive().(type) {
-			case redis.Message:
-				evnt := msgbs.Event(msg.Channel)
-				if message[evnt] == nil {
-					message[evnt] = make(chan redis.Message)
-				}
-				ch := message[evnt]
-				for range subscribers[evnt] {
-					ch <- msg
-				}
+func (s Subscription) removeSubscriber(evnt msgbs.Event, id string) {
+	for i := range s.subscribers[evnt] {
+		if s.subscribers[evnt][i] == id {
+			newSubs := s.subscribers[evnt][:i]
+			if len(newSubs) != len(s.subscribers[evnt])-1 {
+				newSubs = append(newSubs, s.subscribers[evnt][i+1:]...)
 			}
+			s.subscribers[evnt] = newSubs
 		}
-	}()
+	}
 }
 
-func addSubscriber(evnt msgbs.Event) (id string) {
+func (s Subscription) addSubscriber(evnt msgbs.Event) (id string) {
 	id = uuid.New().String()
-	if message[evnt] == nil {
-		message[evnt] = make(chan redis.Message)
+	if s.messages[evnt] == nil {
+		s.messages[evnt] = make(chan redis.Message)
 	}
-	subscribers[evnt] = append(subscribers[evnt], id)
+	s.subscribers[evnt] = append(s.subscribers[evnt], id)
 	return
-}
-
-func removeSubscriber(evnt msgbs.Event, id string) {
-	for i := range subscribers[evnt] {
-		if subscribers[evnt][i] == id {
-			newSubs := subscribers[evnt][:i]
-			if len(newSubs) != len(subscribers[evnt])-1 {
-				newSubs = append(newSubs, subscribers[evnt][i+1:]...)
-			}
-			subscribers[evnt] = newSubs
-		}
-	}
 }
