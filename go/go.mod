@@ -3,6 +3,7 @@ module github.com/ispec-inc/monorepo/go
 go 1.16
 
 require (
+	github.com/99designs/gqlgen v0.15.1 // indirect
 	github.com/DATA-DOG/go-txdb v0.1.5
 	github.com/aws/aws-sdk-go v1.38.50
 	github.com/caarlos0/env/v6 v6.6.2
@@ -16,6 +17,7 @@ require (
 	github.com/google/uuid v1.2.0
 	github.com/graph-gophers/dataloader v5.0.0+incompatible
 	github.com/graph-gophers/graphql-go v1.1.0
+	github.com/graph-gophers/graphql-transport-ws v0.0.1 // indirect
 	github.com/k0kubun/pp v2.4.0+incompatible
 	github.com/lib/pq v1.10.0 // indirect
 	github.com/pkg/errors v0.9.1
