@@ -12,18 +12,6 @@ export const pagesPath = {
   README: {
     $url: (url?: { hash?: string }) => ({ path: '/README', hash: url?.hash })
   },
-  login: {
-    $url: (url?: { hash?: string }) => ({ path: '/login', hash: url?.hash })
-  },
-  place: {
-    _id: (id: string | number) => ({
-      edit: {
-        $url: (url?: { hash?: string }) => ({ path: `/place/${id}/edit`, hash: url?.hash })
-      },
-      $url: (url?: { hash?: string }) => ({ path: `/place/${id}`, hash: url?.hash })
-    }),
-    $url: (url?: { hash?: string }) => ({ path: '/place', hash: url?.hash })
-  },
   sample: {
     form: {
       $url: (url?: { hash?: string }) => ({ path: '/sample/form', hash: url?.hash })
@@ -32,9 +20,6 @@ export const pagesPath = {
       $url: (url?: { hash?: string }) => ({ path: '/sample/separated-form', hash: url?.hash })
     },
     $url: (url: { query: Query0, hash?: string }) => ({ path: '/sample', query: url.query as any, hash: url.hash })
-  },
-  user: {
-    $url: (url?: { hash?: string }) => ({ path: '/user', hash: url?.hash })
   },
   $url: (url?: { hash?: string }) => ({ path: '/', hash: url?.hash })
 }

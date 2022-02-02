@@ -34,7 +34,7 @@ export default function ({ $axios, store }: Context): void {
     return { ...res, data: camelCaseData }
   })
 
-  $axios.onResponseError((error: AxiosError) => {
+  $axios.onResponseError((error) => {
     const code = error.response?.status
     store.dispatch('error/addError', {
       message: error.response?.data?.error || 'exception occurred',

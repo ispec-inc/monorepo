@@ -1,8 +1,11 @@
 <template>
   <div>
     <div>トップ</div>
-    <div>
-      {{ articleList }}
+    <div class="my-10">
+      <div v-for="p of posts" :key="p.id" class="my-6">
+        <div>「{{ p.title }}」</div>
+        <div>{{ p.body }}</div>
+      </div>
     </div>
     <v-btn @click="addSuccessSnackbar">add success snackbar</v-btn>
     <v-btn @click="addErrorSnackbar">add error snackbar</v-btn>
@@ -11,31 +14,23 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import articleModule from '@/store/article'
-import { SampleInterface } from '~/types/sample'
 import { GlobalEventBus } from '~/surface/event-bus/global'
-import { SampleGatewayImpl } from '~/core/sample/gateway'
+import { SampleListPageService } from '~/core/service/sample/list'
+import { SampleListGatewayHubImpl } from '~/core/service/sample/list/hub'
+import { ISamplePostModel } from '~/core/model/sample/interface'
+
+const SERVICE = new SampleListPageService(new SampleListGatewayHubImpl())
 
 @Component({})
 export default class TopPage extends Vue {
-  gateway = new SampleGatewayImpl()
+  readonly service = SERVICE
 
   created(): void {
-    articleModule.fetch()
-
-    this.callApi(1)
-
-    setTimeout(() => {
-      this.callApi(1)
-    }, 1000)
-
-    setTimeout(() => {
-      this.callApi(2)
-    }, 2000)
+    this.service.fetch()
   }
 
-  get articleList(): SampleInterface[] {
-    return articleModule.articles
+  get posts(): ISamplePostModel[] {
+    return this.service.filteredPosts
   }
 
   addSuccessSnackbar(): void {
@@ -49,12 +44,6 @@ export default class TopPage extends Vue {
     GlobalEventBus.getInstance().dispatchSnackbarEvent({
       message: 'error',
       type: 'error',
-    })
-  }
-
-  callApi(id: number): void {
-    this.gateway.fetchById(id).then((res) => {
-      console.log('response', res)
     })
   }
 }
