@@ -3,7 +3,13 @@
 
 .PHONY: protoc gen protogen
 
-run: init article-migrate server
+all-run: app :=
+all-run: init article-migrate server frontend-server
+
+backend-run: init article-migrate server
+
+frontend-run: app :=
+frontend-run: init frontend-server
 
 ci-test: init test
 
@@ -23,13 +29,11 @@ server: ## go run server
 	docker-compose up -d article-mysql
 	docker-compose up -d message-bus-redis
 	docker-compose run --rm dockerize -wait tcp://article-mysql:3306 -timeout 20s
-	DIR=admin docker-compose up api typescript
+	docker-compose up api
 
-nuxt-ssr-user-frontend-server:
-	DIR=nuxt-ssr-user docker-compose up typescript
-
-admin-frontend-server:
-	DIR=admin docker-compose up typescript
+frontend-server: app :=
+frontend-server:
+	APP=${app} docker-compose up typescript
 
 test: pkg = ./...
 test: ## go test
