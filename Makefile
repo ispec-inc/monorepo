@@ -96,3 +96,7 @@ help: ## display this help screen
 .PHOTY: down
 down: ## stop docker containers
 	dockre-compose down
+
+.PHONY: mysql
+mysql: ## connect to local mysql database
+	. ./go/.env/server && docker-compose exec article-mysql mysql -u$${ADMIN_MYSQL_ARTICLE_USER} -p$${ADMIN_MYSQL_ARTICLE_PASSWORD} $${ADMIN_MYSQL_ARTICLE_DATABASE}
