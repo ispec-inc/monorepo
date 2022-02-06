@@ -29,7 +29,7 @@
     }
   },
   "dependencies": {
-    "@babel/preset-env": "7.15.8",
+    "@babel/preset-env": "7.16.11",
     "@monorepo/fast-form": "./libs/fast-form",
     "@monorepo/proto": "./libs/proto",
     "@monorepo/util-functions": "./libs/util-functions",
