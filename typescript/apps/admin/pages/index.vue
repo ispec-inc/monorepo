@@ -30,7 +30,7 @@ export default class TopPage extends Vue {
   }
 
   get posts(): ISamplePostModel[] {
-    return this.service.filteredPosts
+    return this.service.slicedPosts
   }
 
   addSuccessSnackbar(): void {
