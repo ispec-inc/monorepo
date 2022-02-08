@@ -1,5 +1,10 @@
-import { ISamplePostModel } from "./interface"
 import { SamplePostResponse } from "~/types/response/sample"
+
+export interface ISamplePostModel {
+  readonly id: number
+  readonly title: string
+  readonly body: string
+}
 
 export class SamplePostModelImpl implements ISamplePostModel {
   readonly id: number
