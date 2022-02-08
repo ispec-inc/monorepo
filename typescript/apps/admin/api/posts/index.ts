@@ -1,5 +1,5 @@
 import { SamplePostCreateRequest } from "~/types/request/sample/create";
-import { SamplePostResponse } from "~/types/response/sample/find";
+import { SamplePostResponse } from "~/types/response/sample";
 
 export type Methods = {
   get: {

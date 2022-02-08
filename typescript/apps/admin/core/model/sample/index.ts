@@ -1,4 +1,5 @@
 import { ISamplePostModel } from "./interface"
+import { SamplePostResponse } from "~/types/response/sample"
 
 export class SamplePostModelImpl implements ISamplePostModel {
   readonly id: number
@@ -9,5 +10,9 @@ export class SamplePostModelImpl implements ISamplePostModel {
     this.id = id
     this.title = title
     this.body = body
+  }
+
+  static fromApiResponse(response: SamplePostResponse): SamplePostModelImpl {
+    return new this(response.id, response.title, response.body)
   }
 }

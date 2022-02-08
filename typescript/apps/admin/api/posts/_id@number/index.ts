@@ -1,5 +1,5 @@
 import { SamplePostUpdateRequest } from "~/types/request/sample/update";
-import { SamplePostResponse } from "~/types/response/sample/find";
+import { SamplePostResponse } from "~/types/response/sample";
 
 export type Methods = {
   get: {
@@ -11,5 +11,5 @@ export type Methods = {
     resBody: SamplePostResponse
   }
 
-  delete: {}
+  delete: Record<string, never>
 }

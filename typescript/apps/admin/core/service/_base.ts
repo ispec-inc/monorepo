@@ -1,7 +1,7 @@
 export abstract class ServiceBase<T> {
-  protected readonly gatewayHub: T
+  protected readonly usecases: T
 
-  constructor(gatewayHub: T) {
-    this.gatewayHub = gatewayHub
+  constructor(usecases: T) {
+    this.usecases = usecases
   }
 }
