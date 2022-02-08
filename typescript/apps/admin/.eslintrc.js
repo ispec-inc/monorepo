@@ -48,5 +48,6 @@ module.exports = {
     'comma-spacing': 'error',
     'max-statements': 'warn',
     'no-negated-condition': 'error',
+    '@typescript-eslint/no-namespace': 'off'
   },
 }
