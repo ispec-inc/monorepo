@@ -51,6 +51,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	sqlDB, err := db.DB()
+	if err != nil {
+		panic(err)
+	}
+	defer sqlDB.Close()
+
 	err = db.Transaction(func(tx *gorm.DB) error {
 		for _, s := range seeds {
 			if err := tx.Create(s).Error; err != nil {
@@ -60,6 +67,6 @@ func main() {
 		return nil
 	})
 	if err != nil {
-		return
+		panic(err)
 	}
 }
