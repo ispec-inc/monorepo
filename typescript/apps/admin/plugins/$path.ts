@@ -16,6 +16,18 @@ export const pagesPath = {
     form: {
       $url: (url?: { hash?: string }) => ({ path: '/sample/form', hash: url?.hash })
     },
+    posts: {
+      _id: (id: string | number) => ({
+        edit: {
+          $url: (url?: { hash?: string }) => ({ path: `/sample/posts/${id}/edit`, hash: url?.hash })
+        },
+        $url: (url?: { hash?: string }) => ({ path: `/sample/posts/${id}`, hash: url?.hash })
+      }),
+      new: {
+        $url: (url?: { hash?: string }) => ({ path: '/sample/posts/new', hash: url?.hash })
+      },
+      $url: (url?: { hash?: string }) => ({ path: '/sample/posts', hash: url?.hash })
+    },
     separated_form: {
       $url: (url?: { hash?: string }) => ({ path: '/sample/separated-form', hash: url?.hash })
     },

@@ -6,7 +6,7 @@ export interface ISampleListUsecases {
 }
 
 
-export class SampleListUsecase implements ISampleListUsecases {
+export class SampleListUsecaseImpl implements ISampleListUsecases {
   findAll(): Promise<ISamplePostModel[]> {
     return SampleGateway.findAll()
   }
