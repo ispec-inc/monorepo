@@ -48,18 +48,14 @@ export default class PostCreatePage extends Vue {
     (v: string): string | boolean => !!v || 'required',
   ]
 
-  created(): void {
-    this.service.setCreationSucceedHandler(() => {
+  submit(): void {
+    this.service.create(1, this.title, this.body).then(() => {
       this.$router.push(this.$pagesPath.sample.posts.$url())
       GlobalEventBus.getInstance().dispatchSnackbarEvent({
         type: 'success',
         message: '投稿の作成に成功しました',
       })
     })
-  }
-
-  submit(): void {
-    this.service.create(1, this.title, this.body)
   }
 
   get isAwaiting(): boolean {

@@ -9,23 +9,16 @@ type CreateParams = Parameters<ISampleCreatePageUsecases['create']>
 
 export class SampleCreatePageService extends ServiceBase<ISampleCreatePageUsecases> {
   private readonly asyncProcessHelper: AsyncProcessHelper<void, CreateParams>
-  private onCreationSucceed = (): void => { return undefined }
 
   constructor(usecase: ISampleCreatePageUsecases) {
     super(usecase)
 
     this.asyncProcessHelper = new AsyncProcessHelper<void, CreateParams>(usecase.create.bind(usecase))
-      .onSuccess(() => this.onCreationSucceed())
-      .onFailure((e) => { console.log(e) })
   }
 
-  create(userId: number, title: string, body: string): void {
+  create(userId: number, title: string, body: string): Promise<void> {
     const payload = new SampleCreatePayloadModelImpl(userId, title, body)
-    this.asyncProcessHelper.run(payload)
-  }
-
-  setCreationSucceedHandler(handler: () => void): void {
-    this.onCreationSucceed = handler
+    return this.asyncProcessHelper.run(payload)
   }
 
   get isAwaiting(): boolean {
