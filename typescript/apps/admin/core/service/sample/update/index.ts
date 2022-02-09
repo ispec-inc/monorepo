@@ -21,8 +21,12 @@ export class SampleUpdatePageService extends ServiceBase<ISampleUpdatePageUsecas
     return this.fetchHelper.run(id)
   }
 
-  update(title: string, body: string): Promise<void> {
+  update(id: number, title: string, body: string): Promise<void> {
     const payload = new SampleUpdatePayloadModelImpl(title, body)
-    return this.updateHelper.run(payload)
+    return this.updateHelper.run(id, payload)
+  }
+
+  get isAwaiting(): boolean {
+    return this.fetchHelper.isAwaitingResponse || this.updateHelper.isAwaitingResponse
   }
 }

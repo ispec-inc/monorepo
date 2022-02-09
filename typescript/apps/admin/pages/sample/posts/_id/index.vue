@@ -4,6 +4,10 @@
     <v-card>
       <v-card-title>{{ title }}</v-card-title>
       <v-card-text>{{ body }}</v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn class="primary" @click="pushToEditPage">edit</v-btn>
+      </v-card-actions>
     </v-card>
     <h2 class="my-10">Comments</h2>
     <v-card v-for="[id, c] of commentEntries" :key="id" class="mb-2">
@@ -46,6 +50,14 @@ export default class PostDetailPage extends Vue {
 
   get commentEntries(): SamplePostCommentEntry[] {
     return this.service.commentEntries
+  }
+
+  pushToEditPage(): void {
+    this.$router.push(
+      this.$pagesPath.sample.posts
+        ._id(Number(this.$route.params.id))
+        .edit.$url()
+    )
   }
 }
 </script>

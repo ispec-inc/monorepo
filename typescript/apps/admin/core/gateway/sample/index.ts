@@ -1,6 +1,7 @@
 import { SamplePostModelImpl } from "~/core/model/domain/sample"
 import { SamplePostCommentModelImpl } from "~/core/model/domain/sample/comment"
 import { ISampleCreatePayloadModel } from "~/core/model/payload/sample/create"
+import { ISampleUpdatePayloadModel } from "~/core/model/payload/sample/update"
 import { client } from "~/utils/api"
 
 export namespace SampleGateway {
@@ -16,6 +17,10 @@ export namespace SampleGateway {
 
   export async function create(payload: ISampleCreatePayloadModel): Promise<void> {
     const _ = await client.posts.$post({ body: payload.toObject() }).catch(Promise.reject.bind(Promise))
+  }
+
+  export async function update(id: number, payload: ISampleUpdatePayloadModel): Promise<void> {
+    const _ = await client.posts._id(id).$patch({ body: payload.toObject() }).catch(Promise.reject.bind(Promise))
   }
 
   export async function findAllComment(id: number): Promise<SamplePostCommentModelImpl[]> {
