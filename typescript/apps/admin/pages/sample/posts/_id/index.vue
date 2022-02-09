@@ -1,7 +1,8 @@
 <template>
   <div>
     <h2 class="mb-10">Post Detail</h2>
-    <v-card>
+    <v-skeleton-loader v-if="isAwaitingPost" type="article, actions" />
+    <v-card v-else>
       <v-card-title>{{ title }}</v-card-title>
       <v-card-text>{{ body }}</v-card-text>
       <v-card-actions>
@@ -10,6 +11,7 @@
       </v-card-actions>
     </v-card>
     <h2 class="my-10">Comments</h2>
+    <v-skeleton-loader v-if="isAwaitingComments" type="article" />
     <v-card v-for="[id, c] of commentEntries" :key="id" class="mb-2">
       <v-card-title>{{ c.name }}</v-card-title>
       <v-card-subtitle>{{ c.email }}</v-card-subtitle>
@@ -23,21 +25,32 @@
 </style>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
+import UseSubscription from '~/components/mixins/use-subscription'
 import { SamplePostCommentEntry } from '~/core/model/domain/sample/comment'
 import { SampleDetailPageService } from '~/core/service/sample/detail/index'
 import { SampleDetailPageUsecaseImpl } from '~/core/service/sample/detail/usecases'
+import { GlobalEventBus } from '~/surface/event-bus/global'
 
 const SERVICE = new SampleDetailPageService(new SampleDetailPageUsecaseImpl())
 
 @Component({
   components: {},
 })
-export default class PostDetailPage extends Vue {
+export default class PostDetailPage extends mixins(UseSubscription) {
   readonly service = SERVICE
 
   created(): void {
     this.service.fetch(Number(this.$route.params.id))
+
+    this.subscription.add(
+      this.service.errorStream.subscribe((message) => {
+        GlobalEventBus.getInstance().dispatchSnackbarEvent({
+          type: 'error',
+          message,
+        })
+      })
+    )
   }
 
   get title(): string {
@@ -50,6 +63,14 @@ export default class PostDetailPage extends Vue {
 
   get commentEntries(): SamplePostCommentEntry[] {
     return this.service.commentEntries
+  }
+
+  get isAwaitingPost(): boolean {
+    return this.service.isAwaitingComments
+  }
+
+  get isAwaitingComments(): boolean {
+    return this.service.isAwaitingComments
   }
 
   pushToEditPage(): void {

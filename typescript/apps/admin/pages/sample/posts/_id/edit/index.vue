@@ -26,7 +26,8 @@
 </style>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
+import UseSubscription from '~/components/mixins/use-subscription'
 import { SampleUpdatePageService } from '~/core/service/sample/update'
 import { SampleUpdatePageUsecasesImpl } from '~/core/service/sample/update/usecases'
 import { GlobalEventBus } from '~/surface/event-bus/global'
@@ -36,7 +37,7 @@ const SERVICE = new SampleUpdatePageService(new SampleUpdatePageUsecasesImpl())
 @Component({
   components: {},
 })
-export default class PostEditPage extends Vue {
+export default class PostEditPage extends mixins(UseSubscription) {
   readonly service = SERVICE
 
   valid = false
@@ -53,9 +54,23 @@ export default class PostEditPage extends Vue {
   }
 
   created(): void {
+    this.subscription.add(
+      this.service.errorStream.subscribe((message) => {
+        GlobalEventBus.getInstance().dispatchSnackbarEvent({
+          type: 'error',
+          message,
+        })
+      })
+    )
+
     this.service.fetch(this.id).then((model) => {
-      this.title = model.title
-      this.body = model.body
+      if (model) {
+        this.title = model.title
+        this.body = model.body
+        return
+      }
+
+      this.$router.push(this.$pagesPath.sample.posts.$url())
     })
   }
 

@@ -3,6 +3,7 @@
     <h2>Posts</h2>
     <v-btn class="mt-6 primary" @click="pushToCreatePage">+ Create Post</v-btn>
     <div class="my-10">
+      <v-skeleton-loader v-if="isAwaiting" type="article" />
       <v-card
         v-for="p of posts"
         :key="p.id"
@@ -17,25 +18,39 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
+import UseSubscription from '~/components/mixins/use-subscription'
 import { ISamplePostModel } from '~/core/model/domain/sample'
 import { SampleListPageService } from '~/core/service/sample/list'
 import { SampleListUsecaseImpl } from '~/core/service/sample/list/usecases'
+import { GlobalEventBus } from '~/surface/event-bus/global'
 
 const SERVICE = new SampleListPageService(new SampleListUsecaseImpl())
 
 @Component({
   components: {},
 })
-export default class PostIndexPage extends Vue {
+export default class PostIndexPage extends mixins(UseSubscription) {
   readonly service = SERVICE
 
   created(): void {
     this.service.fetch()
+    this.service.errorStream
+      .subscribeAsDisposable((message) => {
+        GlobalEventBus.getInstance().dispatchSnackbarEvent({
+          type: 'error',
+          message,
+        })
+      })
+      .disposedBy(this.subscription)
   }
 
   get posts(): ISamplePostModel[] {
     return this.service.slicedPosts
+  }
+
+  get isAwaiting(): boolean {
+    return this.service.isAwaiting
   }
 
   pushToDetailPage(id: number): void {

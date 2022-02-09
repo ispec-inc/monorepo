@@ -1,19 +1,40 @@
-
-
+import { merge, Observable } from 'rxjs'
 import { ISampleDetailPageUsecases } from "./usecases";
 import { ServiceBase } from "~/core/service/_base";
 import { ISamplePostModel } from "~/core/model/domain/sample";
 import { Maybe } from "~/types/advanced";
 import { ISamplePostCommentModel, SamplePostCommentEntry } from "~/core/model/domain/sample/comment";
+import { AsyncProcessHelper } from "~/utils/aync-process-helper";
+import ErrorModel from "~/core/model/error";
 
 export class SampleDetailPageService extends ServiceBase<ISampleDetailPageUsecases> {
   private _post: Maybe<ISamplePostModel> = null
   private _comments: Maybe<ISamplePostCommentModel[]> = null
 
+  private readonly fetchPostHelper: AsyncProcessHelper<ISamplePostModel, Parameters<ISampleDetailPageUsecases['fetch']>>
+  private readonly fetchCommentsHelper: AsyncProcessHelper<ISamplePostCommentModel[], Parameters<ISampleDetailPageUsecases['fetchComments']>>
+
+  constructor(usecase: ISampleDetailPageUsecases) {
+    super(usecase)
+
+    this.fetchPostHelper = new AsyncProcessHelper(usecase.fetch.bind(usecase))
+    this.fetchCommentsHelper = new AsyncProcessHelper(usecase.fetchComments.bind(usecase))
+  }
+
   async fetch(id: number): Promise<void> {
     this.clearData()
-    this._post = await this.usecases.fetch(id)
-    this._comments = await this.usecases.fetchComments(id)
+    this._post = await this.fetchPostHelper.run(id)
+      .catch((e) => {
+        const model = new ErrorModel(e)
+        this.fetchPostHelper.setErrorMessage(model.message)
+        return null
+      })
+    this._comments = await this.fetchCommentsHelper.run(id)
+      .catch((e) => {
+        const model = new ErrorModel(e)
+        this.fetchCommentsHelper.setErrorMessage(model.message)
+        return null
+      })
   }
 
   clearData(): void {
@@ -31,5 +52,20 @@ export class SampleDetailPageService extends ServiceBase<ISampleDetailPageUsecas
 
   get commentEntries(): SamplePostCommentEntry[] {
     return (this._comments ?? []).map((c) => c.toEntry())
+  }
+
+  get isAwaitingPost(): boolean {
+    return this.fetchPostHelper.isAwaitingResponse
+  }
+
+  get isAwaitingComments(): boolean {
+    return this.fetchCommentsHelper.isAwaitingResponse
+  }
+
+  get errorStream(): Observable<string> {
+    return merge(
+      this.fetchPostHelper.errorMessageStream,
+      this.fetchCommentsHelper.errorMessageStream
+    )
   }
 }

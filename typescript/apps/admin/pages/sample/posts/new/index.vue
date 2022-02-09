@@ -26,7 +26,8 @@
 </style>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
+import UseSubscription from '~/components/mixins/use-subscription'
 import { SampleCreatePageService } from '~/core/service/sample/create'
 import { SampleCreatePageUsecasesImpl } from '~/core/service/sample/create/usecases'
 import { GlobalEventBus } from '~/surface/event-bus/global'
@@ -36,7 +37,7 @@ const SERVICE = new SampleCreatePageService(new SampleCreatePageUsecasesImpl())
 @Component({
   components: {},
 })
-export default class PostCreatePage extends Vue {
+export default class PostCreatePage extends mixins(UseSubscription) {
   readonly service = SERVICE
 
   valid = false
@@ -47,6 +48,17 @@ export default class PostCreatePage extends Vue {
   readonly rules: Array<(value: string) => string | boolean> = [
     (v: string): string | boolean => !!v || 'required',
   ]
+
+  created(): void {
+    this.service.errorStream
+      .subscribeAsDisposable((message) => {
+        GlobalEventBus.getInstance().dispatchSnackbarEvent({
+          type: 'error',
+          message,
+        })
+      })
+      .disposedBy(this.subscription)
+  }
 
   submit(): void {
     this.service.create(1, this.title, this.body).then(() => {
