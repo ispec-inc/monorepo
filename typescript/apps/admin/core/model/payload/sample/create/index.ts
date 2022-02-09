@@ -3,7 +3,7 @@ import { SamplePostCreateRequest } from "~/types/request/sample/create";
 
 export interface ISampleCreatePayloadModel extends IPayloadModel<SamplePostCreateRequest> {}
 
-export class SampleCreatePayloadModelImpl implements IPayloadModel<SamplePostCreateRequest> {
+export class SampleCreatePayloadModelImpl implements ISampleCreatePayloadModel {
   readonly userId: number
   readonly title: string
   readonly body: string
