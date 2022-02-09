@@ -66,7 +66,7 @@ export default class PostDetailPage extends mixins(UseSubscription) {
   }
 
   get isAwaitingPost(): boolean {
-    return this.service.isAwaitingComments
+    return this.service.isAwaitingPost
   }
 
   get isAwaitingComments(): boolean {

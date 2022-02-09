@@ -21,14 +21,22 @@ export class SampleDetailPageService extends ServiceBase<ISampleDetailPageUsecas
     this.fetchCommentsHelper = new AsyncProcessHelper(usecase.fetchComments.bind(usecase))
   }
 
-  async fetch(id: number): Promise<void> {
+  fetch(id: number): void {
     this.clearData()
+    this.fetchPost(id)
+    this.fetchComments(id)
+  }
+
+  private async fetchPost(id: number): Promise<void> {
     this._post = await this.fetchPostHelper.run(id)
       .catch((e) => {
         const model = new ErrorModel(e)
         this.fetchPostHelper.setErrorMessage(model.message)
         return null
       })
+  }
+
+  private async fetchComments(id: number): Promise<void> {
     this._comments = await this.fetchCommentsHelper.run(id)
       .catch((e) => {
         const model = new ErrorModel(e)
