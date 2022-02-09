@@ -1,6 +1,6 @@
 import { SampleGateway } from "~/core/gateway/sample";
-import { ISamplePostModel } from "~/core/model/sample";
-import { ISamplePostCommentModel } from "~/core/model/sample/comment";
+import { ISamplePostModel } from "~/core/model/domain/sample";
+import { ISamplePostCommentModel } from "~/core/model/domain/sample/comment";
 
 export interface ISampleDetailPageUsecases {
   fetch(id: number): Promise<ISamplePostModel>

@@ -1,18 +1,12 @@
 import { Context } from '@nuxt/types'
-import { AxiosError } from 'axios'
 import snakeCaseKeys from 'snakecase-keys'
 import camelCaseKeys from 'camelcase-keys'
 
 export default function ({ $axios, store }: Context): void {
   $axios.onRequest((config) => {
-    if (!store.$auth.loggedIn) {
-      return config
-    }
     config.headers.common.Authorization = store.$auth.getToken('local')
     config.headers.common['User-id'] = localStorage.getItem('userId')
-    return { ...config }
-  })
-  $axios.onRequest((config) => {
+
     if (!config.data) {
       return config
     }
@@ -20,7 +14,7 @@ export default function ({ $axios, store }: Context): void {
     if (contentType && contentType.includes('multipart')) {
       return config
     }
-    const data = JSON.parse(JSON.stringify(config.data))
+    const data = JSON.parse(typeof config.data === 'string' ? config.data : JSON.stringify(config.data))
     const snakeCaseData = snakeCaseKeys(data, { deep: true })
     return { ...config, data: snakeCaseData }
   })
@@ -36,10 +30,6 @@ export default function ({ $axios, store }: Context): void {
 
   $axios.onResponseError((error) => {
     const code = error.response?.status
-    store.dispatch('error/addError', {
-      message: error.response?.data?.error || 'exception occurred',
-      status: code,
-    })
     if (code === 401) {
       store.$auth.logout()
       store.$router.push('login')

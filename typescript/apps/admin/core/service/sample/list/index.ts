@@ -1,6 +1,6 @@
 import { ISampleListUsecases } from "./usecases";
 import { ServiceBase } from "~/core/service/_base";
-import { ISamplePostModel } from "~/core/model/sample";
+import { ISamplePostModel } from "~/core/model/domain/sample";
 
 export class SampleListPageService extends ServiceBase<ISampleListUsecases> {
   private _posts: ISamplePostModel[] = []

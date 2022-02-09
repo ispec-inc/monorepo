@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Posts</h2>
+    <v-btn class="mt-6 primary" @click="pushToCreatePage">+ Create Post</v-btn>
     <div class="my-10">
       <v-card
         v-for="p of posts"
@@ -17,8 +18,8 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
+import { ISamplePostModel } from '~/core/model/domain/sample'
 import { SampleListPageService } from '~/core/service/sample/list'
-import { ISamplePostModel } from '~/core/model/sample'
 import { SampleListUsecaseImpl } from '~/core/service/sample/list/usecases'
 
 const SERVICE = new SampleListPageService(new SampleListUsecaseImpl())
@@ -39,6 +40,10 @@ export default class PostIndexPage extends Vue {
 
   pushToDetailPage(id: number): void {
     this.$router.push(this.$pagesPath.sample.posts._id(id).$url())
+  }
+
+  pushToCreatePage(): void {
+    this.$router.push(this.$pagesPath.sample.posts.new.$url())
   }
 }
 </script>

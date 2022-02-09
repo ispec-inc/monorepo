@@ -20,7 +20,7 @@ export class GlobalEventBus {
     return GlobalEventBus.instance
   }
 
-  dispatchSnackbarEvent(data: Omit<SnackbarData, 'id' | 'duration'>, duration: number = 3000) {
+  dispatchSnackbarEvent(data: Omit<SnackbarData, 'id' | 'duration'>, duration = 3000): void {
     this.snackbarEventStream.next({ ...data, duration })
   }
 }

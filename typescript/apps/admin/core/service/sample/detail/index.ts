@@ -2,9 +2,9 @@
 
 import { ISampleDetailPageUsecases } from "./usecases";
 import { ServiceBase } from "~/core/service/_base";
-import { ISamplePostModel } from "~/core/model/sample";
+import { ISamplePostModel } from "~/core/model/domain/sample";
 import { Maybe } from "~/types/advanced";
-import { ISamplePostCommentModel, SamplePostCommentEntry } from "~/core/model/sample/comment";
+import { ISamplePostCommentModel, SamplePostCommentEntry } from "~/core/model/domain/sample/comment";
 
 export class SampleDetailPageService extends ServiceBase<ISampleDetailPageUsecases> {
   private _post: Maybe<ISamplePostModel> = null

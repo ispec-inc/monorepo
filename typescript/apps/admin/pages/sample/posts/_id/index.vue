@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { SamplePostCommentEntry } from '~/core/model/sample/comment'
+import { SamplePostCommentEntry } from '~/core/model/domain/sample/comment'
 import { SampleDetailPageService } from '~/core/service/sample/detail/index'
 import { SampleDetailPageUsecaseImpl } from '~/core/service/sample/detail/usecases'
 
