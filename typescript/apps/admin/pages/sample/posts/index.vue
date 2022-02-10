@@ -20,9 +20,9 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import UseSubscription from '~/components/mixins/use-subscription'
-import { ISamplePostModel } from '~/core/model/domain/sample'
-import { SampleListPageService } from '~/core/service/sample/list'
-import { SampleListUsecaseImpl } from '~/core/service/sample/list/usecases'
+import { ISamplePostModel } from '~/core/models/domain/sample'
+import { SampleListPageService } from '~/core/services/sample/list'
+import { SampleListUsecaseImpl } from '~/core/services/sample/list/usecases'
 import { GlobalEventBus } from '~/surface/event-bus/global'
 
 const SERVICE = new SampleListPageService(new SampleListUsecaseImpl())

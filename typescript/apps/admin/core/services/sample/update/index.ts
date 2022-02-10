@@ -1,10 +1,10 @@
 import { merge, Observable } from 'rxjs'
 import { ISampleUpdatePageUsecases } from "./usecases";
-import { ServiceBase } from "~/core/service/_base";
-import { SampleUpdatePayloadModelImpl } from "~/core/model/payload/sample/update";
+import { ServiceBase } from "~/core/services/_base";
+import { SampleUpdatePayloadModelImpl } from "~/core/models/payload/sample/update";
 import { AsyncProcessHelper } from "~/utils/aync-process-helper";
-import { ISamplePostModel, SamplePostModelImpl } from "~/core/model/domain/sample";
-import ErrorModel from "~/core/model/error";
+import { ISamplePostModel, SamplePostModelImpl } from "~/core/models/domain/sample";
+import ErrorModel from "~/core/models/error";
 import { Maybe } from '~/types/advanced';
 
 export class SampleUpdatePageService extends ServiceBase<ISampleUpdatePageUsecases> {

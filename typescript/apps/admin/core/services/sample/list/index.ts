@@ -1,8 +1,8 @@
 import { ISampleListUsecases } from "./usecases";
-import { ServiceBase } from "~/core/service/_base";
-import { ISamplePostModel } from "~/core/model/domain/sample";
+import { ServiceBase } from "~/core/services/_base";
+import { ISamplePostModel } from "~/core/models/domain/sample";
 import { AsyncProcessHelper } from "~/utils/aync-process-helper";
-import ErrorModel from "~/core/model/error";
+import ErrorModel from "~/core/models/error";
 import { Stream } from "~/utils/stream";
 
 export class SampleListPageService extends ServiceBase<ISampleListUsecases> {

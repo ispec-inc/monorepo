@@ -1,10 +1,10 @@
 
 
 import { ISampleCreatePageUsecases } from "./usecases";
-import { ServiceBase } from "~/core/service/_base";
-import { SampleCreatePayloadModelImpl } from "~/core/model/payload/sample/create";
+import { ServiceBase } from "~/core/services/_base";
+import { SampleCreatePayloadModelImpl } from "~/core/models/payload/sample/create";
 import { AsyncProcessHelper } from "~/utils/aync-process-helper";
-import ErrorModel from "~/core/model/error";
+import ErrorModel from "~/core/models/error";
 import { Stream } from "~/utils/stream";
 
 type CreateParams = Parameters<ISampleCreatePageUsecases['create']>

@@ -27,9 +27,9 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import UseSubscription from '~/components/mixins/use-subscription'
-import { SamplePostCommentEntry } from '~/core/model/domain/sample/comment'
-import { SampleDetailPageService } from '~/core/service/sample/detail/index'
-import { SampleDetailPageUsecaseImpl } from '~/core/service/sample/detail/usecases'
+import { SamplePostCommentEntry } from '~/core/models/domain/sample/comment'
+import { SampleDetailPageService } from '~/core/services/sample/detail/index'
+import { SampleDetailPageUsecaseImpl } from '~/core/services/sample/detail/usecases'
 import { GlobalEventBus } from '~/surface/event-bus/global'
 
 const SERVICE = new SampleDetailPageService(new SampleDetailPageUsecaseImpl())

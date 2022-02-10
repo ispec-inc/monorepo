@@ -1,6 +1,6 @@
-import { SampleGateway } from "~/core/gateway/sample";
-import { ISamplePostModel, SamplePostModelImpl } from "~/core/model/domain/sample";
-import { ISampleUpdatePayloadModel } from "~/core/model/payload/sample/update";
+import { SampleGateway } from "~/core/gateways/sample";
+import { ISamplePostModel, SamplePostModelImpl } from "~/core/models/domain/sample";
+import { ISampleUpdatePayloadModel } from "~/core/models/payload/sample/update";
 
 
 export interface ISampleUpdatePageUsecases {

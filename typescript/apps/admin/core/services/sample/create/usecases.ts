@@ -1,5 +1,5 @@
-import { SampleGateway } from "~/core/gateway/sample";
-import { ISampleCreatePayloadModel } from "~/core/model/payload/sample/create";
+import { SampleGateway } from "~/core/gateways/sample";
+import { ISampleCreatePayloadModel } from "~/core/models/payload/sample/create";
 
 export interface ISampleCreatePageUsecases {
   create(payload: ISampleCreatePayloadModel): Promise<void>

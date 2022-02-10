@@ -1,5 +1,5 @@
-import { SampleGateway } from "~/core/gateway/sample";
-import { ISamplePostModel } from "~/core/model/domain/sample";
+import { SampleGateway } from "~/core/gateways/sample";
+import { ISamplePostModel } from "~/core/models/domain/sample";
 
 export interface ISampleListUsecases {
   findAll(): Promise<ISamplePostModel[]>

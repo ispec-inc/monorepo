@@ -1,7 +1,7 @@
-import { SamplePostModelImpl } from "~/core/model/domain/sample"
-import { SamplePostCommentModelImpl } from "~/core/model/domain/sample/comment"
-import { ISampleCreatePayloadModel } from "~/core/model/payload/sample/create"
-import { ISampleUpdatePayloadModel } from "~/core/model/payload/sample/update"
+import { SamplePostModelImpl } from "~/core/models/domain/sample"
+import { SamplePostCommentModelImpl } from "~/core/models/domain/sample/comment"
+import { ISampleCreatePayloadModel } from "~/core/models/payload/sample/create"
+import { ISampleUpdatePayloadModel } from "~/core/models/payload/sample/update"
 import { client } from "~/utils/api"
 
 export namespace SampleGateway {

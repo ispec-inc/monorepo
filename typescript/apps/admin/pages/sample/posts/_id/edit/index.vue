@@ -28,8 +28,8 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import UseSubscription from '~/components/mixins/use-subscription'
-import { SampleUpdatePageService } from '~/core/service/sample/update'
-import { SampleUpdatePageUsecasesImpl } from '~/core/service/sample/update/usecases'
+import { SampleUpdatePageService } from '~/core/services/sample/update'
+import { SampleUpdatePageUsecasesImpl } from '~/core/services/sample/update/usecases'
 import { GlobalEventBus } from '~/surface/event-bus/global'
 
 const SERVICE = new SampleUpdatePageService(new SampleUpdatePageUsecasesImpl())
