@@ -7,7 +7,7 @@
     "dev:nuxt": "nuxt",
     "dev:path": "pathpida --watch",
     "dev:api": "aspida --watch",
-    "build": "pathpida && nuxt-ts build",
+    "build": "aspida && pathpida && nuxt-ts build",
     "start": "nuxt-ts start",
     "export": "nuxt-ts export",
     "serve": "nuxt-ts serve",
