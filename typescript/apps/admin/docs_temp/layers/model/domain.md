@@ -24,7 +24,7 @@
 - [SamplePostCommentModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/model/domain/sample/comment/index.ts)
 
 ## 関連
-- ApiResponseType(依存)
+![関連](./frontend-dataflow-domain-model-relation.drawio.png "関連")
 
 ## バックリンク
 - [Models](./index.md)

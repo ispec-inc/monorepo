@@ -21,7 +21,7 @@
 - [SampleCreatePayloadModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/model/payload/sample/create/index.ts)
 
 ## 関連
-- ApiRequestType(依存)
+![関連](./frontend-dataflow-payload-model-relation.drawio.png "関連")
 
 ## バックリンク
 - [Models](./index.md)

@@ -1,5 +1,5 @@
 import { SampleGateway } from "~/core/gateways/sample";
-import { ISamplePostModel, SamplePostModelImpl } from "~/core/models/domain/sample";
+import { ISamplePostModel } from "~/core/models/domain/sample";
 import { ISampleUpdatePayloadModel } from "~/core/models/payload/sample/update";
 
 
