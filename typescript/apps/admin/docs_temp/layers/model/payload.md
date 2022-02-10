@@ -25,4 +25,5 @@
 
 ## バックリンク
 - [Models](./index.md)
+- [Gateways](../gateway.md)
 - [Frontend Data Flow Architectue](../../index.md)

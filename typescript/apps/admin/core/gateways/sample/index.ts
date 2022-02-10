@@ -6,12 +6,12 @@ import { client } from "~/utils/api"
 
 export namespace SampleGateway {
   export async function findAll(): Promise<SamplePostModelImpl[]> {
-    const res = await client.posts.$get()
+    const res = await client.posts.$get().catch(Promise.reject.bind(Promise))
     return res.map((v) => SamplePostModelImpl.fromApiResponse(v))
   }
 
   export async function find(id: number): Promise<SamplePostModelImpl> {
-    const res = await client.posts._id(id).$get()
+    const res = await client.posts._id(id).$get().catch(Promise.reject.bind(Promise))
     return SamplePostModelImpl.fromApiResponse(res)
   }
 
@@ -24,7 +24,7 @@ export namespace SampleGateway {
   }
 
   export async function findAllComment(id: number): Promise<SamplePostCommentModelImpl[]> {
-    const res = await client.posts._id(id).comments.$get()
+    const res = await client.posts._id(id).comments.$get().catch(Promise.reject.bind(Promise))
     return res.map((v) => SamplePostCommentModelImpl.fromApiResponse(v))
   }
 }
