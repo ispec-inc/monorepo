@@ -16,6 +16,7 @@ export class SampleListPageService extends ServiceBase<ISampleListUsecases> {
   }
 
   async fetch(): Promise<void> {
+    this._posts = []
     this._posts = await this.fetchHelper.run()
       .catch((e) => {
         const model = new ErrorModel(e)
