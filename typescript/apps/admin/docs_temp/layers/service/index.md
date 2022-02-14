@@ -30,4 +30,5 @@
 ![関連](./frontend-dataflow-service-relation.drawio.png "関連")
 
 ## バックリンク
+- [Usecases](./usecases.md)
 - [Frontend Data Flow Architectue](../../index.md)
