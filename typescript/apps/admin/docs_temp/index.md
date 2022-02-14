@@ -16,3 +16,6 @@
 - [Gateways](./layers/gateway.md)
 - [Services](./layers/service/index.md)
   - [Usecases](./layers/service/usecases.md)
+
+## 実装手順について
+- [こちら](./impl-procedure.md)
