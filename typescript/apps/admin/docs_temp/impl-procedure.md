@@ -8,7 +8,7 @@
 1. 1で生成した[Usecases](./layers/service/usecases.md)のinterfaceを定義する
 1. 1で生成した[Services](./layers/service/index.md)を実装する
 1. 1で生成した[Usecases](./layers/service/usecases.md)を実装する
-1. 2で生成した[Model(DomainModel)](./layers/model/domain.md)を実装する
+1. 2で生成した[Models](./layers/model/index.md)を実装する
 1. Viewを実装する(1で生成した[Services](./layers/service/index.md)をページ実装ファイルでインスタンス化)
 
 ## つなぎこみ実装
