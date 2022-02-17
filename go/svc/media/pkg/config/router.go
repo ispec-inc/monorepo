@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	s := setting.Get().Rotuer.Media
+	s := setting.Get().Router.Media
 
 	Router = router{
 		Timeout:      s.Timeout,

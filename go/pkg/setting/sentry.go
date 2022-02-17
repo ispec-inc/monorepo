@@ -4,6 +4,6 @@ type (
 	Sentry struct {
 		DSN         string `yaml:"dsn"`
 		Environment string `yaml:"environment"`
-		Debug       string `yaml:"debug"`
+		Debug       bool   `yaml:"debug"`
 	}
 )

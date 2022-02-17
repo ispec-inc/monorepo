@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	s := setting.Get().Rotuer.Graphql
+	s := setting.Get().Router.Graphql
 
 	Router = router{
 		Timeout:      s.Timeout,

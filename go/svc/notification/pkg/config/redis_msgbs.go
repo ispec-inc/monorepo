@@ -1,18 +1,19 @@
 package config
 
-import (
-	"github.com/caarlos0/env/v6"
-)
+import "github.com/ispec-inc/monorepo/go/pkg/setting"
 
 func init() {
-	if err := env.Parse(&RedisMsgbs); err != nil {
-		panic(err)
+	s := setting.Get().RedisMsgbs
+
+	RedisMsgbs = redis{
+		Host: s.Host,
+		Port: s.Port,
 	}
 }
 
 var RedisMsgbs redis
 
 type redis struct {
-	Host string `env:"ADMIN_REDIS_MSGBS_HOST"`
-	Port string `env:"ADMIN_REDIS_MSGBS_PORT"`
+	Host string
+	Port string
 }

@@ -15,6 +15,7 @@ services:
     build:
       context: .
       dockerfile: gen/docker/Dockerfile
+    command: cp gen/.env.default gen/.env
     env_file:
       - gen/.env
     volumes:

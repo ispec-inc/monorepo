@@ -8,6 +8,7 @@ run: init run-middleware article-migrate server
 ci-test: init test
 
 init: ## setup docker build, network, and databases
+	cp gen/.env.default gen/.env
 	docker network create monorepo || true
 	docker-compose up -d article-mysql
 	docker-compose up -d message-bus-redis

@@ -5,6 +5,9 @@ go 1.16
 require (
 	github.com/99designs/gqlgen v0.15.1 // indirect
 	github.com/DATA-DOG/go-txdb v0.1.5
+	github.com/Masterminds/goutils v1.1.1 // indirect
+	github.com/Masterminds/semver v1.5.0 // indirect
+	github.com/Masterminds/sprig v2.22.0+incompatible // indirect
 	github.com/aws/aws-sdk-go v1.38.50
 	github.com/caarlos0/env/v6 v6.6.2
 	github.com/davecgh/go-spew v1.1.1
@@ -18,13 +21,17 @@ require (
 	github.com/graph-gophers/dataloader v5.0.0+incompatible
 	github.com/graph-gophers/graphql-go v1.1.0
 	github.com/graph-gophers/graphql-transport-ws v0.0.1 // indirect
+	github.com/huandu/xstrings v1.3.2 // indirect
+	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/k0kubun/pp v2.4.0+incompatible
 	github.com/lib/pq v1.10.0 // indirect
+	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/multierr v1.6.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	google.golang.org/protobuf v1.27.1
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/driver/mysql v1.0.5
 	gorm.io/driver/postgres v1.1.0
 	gorm.io/gorm v1.21.9

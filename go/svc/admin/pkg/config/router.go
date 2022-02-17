@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	s := setting.Get().Rotuer.Admin
+	s := setting.Get().Router.Admin
 
 	Router = router{
 		Timeout:      s.Timeout,

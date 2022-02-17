@@ -39,9 +39,9 @@ func init() {
 		settingFile = prodSettingFile
 	}
 
-	t, err := template.New(f).Funcs(
+	t, err := template.New(settingFile).Funcs(
 		sprig.TxtFuncMap(),
-	).ParseFiles(f)
+	).ParseFiles(settingFile)
 
 	if err != nil {
 		panic(err)

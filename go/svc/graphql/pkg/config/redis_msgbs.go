@@ -6,8 +6,8 @@ func init() {
 	s := setting.Get().RedisMsgbs
 
 	RedisMsgbs = redis{
-		Host:       s.Host,
-		RedisMsgbs: s.Port,
+		Host: s.Host,
+		Port: s.Port,
 	}
 }
 

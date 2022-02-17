@@ -10,19 +10,19 @@ type (
 
 	Router struct {
 		Admin struct {
-			Router RouterConfig
+			RouterConfig
 		} `yaml:"admin"`
 
 		Article struct {
-			Router RouterConfig
+			RouterConfig
 		} `yaml:"article"`
 
 		Graphql struct {
-			Router RouterConfig
+			RouterConfig
 		} `yaml:"graphql"`
 
 		Media struct {
-			Router RouterConfig
+			RouterConfig
 		} `yaml:"media"`
 	}
 )

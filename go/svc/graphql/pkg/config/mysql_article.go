@@ -9,7 +9,7 @@ import (
 func init() {
 	s := setting.Get().MysqlArticle
 
-	MysqlAdmin = mysqlAdmin{
+	MysqlGraphql = mysqlGraphql{
 		User:        s.User,
 		Password:    s.Password,
 		Database:    s.Database,
@@ -22,9 +22,9 @@ func init() {
 	}
 }
 
-var MysqlArticle mysqlArticle
+var MysqlGraphql mysqlGraphql
 
-type mysqlArticle struct {
+type mysqlGraphql struct {
 	User        string
 	Password    string
 	Database    string

@@ -23,7 +23,7 @@ redis_msgbs:
 sentry:
   dsn: ""
   environment: "development"
-  debug: "true"
+  debug: true
 
 router:
   admin:
