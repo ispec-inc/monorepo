@@ -1,17 +1,21 @@
 package config
 
-import "github.com/caarlos0/env/v6"
+import "github.com/ispec-inc/monorepo/go/pkg/setting"
 
 func init() {
-	if err := env.Parse(&Sentry); err != nil {
-		panic(err)
+	s := setting.Get().Sentry
+
+	Sentry = sentry{
+		DSN:   s.DSN,
+		Env:   s.Environment,
+		Debug: s.Debug,
 	}
 }
 
 var Sentry sentry
 
 type sentry struct {
-	DSN   string `env:"MEDIA_SENTRY_DSN"`
-	Env   string `env:"MEDIA_SENTRY_ENVIRONMENT"`
-	Debug bool   `env:"MEDIA_SENTRY_DEBUG"`
+	DSN   string
+	Env   string
+	Debug bool
 }
