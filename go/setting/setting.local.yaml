@@ -50,7 +50,7 @@ logger:
   type: "stdlog"
 
 media_aws:
-  access_key: {{ env "MEDIA_AWS_ACCESS_KEY" }}
-  secret_key: {{ env "MEDIA_AWS_SECRET_KEY" }}
-  s3_bucket_name: {{ env "MEDIA_AWS_S3_BUCKET_NAME" }}
-  s3_bucket_region: {{ env "MEDIA_AWS_S3_BUCKET_REGION" }}
+  access_key: {{ env "MEDIA_AWS_ACCESS_KEY" | "" }}
+  secret_key: {{ env "MEDIA_AWS_SECRET_KEY" | "" }}
+  s3_bucket_name: {{ env "MEDIA_AWS_S3_BUCKET_NAME" | "" }}
+  s3_bucket_region: {{ env "MEDIA_AWS_S3_BUCKET_REGION" | "" }}

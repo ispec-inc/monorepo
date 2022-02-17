@@ -33,6 +33,8 @@ services:
     ports:
       - "9000:9000"
       - "2345:2345"
+    environment:
+      ENV: local
     env_file:
       - go/.env/server
     depends_on:
@@ -51,6 +53,8 @@ services:
   test:
     container_name: monorepo-test
     image: golang:1.17
+    environment:
+      ENV: local
     env_file:
       - go/.env/server
     depends_on:

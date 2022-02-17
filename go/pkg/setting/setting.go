@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	settingDir       = "setting"
+	settingDir       = "./setting"
 	prodSettingFile  = settingDir + "/setting.prod.yaml"
 	localSettingFile = settingDir + "/setting.local.yaml"
 )
