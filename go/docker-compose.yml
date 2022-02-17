@@ -11,6 +11,8 @@ services:
       - "2345:2345"
     env_file:
       - .env/server
+    enenvironment:
+      ENV: local
     depends_on:
       - article-mysql
       - message-bus-redis
@@ -27,6 +29,8 @@ services:
   test:
     container_name: monorepo-test
     image: golang:1.17
+    enenvironment:
+      ENV: local
     env_file:
       - .env/server
     depends_on:

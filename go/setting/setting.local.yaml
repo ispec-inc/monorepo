@@ -1,0 +1,51 @@
+mysql_article:
+  host: "article-mysql"
+  user: "root"
+  password: "password"
+  database: "article"
+  port: "3306"
+  show_all_log: true
+  max_idle_conn: 25
+  max_open_conn: 25
+  max_lifetime: "25s"
+
+mysql_article_test:
+  host: "article-mysql"
+  user: "root"
+  password: "password"
+  database: "article"
+  port: "3306"
+
+redis_msgbs:
+  host: "message-bus-redis"
+  user: "6379"
+
+sentry:
+  dsn: ""
+  environment: "development"
+  debug: "true"
+
+router:
+  admin:
+    time_out: "10s"
+    allow_origins:
+      - "localhost:3000"
+
+  article:
+    time_out: "10s"
+    allow_origins:
+      - "localhost:3000"
+
+  media:
+    time_out: "10s"
+    allow_origins:
+      - "localhost:3000"
+
+logger:
+  type: "stdlog"
+
+media_aws:
+  access_key: {{ env "MEDIA_AWS_ACCESS_KEY" }}
+  secret_key: {{ env "MEDIA_AWS_SECRET_KEY" }}
+  s3_bucket_name: {{ env "MEDIA_AWS_S3_BUCKET_NAME" }}
+  s3_bucket_region: {{ env "MEDIA_AWS_S3_BUCKET_REGION" }}

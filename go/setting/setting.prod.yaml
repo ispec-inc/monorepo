@@ -1,0 +1,51 @@
+mysql_article:
+  host: {{ env "MYSQL_ARTICLE_HOST" }}
+  user: {{ env "MYSQL_ARTICLE_USER" }}
+  password: {{ env "MYSQL_ARTICLE_PASSWORD" }}
+  database: {{ env "MYSQL_ARTICLE_DATABASE" }}
+  port: {{ env "MYSQL_ARTICLE_PORT" }}
+  show_all_log: true
+  max_idle_conn: 25
+  max_open_conn: 25
+  max_lifetime: "25s"
+
+mysql_article_test:
+  host: null
+  user: null
+  password: null
+  database: null
+  port: null
+
+redis_msgbs:
+  host: {{ env "REDIS_MSGBS_HOST" }}
+  user: {{ env "REDIS_MSGBS_PORT" }}
+
+sentry:
+  dsn: {{ env "SENTRY_DSN" }}
+  environment: {{ env "SENTRY_ENVIRONMENT" }}
+  debug: {{ env "SENTRY_DEBUG" }}
+
+router:
+  admin:
+    time_out: "10s"
+    allow_origins:
+      - "https://monorepo.ispec.world"
+
+  article:
+    time_out: "10s"
+    allow_origins:
+      - "https://monorepo.ispec.world"
+
+  media:
+    time_out: "10s"
+    allow_origins:
+      - "https://monorepo.ispec.world"
+
+logger:
+  type: "sentry"
+
+media_aws:
+  access_key: {{ env "MEDIA_AWS_ACCESS_KEY" }}
+  secret_key: {{ env "MEDIA_AWS_SECRET_KEY" }}
+  s3_bucket_name: {{ env "MEDIA_AWS_S3_BUCKET_NAME" }}
+  s3_bucket_region: {{ env "MEDIA_AWS_S3_BUCKET_REGION" }}
