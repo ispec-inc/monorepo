@@ -1,7 +1,7 @@
 package config
 
 import (
-	"os"
+	"github.com/ispec-inc/monorepo/go/pkg/setting"
 )
 
 const (
@@ -12,7 +12,7 @@ const (
 type LoggerType string
 
 func init() {
-	typ := os.Getenv("NOTIFICATION_LOGGER_TYPE")
+	typ := setting.Get().Logger.Type
 	switch typ {
 	case string(LoggerTypeSentry):
 		Logger.Type = LoggerTypeSentry
