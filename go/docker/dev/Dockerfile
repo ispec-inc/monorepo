@@ -7,5 +7,6 @@ WORKDIR /go/src/app
 COPY go.mod go.sum ./
 
 RUN go mod download \
-    && go get -u github.com/cosmtrek/air@v1.27.3 \
+    && go get -u github.com/cosmtrek/air@v1.27.10 \
     && go install github.com/go-delve/delve/cmd/dlv@latest
+

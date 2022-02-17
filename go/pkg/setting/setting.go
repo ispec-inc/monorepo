@@ -3,16 +3,18 @@ package setting
 import (
 	"bytes"
 	"os"
+	"path"
 	"text/template"
 
 	"github.com/Masterminds/sprig"
+	"github.com/davecgh/go-spew/spew"
 	"gopkg.in/yaml.v2"
 )
 
 const (
-	settingDir       = "./setting"
-	prodSettingFile  = settingDir + "/setting.prod.yaml"
-	localSettingFile = settingDir + "/setting.local.yaml"
+	settingDir       = "setting"
+	prodSettingFile  = "setting.prod.yaml"
+	localSettingFile = "setting.local.yaml"
 )
 
 type (
@@ -28,20 +30,19 @@ type (
 )
 
 var (
-	Setting     setting
-	settingFile string
+	Setting setting
 )
 
 func init() {
+	var f string
 	if os.Getenv("ENV") == "local" {
-		settingFile = localSettingFile
+		f = localSettingFile
 	} else {
-		settingFile = prodSettingFile
+		f = prodSettingFile
 	}
-
-	t, err := template.New(settingFile).Funcs(
+	t, err := template.New(f).Funcs(
 		sprig.TxtFuncMap(),
-	).ParseFiles(settingFile)
+	).ParseFiles(path.Join(settingDir, f))
 
 	if err != nil {
 		panic(err)
@@ -51,6 +52,8 @@ func init() {
 	if err := t.Execute(&b, nil); err != nil {
 		panic(err)
 	}
+
+	spew.Dump(b)
 
 	if err = yaml.Unmarshal(b.Bytes(), &Setting); err != nil {
 		panic(err)
