@@ -17,6 +17,10 @@ type (
 			Router RouterConfig
 		} `yaml:"article"`
 
+		Graphql struct {
+			Router RouterConfig
+		} `yaml:"graphql"`
+
 		Media struct {
 			Router RouterConfig
 		} `yaml:"media"`

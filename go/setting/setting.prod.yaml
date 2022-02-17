@@ -30,16 +30,25 @@ router:
     time_out: "10s"
     allow_origins:
       - "https://monorepo.ispec.world"
+      - "*.amplify.com"
 
   article:
     time_out: "10s"
     allow_origins:
       - "https://monorepo.ispec.world"
+      - "*.amplify.com"
+
+  graphql:
+    time_out: "10s"
+    allow_origins:
+      - "https://monorepo.ispec.world"
+      - "*.amplify.com"
 
   media:
     time_out: "10s"
     allow_origins:
       - "https://monorepo.ispec.world"
+      - "*.amplify.com"
 
 logger:
   type: "sentry"

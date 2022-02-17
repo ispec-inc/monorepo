@@ -3,18 +3,21 @@ package config
 import (
 	"time"
 
-	"github.com/caarlos0/env/v6"
+	"github.com/ispec-inc/monorepo/go/pkg/setting"
 )
 
 func init() {
-	if err := env.Parse(&Router); err != nil {
-		panic(err)
+	s := setting.Get().Rotuer.Article
+
+	Router = router{
+		Timeout:      s.Timeout,
+		AllowOrigins: s.AllowOrigins,
 	}
 }
 
 var Router router
 
 type router struct {
-	Timeout      time.Duration `env:"ARTICLE_ROUTER_TIMEOUT"`
-	AllowOrigins []string      `env:"ARTICLE_ROUTER_ALLOW_ORIGINS" envSeparator:","`
+	Timeout      time.Duration
+	AllowOrigins []string
 }

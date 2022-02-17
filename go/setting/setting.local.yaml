@@ -36,6 +36,11 @@ router:
     allow_origins:
       - "localhost:3000"
 
+  graphql:
+    time_out: "10s"
+    allow_origins:
+      - "localhost:3000"
+
   media:
     time_out: "10s"
     allow_origins:
