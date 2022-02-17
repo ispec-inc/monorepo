@@ -5,7 +5,7 @@ import "github.com/ispec-inc/monorepo/go/pkg/setting"
 func init() {
 	s := setting.Get().MysqlArticleTest
 
-	MysqlAdminTest = mysqlAdminTest{
+	MysqlArticleTest = mysqlArticleTest{
 		User:     s.User,
 		Password: s.Password,
 		Database: s.Database,
@@ -14,9 +14,9 @@ func init() {
 	}
 }
 
-var MysqlAdminTest mysqlAdminTest
+var MysqlArticleTest mysqlArticleTest
 
-type mysqlAdminTest struct {
+type mysqlArticleTest struct {
 	User     string
 	Password string
 	Database string

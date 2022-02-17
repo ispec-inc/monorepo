@@ -16,7 +16,7 @@ func Init(indb *gorm.DB) (err error) {
 	}
 
 	var loglev rdb.LogLevel
-	if config.MysqlArticle.ShowAllLog {
+	if config.MysqlGraphql.ShowAllLog {
 		loglev = rdb.LogLevelInfo
 	} else {
 		loglev = rdb.LogLevelError
@@ -25,16 +25,16 @@ func Init(indb *gorm.DB) (err error) {
 	db, err = rdb.New(rdb.Config{
 		DBMS: rdb.DBMSMySQL,
 		Conn: rdb.Connection{
-			User:     config.MysqlArticle.User,
-			Password: config.MysqlArticle.Password,
-			Host:     config.MysqlArticle.Host,
-			Port:     config.MysqlArticle.Port,
-			Database: config.MysqlArticle.Database,
+			User:     config.MysqlGraphql.User,
+			Password: config.MysqlGraphql.Password,
+			Host:     config.MysqlGraphql.Host,
+			Port:     config.MysqlGraphql.Port,
+			Database: config.MysqlGraphql.Database,
 		},
 		LogLevel:    loglev,
-		MaxIdleConn: config.MysqlArticle.MaxIdleConn,
-		MaxOpenConn: config.MysqlArticle.MaxOpenConn,
-		MaxLifetime: config.MysqlArticle.MaxLifetime,
+		MaxIdleConn: config.MysqlGraphql.MaxIdleConn,
+		MaxOpenConn: config.MysqlGraphql.MaxOpenConn,
+		MaxLifetime: config.MysqlGraphql.MaxLifetime,
 	})
 	return err
 }
