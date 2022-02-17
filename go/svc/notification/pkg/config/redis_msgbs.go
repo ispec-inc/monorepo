@@ -13,6 +13,6 @@ func init() {
 var RedisMsgbs redis
 
 type redis struct {
-	Host string `env:"NOTIFICATION_REDIS_MSGBS_HOST"`
-	Port string `env:"NOTIFICATION_REDIS_MSGBS_PORT"`
+	Host string `env:"ADMIN_REDIS_MSGBS_HOST"`
+	Port string `env:"ADMIN_REDIS_MSGBS_PORT"`
 }
