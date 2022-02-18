@@ -20,8 +20,8 @@
 - APIからのレスポンス型に紐づく`Model`である場合は、そのレスポンス型で値を引数に取り自身のインスタンスを返すstatic関数を`fromApiResponse`という名前で実装することができる
 
 ## 実装例
-- [SamplePostModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/model/domain/sample/index.ts)
-- [SamplePostCommentModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/model/domain/sample/comment/index.ts)
+- [SamplePostModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/models/domain/sample/index.ts)
+- [SamplePostCommentModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/models/domain/sample/comment/index.ts)
 
 ## 関連
 ![関連](./frontend-dataflow-domain-model-relation.drawio.png "関連")

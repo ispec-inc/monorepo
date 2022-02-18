@@ -20,7 +20,7 @@
 - 関数は、プリミティブな値か[PayloadModel](../model/payload.md)を受け取り、voidか[Model(DomainModel)](../model/domain.md)のPromiseを返す
 
 ## 実装例
-- [SampleUpdatePageUsecasesImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/service/sample/update/usecases.ts)
+- [SampleUpdatePageUsecasesImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/services/sample/update/usecases.ts)
 
 ## 関連
 ![関連](./frontend-dataflow-usecases-relation.drawio.png "関連")

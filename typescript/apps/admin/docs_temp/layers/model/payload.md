@@ -18,7 +18,7 @@
   - 引数が多くなりそうな場合は、タプル型を用いるか、同ファイルで引数用の型を定義してそれを使用することができる
 
 ## 実装例
-- [SampleCreatePayloadModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/model/payload/sample/create/index.ts)
+- [SampleCreatePayloadModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/models/payload/sample/create/index.ts)
 
 ## 関連
 ![関連](./frontend-dataflow-payload-model-relation.drawio.png "関連")

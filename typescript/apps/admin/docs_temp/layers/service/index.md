@@ -23,8 +23,8 @@
 - 「目的」の項にもあるが、Viewから切り離せそうなロジックはできるだけこのレイヤーへ寄せ、Viewには画面の表示関係に専念させる
 
 ## 実装例
-- [SampleListPageService](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/service/sample/list/index.ts)
-- [SampleUpdatePageService](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/service/sample/update/index.ts)
+- [SampleListPageService](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/services/sample/list/index.ts)
+- [SampleUpdatePageService](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/services/sample/update/index.ts)
 
 ## 関連
 ![関連](./frontend-dataflow-service-relation.drawio.png "関連")

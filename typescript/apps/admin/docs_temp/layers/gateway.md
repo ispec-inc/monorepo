@@ -18,7 +18,7 @@
 - API疎通時のエラーは必ずcatchし`Promise.reject`を返すようにする
 
 ## 実装例
-- [SampleGateway](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/gateway/sample/index.ts)
+- [SampleGateway](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/gateways/sample/index.ts)
 
 ## 関連
 ![関連](./frontend-dataflow-gateway-relation.drawio.png "関連")
