@@ -1,4 +1,4 @@
-FROM ruby:2.7.5-alpine
+FROM ruby:3.1.1-alpine
 
 RUN mkdir /db
 COPY Gemfile /db
