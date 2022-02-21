@@ -18,7 +18,7 @@ mysql_article_test:
 
 redis_msgbs:
   host: "message-bus-redis"
-  user: 6379
+  port: 6379
 
 sentry:
   dsn: ""
@@ -27,22 +27,22 @@ sentry:
 
 router:
   admin:
-    time_out: "10s"
+    timeout: "10s"
     allow_origins:
       - "localhost:3000"
 
   article:
-    time_out: "10s"
+    timeout: "10s"
     allow_origins:
       - "localhost:3000"
 
   graphql:
-    time_out: "10s"
+    timeout: "10s"
     allow_origins:
       - "localhost:3000"
 
   media:
-    time_out: "10s"
+    timeout: "10s"
     allow_origins:
       - "localhost:3000"
 

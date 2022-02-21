@@ -18,7 +18,7 @@ mysql_article_test:
 
 redis_msgbs:
   host: {{ env "REDIS_MSGBS_HOST" }}
-  user: {{ env "REDIS_MSGBS_PORT" }}
+  port: {{ env "REDIS_MSGBS_PORT" }}
 
 sentry:
   dsn: {{ env "SENTRY_DSN" }}
@@ -27,25 +27,25 @@ sentry:
 
 router:
   admin:
-    time_out: "10s"
+    timeout: "10s"
     allow_origins:
       - "https://monorepo.ispec.world"
       - "*.amplify.com"
 
   article:
-    time_out: "10s"
+    timeout: "10s"
     allow_origins:
       - "https://monorepo.ispec.world"
       - "*.amplify.com"
 
   graphql:
-    time_out: "10s"
+    timeout: "10s"
     allow_origins:
       - "https://monorepo.ispec.world"
       - "*.amplify.com"
 
   media:
-    time_out: "10s"
+    timeout: "10s"
     allow_origins:
       - "https://monorepo.ispec.world"
       - "*.amplify.com"
