@@ -14,7 +14,7 @@ type User struct {
 }
 
 type UserResolverArgs struct {
-	ID int64
+	ID uint
 }
 
 func NewUser(ctx context.Context, args UserResolverArgs) (*User, error) {

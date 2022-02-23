@@ -13,17 +13,17 @@ import (
 
 func TestUserDao_Get(t *testing.T) {
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "user_dao_get", []interface{}{
-		&entity.User{ID: int64(1), Email: "email"},
+		&entity.User{ID: uint(1), Email: "email"},
 	})
 	defer cleanup()
 	d := NewUser(db)
 
 	type (
 		give struct {
-			id int64
+			id uint
 		}
 		want struct {
-			id int64
+			id uint
 		}
 	)
 	tests := []struct {
@@ -34,13 +34,13 @@ func TestUserDao_Get(t *testing.T) {
 	}{
 		{
 			name: "success",
-			give: give{id: int64(1)},
-			want: want{id: int64(1)},
+			give: give{id: uint(1)},
+			want: want{id: uint(1)},
 		},
 		{
 			name: "not found",
-			give: give{id: int64(2)},
-			want: want{id: int64(0)},
+			give: give{id: uint(2)},
+			want: want{id: uint(0)},
 			err:  true,
 		},
 	}
@@ -60,15 +60,15 @@ func TestUserDao_Get(t *testing.T) {
 
 func TestUserDao_List(t *testing.T) {
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "user_dao_find_by_user_id", []interface{}{
-		&entity.User{ID: int64(1), Email: "email-1"},
-		&entity.User{ID: int64(2), Email: "email-2"},
+		&entity.User{ID: uint(1), Email: "email-1"},
+		&entity.User{ID: uint(2), Email: "email-2"},
 	})
 	defer cleanup()
 	d := NewUser(db)
 
 	type (
 		give struct {
-			ids []int64
+			ids []uint
 		}
 		want struct {
 			count int
@@ -88,7 +88,7 @@ func TestUserDao_List(t *testing.T) {
 		},
 		{
 			name: "success with ids",
-			give: give{ids: []int64{1}},
+			give: give{ids: []uint{1}},
 			want: want{count: 1},
 			err:  false,
 		},
@@ -109,7 +109,7 @@ func TestUserDao_List(t *testing.T) {
 
 func TestUserDao_Create(t *testing.T) {
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "user_dao_create", []interface{}{
-		&entity.User{ID: int64(1), Email: "old"},
+		&entity.User{ID: uint(1), Email: "old"},
 	})
 	defer cleanup()
 	d := NewUser(db)

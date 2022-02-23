@@ -30,7 +30,7 @@ func TestArticleController_list(t *testing.T) {
 	}
 
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_controller_get", []interface{}{
-		&entity.Article{ID: int64(1)},
+		&entity.Article{ID: uint(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -78,7 +78,7 @@ func TestArticleController_get(t *testing.T) {
 	}
 
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_controller_get", []interface{}{
-		&entity.Article{ID: int64(1)},
+		&entity.Article{ID: uint(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -174,7 +174,7 @@ func TestArticleController_update(t *testing.T) {
 	}
 
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_controller_update", []interface{}{
-		&entity.Article{ID: int64(1)},
+		&entity.Article{ID: uint(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -223,7 +223,7 @@ func TestArticleController_delete(t *testing.T) {
 	}
 
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_controller_delete", []interface{}{
-		&entity.Article{ID: int64(1)},
+		&entity.Article{ID: uint(1)},
 	})
 	database.Init(db)
 	defer cleanup()

@@ -49,7 +49,7 @@ func (c controller) get(w http.ResponseWriter, r *http.Request) {
 	}
 
 	atl := &model.Article{}
-	if err := atl.Find(int64(id)); err != nil {
+	if err := atl.Find(uint(id)); err != nil {
 		c.log.Error(r.Context(), err)
 		presenter.ApplicationException(w, err)
 		return
@@ -108,7 +108,7 @@ func (c controller) update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	atl := &model.Article{}
-	if err := atl.Find(int64(id)); err != nil {
+	if err := atl.Find(uint(id)); err != nil {
 		c.log.Error(r.Context(), err)
 		presenter.ApplicationException(w, err)
 		return
@@ -135,7 +135,7 @@ func (c controller) delete(w http.ResponseWriter, r *http.Request) {
 	}
 
 	atl := &model.Article{}
-	if err := atl.Find(int64(id)); err != nil {
+	if err := atl.Find(uint(id)); err != nil {
 		c.log.Error(r.Context(), err)
 		presenter.ApplicationException(w, err)
 		return

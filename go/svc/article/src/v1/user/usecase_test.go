@@ -25,23 +25,23 @@ func TestUserUsecase_Get(t *testing.T) {
 		{
 			name: "success",
 			give: &GetInput{
-				ID: int64(1),
+				ID: uint(1),
 			},
 			want: &GetOutput{
-				User: &model.User{ID: int64(1)},
+				User: &model.User{ID: uint(1)},
 			},
 			userRepo: func(c *gomock.Controller) *mock_repository.MockUser {
 				u := mock_repository.NewMockUser(c)
-				u.EXPECT().Get(int64(1)).Return(&model.User{ID: int64(1)}, nil).Times(1)
+				u.EXPECT().Get(uint(1)).Return(&model.User{ID: uint(1)}, nil).Times(1)
 				return u
 			},
 		},
 		{
 			name: "fail to get user",
-			give: &GetInput{ID: int64(1)},
+			give: &GetInput{ID: uint(1)},
 			userRepo: func(c *gomock.Controller) *mock_repository.MockUser {
 				u := mock_repository.NewMockUser(c)
-				u.EXPECT().Get(int64(1)).Return(nil, errors.New("unknown")).Times(1)
+				u.EXPECT().Get(uint(1)).Return(nil, errors.New("unknown")).Times(1)
 				return u
 			},
 			err: true,

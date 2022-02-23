@@ -15,7 +15,7 @@ type UserResult struct {
 
 func LoadUsers(
 	ctx context.Context,
-	ids []int64,
+	ids []uint,
 ) ([]UserResult, error) {
 
 	loader := dataloader.NewBatchedLoader(batchLoadUser)
@@ -47,7 +47,7 @@ func LoadUsers(
 
 func LoadUser(
 	ctx context.Context,
-	id int64,
+	id uint,
 ) (*model.User, error) {
 	ldr, err := getLoader(ctx, userKey)
 	if err != nil {

@@ -37,7 +37,7 @@ func (u *User) validate() error {
 	return nil
 }
 
-func (u *User) Find(id int64) error {
+func (u *User) Find(id uint) error {
 	return apperror.NewGormFind(
 		database.Get().First(u, id).Error,
 		entity.UserTableName,
@@ -78,7 +78,7 @@ func (u *Users) Find() error {
 	)
 }
 
-func (u *Users) List(ids []int64) error {
+func (u *Users) List(ids []uint) error {
 	q := database.Get()
 	if len(ids) > 0 {
 		q = q.Where("id in ?", ids)

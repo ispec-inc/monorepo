@@ -5,7 +5,7 @@ import (
 )
 
 type User interface {
-	Get(id int64) (*model.User, error)
-	List(ids []int64) ([]*model.User, error)
+	Get(id uint) (*model.User, error)
+	List(ids []uint) ([]*model.User, error)
 	Create(user *model.User) error
 }

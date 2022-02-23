@@ -26,7 +26,7 @@ type User struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id          uint                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name        string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Email       string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
@@ -66,7 +66,7 @@ func (*User) Descriptor() ([]byte, []int) {
 	return file_article_view_user_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *User) GetId() int64 {
+func (x *User) GetId() uint {
 	if x != nil {
 		return x.Id
 	}

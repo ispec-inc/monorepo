@@ -196,7 +196,7 @@ type CreateRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserId int64  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId uint   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Title  string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Body   string `protobuf:"bytes,3,opt,name=body,proto3" json:"body,omitempty"`
 }
@@ -233,7 +233,7 @@ func (*CreateRequest) Descriptor() ([]byte, []int) {
 	return file_admin_api_rest_v1_article_article_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *CreateRequest) GetUserId() int64 {
+func (x *CreateRequest) GetUserId() uint {
 	if x != nil {
 		return x.UserId
 	}
@@ -306,7 +306,7 @@ type UpdateRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserId int64  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId uint   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Title  string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Body   string `protobuf:"bytes,3,opt,name=body,proto3" json:"body,omitempty"`
 }
@@ -343,7 +343,7 @@ func (*UpdateRequest) Descriptor() ([]byte, []int) {
 	return file_admin_api_rest_v1_article_article_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *UpdateRequest) GetUserId() int64 {
+func (x *UpdateRequest) GetUserId() uint {
 	if x != nil {
 		return x.UserId
 	}

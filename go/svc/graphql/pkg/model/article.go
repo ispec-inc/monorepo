@@ -16,7 +16,7 @@ type (
 	Articles []Article
 )
 
-func NewArticle(userID int64, title, body string) *Article {
+func NewArticle(userID uint, title, body string) *Article {
 	atl := &Article{}
 	atl.UserID = userID
 	atl.Title = title
@@ -41,7 +41,7 @@ func (a *Article) validate() error {
 	return nil
 }
 
-func (a *Article) Find(id int64) error {
+func (a *Article) Find(id uint) error {
 	return apperror.NewGormFind(
 		database.Get().First(a, id).Error,
 		entity.ArticleTableName,
@@ -82,7 +82,7 @@ func (a *Articles) Find() error {
 	)
 }
 
-func (a *Articles) List(ids []int64) error {
+func (a *Articles) List(ids []uint) error {
 	q := database.Get()
 	if len(ids) > 0 {
 		q = q.Where("id in ?", ids)

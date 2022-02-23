@@ -30,7 +30,7 @@ func (h Handler) Get(w http.ResponseWriter, r *http.Request) {
 	}
 
 	opt, aerr := h.usecase.Get(r.Context(), &user.GetInput{
-		ID: int64(id),
+		ID: uint(id),
 	})
 	if aerr != nil {
 		presenter.ApplicationException(w, aerr)

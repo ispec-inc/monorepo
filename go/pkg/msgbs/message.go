@@ -1,6 +1,6 @@
 package msgbs
 
 type Article struct {
-	ID    int64
+	ID    uint
 	Title string
 }

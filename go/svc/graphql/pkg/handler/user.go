@@ -29,5 +29,5 @@ func (h Handler) User(
 		return nil, err
 	}
 
-	return query.User(ctx, int64(id))
+	return query.User(ctx, uint(id))
 }

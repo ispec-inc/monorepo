@@ -35,7 +35,7 @@ func (m *MockUser) EXPECT() *MockUserMockRecorder {
 }
 
 // Get mocks base method.
-func (m *MockUser) Get(id int64) (*model.User, error) {
+func (m *MockUser) Get(id uint) (*model.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Get", id)
 	ret0, _ := ret[0].(*model.User)
@@ -50,7 +50,7 @@ func (mr *MockUserMockRecorder) Get(id interface{}) *gomock.Call {
 }
 
 // List mocks base method.
-func (m *MockUser) List(ids []int64) ([]*model.User, error) {
+func (m *MockUser) List(ids []uint) ([]*model.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", ids)
 	ret0, _ := ret[0].([]*model.User)

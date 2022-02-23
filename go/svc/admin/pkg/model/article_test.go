@@ -13,10 +13,10 @@ import (
 func TestArticleModel_Find(t *testing.T) {
 	type (
 		give struct {
-			id int64
+			id uint
 		}
 		want struct {
-			id int64
+			id uint
 		}
 	)
 	tests := []struct {
@@ -27,20 +27,20 @@ func TestArticleModel_Find(t *testing.T) {
 	}{
 		{
 			name: "success",
-			give: give{id: int64(1)},
-			want: want{id: int64(1)},
+			give: give{id: uint(1)},
+			want: want{id: uint(1)},
 			err:  false,
 		},
 		{
 			name: "not found",
-			give: give{id: int64(2)},
-			want: want{id: int64(0)},
+			give: give{id: uint(2)},
+			want: want{id: uint(0)},
 			err:  true,
 		},
 	}
 
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_find", []interface{}{
-		&entity.Article{ID: int64(1)},
+		&entity.Article{ID: uint(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -86,7 +86,7 @@ func TestArticleModel_Create(t *testing.T) {
 	}
 
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_create", []interface{}{
-		&entity.Article{ID: int64(1)},
+		&entity.Article{ID: uint(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -133,7 +133,7 @@ func TestArticleModel_Save(t *testing.T) {
 	}
 
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_save", []interface{}{
-		&entity.Article{ID: int64(1)},
+		&entity.Article{ID: uint(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -153,7 +153,7 @@ func TestArticleModel_Save(t *testing.T) {
 func TestArticleModel_Delete(t *testing.T) {
 	type (
 		give struct {
-			id int64
+			id uint
 		}
 		want struct {
 			changedCount int
@@ -167,14 +167,14 @@ func TestArticleModel_Delete(t *testing.T) {
 	}{
 		{
 			name: "success",
-			give: give{id: int64(1)},
+			give: give{id: uint(1)},
 			want: want{changedCount: -1},
 			err:  false,
 		},
 	}
 
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_delete", []interface{}{
-		&entity.Article{ID: int64(1)},
+		&entity.Article{ID: uint(1)},
 	})
 	database.Init(db)
 	defer cleanup()
@@ -212,7 +212,7 @@ func TestArticlesModel_Find(t *testing.T) {
 	}
 
 	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "articles_model_find", []interface{}{
-		&entity.Article{ID: int64(1)},
+		&entity.Article{ID: uint(1)},
 	})
 	database.Init(db)
 	defer cleanup()

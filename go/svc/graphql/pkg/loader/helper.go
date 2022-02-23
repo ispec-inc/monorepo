@@ -8,19 +8,19 @@ import (
 	"github.com/graph-gophers/dataloader"
 )
 
-func extractIDsFromKeys(keys dataloader.Keys) []int64 {
-	ids := make([]int64, len(keys))
+func extractIDsFromKeys(keys dataloader.Keys) []uint {
+	ids := make([]uint, len(keys))
 	for i := range keys {
 		id, err := strconv.Atoi(keys[i].String())
 		if err == nil {
-			ids[i] = int64(id)
+			ids[i] = uint(id)
 		}
 	}
 
 	return ids
 }
 
-func newKeysFromIDs(ids []int64) dataloader.Keys {
+func newKeysFromIDs(ids []uint) dataloader.Keys {
 	keys := make([]string, len(ids))
 
 	for i := range ids {

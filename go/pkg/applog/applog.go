@@ -20,8 +20,8 @@ func New(l logger.Logger) AppLog {
 	}
 }
 
-func (l AppLog) SetUser(ctx context.Context, userID int64, userName string) context.Context {
-	ctx = context.WithValue(ctx, userIDKey, strconv.FormatInt(userID, 10))
+func (l AppLog) SetUser(ctx context.Context, userID uint, userName string) context.Context {
+	ctx = context.WithValue(ctx, userIDKey, strconv.FormatUint(uint64(userID), 10))
 	ctx = context.WithValue(ctx, userNameKey, userName)
 	return ctx
 }

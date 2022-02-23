@@ -7,9 +7,9 @@ import (
 )
 
 func CurrentUser(ctx context.Context) (*resolver.User, error) {
-	return resolver.NewUser(ctx, resolver.UserResolverArgs{ID: int64(1)})
+	return resolver.NewUser(ctx, resolver.UserResolverArgs{ID: uint(1)})
 }
 
-func User(ctx context.Context, id int64) (*resolver.User, error) {
+func User(ctx context.Context, id uint) (*resolver.User, error) {
 	return resolver.NewUser(ctx, resolver.UserResolverArgs{ID: id})
 }

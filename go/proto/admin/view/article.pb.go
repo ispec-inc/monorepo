@@ -26,8 +26,8 @@ type Article struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId    int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Id        uint                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId    uint                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Title     string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	Body      string                 `protobuf:"bytes,4,opt,name=body,proto3" json:"body,omitempty"`
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -66,14 +66,14 @@ func (*Article) Descriptor() ([]byte, []int) {
 	return file_admin_view_article_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Article) GetId() int64 {
+func (x *Article) GetId() uint {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *Article) GetUserId() int64 {
+func (x *Article) GetUserId() uint {
 	if x != nil {
 		return x.UserId
 	}

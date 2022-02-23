@@ -17,7 +17,7 @@ func NewUser(db *gorm.DB) User {
 	}
 }
 
-func (d User) Get(id int64) (*model.User, error) {
+func (d User) Get(id uint) (*model.User, error) {
 	e := &entity.User{}
 	if err := d.db.First(e, id).Error; err != nil {
 		return nil, apperror.NewGormFind(err, entity.UserModelName)
@@ -25,7 +25,7 @@ func (d User) Get(id int64) (*model.User, error) {
 	return model.NewUserFromEntity(e), nil
 }
 
-func (d User) List(ids []int64) ([]*model.User, error) {
+func (d User) List(ids []uint) ([]*model.User, error) {
 	query := d.db
 	if len(ids) > 0 {
 		query = query.Where("id in (?)", ids)
