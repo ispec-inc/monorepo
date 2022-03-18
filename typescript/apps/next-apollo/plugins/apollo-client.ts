@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: 'http://localhost:9000/ideation/graphql',
+  uri: `${process.env.NEXT_PUBLIC_SERVER_API_URL}/ideation/graphql`,
 })
 
 export default client
