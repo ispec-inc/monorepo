@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/DATA-DOG/go-txdb v0.1.5
 	github.com/aws/aws-sdk-go v1.38.50
-	github.com/caarlos0/env/v6 v6.6.2
+	github.com/caarlos0/env/v6 v6.9.1
 	github.com/envoyproxy/protoc-gen-validate v0.6.7
 	github.com/getsentry/sentry-go v0.11.0
 	github.com/go-chi/chi v1.5.4
