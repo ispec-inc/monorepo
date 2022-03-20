@@ -45,6 +45,7 @@ func TestArticle_Create(t *testing.T) {
 
 		r := reader.NewArticle(db)
 		atcl, err := r.Get(test.give.article.ID)
+		assert.NoError(t, err)
 		assert.Equal(t, test.give.article, atcl)
 	})
 }

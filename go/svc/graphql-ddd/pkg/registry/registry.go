@@ -12,6 +12,9 @@ func New() (Registry, func() error, error) {
 	}
 
 	lgr, clnup, err := NewLogger()
+	if err != nil {
+		return Registry{}, clnup, err
+	}
 
 	return Registry{
 		repo: repo,
