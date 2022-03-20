@@ -14,7 +14,6 @@ require (
 	github.com/google/uuid v1.2.0
 	github.com/graph-gophers/graphql-go v1.1.0
 	github.com/k0kubun/pp v2.4.0+incompatible
-	github.com/lib/pq v1.10.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/multierr v1.6.0
@@ -23,6 +22,6 @@ require (
 	google.golang.org/protobuf v1.27.1
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gorm.io/driver/mysql v1.0.5
-	gorm.io/driver/postgres v1.1.0
-	gorm.io/gorm v1.21.9
+	gorm.io/driver/postgres v1.3.1
+	gorm.io/gorm v1.23.1
 )
