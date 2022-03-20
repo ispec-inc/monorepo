@@ -11,7 +11,7 @@ require (
 	github.com/go-chi/chi v1.5.4
 	github.com/go-chi/cors v1.2.0
 	github.com/gomodule/redigo v1.7.1-0.20190724094224-574c33c3df38
-	github.com/google/uuid v1.2.0
+	github.com/google/uuid v1.3.0
 	github.com/graph-gophers/graphql-go v1.1.0
 	github.com/k0kubun/pp v2.4.0+incompatible
 	github.com/lib/pq v1.10.0 // indirect
