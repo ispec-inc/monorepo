@@ -1,18 +1,2 @@
 require 'standalone_migrations'
 StandaloneMigrations::Tasks.load_tasks
-
-require 'seed-fu'
-namespace :db do
-  task :seed_fu => :environment do
-    if ENV["FILTER"]
-      filter = /#{ENV["FILTER"].gsub(/,/, "|")}/
-    end
-
-    fixture_path = "db/fixtures"
-    if ENV["SEED_ENV"]
-      fixture_paths = [fixture_path, "#{fixture_path}/#{ENV["SEED_ENV"]}"]
-    end
-
-    SeedFu.seed(fixture_paths, filter)
-  end
-end
