@@ -29,8 +29,8 @@ func NewPostArticle(
 	rgst registry.Registry,
 ) PostArticle {
 	return PostArticle{
-		// cmd: rgst.NewArticleCommand(),
-		// userq: rgst.NewUserQuery(),
+		cmd:  rgst.Repository().NewArticleCommand(),
+		usrq: rgst.Repository().NewUserQuery(),
 	}
 }
 

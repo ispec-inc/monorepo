@@ -20,7 +20,7 @@ func (a Adapter) PostArticle(ctx context.Context, args PostArticleArgs) (*resolv
 	ipt := uc.PostArticleInput{
 		Title:      article.Title(args.Input.Title),
 		Content:    article.Content(args.Input.Content),
-		PostUserID: user.ID(""),
+		PostUserID: user.ID("id"),
 	}
 	post := uc.NewPostArticle(a.registry)
 	opt, err := post.Do(ctx, ipt)
