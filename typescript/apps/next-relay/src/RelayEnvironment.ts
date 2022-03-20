@@ -11,9 +11,11 @@ import {
  * the results of GraphQL queries from your server (or other data source). See more at
  * https://relay.dev/docs/en/quick-start-guide#relay-environment.
  */
+
 const fetchRelay: FetchFunction = async (params, variables, _cacheConfig) => {
-  // TODO: use env variable
-  const response = await fetch("http://localhost:4000/graphql", {
+  console.log(params)
+    // TODO: use env variable
+  const response = await fetch("http://localhost:9000/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

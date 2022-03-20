@@ -1,30 +1,35 @@
 {
-  "name": "learn-starter",
+  "name": "@monorepo/next-relay",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "graphql-gen": "get-graphql-schema http://localhost:4000/graphql > schema.graphql",
-    "relay": "relay-compiler --src ./src --schema schema.graphql --language typescript --artifactDirectory ./src/__generated__",
+    "relay": "relay-compiler",
     "start": "next start"
   },
   "dependencies": {
-    "next": "^10.0.0",
-    "react": "^18.0.0-alpha-01be61c12",
-    "react-dom": "^18.0.0-alpha-01be61c12",
-    "react-relay": "^11.0.2"
+    "next": "^12.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-relay": "^13.2.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.11",
-    "@types/react-relay": "^11.0.1",
-    "@types/relay-runtime": "^11.0.0",
-    "babel-plugin-relay": "^11.0.2",
-    "get-graphql-schema": "^2.1.2",
+    "@types/react-relay": "^13.2.1",
+    "@types/relay-compiler": "^8.0.2",
+    "@types/relay-runtime": "^13.0.2",
+    "babel-plugin-relay": "^13.2.0",
     "graphql": "^15.5.0",
-    "relay-compiler": "^11.0.2",
-    "relay-compiler-language-typescript": "^14.0.0",
+    "relay-compiler": "^13.2.0",
     "relay-config": "^11.0.2",
     "typescript": "^4.3.2"
+  },
+    "relay": {
+    "language": "typescript",
+    "src": ".",
+    "schema": "./schema.graphql",
+    "artifactDirectory": "./src/__generated__"
   }
+
 }

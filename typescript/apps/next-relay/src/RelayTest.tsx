@@ -1,18 +1,37 @@
-import { Suspense } from "react";
 import { graphql } from "relay-runtime";
 import { useLazyLoadQuery } from "react-relay";
 
-const RelayTestQuery = graphql`
-  query RelayTestQuery {
-    viewer {
-      id
+const getUser = graphql`
+  query RelayTestQueryGetUser_nodeQuery($id: ID!) {
+        user(id: $id) {
+            id
+            name
     }
   }
 `;
 
-function RelayTestInner() {
-  const data = useLazyLoadQuery(RelayTestQuery, {
-    variables: {},
+const getUserArticles = graphql`
+  query RelayTestQueryGetUserArticles_nodeQuery($userId: ID!) {
+        articles(userId: $userId) {
+            id  
+            title
+            body
+    }
+  }
+`;
+
+const getCurrentUser = graphql`
+  query RelayTestQueryGetCurrentUser_nodeQuery {
+        currentUser {
+            id  
+            name
+    }
+  }
+`;
+
+const RelayTestInner = () => {
+  const data = useLazyLoadQuery(getUser, {
+      id: "1"
   });
 
   console.log("data", data);
@@ -22,8 +41,6 @@ function RelayTestInner() {
 
 export default function RelayTest() {
   return (
-    <Suspense fallback={<div>Loading</div>}>
       <RelayTestInner />
-    </Suspense>
   );
 }
