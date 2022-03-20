@@ -1,0 +1,10 @@
+type Article {
+  id: ID!
+  title: String!
+  content: String!
+}
+
+input PostArticleInput {
+  title: String!
+  content: String!
+}

@@ -14,9 +14,9 @@ services:
     container_name: gen
     build:
       context: .
-      dockerfile: gen/docker/Dockerfile
+      dockerfile: go/tool/gen/docker/Dockerfile
     env_file:
-      - gen/.env
+      - go/tool/gen/.env
     volumes:
       - ./:/workspace
     working_dir: /workspace
@@ -31,7 +31,6 @@ services:
     command: air -c .air.toml
     ports:
       - "9000:9000"
-      - "2345:2345"
     env_file:
       - go/.env/server
     depends_on:
