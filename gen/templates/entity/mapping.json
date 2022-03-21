@@ -84,12 +84,12 @@
     },
     {
       "sql_type": "bigint",
-      "go_type": "int64",
+      "go_type": "uint",
       "json_type": "Integer",
-      "protobuf_type": "int64",
-      "guregu_type": "int64",
-      "go_nullable_type": "int64",
-      "swagger_type": "int64"
+      "protobuf_type": "uint",
+      "guregu_type": "uint",
+      "go_nullable_type": "uint",
+      "swagger_type": "uint"
     },
     {
       "sql_type": "int8",
@@ -325,7 +325,6 @@
       "go_nullable_type": "float64",
       "swagger_type": "float64"
     },
-
     {
       "sql_type": "float",
       "go_type": "float32",
@@ -344,7 +343,6 @@
       "go_nullable_type": "float32",
       "swagger_type": "float32"
     },
-
     {
       "sql_type": "binary",
       "go_type": "[]byte",
