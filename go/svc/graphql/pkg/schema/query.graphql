@@ -1,5 +1,0 @@
-type Query {
-    currentUser: User
-    user(id: ID!): User
-    articles(userId: ID): [Article]
-}
