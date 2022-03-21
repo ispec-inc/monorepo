@@ -68,7 +68,7 @@ async function fetchQuery(
     await new Promise((r) => setTimeout(r, Math.random() * 500 + 100))
 
     // TODO: Add enpoint URL
-    const endpoint = 'http://localhost:9000/graphql'
+    const endpoint = 'http://localhost:9000/graphql-ddd'
 
     const res = await fetch(endpoint, {
       method: 'POST',
