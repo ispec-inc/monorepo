@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<5f20c9f5ac61e8c5bc0239e74b42c2d3>>
+ * @generated SignedSource<<92b121b10552634e076ee69c25a5d71d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,16 +9,16 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-export type RelayTestQueryGetCurrentUser_nodeQuery$variables = {};
-export type RelayTestQueryGetCurrentUser_nodeQuery$data = {
+export type CurrentUser_nodeQuery$variables = {};
+export type CurrentUser_nodeQuery$data = {
   readonly currentUser: {
     readonly id: string;
     readonly name: string;
   } | null;
 };
-export type RelayTestQueryGetCurrentUser_nodeQuery = {
-  variables: RelayTestQueryGetCurrentUser_nodeQuery$variables;
-  response: RelayTestQueryGetCurrentUser_nodeQuery$data;
+export type CurrentUser_nodeQuery = {
+  variables: CurrentUser_nodeQuery$variables;
+  response: CurrentUser_nodeQuery$data;
 };
 
 const node: ConcreteRequest = (function(){
@@ -54,7 +54,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "RelayTestQueryGetCurrentUser_nodeQuery",
+    "name": "CurrentUser_nodeQuery",
     "selections": (v0/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -63,20 +63,20 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "RelayTestQueryGetCurrentUser_nodeQuery",
+    "name": "CurrentUser_nodeQuery",
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "72b560e90c6779d198da0f564d0425da",
+    "cacheID": "e01409728e0ea81c7ec7b73f28b2adc9",
     "id": null,
     "metadata": {},
-    "name": "RelayTestQueryGetCurrentUser_nodeQuery",
+    "name": "CurrentUser_nodeQuery",
     "operationKind": "query",
-    "text": "query RelayTestQueryGetCurrentUser_nodeQuery {\n  currentUser {\n    id\n    name\n  }\n}\n"
+    "text": "query CurrentUser_nodeQuery {\n  currentUser {\n    id\n    name\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "cada820a5323bd4ac17dac450a32dfb4";
+(node as any).hash = "d708c4d082c604cf3d1888d68abea0e1";
 
 export default node;

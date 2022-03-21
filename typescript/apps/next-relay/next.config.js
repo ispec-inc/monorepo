@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   react: {
-    useSuspense: false
+    useSuspense: false,
+    wait: true
   }
 }
 

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9b8e023dd9b625d18f5349cd1d658285>>
+ * @generated SignedSource<<d25ae95cf99d61de0f808b97af2c5a27>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,18 +9,18 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-export type RelayTestQueryGetUser_nodeQuery$variables = {
+export type User_nodeQuery$variables = {
   id: string;
 };
-export type RelayTestQueryGetUser_nodeQuery$data = {
+export type User_nodeQuery$data = {
   readonly user: {
     readonly id: string;
     readonly name: string;
   } | null;
 };
-export type RelayTestQueryGetUser_nodeQuery = {
-  variables: RelayTestQueryGetUser_nodeQuery$variables;
-  response: RelayTestQueryGetUser_nodeQuery$data;
+export type User_nodeQuery = {
+  variables: User_nodeQuery$variables;
+  response: User_nodeQuery$data;
 };
 
 const node: ConcreteRequest = (function(){
@@ -69,7 +69,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "RelayTestQueryGetUser_nodeQuery",
+    "name": "User_nodeQuery",
     "selections": (v1/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -78,20 +78,20 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "RelayTestQueryGetUser_nodeQuery",
+    "name": "User_nodeQuery",
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "ccf6a6d4b828b9808edd112e8f5a6da6",
+    "cacheID": "8cdae393cb2368337d2679069d689ffb",
     "id": null,
     "metadata": {},
-    "name": "RelayTestQueryGetUser_nodeQuery",
+    "name": "User_nodeQuery",
     "operationKind": "query",
-    "text": "query RelayTestQueryGetUser_nodeQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    id\n    name\n  }\n}\n"
+    "text": "query User_nodeQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    id\n    name\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "e49dff2264803b249db9cc1410efff92";
+(node as any).hash = "dc8313b6304ee3738a01aa3a4743866f";
 
 export default node;

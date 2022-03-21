@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<74c3090a25fa9407890bc9e092fdcb7e>>
+ * @generated SignedSource<<83dd33270de4807ae69562cd9b6c4e43>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,19 +9,19 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-export type RelayTestQueryGetUserArticles_nodeQuery$variables = {
+export type UserArticles_nodeQuery$variables = {
   userId: string;
 };
-export type RelayTestQueryGetUserArticles_nodeQuery$data = {
+export type UserArticles_nodeQuery$data = {
   readonly articles: ReadonlyArray<{
     readonly id: string;
     readonly title: string;
     readonly body: string;
   } | null> | null;
 };
-export type RelayTestQueryGetUserArticles_nodeQuery = {
-  variables: RelayTestQueryGetUserArticles_nodeQuery$variables;
-  response: RelayTestQueryGetUserArticles_nodeQuery$data;
+export type UserArticles_nodeQuery = {
+  variables: UserArticles_nodeQuery$variables;
+  response: UserArticles_nodeQuery$data;
 };
 
 const node: ConcreteRequest = (function(){
@@ -77,7 +77,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "RelayTestQueryGetUserArticles_nodeQuery",
+    "name": "UserArticles_nodeQuery",
     "selections": (v1/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -86,20 +86,20 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "RelayTestQueryGetUserArticles_nodeQuery",
+    "name": "UserArticles_nodeQuery",
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "64884bef29b12968a03076adffdf2a30",
+    "cacheID": "c8d4931c7543b9f2b0d43f8426656ba7",
     "id": null,
     "metadata": {},
-    "name": "RelayTestQueryGetUserArticles_nodeQuery",
+    "name": "UserArticles_nodeQuery",
     "operationKind": "query",
-    "text": "query RelayTestQueryGetUserArticles_nodeQuery(\n  $userId: ID!\n) {\n  articles(userId: $userId) {\n    id\n    title\n    body\n  }\n}\n"
+    "text": "query UserArticles_nodeQuery(\n  $userId: ID!\n) {\n  articles(userId: $userId) {\n    id\n    title\n    body\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "35dde112b9288a270f3b2a962e2d969e";
+(node as any).hash = "95a23347bc9849d51d71647aa1041e10";
 
 export default node;
