@@ -1,0 +1,5 @@
+query getPatches {
+  getPatches {
+    id
+  }
+}
