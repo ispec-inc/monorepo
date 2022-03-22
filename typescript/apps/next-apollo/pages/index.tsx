@@ -1,8 +1,8 @@
 import { useQuery, gql } from '@apollo/client'
 
 const QUERY = gql`
-  query getPatches {
-    getPatches {
+  query getArticles {
+    articles {
       id
     }
   }
