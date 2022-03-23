@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { NextPage } from 'next'
 import { useQuery, gql } from '@apollo/client'
 
 const QUERY = gql`
@@ -8,7 +10,8 @@ const QUERY = gql`
   }
 `
 
-const Home = () => {
+const Home: NextPage = () => {
+  const [count, setCount] = useState(0)
   const { data, loading, error } = useQuery(QUERY)
 
   if (loading) {
@@ -49,6 +52,8 @@ const Home = () => {
   return (
     <>
       <div>React Next Framework & Apollo Client</div>
+      {count}
+      <button onClick={() => setCount(count + 1)}>aaa</button>
     </>
   )
 }
