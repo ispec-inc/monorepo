@@ -3,7 +3,7 @@
 
 .PHONY: gen
 
-run: init run-middleware article-migrate server
+run: init article-migrate seed server
 
 ci-test: init test
 
