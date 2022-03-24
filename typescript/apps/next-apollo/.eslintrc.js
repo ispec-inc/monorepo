@@ -23,6 +23,7 @@ module.exports = {
     'eslint-plugin-import',
     'typescript-sort-keys',
   ],
+  root: true,
   rules: {
     '@typescript-eslint/array-type': [
       'error',

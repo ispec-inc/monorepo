@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm-run-all -p dev:*",
+    "dev:next": "next dev",
+    "dev:graphql": "yarn ggen --watch",
     "build": "next build",
     "start": "next start",
     "lint": "run-p lint:*",
     "lint:ts": "eslint --ext .tsx --ext .ts --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{ts,tsx,css} --ignore-path .gitignore",
-    "hygen": "hygen"
+    "hygen": "hygen",
+    "ggen": "graphql-codegen --config codegen.yml"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --max-warnings=0 --ext .tsx --ext .ts --fix",
@@ -22,13 +25,16 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
-    "graphql": "^16.3.0",
     "next": "^12.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "sass": "^1.49.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript-operations": "2.3.5",
+    "@graphql-codegen/typescript-react-apollo": "3.2.11",
     "@types/node": "^17.0.13",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
@@ -43,6 +49,7 @@
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.6.0",
     "typescript": "^4.5.5"
   }

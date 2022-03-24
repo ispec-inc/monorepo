@@ -1,7 +1,5 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 
-console.debug('いつ実行されんの?')
-
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
