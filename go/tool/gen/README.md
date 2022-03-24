@@ -42,17 +42,5 @@ $ make gen
 $ make gen opt=--overwrite
 ```
 
-- .protoファイルを生成
-
-```
-$ make protogen
-```
-
-- .protoファイルを上書き保存
-
-```
-$ make protogen opt=--overwrite
-```
-
 ## And more
 https://github.com/smallnest/gen

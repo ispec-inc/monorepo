@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 .DEFAULT_GOAL := help
 
-.PHONY: init build seed server test update-proto mockgen mockadd help
+.PHONY: init build seed server test mockgen mockadd help
 
 init: ## setup docker build, network, and databases
 	docker network create monorepo || true

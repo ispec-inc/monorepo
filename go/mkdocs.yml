@@ -3,7 +3,6 @@ nav:
   - Getting Started:
     - Overview: getting-started/overview.md
     - Test: getting-started/test.md
-    - Protocol Buffer: getting-started/protocol-buffer.md
   - Design:
     - Architecture: design/architecture.md
   - Setting:
