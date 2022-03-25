@@ -1,8 +1,5 @@
 .vscode/
 .idea/
 
-# gen command
-gen/.env
-
 # OS X
 .DS_Store
