@@ -4,9 +4,9 @@ services:
     container_name: gen
     build:
       context: .
-      dockerfile: go/tool/gen/docker/Dockerfile
+      dockerfile: go/tools/gen/docker/Dockerfile
     env_file:
-      - go/tool/gen/.env
+      - go/tools/gen/.env
     volumes:
       - ./:/workspace
     working_dir: /workspace
