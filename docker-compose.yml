@@ -81,7 +81,7 @@ services:
     networks:
       - monorepo
     volumes:
-      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./go/docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
   article-mysql-test:
     container_name: monorepo-article-mysql-test
@@ -95,7 +95,7 @@ services:
     networks:
       - monorepo
     volumes:
-      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./go/docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
   dockerize:
     image: jwilder/dockerize:0.6.1
