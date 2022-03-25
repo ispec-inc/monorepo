@@ -15,13 +15,13 @@ build:
 	docker-compose build
 
 seed: ## insert seed data
-	docker-compose run --rm monorepo-api go run ./cmd/db/seed
+	docker-compose run --rm api go run ./cmd/db/seed
 
 server: ## go run server
 	docker-compose up -d article-mysql
 	docker-compose up -d message-bus-redis
 	docker-compose run --rm dockerize -wait tcp://article-mysql:3306 -timeout 20s
-	docker-compose up monorepo-api
+	docker-compose up api
 
 test: pkg = ./...
 test: ## go test
