@@ -1,12 +1,12 @@
-version: '2.2'
+version: '3.8'
 services:
   gen:
     container_name: gen
     build:
       context: .
-      dockerfile: go/tool/gen/docker/Dockerfile
+      dockerfile: go/tools/gen/docker/Dockerfile
     env_file:
-      - go/tool/gen/.env
+      - go/tools/gen/.env
     volumes:
       - ./:/workspace
     working_dir: /workspace
@@ -81,7 +81,7 @@ services:
     networks:
       - monorepo
     volumes:
-      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./go/docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
   article-mysql-test:
     container_name: monorepo-article-mysql-test
@@ -95,7 +95,7 @@ services:
     networks:
       - monorepo
     volumes:
-      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./go/docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
   dockerize:
     image: jwilder/dockerize:0.6.1

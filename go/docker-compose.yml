@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.8'
 services:
   api:
     container_name: monorepo-api
@@ -8,7 +8,6 @@ services:
     command: air -c .air.toml
     ports:
       - "9000:9000"
-      - "2345:2345"
     env_file:
       - .env/server
     depends_on:
@@ -48,6 +47,7 @@ services:
   article-mysql:
     container_name: monorepo-article-mysql
     image: mysql:5.7
+    platform: linux/x86_64
     environment:
       MYSQL_DATABASE: article
       MYSQL_ROOT_PASSWORD: password
@@ -61,6 +61,7 @@ services:
   article-mysql-test:
     container_name: monorepo-article-mysql-test
     image: mysql:5.7
+    platform: linux/x86_64
     environment:
       MYSQL_DATABASE: article
       MYSQL_ROOT_PASSWORD: password
