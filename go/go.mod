@@ -1,6 +1,6 @@
 module github.com/ispec-inc/monorepo/go
 
-go 1.17
+go 1.18
 
 require (
 	github.com/DATA-DOG/go-txdb v0.1.5
