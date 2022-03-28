@@ -1,12 +1,17 @@
 ---
-to: "<%= type === 'payload' ? `core/model/payload/${path}/index.ts` : null %>"
+to: "<%= type === 'payload' ? `core/models/payload/${path}/index.ts` : null %>"
 ---
 <%
-  InterfaceName = 'I' + h.changeCase.pascalCase(name) + 'PayloadModel'
+  BaseName = h.changeCase.pascalCase(path.split('/').join('-'))
+  InterfaceName = 'I' + BaseName + 'PayloadModel'
 %>
-import { IPayloadModel } from "~/core/model/payload/_interface";
+import { IPayloadModel } from "~/core/models/payload/_interface";
 
-export interface <%= InterfaceName %> extends IPayloadModel</* Replace with the corresponding api request type */> {}
+interface Params {}
 
-export class <%= h.changeCase.pascalCase(name) %>PayloadModelImpl implements <%= InterfaceName %> {}
+export interface <%= InterfaceName %> extends Params, IPayloadModel</* Replace with the corresponding api request type */> {}
+
+export class <%= BaseName %>PayloadModelImpl implements <%= InterfaceName %> {
+  constructor(params: Params) {}
+}
 

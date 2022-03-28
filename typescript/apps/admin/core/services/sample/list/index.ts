@@ -1,39 +1,21 @@
-import { ISampleListUsecases } from "./usecases";
 import { ServiceBase } from "~/core/services/_base";
-import { ISamplePostModel } from "~/core/models/domain/sample";
-import { AsyncProcessHelper } from "~/utils/aync-process-helper";
-import ErrorModel from "~/core/models/error";
-import { Stream } from "~/utils/stream";
+import { ISamplePostFindAllRepository } from "~/core/repositories/sample/post/find-all";
+import { SamplePostModelImpl } from "~/core/models/domain/sample";
 
-export class SampleListPageService extends ServiceBase<ISampleListUsecases> {
-  private _posts: ISamplePostModel[] = []
-  private readonly fetchHelper: AsyncProcessHelper<ISamplePostModel[], []>
+interface Repositories {
+  findAll: ISamplePostFindAllRepository
+}
 
-  constructor(usecases: ISampleListUsecases) {
-    super(usecases)
-
-    this.fetchHelper = new AsyncProcessHelper(usecases.findAll.bind(usecases))
-  }
-
+export class SampleListPageService extends ServiceBase<Repositories> {
   async fetch(): Promise<void> {
-    this._posts = []
-    this._posts = await this.fetchHelper.run()
-      .catch((e) => {
-        const model = new ErrorModel(e)
-        this.fetchHelper.setErrorMessage(model.message)
-        return []
-      })
+    await this.repositories.findAll.fetch().catch((err) => { throw err })
   }
 
-  get slicedPosts(): ISamplePostModel[] {
-    return this._posts.slice(0, 10)
+  get isAwaitingFetch(): boolean {
+    return this.repositories.findAll.isAwaitingResponse
   }
 
-  get isAwaiting(): boolean {
-    return this.fetchHelper.isAwaitingResponse
-  }
-
-  get errorStream(): Stream<string> {
-    return this.fetchHelper.errorMessageStream
+  get posts(): SamplePostModelImpl[] {
+    return this.repositories.findAll.posts ?? []
   }
 }

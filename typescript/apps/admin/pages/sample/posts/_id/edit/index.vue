@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="mb-6">Edit Post</h2>
-    <v-card :loading="isAwaiting" :disabled="isAwaiting">
+    <v-card :loading="service.isAwaiting" :disabled="service.isAwaiting">
       <v-card-text>
         <v-form v-model="valid">
           <v-text-field v-model="title" :rules="rules" label="title" />
@@ -11,7 +11,7 @@
           <v-spacer />
           <v-btn
             class="primary"
-            :disabled="!valid || isAwaiting"
+            :disabled="!valid || service.isAwaiting"
             @click="submit"
             >submit</v-btn
           >
@@ -28,17 +28,20 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import UseSubscription from '~/components/mixins/use-subscription'
+import ErrorModel from '~/core/models/error'
+import { SamplePostFindRepositoryImpl } from '~/core/repositories/sample/post/find'
+import { SamplePostUpdateRepositoryImpl } from '~/core/repositories/sample/post/update'
 import { SampleUpdatePageService } from '~/core/services/sample/update'
-import { SampleUpdatePageUsecasesImpl } from '~/core/services/sample/update/usecases'
 import { GlobalEventBus } from '~/surface/event-bus/global'
-
-const SERVICE = new SampleUpdatePageService(new SampleUpdatePageUsecasesImpl())
 
 @Component({
   components: {},
 })
 export default class PostEditPage extends mixins(UseSubscription) {
-  readonly service = SERVICE
+  readonly service = new SampleUpdatePageService({
+    find: new SamplePostFindRepositoryImpl(),
+    update: new SamplePostUpdateRepositoryImpl(),
+  })
 
   valid = false
 
@@ -54,38 +57,46 @@ export default class PostEditPage extends mixins(UseSubscription) {
   }
 
   created(): void {
-    this.subscription.add(
-      this.service.errorStream.subscribe((message) => {
+    this.fetchPost(this.id)
+  }
+
+  async fetchPost(id: number): Promise<void> {
+    const model = await this.service.fetch(id).catch((err) => {
+      const { message } = new ErrorModel(err)
+      GlobalEventBus.getInstance().dispatchSnackbarEvent({
+        type: 'error',
+        message,
+      })
+
+      return null
+    })
+
+    if (!model) {
+      this.$router.push(this.$pagesPath.sample.posts.$url())
+      return
+    }
+
+    this.title = model.title
+    this.body = model.body
+  }
+
+  submit(): void {
+    this.service
+      .update(this.id, this.title, this.body)
+      .then(() => {
+        this.$router.push(this.$pagesPath.sample.posts.$url())
+        GlobalEventBus.getInstance().dispatchSnackbarEvent({
+          type: 'success',
+          message: '投稿の更新に成功しました',
+        })
+      })
+      .catch((err) => {
+        const { message } = new ErrorModel(err)
         GlobalEventBus.getInstance().dispatchSnackbarEvent({
           type: 'error',
           message,
         })
       })
-    )
-
-    this.service.fetch(this.id).then((model) => {
-      if (model) {
-        this.title = model.title
-        this.body = model.body
-        return
-      }
-
-      this.$router.push(this.$pagesPath.sample.posts.$url())
-    })
-  }
-
-  submit(): void {
-    this.service.update(this.id, this.title, this.body).then(() => {
-      this.$router.push(this.$pagesPath.sample.posts.$url())
-      GlobalEventBus.getInstance().dispatchSnackbarEvent({
-        type: 'success',
-        message: '投稿の更新に成功しました',
-      })
-    })
-  }
-
-  get isAwaiting(): boolean {
-    return this.service.isAwaiting
   }
 }
 </script>

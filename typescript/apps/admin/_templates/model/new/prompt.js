@@ -7,13 +7,8 @@ module.exports = [
   },
   {
     type: 'input',
-    name: 'name',
-    message: 'Modelの名前を入力してください。\n例) Article',
-  },
-  {
-    type: 'input',
     name: 'path',
     message:
-      'core/model/[domain|payload]以下のパスを入力してください。\n例) article',
+      'core/models/[domain|payload]以下のパスを入力してください。先頭、末尾の"/"は不要です。\n例) article',
   },
 ]

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="mb-6">Create Post</h2>
-    <v-card :loading="isAwaiting" :disabled="isAwaiting">
+    <v-card :loading="service.isAwaiting" :disabled="service.isAwaiting">
       <v-card-text>
         <v-form v-model="valid">
           <v-text-field v-model="title" :rules="rules" label="title" />
@@ -11,7 +11,7 @@
           <v-spacer />
           <v-btn
             class="primary"
-            :disabled="!valid || isAwaiting"
+            :disabled="!valid || service.isAwaiting"
             @click="submit"
             >submit</v-btn
           >
@@ -28,17 +28,18 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import UseSubscription from '~/components/mixins/use-subscription'
+import ErrorModel from '~/core/models/error'
+import { SamplePostCreateRepositoryImpl } from '~/core/repositories/sample/post/create'
 import { SampleCreatePageService } from '~/core/services/sample/create'
-import { SampleCreatePageUsecasesImpl } from '~/core/services/sample/create/usecases'
 import { GlobalEventBus } from '~/surface/event-bus/global'
-
-const SERVICE = new SampleCreatePageService(new SampleCreatePageUsecasesImpl())
 
 @Component({
   components: {},
 })
 export default class PostCreatePage extends mixins(UseSubscription) {
-  readonly service = SERVICE
+  readonly service = new SampleCreatePageService({
+    create: new SamplePostCreateRepositoryImpl(),
+  })
 
   valid = false
 
@@ -49,29 +50,23 @@ export default class PostCreatePage extends mixins(UseSubscription) {
     (v: string): string | boolean => !!v || 'required',
   ]
 
-  created(): void {
-    this.service.errorStream
-      .subscribeAsDisposable((message) => {
+  submit(): void {
+    this.service
+      .create(1, this.title, this.body)
+      .then(() => {
+        this.$router.push(this.$pagesPath.sample.posts.$url())
+        GlobalEventBus.getInstance().dispatchSnackbarEvent({
+          type: 'success',
+          message: '投稿の作成に成功しました',
+        })
+      })
+      .catch((err) => {
+        const { message } = new ErrorModel(err)
         GlobalEventBus.getInstance().dispatchSnackbarEvent({
           type: 'error',
           message,
         })
       })
-      .disposedBy(this.subscription)
-  }
-
-  submit(): void {
-    this.service.create(1, this.title, this.body).then(() => {
-      this.$router.push(this.$pagesPath.sample.posts.$url())
-      GlobalEventBus.getInstance().dispatchSnackbarEvent({
-        type: 'success',
-        message: '投稿の作成に成功しました',
-      })
-    })
-  }
-
-  get isAwaiting(): boolean {
-    return this.service.isAwaiting
   }
 }
 </script>

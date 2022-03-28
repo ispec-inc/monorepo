@@ -1,79 +1,38 @@
-import { merge, Observable } from 'rxjs'
-import { ISampleDetailPageUsecases } from "./usecases";
+
+
+import { SamplePostModelImpl } from "~/core/models/domain/sample";
+import { SamplePostCommentModelImpl } from "~/core/models/domain/sample/comment";
+import { ISampleCommentFindAllRepository } from "~/core/repositories/sample/comment/find-all";
+import { ISamplePostFindRepository } from "~/core/repositories/sample/post/find";
 import { ServiceBase } from "~/core/services/_base";
-import { ISamplePostModel } from "~/core/models/domain/sample";
 import { Maybe } from "~/types/advanced";
-import { ISamplePostCommentModel, SamplePostCommentEntry } from "~/core/models/domain/sample/comment";
-import { AsyncProcessHelper } from "~/utils/aync-process-helper";
-import ErrorModel from "~/core/models/error";
 
-export class SampleDetailPageService extends ServiceBase<ISampleDetailPageUsecases> {
-  private _post: Maybe<ISamplePostModel> = null
-  private _comments: Maybe<ISamplePostCommentModel[]> = null
+interface Repositories {
+  find: ISamplePostFindRepository
+  comments: ISampleCommentFindAllRepository
+}
 
-  private readonly fetchPostHelper: AsyncProcessHelper<ISamplePostModel, Parameters<ISampleDetailPageUsecases['fetch']>>
-  private readonly fetchCommentsHelper: AsyncProcessHelper<ISamplePostCommentModel[], Parameters<ISampleDetailPageUsecases['fetchComments']>>
-
-  constructor(usecase: ISampleDetailPageUsecases) {
-    super(usecase)
-
-    this.fetchPostHelper = new AsyncProcessHelper(usecase.fetch.bind(usecase))
-    this.fetchCommentsHelper = new AsyncProcessHelper(usecase.fetchComments.bind(usecase))
-  }
-
-  fetch(id: number): void {
-    this.clearData()
-    this.fetchPost(id)
-    this.fetchComments(id)
-  }
-
-  private async fetchPost(id: number): Promise<void> {
-    this._post = await this.fetchPostHelper.run(id)
-      .catch((e) => {
-        const model = new ErrorModel(e)
-        this.fetchPostHelper.setErrorMessage(model.message)
-        return null
-      })
-  }
-
-  private async fetchComments(id: number): Promise<void> {
-    this._comments = await this.fetchCommentsHelper.run(id)
-      .catch((e) => {
-        const model = new ErrorModel(e)
-        this.fetchCommentsHelper.setErrorMessage(model.message)
-        return null
-      })
-  }
-
-  clearData(): void {
-    this._post = null
-    this._comments = null
-  }
-
-  get title(): string {
-    return this._post?.title ?? ''
-  }
-
-  get body(): string {
-    return this._post?.body ?? ''
-  }
-
-  get commentEntries(): SamplePostCommentEntry[] {
-    return (this._comments ?? []).map((c) => c.toEntry())
+export class SampleDetailPageService extends ServiceBase<Repositories> {
+  async fetch(id: number): Promise<void> {
+    await Promise.all([
+      this.repositories.find.fetch(id).catch((err) => { throw err }),
+      this.repositories.comments.fetch(id).catch((err) => { throw err })
+    ])
   }
 
   get isAwaitingPost(): boolean {
-    return this.fetchPostHelper.isAwaitingResponse
+    return this.repositories.find.isAwaitingResponse
   }
 
   get isAwaitingComments(): boolean {
-    return this.fetchCommentsHelper.isAwaitingResponse
+    return this.repositories.comments.isAwaitingResponse
   }
 
-  get errorStream(): Observable<string> {
-    return merge(
-      this.fetchPostHelper.errorMessageStream,
-      this.fetchCommentsHelper.errorMessageStream
-    )
+  get post(): Maybe<SamplePostModelImpl> {
+    return this.repositories.find.post
+  }
+
+  get comments(): SamplePostCommentModelImpl[] {
+    return this.repositories.comments.comments ?? []
   }
 }

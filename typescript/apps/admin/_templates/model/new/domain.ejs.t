@@ -1,10 +1,15 @@
 ---
-to: "<%= type === 'domain' ? `core/model/domain/${path}/index.ts` : null %>"
+to: "<%= type === 'domain' ? `core/models/domain/${path}/index.ts` : null %>"
 ---
 <%
-  InterfaceName = 'I' + h.changeCase.pascalCase(name) + 'Model'
+  BaseName = h.changeCase.pascalCase(path.split('/').join('-'))
+  InterfaceName = 'I' + BaseName + 'Model'
 %>
-export interface <%= InterfaceName %> {}
+interface Params {}
 
-export class <%= h.changeCase.pascalCase(name) %>ModelImpl implements <%= InterfaceName %> {}
+export interface <%= InterfaceName %> extends Params {}
+
+export class <%= BaseName %>ModelImpl implements <%= InterfaceName %> {
+  constructor(params: Params) {}
+}
 

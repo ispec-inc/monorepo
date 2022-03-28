@@ -1,45 +1,32 @@
-import { merge, Observable } from 'rxjs'
-import { ISampleUpdatePageUsecases } from "./usecases";
-import { ServiceBase } from "~/core/services/_base";
+
+
+import { ISamplePostModel } from "~/core/models/domain/sample";
 import { SampleUpdatePayloadModelImpl } from "~/core/models/payload/sample/update";
-import { AsyncProcessHelper } from "~/utils/aync-process-helper";
-import { ISamplePostModel, SamplePostModelImpl } from "~/core/models/domain/sample";
-import ErrorModel from "~/core/models/error";
-import { Maybe } from '~/types/advanced';
+import { ISamplePostFindRepository } from "~/core/repositories/sample/post/find";
+import { ISamplePostUpdateRepository } from "~/core/repositories/sample/post/update";
+import { ServiceBase } from "~/core/services/_base";
 
-export class SampleUpdatePageService extends ServiceBase<ISampleUpdatePageUsecases> {
-  private readonly fetchHelper: AsyncProcessHelper<SamplePostModelImpl, Parameters<ISampleUpdatePageUsecases['fetch']>>
-  private readonly updateHelper: AsyncProcessHelper<void, Parameters<ISampleUpdatePageUsecases['update']>>
+interface Repositories {
+  find: ISamplePostFindRepository
+  update: ISamplePostUpdateRepository
+}
 
-  constructor(usecases: ISampleUpdatePageUsecases) {
-    super(usecases)
+export class SampleUpdatePageService extends ServiceBase<Repositories> {
+  async fetch(id: number): Promise<ISamplePostModel> {
+    const model = await this.repositories.find.fetch(id).catch((err) => { throw err })
 
-    this.fetchHelper = new AsyncProcessHelper(usecases.fetch.bind(usecases))
-    this.updateHelper = new AsyncProcessHelper(usecases.update.bind(usecases))
-  }
-
-  async fetch(id: number): Promise<Maybe<ISamplePostModel>> {
-    return await this.fetchHelper.run(id).catch((e) => {
-      const model = new ErrorModel(e);
-      this.updateHelper.setErrorMessage(model.message);
-      return null
-    })
+    return model
   }
 
   async update(id: number, title: string, body: string): Promise<void> {
-    const payload = new SampleUpdatePayloadModelImpl(title, body)
-    return await this.updateHelper.run(id, payload)
-      .catch((e) => {
-        const model = new ErrorModel(e)
-        this.updateHelper.setErrorMessage(model.message)
-      })
+    const payload = new SampleUpdatePayloadModelImpl({
+      title,
+      body
+    })
+    await this.repositories.update.patch(id, payload).catch((err) => { throw err })
   }
 
   get isAwaiting(): boolean {
-    return this.fetchHelper.isAwaitingResponse || this.updateHelper.isAwaitingResponse
-  }
-
-  get errorStream(): Observable<string> {
-    return merge(this.fetchHelper.errorMessageStream, this.updateHelper.errorMessageStream)
+    return this.repositories.find.isAwaitingResponse || this.repositories.update.isAwaitingResponse
   }
 }

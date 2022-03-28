@@ -1,23 +1,20 @@
-import { SamplePostResponse } from "~/types/response/sample"
-
-export interface ISamplePostModel {
+interface Params {
   readonly id: number
   readonly title: string
   readonly body: string
 }
+
+export interface ISamplePostModel extends Params {}
 
 export class SamplePostModelImpl implements ISamplePostModel {
   readonly id: number
   readonly title: string
   readonly body: string
 
-  constructor(id: number, title: string, body: string) {
+  constructor(params: Params) {
+    const { id, title, body } = params
     this.id = id
     this.title = title
     this.body = body
-  }
-
-  static fromApiResponse(response: SamplePostResponse): SamplePostModelImpl {
-    return new this(response.id, response.title, response.body)
   }
 }

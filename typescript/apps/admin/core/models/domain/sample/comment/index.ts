@@ -2,12 +2,14 @@ import { SamplePostCommentResponse } from "~/types/response/sample"
 
 export type SamplePostCommentEntry = [id: number, value: { name: string, email: string, body: string }]
 
-export interface ISamplePostCommentModel {
+interface Params {
   readonly id: number
   readonly name: string
   readonly email: string
   readonly body: string
+}
 
+export interface ISamplePostCommentModel extends Params {
   toEntry(): SamplePostCommentEntry
 }
 
@@ -17,7 +19,8 @@ export class SamplePostCommentModelImpl implements ISamplePostCommentModel {
   readonly email: string
   readonly body: string
 
-  constructor(id: number, name: string, email: string, body: string) {
+  constructor(params: Params) {
+    const { id, name, email, body } = params
     this.id = id
     this.name = name
     this.email = email
@@ -26,10 +29,5 @@ export class SamplePostCommentModelImpl implements ISamplePostCommentModel {
 
   toEntry(): SamplePostCommentEntry {
     return [this.id, { name: this.name, email: this.email, body: this.body }]
-  }
-
-  static fromApiResponse(response: SamplePostCommentResponse): SamplePostCommentModelImpl {
-    const { id, name, email, body } = response
-    return new this(id, name, email, body)
   }
 }

@@ -1,14 +1,21 @@
 import { IPayloadModel } from "../../_interface";
 import { SamplePostCreateRequest } from "~/types/request/sample/create";
 
-export interface ISampleCreatePayloadModel extends IPayloadModel<SamplePostCreateRequest> {}
+interface Params {
+  readonly userId: number
+  readonly title: string
+  readonly body: string
+}
+
+export interface ISampleCreatePayloadModel extends Params, IPayloadModel<SamplePostCreateRequest> {}
 
 export class SampleCreatePayloadModelImpl implements ISampleCreatePayloadModel {
   readonly userId: number
   readonly title: string
   readonly body: string
 
-  constructor(userId: number, title: string, body: string) {
+  constructor(params: Params) {
+    const { userId, title, body } = params
     this.userId = userId
     this.title = title
     this.body = body

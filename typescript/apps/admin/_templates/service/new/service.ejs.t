@@ -1,11 +1,12 @@
 ---
-to: "core/service/<%= path %>/index.ts"
+to: "core/services/<%= path %>/index.ts"
 ---
 <%
-  UsecaseInterfaceName = 'I' + h.changeCase.pascalCase(name) + 'Usecases'
+  BaseName = h.changeCase.pascalCase(path.split('/').join('-'))
 %>
 
-import { <%= UsecaseInterfaceName %> } from "./usecases";
-import { ServiceBase } from "~/core/service/_base";
+import { ServiceBase } from "~/core/services/_base";
 
-export class <%= h.changeCase.pascalCase(name) %>Service extends ServiceBase<<%= UsecaseInterfaceName %>> {}
+interface Repositories {}
+
+export class <%= BaseName %>PageService extends ServiceBase<Repositories> {}

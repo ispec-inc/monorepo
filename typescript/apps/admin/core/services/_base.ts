@@ -1,7 +1,7 @@
 export abstract class ServiceBase<T> {
-  protected readonly usecases: T
+  protected readonly repositories: T
 
-  constructor(usecases: T) {
-    this.usecases = usecases
+  constructor(repositories: T) {
+    this.repositories = repositories
   }
 }

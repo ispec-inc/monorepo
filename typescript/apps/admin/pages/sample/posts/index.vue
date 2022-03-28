@@ -3,9 +3,9 @@
     <h2>Posts</h2>
     <v-btn class="mt-6 primary" @click="pushToCreatePage">+ Create Post</v-btn>
     <div class="my-10">
-      <v-skeleton-loader v-if="isAwaiting" type="article" />
+      <v-skeleton-loader v-if="service.isAwaitingFetch" type="article" />
       <v-card
-        v-for="p of posts"
+        v-for="p of service.posts"
         :key="p.id"
         class="my-6"
         @click="pushToDetailPage(p.id)"
@@ -20,37 +20,31 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import UseSubscription from '~/components/mixins/use-subscription'
-import { ISamplePostModel } from '~/core/models/domain/sample'
+import ErrorModel from '~/core/models/error'
+import { SamplePostFindAllRepositoryImpl } from '~/core/repositories/sample/post/find-all'
 import { SampleListPageService } from '~/core/services/sample/list'
-import { SampleListUsecaseImpl } from '~/core/services/sample/list/usecases'
 import { GlobalEventBus } from '~/surface/event-bus/global'
-
-const SERVICE = new SampleListPageService(new SampleListUsecaseImpl())
 
 @Component({
   components: {},
 })
 export default class PostIndexPage extends mixins(UseSubscription) {
-  readonly service = SERVICE
+  readonly service = new SampleListPageService({
+    findAll: new SamplePostFindAllRepositoryImpl(),
+  })
 
   created(): void {
-    this.service.fetch()
-    this.service.errorStream
-      .subscribeAsDisposable((message) => {
-        GlobalEventBus.getInstance().dispatchSnackbarEvent({
-          type: 'error',
-          message,
-        })
+    this.fetchPosts()
+  }
+
+  fetchPosts(): void {
+    this.service.fetch().catch((err) => {
+      const { message } = new ErrorModel(err)
+      GlobalEventBus.getInstance().dispatchSnackbarEvent({
+        type: 'error',
+        message,
       })
-      .disposedBy(this.subscription)
-  }
-
-  get posts(): ISamplePostModel[] {
-    return this.service.slicedPosts
-  }
-
-  get isAwaiting(): boolean {
-    return this.service.isAwaiting
+    })
   }
 
   pushToDetailPage(id: number): void {
