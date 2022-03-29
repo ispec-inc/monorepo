@@ -15,21 +15,18 @@
 ## 実装
 - `$ yarn hygen model new`でファイルを生成
 - 生成されたファイルでinterfaceを定義し、同ファイルで実装を書く
-- コンストラクタでは原則APIの実装に合わせて定義した型は扱わず、プリミティブな値を受け取る形が望ましい(汎用性を高めるため)
-  - 引数が多くなりそうな場合は、タプル型を用いるか、同ファイルで引数用の型を定義してそれを使用することができる
-- APIからのレスポンス型に紐づく`Model`である場合は、そのレスポンス型で値を引数に取り自身のインスタンスを返すstatic関数を`fromApiResponse`という名前で実装することができる
+- コンストラクタで受け取る値は同ファイルの`Params`という名前のinterfaceで定義する
 
 ## 実装例
 - [SamplePostModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/models/domain/sample/index.ts)
 - [SamplePostCommentModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/models/domain/sample/comment/index.ts)
 
 ## 関連
-![関連](./frontend-dataflow-domain-model-relation.drawio.png "関連")
+![関連](./domain.png "関連")
 
 ## バックリンク
 - [Models](./index.md)
-- [Gateways](../gateway.md)
 - [Services](../service/index.md)
-- [Usecases](../service/usecases.md)
+- [Repositories](../repositories/index.md)
 - [Frontend Data Flow Architectue](../../index.md)
 - [実装手順](../../impl-procedure.md)

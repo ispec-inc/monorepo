@@ -13,9 +13,8 @@
 - [Models](./layers/model/index.md)
   - [DomainModel](./layers/model/domain.md)
   - [PayloadModel](./layers/model/payload.md)
-- [Gateways](./layers/gateway.md)
 - [Services](./layers/service/index.md)
-  - [Usecases](./layers/service/usecases.md)
+- [Repositories](./layers/repositories/index.md)
 
 ## 実装手順について
 - [こちら](./impl-procedure.md)

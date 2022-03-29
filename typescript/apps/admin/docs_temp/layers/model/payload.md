@@ -14,19 +14,16 @@
 ## 実装
 - `$ yarn hygen model new`でファイルを生成
 - 生成されたファイルに記述されているinterfaceの定義文のうち、`/* Replace with the corresponding api request type */`となっている部分を対応する型に置き換える
-- コンストラクタでは原則APIの実装に合わせて定義した型は扱わず、プリミティブな値を受け取る形が望ましい(汎用性を高めるため)
-  - 引数が多くなりそうな場合は、タプル型を用いるか、同ファイルで引数用の型を定義してそれを使用することができる
+- コンストラクタで受け取る値は同ファイルの`Params`という名前のinterfaceで定義する
 
 ## 実装例
 - [SampleCreatePayloadModelImpl](https://github.com/ispec-inc/monorepo/blob/update/frontend/data-flow/typescript/apps/admin/core/models/payload/sample/create/index.ts)
 
 ## 関連
-![関連](./frontend-dataflow-payload-model-relation.drawio.png "関連")
+![関連](./payload.png "関連")
 
 ## バックリンク
 - [Models](./index.md)
-- [Gateways](../gateway.md)
 - [Services](../service/index.md)
-- [Usecases](../service/usecases.md)
 - [Frontend Data Flow Architectue](../../index.md)
 - [実装手順](../../impl-procedure.md)
