@@ -25,6 +25,6 @@
 ![関連](./diagram.png "関連")
 
 ## バックリンク
-- [Services](./index.md)
+- [Services](../service/index.md)
 - [Frontend Data Flow Architectue](../../index.md)
 - [実装手順](../../impl-procedure.md)
