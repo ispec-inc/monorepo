@@ -6,6 +6,7 @@ import { ISampleCommentFindAllRepository } from "~/core/repositories/sample/comm
 import { ISamplePostFindRepository } from "~/core/repositories/sample/post/find";
 import { ServiceBase } from "~/core/services/_base";
 import { Maybe } from "~/types/advanced";
+import { NaturalNumber } from "~/types/value-object/natural-number";
 
 interface Repositories {
   find: ISamplePostFindRepository
@@ -13,7 +14,7 @@ interface Repositories {
 }
 
 export class SampleDetailPageService extends ServiceBase<Repositories> {
-  async fetch(id: number): Promise<void> {
+  async fetch(id: NaturalNumber): Promise<void> {
     await Promise.all([
       this.repositories.find.fetch(id).catch((err) => { throw err }),
       this.repositories.comments.fetch(id).catch((err) => { throw err })

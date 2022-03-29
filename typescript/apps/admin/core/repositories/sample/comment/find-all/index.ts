@@ -2,6 +2,7 @@
 
 import { SamplePostCommentModelImpl } from "~/core/models/domain/sample/comment";
 import { Maybe } from "~/types/advanced";
+import { NaturalNumber } from "~/types/value-object/natural-number";
 import { client } from "~/utils/api";
 import { AsyncProcessHelper } from "~/utils/aync-process-helper";
 
@@ -9,7 +10,7 @@ export interface ISampleCommentFindAllRepository {
   readonly isAwaitingResponse: boolean
   readonly comments: Maybe<SamplePostCommentModelImpl[]>
 
-  fetch(id: number): Promise<SamplePostCommentModelImpl[]>
+  fetch(id: NaturalNumber): Promise<SamplePostCommentModelImpl[]>
 }
 
 export class SampleCommentFindAllRepositoryImpl implements ISampleCommentFindAllRepository {
@@ -17,9 +18,14 @@ export class SampleCommentFindAllRepositoryImpl implements ISampleCommentFindAll
 
   private _comments: Maybe<SamplePostCommentModelImpl[]> = null
 
-  async fetch(id: number): Promise<SamplePostCommentModelImpl[]> {
-    const res = await this.endpoint.run(id).catch((err) => { throw err })
-    const models = res.map((v) => new SamplePostCommentModelImpl(v))
+  async fetch(id: NaturalNumber): Promise<SamplePostCommentModelImpl[]> {
+    const res = await this.endpoint.run(id.value).catch((err) => { throw err })
+    const models = res.map((v) => new SamplePostCommentModelImpl({
+      id: new NaturalNumber(v.id),
+      name: v.name,
+      email: v.email,
+      body: v.body
+    }))
     this._comments = models
     return models
   }

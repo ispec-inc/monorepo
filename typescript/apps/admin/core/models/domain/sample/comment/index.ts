@@ -1,9 +1,9 @@
-import { SamplePostCommentResponse } from "~/types/response/sample"
+import { NaturalNumber } from "~/types/value-object/natural-number"
 
-export type SamplePostCommentEntry = [id: number, value: { name: string, email: string, body: string }]
+export type SamplePostCommentEntry = [id: NaturalNumber, value: { name: string, email: string, body: string }]
 
 interface Params {
-  readonly id: number
+  readonly id: NaturalNumber
   readonly name: string
   readonly email: string
   readonly body: string
@@ -14,7 +14,7 @@ export interface ISamplePostCommentModel extends Params {
 }
 
 export class SamplePostCommentModelImpl implements ISamplePostCommentModel {
-  readonly id: number
+  readonly id: NaturalNumber
   readonly name: string
   readonly email: string
   readonly body: string

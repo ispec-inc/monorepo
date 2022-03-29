@@ -1,5 +1,7 @@
+import { NaturalNumber } from "~/types/value-object/natural-number"
+
 interface Params {
-  readonly id: number
+  readonly id: NaturalNumber
   readonly title: string
   readonly body: string
 }
@@ -7,7 +9,7 @@ interface Params {
 export interface ISamplePostModel extends Params {}
 
 export class SamplePostModelImpl implements ISamplePostModel {
-  readonly id: number
+  readonly id: NaturalNumber
   readonly title: string
   readonly body: string
 

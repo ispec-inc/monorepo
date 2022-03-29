@@ -33,6 +33,7 @@ import { SamplePostFindRepositoryImpl } from '~/core/repositories/sample/post/fi
 import { SamplePostUpdateRepositoryImpl } from '~/core/repositories/sample/post/update'
 import { SampleUpdatePageService } from '~/core/services/sample/update'
 import { GlobalEventBus } from '~/surface/event-bus/global'
+import { NaturalNumber } from '~/types/value-object/natural-number'
 
 @Component({
   components: {},
@@ -52,15 +53,15 @@ export default class PostEditPage extends mixins(UseSubscription) {
     (v: string): string | boolean => !!v || 'required',
   ]
 
-  get id(): number {
-    return Number(this.$route.params.id)
+  get id(): NaturalNumber {
+    return NaturalNumber.from(this.$route.params.id)
   }
 
   created(): void {
     this.fetchPost(this.id)
   }
 
-  async fetchPost(id: number): Promise<void> {
+  async fetchPost(id: NaturalNumber): Promise<void> {
     const model = await this.service.fetch(id).catch((err) => {
       const { message } = new ErrorModel(err)
       GlobalEventBus.getInstance().dispatchSnackbarEvent({

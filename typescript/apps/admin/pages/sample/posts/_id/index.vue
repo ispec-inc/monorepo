@@ -12,7 +12,7 @@
     </v-card>
     <h2 class="my-10">Comments</h2>
     <v-skeleton-loader v-if="service.isAwaitingComments" type="article" />
-    <v-card v-for="[id, c] of commentEntries" :key="id" class="mb-2">
+    <v-card v-for="[id, c] of commentEntries" :key="id.value" class="mb-2">
       <v-card-title>{{ c.name }}</v-card-title>
       <v-card-subtitle>{{ c.email }}</v-card-subtitle>
       <v-card-text>{{ c.body }}</v-card-text>
@@ -33,6 +33,7 @@ import { SampleCommentFindAllRepositoryImpl } from '~/core/repositories/sample/c
 import { SamplePostFindRepositoryImpl } from '~/core/repositories/sample/post/find'
 import { SampleDetailPageService } from '~/core/services/sample/detail'
 import { GlobalEventBus } from '~/surface/event-bus/global'
+import { NaturalNumber } from '~/types/value-object/natural-number'
 
 @Component({
   components: {},
@@ -44,10 +45,10 @@ export default class PostDetailPage extends mixins(UseSubscription) {
   })
 
   created(): void {
-    this.fetchDetail(Number(this.$route.params.id))
+    this.fetchDetail(NaturalNumber.from(this.$route.params.id))
   }
 
-  fetchDetail(id: number): void {
+  fetchDetail(id: NaturalNumber): void {
     this.service.fetch(id).catch((err) => {
       const { message } = new ErrorModel(err)
       GlobalEventBus.getInstance().dispatchSnackbarEvent({
