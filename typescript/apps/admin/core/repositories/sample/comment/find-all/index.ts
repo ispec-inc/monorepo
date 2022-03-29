@@ -1,6 +1,6 @@
 
 
-import { SamplePostCommentModelImpl } from "~/core/models/domain/sample/comment";
+import { ISamplePostCommentModel, SamplePostCommentModelImpl } from "~/core/models/domain/sample/comment";
 import { Maybe } from "~/types/advanced";
 import { NaturalNumber } from "~/types/value-object/natural-number";
 import { client } from "~/utils/api";
@@ -8,9 +8,9 @@ import { AsyncProcessHelper } from "~/utils/aync-process-helper";
 
 export interface ISampleCommentFindAllRepository {
   readonly isAwaitingResponse: boolean
-  readonly comments: Maybe<SamplePostCommentModelImpl[]>
+  readonly comments: Maybe<ISamplePostCommentModel[]>
 
-  fetch(id: NaturalNumber): Promise<SamplePostCommentModelImpl[]>
+  fetch(id: NaturalNumber): Promise<ISamplePostCommentModel[]>
 }
 
 export class SampleCommentFindAllRepositoryImpl implements ISampleCommentFindAllRepository {

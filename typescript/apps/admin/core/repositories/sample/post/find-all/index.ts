@@ -1,4 +1,4 @@
-import { SamplePostModelImpl } from "~/core/models/domain/sample";
+import { ISamplePostModel, SamplePostModelImpl } from "~/core/models/domain/sample";
 import { Maybe } from "~/types/advanced";
 import { NaturalNumber } from "~/types/value-object/natural-number";
 import { client } from "~/utils/api";
@@ -6,9 +6,9 @@ import { AsyncProcessHelper } from "~/utils/aync-process-helper";
 
 export interface ISamplePostFindAllRepository {
   readonly isAwaitingResponse: boolean
-  readonly posts: Maybe<SamplePostModelImpl[]>
+  readonly posts: Maybe<ISamplePostModel[]>
 
-  fetch(): Promise<SamplePostModelImpl[]>
+  fetch(): Promise<ISamplePostModel[]>
 }
 
 export class SamplePostFindAllRepositoryImpl implements ISamplePostFindAllRepository {

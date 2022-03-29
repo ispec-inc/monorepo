@@ -1,6 +1,6 @@
 import { ServiceBase } from "~/core/services/_base";
 import { ISamplePostFindAllRepository } from "~/core/repositories/sample/post/find-all";
-import { SamplePostModelImpl } from "~/core/models/domain/sample";
+import { ISamplePostModel } from "~/core/models/domain/sample";
 
 interface Repositories {
   findAll: ISamplePostFindAllRepository
@@ -15,7 +15,7 @@ export class SampleListPageService extends ServiceBase<Repositories> {
     return this.repositories.findAll.isAwaitingResponse
   }
 
-  get posts(): SamplePostModelImpl[] {
+  get posts(): ISamplePostModel[] {
     return this.repositories.findAll.posts ?? []
   }
 }

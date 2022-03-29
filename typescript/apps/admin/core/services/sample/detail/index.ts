@@ -1,7 +1,7 @@
 
 
-import { SamplePostModelImpl } from "~/core/models/domain/sample";
-import { SamplePostCommentModelImpl } from "~/core/models/domain/sample/comment";
+import { ISamplePostModel } from "~/core/models/domain/sample";
+import { ISamplePostCommentModel } from "~/core/models/domain/sample/comment";
 import { ISampleCommentFindAllRepository } from "~/core/repositories/sample/comment/find-all";
 import { ISamplePostFindRepository } from "~/core/repositories/sample/post/find";
 import { ServiceBase } from "~/core/services/_base";
@@ -29,11 +29,11 @@ export class SampleDetailPageService extends ServiceBase<Repositories> {
     return this.repositories.comments.isAwaitingResponse
   }
 
-  get post(): Maybe<SamplePostModelImpl> {
+  get post(): Maybe<ISamplePostModel> {
     return this.repositories.find.post
   }
 
-  get comments(): SamplePostCommentModelImpl[] {
+  get comments(): ISamplePostCommentModel[] {
     return this.repositories.comments.comments ?? []
   }
 }
