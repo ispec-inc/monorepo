@@ -67,7 +67,7 @@ const Home: NextPage = () => {
     <div className="flex" flex="col" items="center" justify="center" h="full">
       <div>React Next Framework & Apollo Client</div>
       {data?.viewer.repositories.nodes?.map((value) => (
-        <div key={value?.id} p="x-5p y-6p">
+        <div key={value?.id} p="x-5p y-6p" text="19p warn">
           {value?.name}: created at {value?.createdAt}
         </div>
       ))}
