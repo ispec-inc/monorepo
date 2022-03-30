@@ -1,0 +1,25 @@
+type Article {
+  id: ID!
+  title: String!
+  body: String!
+  writer: User!
+}
+
+type Mutation {
+  createArticle(title: String!, body: String!): Article
+}
+
+type Query {
+  currentUser: User
+  user(id: ID!): User
+  articles(userId: ID): [Article]
+}
+
+type Subscription {
+  articleAdded: Article
+}
+
+type User {
+  id: ID!
+  name: String!
+}
