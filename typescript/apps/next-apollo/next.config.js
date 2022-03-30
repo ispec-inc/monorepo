@@ -12,11 +12,14 @@ module.exports = {
     config.plugins.push(UnoCSS({
       include: [/\.tsx/],
       exclude: [/node_modules/],
-      presets: [presetUno(), presetAttributify({ nonValuedAttribute: false })]
+      presets: [presetUno(), presetAttributify()],
+      theme: {
+        spacing: {
+          '5p': '5px',
+          '6p': '6px',
+        }
+      }
     }))
     return config
   },
-  // eslint: {
-  //   ignoreDuringBuilds: true,
-  // },
 }

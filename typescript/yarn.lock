@@ -4952,7 +4952,7 @@
     gzip-size "^6.0.0"
     sirv "^2.0.2"
 
-"@unocss/preset-attributify@0.30.7", "@unocss/preset-attributify@^0.30.0":
+"@unocss/preset-attributify@0.30.7":
   version "0.30.7"
   resolved "https://registry.yarnpkg.com/@unocss/preset-attributify/-/preset-attributify-0.30.7.tgz#086ad4c2ed74d39b52634506ff181a1ee668ab18"
   integrity sha512-x8PkVX0kEszs40qmi+iTqVBVLR23nLANj1nwFiY57Xt4eJprJbZehV32pQsl0rcWydhmwHsxVzYbAoSD5WgTgA==
@@ -5044,7 +5044,7 @@
     "@unocss/transformer-directives" "0.30.7"
     magic-string "^0.26.1"
 
-"@unocss/webpack@^0.30.0":
+"@unocss/webpack@^0.30.7":
   version "0.30.7"
   resolved "https://registry.yarnpkg.com/@unocss/webpack/-/webpack-0.30.7.tgz#665f0105c894e4a6e9ca9c9158435415528d8282"
   integrity sha512-A07fxc9F2aQzPAsGOOWvmRrZra1ZtNdjCaKl24ANLJzx2P8iTYpr9Z2wrr6P+zUG7ZeNw/k1Gh1H4t5ouwaVSA==
@@ -5432,28 +5432,6 @@
     "@webassemblyjs/ast" "1.9.0"
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
-
-"@windicss/config@1.8.3":
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/@windicss/config/-/config-1.8.3.tgz#4f6eb0441be00ff7f284bb278a6d0c8f34f791ed"
-  integrity sha512-1fvfZhRD7WfV/Xh6uIAYKIdbQWrwEgSdkFlHiLPzMDS44KjwNZILDzLAz9Y2W5H2K4MLGgGMnzGS89ECyjc0Ww==
-  dependencies:
-    debug "^4.3.3"
-    jiti "^1.13.0"
-    windicss "^3.5.1"
-
-"@windicss/plugin-utils@^1.8.2":
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/@windicss/plugin-utils/-/plugin-utils-1.8.3.tgz#cec2bdc7703357de348e4512d61c7bd7802b049a"
-  integrity sha512-emlMeDt73uNV1ZofLTDogcxqL9aZ5uIRYkjeHlrWiaDozFbX6Jc+a6eRo9Ieaar3JUryl6AnecTPHAiFDl4IXg==
-  dependencies:
-    "@antfu/utils" "^0.5.0"
-    "@windicss/config" "1.8.3"
-    debug "^4.3.3"
-    fast-glob "^3.2.11"
-    magic-string "^0.25.7"
-    micromatch "^4.0.4"
-    windicss "^3.5.1"
 
 "@wry/context@^0.4.0":
   version "0.4.4"
@@ -21591,7 +21569,7 @@ unixify@1.0.0, unixify@^1.0.0:
   dependencies:
     normalize-path "^2.1.1"
 
-unocss@^0.30.4:
+unocss@^0.30.7:
   version "0.30.7"
   resolved "https://registry.yarnpkg.com/unocss/-/unocss-0.30.7.tgz#c74ee917d54d141916244b5781c036db6ea2d7e7"
   integrity sha512-QFzWJoVuggnZxxhHOt46hExqGdb3B0z1wy/SUbQ47L5fh1Qlo4Ptg1Asjitl8OpC2riPG5cXrHb4aGhxnHIxbA==
@@ -22594,19 +22572,6 @@ widest-line@^3.1.0:
   integrity sha512-NsmoXalsWVDMGupxZ5R08ka9flZjjiLvHVAWYOKtiKM8ujtZWr9cRffak+uSE48+Ob8ObalXpwyeUiyDD6QFgg==
   dependencies:
     string-width "^4.0.0"
-
-windicss-webpack-plugin@^1.6.7:
-  version "1.6.7"
-  resolved "https://registry.yarnpkg.com/windicss-webpack-plugin/-/windicss-webpack-plugin-1.6.7.tgz#274c6ccc0c66e0a55d03a4679dea54b7f08997db"
-  integrity sha512-wMC0+/buGBMqbS6d2jCUGh51J2qSAwIBrwOCmd44GqXTIJs+uNzptYlwijj+V7ykgGn6nmR0fyxH72Ramw2LZA==
-  dependencies:
-    "@windicss/plugin-utils" "^1.8.2"
-    debug "^4.3.3"
-    loader-utils "^2.0.0"
-    lodash "^4.17.21"
-    pathe "^0.2.0"
-    webpack-virtual-modules "^0.4.3"
-    windicss "^3.5.1"
 
 windicss@^3.5.1:
   version "3.5.1"
