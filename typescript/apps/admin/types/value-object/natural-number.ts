@@ -9,8 +9,8 @@ export class NaturalNumber {
     this.value = value
   }
 
-  equalTo(nn: NaturalNumber): boolean {
-    return this.value === nn.value
+  equals(to: NaturalNumber): boolean {
+    return this.value === to.value
   }
 
   static from(value: unknown): NaturalNumber {
