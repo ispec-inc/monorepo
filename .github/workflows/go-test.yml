@@ -24,7 +24,7 @@ jobs:
           make ci-test
 
       - name: upload coverage to codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.GO_DISTRIBUTED_MONOLITH_CODECOV_TOKEN }}
           name: coverage
