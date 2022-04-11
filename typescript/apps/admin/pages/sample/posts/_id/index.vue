@@ -12,7 +12,7 @@
     </v-card>
     <h2 class="my-10">Comments</h2>
     <v-skeleton-loader v-if="service.isAwaitingComments" type="article" />
-    <v-card v-for="[id, c] of commentEntries" :key="id.value" class="mb-2">
+    <v-card v-for="[id, c] of commentEntries" :key="id" class="mb-2">
       <v-card-title>{{ c.name }}</v-card-title>
       <v-card-subtitle>{{ c.email }}</v-card-subtitle>
       <v-card-text>{{ c.body }}</v-card-text>
@@ -27,13 +27,17 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import UseSubscription from '~/components/mixins/use-subscription'
-import { SamplePostCommentEntry } from '~/core/models/domain/sample/comment'
 import ErrorModel from '~/core/models/error'
 import { SampleCommentFindAllRepositoryImpl } from '~/core/repositories/sample/comment/find-all'
 import { SamplePostFindRepositoryImpl } from '~/core/repositories/sample/post/find'
 import { SampleDetailPageService } from '~/core/services/sample/detail'
+import { SamplePostId } from '~/core/values/sample/post/id'
 import { GlobalEventBus } from '~/surface/event-bus/global'
-import { NaturalNumber } from '~/types/value-object/natural-number'
+
+type SamplePostCommentEntry = [
+  id: number,
+  data: { name: string; email: string; body: string }
+]
 
 @Component({
   components: {},
@@ -45,10 +49,10 @@ export default class PostDetailPage extends mixins(UseSubscription) {
   })
 
   created(): void {
-    this.fetchDetail(NaturalNumber.from(this.$route.params.id))
+    this.fetchDetail(SamplePostId.from(this.$route.params.id))
   }
 
-  fetchDetail(id: NaturalNumber): void {
+  fetchDetail(id: SamplePostId): void {
     this.service.fetch(id).catch((err) => {
       const { message } = new ErrorModel(err)
       GlobalEventBus.getInstance().dispatchSnackbarEvent({
@@ -59,15 +63,19 @@ export default class PostDetailPage extends mixins(UseSubscription) {
   }
 
   get title(): string {
-    return this.service.post?.title ?? ''
+    return this.service.post?.rawValue.title ?? ''
   }
 
   get body(): string {
-    return this.service.post?.body ?? ''
+    return this.service.post?.rawValue.body ?? ''
   }
 
   get commentEntries(): SamplePostCommentEntry[] {
-    return this.service.comments.map((c) => c.toEntry())
+    return this.service.comments.map((c) => {
+      const { id, body, email, name } = c.rawValue
+
+      return [id.value, { name, body, email }]
+    })
   }
 
   pushToEditPage(): void {

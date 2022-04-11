@@ -1,28 +1,27 @@
 
 
-import { SamplePostModelImpl } from "~/core/models/domain/sample";
+import { SamplePostModel } from "~/core/models/domain/sample";
 import { Maybe } from "~/types/advanced";
-import { NaturalNumber } from "~/types/value-object/natural-number";
 import { client } from "~/utils/api";
 import { AsyncProcessHelper } from "~/utils/aync-process-helper";
+import { SamplePostId } from "~/core/values/sample/post/id";
 
 export interface ISamplePostFindRepository {
   readonly isAwaitingResponse: boolean
-  readonly post: Maybe<SamplePostModelImpl>
+  readonly post: Maybe<SamplePostModel>
 
-  fetch(id: NaturalNumber): Promise<SamplePostModelImpl>
+  fetch(id: SamplePostId): Promise<SamplePostModel>
 }
-
 
 export class SamplePostFindRepositoryImpl implements ISamplePostFindRepository {
   private readonly endpoint = new AsyncProcessHelper((id: number) => client.posts._id(id).$get())
 
-  private _post: Maybe<SamplePostModelImpl> = null
+  private _post: Maybe<SamplePostModel> = null
 
-  async fetch(id: NaturalNumber): Promise<SamplePostModelImpl> {
+  async fetch(id: SamplePostId): Promise<SamplePostModel> {
     const res = await this.endpoint.run(id.value).catch((err) => { throw err })
-    const model = new SamplePostModelImpl({
-      id: new NaturalNumber(res.id),
+    const model = new SamplePostModel({
+      id: new SamplePostId(res.id),
       title: res.title,
       body: res.body
     })
@@ -30,7 +29,7 @@ export class SamplePostFindRepositoryImpl implements ISamplePostFindRepository {
     return model
   }
 
-  get post(): Maybe<SamplePostModelImpl> {
+  get post(): Maybe<SamplePostModel> {
     return this._post
   }
 

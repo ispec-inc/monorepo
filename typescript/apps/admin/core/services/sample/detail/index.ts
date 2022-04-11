@@ -1,12 +1,12 @@
 
 
-import { ISamplePostModel } from "~/core/models/domain/sample";
-import { ISamplePostCommentModel } from "~/core/models/domain/sample/comment";
+import { SamplePostModel } from "~/core/models/domain/sample";
+import { SamplePostCommentModel } from "~/core/models/domain/sample/comment";
 import { ISampleCommentFindAllRepository } from "~/core/repositories/sample/comment/find-all";
 import { ISamplePostFindRepository } from "~/core/repositories/sample/post/find";
 import { ServiceBase } from "~/core/services/_base";
+import { SamplePostId } from "~/core/values/sample/post/id";
 import { Maybe } from "~/types/advanced";
-import { NaturalNumber } from "~/types/value-object/natural-number";
 
 interface Repositories {
   find: ISamplePostFindRepository
@@ -14,7 +14,7 @@ interface Repositories {
 }
 
 export class SampleDetailPageService extends ServiceBase<Repositories> {
-  async fetch(id: NaturalNumber): Promise<void> {
+  async fetch(id: SamplePostId): Promise<void> {
     await Promise.all([
       this.repositories.find.fetch(id).catch((err) => { throw err }),
       this.repositories.comments.fetch(id).catch((err) => { throw err })
@@ -29,11 +29,11 @@ export class SampleDetailPageService extends ServiceBase<Repositories> {
     return this.repositories.comments.isAwaitingResponse
   }
 
-  get post(): Maybe<ISamplePostModel> {
+  get post(): Maybe<SamplePostModel> {
     return this.repositories.find.post
   }
 
-  get comments(): ISamplePostCommentModel[] {
+  get comments(): SamplePostCommentModel[] {
     return this.repositories.comments.comments ?? []
   }
 }

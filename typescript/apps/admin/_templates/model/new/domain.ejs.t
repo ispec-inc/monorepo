@@ -3,13 +3,10 @@ to: "<%= type === 'domain' ? `core/models/domain/${path}/index.ts` : null %>"
 ---
 <%
   BaseName = h.changeCase.pascalCase(path.split('/').join('-'))
-  InterfaceName = 'I' + BaseName + 'Model'
 %>
+import { DomainModelBase } from "../_base"
+
 interface Params {}
 
-export interface <%= InterfaceName %> extends Params {}
-
-export class <%= BaseName %>ModelImpl implements <%= InterfaceName %> {
-  constructor(params: Params) {}
-}
+export class <%= BaseName %>Model extends DomainModelBase<Params> {}
 

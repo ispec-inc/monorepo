@@ -32,8 +32,8 @@ import ErrorModel from '~/core/models/error'
 import { SamplePostFindRepositoryImpl } from '~/core/repositories/sample/post/find'
 import { SamplePostUpdateRepositoryImpl } from '~/core/repositories/sample/post/update'
 import { SampleUpdatePageService } from '~/core/services/sample/update'
+import { SamplePostId } from '~/core/values/sample/post/id'
 import { GlobalEventBus } from '~/surface/event-bus/global'
-import { NaturalNumber } from '~/types/value-object/natural-number'
 
 @Component({
   components: {},
@@ -53,15 +53,15 @@ export default class PostEditPage extends mixins(UseSubscription) {
     (v: string): string | boolean => !!v || 'required',
   ]
 
-  get id(): NaturalNumber {
-    return NaturalNumber.from(this.$route.params.id)
+  get id(): SamplePostId {
+    return SamplePostId.from(this.$route.params.id)
   }
 
   created(): void {
     this.fetchPost(this.id)
   }
 
-  async fetchPost(id: NaturalNumber): Promise<void> {
+  async fetchPost(id: SamplePostId): Promise<void> {
     const model = await this.service.fetch(id).catch((err) => {
       const { message } = new ErrorModel(err)
       GlobalEventBus.getInstance().dispatchSnackbarEvent({
@@ -77,8 +77,8 @@ export default class PostEditPage extends mixins(UseSubscription) {
       return
     }
 
-    this.title = model.title
-    this.body = model.body
+    this.title = model.rawValue.title
+    this.body = model.rawValue.body
   }
 
   submit(): void {

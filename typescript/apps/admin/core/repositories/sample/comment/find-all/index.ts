@@ -1,27 +1,28 @@
 
 
-import { ISamplePostCommentModel, SamplePostCommentModelImpl } from "~/core/models/domain/sample/comment";
+import { SamplePostCommentModel } from "~/core/models/domain/sample/comment";
 import { Maybe } from "~/types/advanced";
-import { NaturalNumber } from "~/types/value-object/natural-number";
 import { client } from "~/utils/api";
 import { AsyncProcessHelper } from "~/utils/aync-process-helper";
+import { SamplePostId } from "~/core/values/sample/post/id";
+import { SamplePostCommentId } from "~/core/values/sample/post/comment/id";
 
 export interface ISampleCommentFindAllRepository {
   readonly isAwaitingResponse: boolean
-  readonly comments: Maybe<ISamplePostCommentModel[]>
+  readonly comments: Maybe<SamplePostCommentModel[]>
 
-  fetch(id: NaturalNumber): Promise<ISamplePostCommentModel[]>
+  fetch(id: SamplePostId): Promise<SamplePostCommentModel[]>
 }
 
 export class SampleCommentFindAllRepositoryImpl implements ISampleCommentFindAllRepository {
   private readonly endpoint = new AsyncProcessHelper((id: number) => client.posts._id(id).comments.$get())
 
-  private _comments: Maybe<SamplePostCommentModelImpl[]> = null
+  private _comments: Maybe<SamplePostCommentModel[]> = null
 
-  async fetch(id: NaturalNumber): Promise<SamplePostCommentModelImpl[]> {
+  async fetch(id: SamplePostId): Promise<SamplePostCommentModel[]> {
     const res = await this.endpoint.run(id.value).catch((err) => { throw err })
-    const models = res.map((v) => new SamplePostCommentModelImpl({
-      id: new NaturalNumber(v.id),
+    const models = res.map((v) => new SamplePostCommentModel({
+      id: new SamplePostCommentId(v.id),
       name: v.name,
       email: v.email,
       body: v.body
@@ -30,7 +31,7 @@ export class SampleCommentFindAllRepositoryImpl implements ISampleCommentFindAll
     return models
   }
 
-  get comments(): Maybe<SamplePostCommentModelImpl[]> {
+  get comments(): Maybe<SamplePostCommentModel[]> {
     return this._comments
   }
 

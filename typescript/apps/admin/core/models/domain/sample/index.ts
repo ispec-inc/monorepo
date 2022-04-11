@@ -1,22 +1,10 @@
-import { NaturalNumber } from "~/types/value-object/natural-number"
+import { DomainModelBase } from "../_base"
+import { SamplePostId } from "~/core/values/sample/post/id"
 
 interface Params {
-  readonly id: NaturalNumber
+  readonly id: SamplePostId
   readonly title: string
   readonly body: string
 }
 
-export interface ISamplePostModel extends Params {}
-
-export class SamplePostModelImpl implements ISamplePostModel {
-  readonly id: NaturalNumber
-  readonly title: string
-  readonly body: string
-
-  constructor(params: Params) {
-    const { id, title, body } = params
-    this.id = id
-    this.title = title
-    this.body = body
-  }
-}
+export class SamplePostModel extends DomainModelBase<Params> {}

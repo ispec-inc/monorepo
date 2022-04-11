@@ -14,7 +14,7 @@
 
 ## 実装
 - `$ yarn hygen model new`でファイルを生成
-- 生成されたファイルでinterfaceを定義し、同ファイルで実装を書く
+- `DomainModelBase<Params>`を継承する
 - コンストラクタで受け取る値は同ファイルの`Params`という名前のinterfaceで定義する
 
 ## 実装例
