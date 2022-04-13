@@ -13,7 +13,6 @@ CREATE TABLE `articles` (
   `user_id` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` varchar(255) NOT NULL,
-  `aaaaaa` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
