@@ -20,14 +20,14 @@ jobs:
           git fetch
           git checkout ${{github.base_ref}}
           git pull
-          git checkout -
+          git checkout ${{github.head_ref}}
 
           export ARTICLE_DIR=mysql/migrations/article
 
           git show ${{github.base_ref}}:$ARTICLE_DIR/schema.sql > $ARTICLE_DIR/schema.prev.sql
       - name: check diff
         run: |
-          docker run yumafuu/mysqldef \
+          docker run -t yumafuu/mysqldef \
             --file $ARTICLE_DIR/schema.prev.sql \
             --file $ARTICLE_DIR/schema.sql > article
 
