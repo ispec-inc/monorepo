@@ -24,7 +24,7 @@ jobs:
 
           export ARTICLE_DIR=mysql/migrations/article
 
-          git show ${{github.base_ref}}:$ARTICLE_DIR/schema.sql > $ARTICLE_DIR/schema.prev.sql
+          git show ${{github.base_ref}}:$ARTICLE_DIR/schema.sql > $ARTICLE_DIR/schema.prev.sql 2>/dev/null
       - name: check diff
         run: |
           docker run -t yumafuu/mysqldef \
