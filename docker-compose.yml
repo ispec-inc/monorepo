@@ -52,12 +52,12 @@ services:
   article-migrate:
     container_name: article-migrate
     build:
-      context: ./migration/article
-      dockerfile: Dockerfile
+      context: mysql
+      dockerfile: migrations/article/Dockerfile
     env_file:
-      - ./migration/article/.env
+      - ./mysql/migrations/article/.env
     volumes:
-      - ./migration/article:/db
+      - ./mysql/migrations/article:/db
     networks:
       - monorepo
 

@@ -34,7 +34,7 @@ test: ## go test
 	docker-compose run --rm test go test -v -cover -coverprofile=coverage.out $(pkg)
 
 article-migrate: ## migrate
-	docker-compose run --rm article-migrate db:migrate
+	docker-compose run --rm article-migrate
 
 article-command: cmd :=
 article-command: ## rake $(cmd) - execute standalone-migration command
