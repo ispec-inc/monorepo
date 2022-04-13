@@ -1,6 +1,0 @@
-type Article {
-    id: ID!
-    title: String!
-    body: String!
-    writer: User!
-}

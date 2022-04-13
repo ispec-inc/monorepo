@@ -1,0 +1,3 @@
+type Mutation {
+    postArticle(input: PostArticleInput!): Article
+}

@@ -1,4 +1,0 @@
-{{ range $tableName , $table := .tableInfos }}
-    {{$name := singular $table.TableName -}}
-    {{$filename := printf "%s.proto" $name -}}
-    {{ GenerateTableFile $table.TableName  "model.go.tmpl" "" $filename}}{{- end }}
