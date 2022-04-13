@@ -19,4 +19,3 @@ CREATE TABLE `articles` (
 
   CONSTRAINT `articles_fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
-
