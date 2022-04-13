@@ -1,6 +1,6 @@
 import { graphql, useLazyLoadQuery } from "react-relay";
 import React from "react";
-import { CurrentUser_Query } from "../pages/__generated__/CurrentUser_Query.graphql";
+import { CurrentUser_Query } from "../../__generated__/CurrentUser_Query.graphql";
 
 const currentUser = graphql`
   query CurrentUser_Query {

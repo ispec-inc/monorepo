@@ -47,7 +47,6 @@
   "name": "react-vite-relay",
   "private": true,
   "relay": {
-    "artifactDirectory": "./src/__generated__",
     "language": "typescript",
     "schema": "./schema.graphql",
     "src": "./src"
