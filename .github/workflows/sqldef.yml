@@ -15,6 +15,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
+      - name: setup
+        run: |
+          touch go/.env/server
+
       - name: prev migrate
         run: |
           git fetch
