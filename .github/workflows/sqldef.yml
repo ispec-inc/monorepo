@@ -21,6 +21,7 @@ jobs:
 
           export ARTICLE_DIR=mysql/migrations/article
 
+          echo git show ${{github.base_ref}}:$ARTICLE_DIR/schema.sql > $ARTICLE_DIR/schema.prev.sql
           git show ${{github.base_ref}}:$ARTICLE_DIR/schema.sql > $ARTICLE_DIR/schema.prev.sql
 
       - name: check diff
