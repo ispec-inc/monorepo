@@ -1,0 +1,37 @@
+name: sqldef
+
+on:
+  pull_request:
+    paths:
+      - mysql/**/*.sql
+
+jobs:
+  mysqldef:
+    name:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup
+        run: |
+          git fetch
+
+          export ARTICLE_DIR=mysql/migrations/article
+
+          git show ${{github.base_ref}}:$ARTICLE_DIR/schema.sql > $ARTICLE_DIR/schema.prev.sql
+
+      - name: check diff
+        run: |
+          docker run yumafuu/mysqldef \
+            --file $ARTICLE_DIR/schema.sql \
+            --file $ARTICLE_DIR/schema.prev.sql > article
+
+          export ARTICLE_RESULT=$(cat article)
+
+      - name: comment result
+        run: |
+          envsubst < .github/sqldef_result.md.tpl > comment
+          gh pr comment -F ./comment "${URL}"
