@@ -15,6 +15,14 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
+      - name: install
+        run: |
+          apt-get install curl tar
+          curl -fSL https://github.com/k0kubun/sqldef/releases/download/v0.11.50/mysqldef_linux_amd64.tar.gz -o mysqldef.tar.gz \
+          tar -zxf mysqldef.tar.gz
+          chmod +x myqldef
+          mv mysqldef /usr/local/bin
+
       - name: setup
         run: |
           git fetch
@@ -27,7 +35,7 @@ jobs:
           git show ${{github.base_ref}}:$ARTICLE_DIR/schema.sql > $ARTICLE_DIR/schema.prev.sql 2>/dev/null
       - name: check diff
         run: |
-          docker run -t yumafuu/mysqldef \
+          mysqldef \
             --file $ARTICLE_DIR/schema.prev.sql \
             --file $ARTICLE_DIR/schema.sql > article
 
