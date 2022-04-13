@@ -1,5 +1,6 @@
 import { graphql, useLazyLoadQuery } from "react-relay";
 import React from "react";
+import { UserArticles_Query } from "./__generated__/UserArticles_Query.graphql";
 
 const getUserArticles = graphql`
   query UserArticles_Query($userId: ID!) {
@@ -15,8 +16,8 @@ type UserArticlesProps = {
   userId: string;
 };
 
-const UserArticles: React.FC<UserArticlesProps> = (props) => {
-  const data = useLazyLoadQuery(getUserArticles, {
+export const UserArticles: React.FC<UserArticlesProps> = (props) => {
+  const data = useLazyLoadQuery<UserArticles_Query>(getUserArticles, {
     userId: props.userId,
   });
 
@@ -24,5 +25,3 @@ const UserArticles: React.FC<UserArticlesProps> = (props) => {
 
   return <div>hi</div>;
 };
-
-export default UserArticles;

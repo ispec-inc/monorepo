@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+
+# Random things to ignore
+ignore/
+package-lock.json
+/yarn-offline-cache
+.cache
+.webpack
+globalConfig.json
