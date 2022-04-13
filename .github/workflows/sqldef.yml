@@ -7,7 +7,7 @@ on:
 
 jobs:
   mysqldef:
-    name:
+    name: mysqldef
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
