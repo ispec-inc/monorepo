@@ -19,6 +19,7 @@ jobs:
         run: |
           touch go/.env/server
           docker network create monorepo
+          docker-compose up -d article-mysql
 
       - name: prev migrate
         run: |
