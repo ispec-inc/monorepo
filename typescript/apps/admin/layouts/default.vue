@@ -10,9 +10,7 @@
     >
       <v-list nav>
         <v-list-item>
-          <v-list-item-content class="logo-wrapper">
-            <img src="/logo.png" class="logo" />
-          </v-list-item-content>
+          <v-list-item-content class="logo-wrapper"> </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
         <v-list-group
@@ -115,47 +113,29 @@ export default class DefaultLayout extends Vue {
   items = [
     {
       icon: 'mdi-map-marker',
-      title: 'プレイス',
+      title: 'サンプル',
       items: [
         {
           icon: 'mdi-format-list-bulleted',
           title: '一覧',
-          to: '/place',
+          to: '/',
           separate: 'place-new',
         },
         {
           icon: 'mdi-shape-square-rounded-plus',
           title: '登録',
-          to: '/place/new',
-        },
-      ],
-    },
-    {
-      icon: 'mdi-account-music',
-      title: 'アーティスト',
-      items: [
-        {
-          icon: 'mdi-format-list-bulleted',
-          title: '一覧',
-          to: '/anime',
-          separate: 'anime-new',
-        },
-        {
-          icon: 'mdi-shape-square-rounded-plus',
-          title: '登録',
-          to: '/anime/new',
+          to: '/',
         },
       ],
     },
   ]
 
   miniVariant = false
-  title = 'Placy Admin'
+  title = 'Admin'
 
   logout(): void {
     this.$auth.logout()
     localStorage.removeItem('userId')
-    this.$router.push(this.$pagesPath.login.$url())
   }
 
   created(): void {
