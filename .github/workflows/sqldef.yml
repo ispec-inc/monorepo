@@ -34,10 +34,10 @@ jobs:
 
           docker-compose run article-migrate > article
 
-          export ARTICLE_RESULT=$(cat article)
-
       - name: comment result
         run: |
+          export ARTICLE_RESULT=$(cat article)
+
           envsubst < .github/sqldef_result.md.tpl > comment
           gh pr comment -F ./comment "${URL}"
 
