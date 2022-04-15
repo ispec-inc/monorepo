@@ -12,3 +12,7 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Stylyng
+
+Reference to [unocss](https://github.com/unocss/unocss) [tailwind.css](https://tailwindcss.com/docs/installation)

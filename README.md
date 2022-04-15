@@ -6,7 +6,6 @@ monorepo is an OSS project that aims to improve the quality and speed of MVP dev
 
 
 ## Features
-- [Gen](./gen)
 - [Migration](./migration)
 - [Go](./go)
 - [TypeScript](./typescript)

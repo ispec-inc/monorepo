@@ -1,4 +1,3 @@
-/* eslint-disable */
 const path = require('path')
 const UnoCSS = require('@unocss/webpack').default
 
@@ -10,5 +9,5 @@ module.exports = {
   webpack: (config) => {
     config.plugins.push(UnoCSS())
     return config
-  }
+  },
 }

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "npm-run-all -p dev:*",
-    "dev:next": "next dev",
+    "dev": "run-p dev:*",
     "dev:graphql": "yarn ggen --watch",
+    "dev:next": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "run-p lint:*",

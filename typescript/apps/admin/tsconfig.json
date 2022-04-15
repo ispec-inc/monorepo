@@ -30,5 +30,8 @@
     "dist",
     "cypress/**/*.js",
     "*.js",
-  ]
+  ],
+  "vueCompilerOptions": {
+    "experimentalCompatMode": 2
+  }
 }

@@ -11,6 +11,9 @@ module.exports = {
     'plugin:typescript-sort-keys/recommended',
   ],
   ignorePatterns: [
+    '/__generated__/**',
+    '**/*.config.js',
+    '**/*.config.ts',
     '**/node_modules/*',
     '**/out/*',
     '**/.next/*',

@@ -1,7 +1,0 @@
-{
-  "presets": ["@babel/preset-typescript", "@babel/preset-react"],
-  "plugins": [
-    "babel-plugin-relay",
-    ["module-rewrite", { "replaceFunc": "./build/fixGraphQLImports.js" }]
-  ]
-}

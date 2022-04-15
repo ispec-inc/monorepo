@@ -1,0 +1,44 @@
+name: sqldef
+
+on:
+  pull_request:
+    paths:
+      - mysql/**/*.sql
+
+jobs:
+  mysqldef:
+    name: mysqldef
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup
+        run: |
+          touch go/.env/server
+          docker network create monorepo
+          docker-compose up -d article-mysql
+
+      - name: prev migrate
+        run: |
+          git fetch
+
+          git checkout ${{github.base_ref}}
+          docker-compose build article-migrate
+          docker-compose run article-migrate
+
+      - name: current migrate
+        run: |
+          git checkout ${{github.head_ref}}
+          docker-compose build article-migrate
+          docker-compose run article-migrate > article
+
+      - name: comment result
+        run: |
+          export ARTICLE_RESULT=$(cat article)
+
+          envsubst < .github/sqldef_result.md.tpl > comment
+          gh pr comment -F ./comment "${URL}"
+

@@ -11,7 +11,6 @@ The code in each directory is as follows.
 ├── docker
 ├── mkdocs.yml
 ├── pkg # Common packages referenced by `svc`
-├── proto # Generated from protocol buffer.
 └── svc # The code for each microservice
     ├── admin
     └── article

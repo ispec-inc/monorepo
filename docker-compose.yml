@@ -1,22 +1,12 @@
-version: '2.2'
+version: '3.8'
 services:
-  protoc:
-    container_name: protoc
-    build:
-      context: .
-      dockerfile: proto/docker/Dockerfile
-    volumes:
-      - ./:/workspace
-    networks:
-      - monorepo
-
   gen:
     container_name: gen
     build:
       context: .
-      dockerfile: go/tool/gen/docker/Dockerfile
+      dockerfile: go/tools/gen/docker/Dockerfile
     env_file:
-      - go/tool/gen/.env
+      - go/tools/gen/.env
     volumes:
       - ./:/workspace
     working_dir: /workspace
@@ -48,7 +38,7 @@ services:
 
   test:
     container_name: monorepo-test
-    image: golang:1.17
+    image: golang:1.18
     env_file:
       - go/.env/server
     depends_on:
@@ -62,12 +52,12 @@ services:
   article-migrate:
     container_name: article-migrate
     build:
-      context: ./migration/article
-      dockerfile: Dockerfile
+      context: mysql
+      dockerfile: migrations/article/Dockerfile
     env_file:
-      - ./migration/article/.env
+      - ./mysql/migrations/article/.env
     volumes:
-      - ./migration/article:/db
+      - ./mysql/migrations/article:/db
     networks:
       - monorepo
 
@@ -82,6 +72,7 @@ services:
   article-mysql:
     container_name: monorepo-article-mysql
     image: mysql:5.7
+    platform: linux/x86_64
     environment:
       MYSQL_DATABASE: article
       MYSQL_ROOT_PASSWORD: password
@@ -90,11 +81,12 @@ services:
     networks:
       - monorepo
     volumes:
-      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./go/docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
   article-mysql-test:
     container_name: monorepo-article-mysql-test
     image: mysql:5.7
+    platform: linux/x86_64
     environment:
       MYSQL_DATABASE: article
       MYSQL_ROOT_PASSWORD: password
@@ -103,7 +95,7 @@ services:
     networks:
       - monorepo
     volumes:
-      - ./docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./go/docker/dev/my.cnf:/etc/mysql/conf.d/my.cnf
 
   dockerize:
     image: jwilder/dockerize:0.6.1
