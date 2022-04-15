@@ -23996,14 +23996,29 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
 export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', viewer: { __typename?: 'User', login: string, repositories: { __typename?: 'RepositoryConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean }, nodes?: Array<{ __typename?: 'Repository', createdAt: any, id: string, name: string, nameWithOwner: string, url: any, description?: string | null } | null> | null } } };
+export type HomePageQuery = { __typename?: 'Query', viewer: { __typename?: 'User', login: string, repositories: { __typename?: 'RepositoryConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean }, nodes?: Array<{ __typename?: 'Repository', createdAt: any, id: string, name: string, nameWithOwner: string, url: any, description?: string | null, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } } | null> | null } } };
+
+export type RepositoryPageQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+}>;
+
+
+export type RepositoryPageQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', id: string, name: string, nameWithOwner: string, issues: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', id: string, title: string, url: any } | null> | null } } | null };
+
+export type CreateIssueMutationVariables = Exact<{
+  input: CreateIssueInput;
+}>;
+
+
+export type CreateIssueMutation = { __typename?: 'Mutation', createIssue?: { __typename?: 'CreateIssuePayload', issue?: { __typename?: 'Issue', id: string, title: string, url: any } | null } | null };
 
 
 export const HomePageDocument = gql`
     query HomePage {
   viewer {
     login
-    repositories(first: 10) {
+    repositories(first: 10, ownerAffiliations: OWNER) {
       pageInfo {
         hasNextPage
       }
@@ -24012,6 +24027,9 @@ export const HomePageDocument = gql`
         id
         name
         nameWithOwner
+        owner {
+          login
+        }
         url
         description
       }
@@ -24046,3 +24064,85 @@ export function useHomePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<H
 export type HomePageQueryHookResult = ReturnType<typeof useHomePageQuery>;
 export type HomePageLazyQueryHookResult = ReturnType<typeof useHomePageLazyQuery>;
 export type HomePageQueryResult = Apollo.QueryResult<HomePageQuery, HomePageQueryVariables>;
+export const RepositoryPageDocument = gql`
+    query RepositoryPage($name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) {
+    id
+    name
+    nameWithOwner
+    issues(first: 10) {
+      nodes {
+        id
+        title
+        url
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useRepositoryPageQuery__
+ *
+ * To run a query within a React component, call `useRepositoryPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRepositoryPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRepositoryPageQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *      owner: // value for 'owner'
+ *   },
+ * });
+ */
+export function useRepositoryPageQuery(baseOptions: Apollo.QueryHookOptions<RepositoryPageQuery, RepositoryPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RepositoryPageQuery, RepositoryPageQueryVariables>(RepositoryPageDocument, options);
+      }
+export function useRepositoryPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RepositoryPageQuery, RepositoryPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RepositoryPageQuery, RepositoryPageQueryVariables>(RepositoryPageDocument, options);
+        }
+export type RepositoryPageQueryHookResult = ReturnType<typeof useRepositoryPageQuery>;
+export type RepositoryPageLazyQueryHookResult = ReturnType<typeof useRepositoryPageLazyQuery>;
+export type RepositoryPageQueryResult = Apollo.QueryResult<RepositoryPageQuery, RepositoryPageQueryVariables>;
+export const CreateIssueDocument = gql`
+    mutation createIssue($input: CreateIssueInput!) {
+  createIssue(input: $input) {
+    issue {
+      id
+      title
+      url
+    }
+  }
+}
+    `;
+export type CreateIssueMutationFn = Apollo.MutationFunction<CreateIssueMutation, CreateIssueMutationVariables>;
+
+/**
+ * __useCreateIssueMutation__
+ *
+ * To run a mutation, you first call `useCreateIssueMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateIssueMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createIssueMutation, { data, loading, error }] = useCreateIssueMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateIssueMutation(baseOptions?: Apollo.MutationHookOptions<CreateIssueMutation, CreateIssueMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateIssueMutation, CreateIssueMutationVariables>(CreateIssueDocument, options);
+      }
+export type CreateIssueMutationHookResult = ReturnType<typeof useCreateIssueMutation>;
+export type CreateIssueMutationResult = Apollo.MutationResult<CreateIssueMutation>;
+export type CreateIssueMutationOptions = Apollo.BaseMutationOptions<CreateIssueMutation, CreateIssueMutationVariables>;

@@ -1,3 +1,4 @@
+// 'plugin:prettier/recommended',
 module.exports = {
   env: {
     browser: true,
@@ -7,7 +8,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
     'plugin:typescript-sort-keys/recommended',
   ],
   ignorePatterns: [
