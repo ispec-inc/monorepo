@@ -8,6 +8,7 @@ const client = new ApolloClient({
       'Content-Type': 'application/json',
     },
     uri: `${process.env.NEXT_PUBLIC_GITHUB_API_URL}/graphql`,
+    // TODO: uri の読み込み方要検討
   }),
 })
 
