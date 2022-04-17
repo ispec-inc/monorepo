@@ -16,7 +16,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -44,10 +44,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: checkout platform
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ispec-inc/platform
         token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
