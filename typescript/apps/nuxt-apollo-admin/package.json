@@ -68,7 +68,7 @@
     "typed-vuex": "0.2.0",
     "typescript": "4.4.2",
     "uuid": "8.3.2",
-    "vee-validate": "3.4.14",
+    "vee-validate": "4.5.11",
     "vue-class-component": "7.2.6",
     "vue-eslint-parser": "7.11.0",
     "vue-jest": "3.0.7",
