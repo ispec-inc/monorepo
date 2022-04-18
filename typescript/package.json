@@ -6,5 +6,8 @@
   "workspaces": [
     "apps/*",
     "libs/*"
-  ]
+  ],
+  "scripts": {
+    "next-apollo": "yarn workspace @monorepo/next-apollo"
+  }
 }

@@ -1,8 +1,15 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: `${process.env.NEXT_PUBLIC_SERVER_API_URL}/graphql`,
+  link: new HttpLink({
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_API_ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    uri: `${process.env.NEXT_PUBLIC_GITHUB_API_URL}/graphql`,
+    // TODO: uri の読み込み方要検討
+  }),
 })
 
 export default client
