@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-import { User } from "./User";
+import { User } from "../atoms/User";
 import { CurrentUser } from "../atoms/CurrentUser";
-import { UserArticles } from "./UserArticles";
+import { UserArticles } from "../atoms/UserArticles";
 
 export const Dashboard: React.FC = (props) => {
   return (

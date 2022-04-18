@@ -1,6 +1,6 @@
 import { graphql, useLazyLoadQuery } from "react-relay";
 import React from "react";
-import { UserArticles_Query } from "../../__generated__/UserArticles_Query.graphql";
+import { UserArticles_Query } from "./__generated__/UserArticles_Query.graphql";
 
 const getUserArticles = graphql`
   query UserArticles_Query($userId: ID!) {
