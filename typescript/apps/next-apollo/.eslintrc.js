@@ -51,8 +51,9 @@ module.exports = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     semi: ['error', 'never', { beforeStatementContinuationChars: 'never' }],
-    'sort-keys': 2,
+    'sort-keys': 'off',
     'spaced-comment': ['error', 'always', { markers: ['/ <reference'] }],
+    'typescript-sort-keys/interface': 'off'
   },
   settings: {
     'import/resolver': {
