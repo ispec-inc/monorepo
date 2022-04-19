@@ -1,17 +1,21 @@
+
 export type UserAge = Readonly<number>
 
 // constructor
+
 export const createUserAge = (v: number): UserAge => {
   if (!v) {
-    throw new RangeError('age は必須です')
+    throw new RangeError('use age は必須です')
   }
-  const castedNum = Number(v)
-  if (Number.isNaN(castedNum)) {
-    throw new RangeError('不正な値です')
-  }
-  if (castedNum < 0) {
+  const castedAge = Number(v)
+
+  if (Number.isNaN(castedAge)) {
     throw new RangeError('不正な値です')
   }
 
-  return v
+  if (castedAge < 14) {
+    throw new RangeError('値は15以上の必要があります')
+  }
+
+  return castedAge
 }
