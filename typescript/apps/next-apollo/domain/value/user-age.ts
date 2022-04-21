@@ -1,4 +1,3 @@
-
 export type UserAge = Readonly<number>
 
 // constructor

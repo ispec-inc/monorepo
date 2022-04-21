@@ -12,6 +12,7 @@ export type User = Readonly<{
   email: string,
 }>
 
+
 // constructor
 export const createUser = (userId: string, firstName: string, lastName: string, gender: Gender, age: number, email: string): User => {
   if (!userId) {
