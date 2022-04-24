@@ -3,8 +3,8 @@ github.com/DATA-DOG/go-txdb v0.1.5 h1:kKzz+LYk9qw1+fMyo8/9yDQiNXrJ2HbfX/TY61HkkB
 github.com/DATA-DOG/go-txdb v0.1.5/go.mod h1:DhAhxMXZpUJVGnT+p9IbzJoRKvlArO2pkHjnGX7o0n0=
 github.com/Masterminds/semver/v3 v3.1.1 h1:hLg3sBzpNErnxhQtUy/mmLR2I9foDujNK030IGemrRc=
 github.com/Masterminds/semver/v3 v3.1.1/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0cBrbBpGY/8hQs=
-github.com/aws/aws-sdk-go v1.43.37 h1:kyZ7UjaPZaCik+asF33UFOOYSwr9liDRr/UM/vuw8yY=
-github.com/aws/aws-sdk-go v1.43.37/go.mod h1:y4AeaBuwd2Lk+GepC1E9v0qOiTws0MIWAX4oIKwKHZo=
+github.com/aws/aws-sdk-go v1.43.45 h1:2708Bj4uV+ym62MOtBnErm/CDX61C4mFe9V2gXy1caE=
+github.com/aws/aws-sdk-go v1.43.45/go.mod h1:y4AeaBuwd2Lk+GepC1E9v0qOiTws0MIWAX4oIKwKHZo=
 github.com/caarlos0/env/v6 v6.9.1 h1:zOkkjM0F6ltnQ5eBX6IPI41UP/KDGEK7rRPwGCNos8k=
 github.com/caarlos0/env/v6 v6.9.1/go.mod h1:hvp/ryKXKipEkcuYjs9mI4bBCg+UI0Yhgm5Zu0ddvwc=
 github.com/cockroachdb/apd v1.1.0 h1:3LFP3629v+1aKXU5Q37mxmRxX/pIu1nijXydLShEq5I=
