@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.18'
-      - uses: reviewdog/action-staticcheck@v1.9
+      - uses: reviewdog/action-staticcheck@v1.10
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
