@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@capacitor/android": "2.5.0",
-    "@capacitor/core": "2.5.0",
-    "@capacitor/ios": "2.5.0",
+    "@capacitor/android": "3.5.0",
+    "@capacitor/core": "3.5.0",
+    "@capacitor/ios": "3.5.0",
     "@ionic/react": "5.9.3",
     "@ionic/react-router": "5.9.3",
     "@testing-library/jest-dom": "4.2.4",
@@ -50,7 +50,7 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "2.5.0",
+    "@capacitor/cli": "3.5.0",
     "@typescript-eslint/eslint-plugin": "3.10.1",
     "@typescript-eslint/parser": "3.10.1",
     "awesome-typescript-loader": "5.2.1",
