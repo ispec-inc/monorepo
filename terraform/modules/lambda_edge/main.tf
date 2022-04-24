@@ -1,6 +1,6 @@
 provider "aws" {
   region  = "us-east-1"
-  version = "2.70.1"
+  version = "4.11.0"
   alias   = "virginia"
 }
 
