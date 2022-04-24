@@ -58,7 +58,7 @@
     "npm-run-all": "4.1.5",
     "nuxt": "2.15.8",
     "nuxt-property-decorator": "2.9.1",
-    "nuxt-typed-vuex": "0.2.0",
+    "nuxt-typed-vuex": "0.3.0",
     "pathpida": "0.17.0",
     "sass": "1.38.2",
     "snakecase-keys": "3.2.1",
