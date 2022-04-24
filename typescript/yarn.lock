@@ -21122,21 +21122,7 @@ ts-jest@26.5.6:
     semver "7.x"
     yargs-parser "20.x"
 
-ts-jest@27.0.5:
-  version "27.0.5"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-27.0.5.tgz#0b0604e2271167ec43c12a69770f0bb65ad1b750"
-  integrity sha512-lIJApzfTaSSbtlksfFNHkWOzLJuuSm4faFAfo5kvzOiRAuoN4/eKxVJ2zEAho8aecE04qX6K1pAzfH5QHL1/8w==
-  dependencies:
-    bs-logger "0.x"
-    fast-json-stable-stringify "2.x"
-    jest-util "^27.0.0"
-    json5 "2.x"
-    lodash "4.x"
-    make-error "1.x"
-    semver "7.x"
-    yargs-parser "20.x"
-
-ts-jest@^27.0.5:
+ts-jest@27.1.4, ts-jest@^27.0.5:
   version "27.1.4"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-27.1.4.tgz#84d42cf0f4e7157a52e7c64b1492c46330943e00"
   integrity sha512-qjkZlVPWVctAezwsOD1OPzbZ+k7zA5z3oxII4dGdZo5ggX/PL7kvwTM0pXTr10fAtbiVpJaL3bWd502zAhpgSQ==
