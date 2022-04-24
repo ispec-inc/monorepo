@@ -70,7 +70,7 @@
     "vue-eslint-parser": "7.11.0",
     "vue-jest": "3.0.7",
     "vue-property-decorator": "9.1.2",
-    "vuex-module-decorators": "1.0.1"
+    "vuex-module-decorators": "1.2.0"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "2.1.0",
