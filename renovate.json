@@ -1,6 +1,45 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>ispec-inc/renovate-config"
+    "config:base",
+    ":timezone(Asia/Tokyo)",
+    ":autodetectPinVersions",
+    ":combinePatchMinorReleases",
+    ":dependencyDashboard",
+    ":disableRateLimiting",
+    ":docker",
+    ":enableRenovate",
+    ":enableVulnerabilityAlerts",
+    ":gomod",
+    ":ignoreModulesAndTests",
+    ":ignoreUnstable",
+    ":noUnscheduledUpdates",
+    ":prImmediately",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":separateMultipleMajorReleases",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor",
+    "preview:dockerCompose",
+    "workarounds:all"
+  ],
+  "labels": ["dependencies"],
+  "dependencyDashboard": true,
+  "automerge": true,
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "groupName": "devDependencies",
+      "rangeStrategy": "update-lockfile"
+    },
+    {
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "dependencies (non-major)",
+      "rangeStrategy": "pin"
+    }
+  ],
+  "postUpdateOptions": [
+    "gomodTidy"
   ]
 }
