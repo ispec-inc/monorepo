@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 import { useMemo } from 'react'
-import RepositoryPageQueryModel from '~/models/query-model/repository-page-query-model'
+import QueryRepositoryPageModel from '~/models/query/query-repository-page'
 import { useRepositoryPageQuery } from '~/__generated__/graphql'
 
 const _QUERY = gql`
@@ -27,7 +27,7 @@ export const useRepositoryPageService = (owner: string, name: string) => {
       owner,
     },
   })
-  const queryModel = useMemo(() => data ? new RepositoryPageQueryModel(data) : null, [data])
+  const queryModel = useMemo(() => data ? new QueryRepositoryPageModel(data) : null, [data])
 
   return {
     queryModel,

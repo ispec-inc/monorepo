@@ -1,6 +1,7 @@
 export type UserAge = Readonly<number>
 
 // constructor
+const useAgeMinLimit = 15
 
 export const createUserAge = (v: number): UserAge => {
   if (!v) {
@@ -12,8 +13,8 @@ export const createUserAge = (v: number): UserAge => {
     throw new RangeError('不正な値です')
   }
 
-  if (castedAge < 14) {
-    throw new RangeError('値は15以上の必要があります')
+  if (castedAge < useAgeMinLimit) {
+    throw new RangeError(`値は${useAgeMinLimit}以上の必要があります`)
   }
 
   return castedAge

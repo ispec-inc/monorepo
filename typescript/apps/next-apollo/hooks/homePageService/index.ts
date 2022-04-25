@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { useMemo } from 'react'
-import HomePageQueryModel from '~/models/query-model/home-page-query-model'
+import QueryHomePageModel from '~/models/query/query-home-page'
 import { useHomePageQuery } from '~/__generated__/graphql'
 
 const _QUERY = gql`
@@ -27,11 +27,9 @@ const _QUERY = gql`
   }
 `
 
-
-
 export const useHomePageService = () => {
   const { data, loading, error, refetch } = useHomePageQuery()
-  const queryModel = useMemo(() => data ? new HomePageQueryModel(data) : null, [data])
+  const queryModel = useMemo(() => data ? new QueryHomePageModel(data) : null, [data])
 
   return {
     queryModel,

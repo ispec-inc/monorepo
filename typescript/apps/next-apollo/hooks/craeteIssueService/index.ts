@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import CreateIssueMutateModel from '~/models/mutate-model/create-issue-mutate-model'
+import CreateIssueMutateModel from '~/models/mutate/mutate-create-issue'
 import { useCreateIssueMutation } from '~/__generated__/graphql'
 
 const _MUTATION = gql`

@@ -1,7 +1,7 @@
 import { IRepositoryPageQueryModel } from '~/pages/repositories/[owner]/[name]/query'
 import { RepositoryPageQuery } from '~/__generated__/graphql'
 
-export default class RepositoryPageQueryModel implements IRepositoryPageQueryModel {
+export default class QueryRepositoryPageModel implements IRepositoryPageQueryModel {
   private readonly data: RepositoryPageQuery
   
   constructor(data: RepositoryPageQuery) {

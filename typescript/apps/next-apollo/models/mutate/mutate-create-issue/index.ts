@@ -1,6 +1,6 @@
 import { CreateIssueMutationVariables } from '~/__generated__/graphql'
 
-export default class CreateIssueMutateModel {
+export default class MutateCreateIssueModel {
   private readonly repositoryId: string
   private readonly title: string
   

@@ -1,4 +1,4 @@
-const domainValidationToFormRule = <T>(validationFunc: (v: T) => T) => {
+export const domainValidationToFormRule = <T>(validationFunc: (v: T) => T) => {
   return (v: T): string | boolean => {
     try {
       validationFunc(v)

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRepositoryPageService } from '~/hooks/repositoryPageService'
 import { useCreateIssueService } from '~/hooks/craeteIssueService'
-import CreateIssueMutateModel from '~/models/mutate-model/create-issue-mutate-model'
+import MutateCreateIssueModel from '~/models/mutate/mutate-create-issue'
 
 const RepositoryPage: NextPage = () => {
   const router = useRouter()
@@ -20,7 +20,7 @@ const RepositoryPage: NextPage = () => {
 
   const createNewIssue = () => {
     createIssue(
-      new CreateIssueMutateModel(queryModel?.repositoryId || '', issueTitle)
+      new MutateCreateIssueModel(queryModel?.repositoryId || '', issueTitle)
     )
   }
 

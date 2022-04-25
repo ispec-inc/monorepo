@@ -1,7 +1,7 @@
 import { IHomePageQueryModel } from '~/pages/query'
 import { HomePageQuery } from '~/__generated__/graphql'
 
-export default class HomePageQueryModel implements IHomePageQueryModel {
+export default class QueryHomePageModel implements IHomePageQueryModel {
   private readonly data: HomePageQuery
   
   constructor(data: HomePageQuery) {
