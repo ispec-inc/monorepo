@@ -18,7 +18,7 @@ export const useCreateIssueService = () => {
   const [createIssueMutation, createIssueResponse] = useCreateIssueMutation()
 
   const createIssue = (mutationModel: CreateIssueMutateModel) => {
-    createIssueMutation({ variables: mutationModel.asObject() })
+    createIssueMutation({ variables: mutationModel.variables() })
   }
 
   return {

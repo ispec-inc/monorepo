@@ -9,7 +9,7 @@ export default class MutateCreateIssueModel {
     this.title = title
   }
 
-  asObject(): CreateIssueMutationVariables {
+  variables(): CreateIssueMutationVariables {
     return {
       input: {
         repositoryId: this.repositoryId,
