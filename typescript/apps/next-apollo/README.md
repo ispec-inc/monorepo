@@ -7,9 +7,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
+cd ../../
+
+yarn workspace @monorepo/next-apollo dev
 ```
 
 Open <http://localhost:3000> with your browser to see the result.
@@ -18,7 +18,7 @@ Open <http://localhost:3000> with your browser to see the result.
 
 Reference to [unocss](https://github.com/unocss/unocss) [tailwind.css](https://tailwindcss.com/docs/installation)
 
-# **Frontend Data Flow Architectue**
+# **Data Flow Architectue**
 
 # Domain
 
