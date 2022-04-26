@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useHomePageService } from '~/hooks/homePageService'
+import { useHomePageService } from '~/hooks/home-page-service'
 
 const Home: NextPage = () => {
   const router = useRouter()

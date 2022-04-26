@@ -1,8 +1,8 @@
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useRepositoryPageService } from '~/hooks/repositoryPageService'
-import { useCreateIssueService } from '~/hooks/craeteIssueService'
+import { useRepositoryPageService } from '~/hooks/repository-page-service'
+import { useCreateIssueService } from '~/hooks/craete-issue-service'
 import MutateCreateIssueModel from '~/models/mutate/mutate-create-issue'
 
 const RepositoryPage: NextPage = () => {
