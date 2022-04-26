@@ -129,6 +129,8 @@ Reference to [unocss](https://github.com/unocss/unocss) [tailwind.css](https://t
 
 その他、error や loading状態 の受け渡しも行う。
 
+周辺ファイルは `yarn hygen query new` で作成可能。
+
 ### Mutate hook
 
 情報の作成、更新、アップデートの操作を `Apollo` を操作してバックエンドに伝える役割を持つ。
@@ -136,6 +138,8 @@ Reference to [unocss](https://github.com/unocss/unocss) [tailwind.css](https://t
 値の変換ロジックの記載を減らしたり、関数のシグネチャの変更を一部にとどめるために、 `Mutate Model` をinterfaceとして持つ
 
 その他、error や loading状態 の受け渡しも行う。
+
+周辺ファイルは `yarn hygen mutate new` で作成可能。
 
 # Models
 
