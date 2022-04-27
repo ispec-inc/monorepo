@@ -9,9 +9,6 @@ import {
   UploadableMap,
   // GraphQLResponse,
 } from "relay-runtime";
-// import { deleteToken, getToken } from "./utils/APIToken";
-// import { RelayObservable } from 'relay-runtime/lib/network/RelayObservable'
-// import { SubscriptionClient } from 'subscriptions-transport-ws'
 
 const STORE_MAX_ENTRIES = 300;
 const STORE_CACHE_EXPIRE = 10 * 60 * 1000; // 10 mins
@@ -82,6 +79,15 @@ async function fetchQuery(
     console.log(data);
     console.groupEnd();
     console.groupEnd();
+
+    // エラーのsnackbarをもし入れたら、このコードを使える
+    // if (data?.errors?.length > 0) {
+    //   console.log(data.errors);
+    //   data.errors.forEach((error: any) => {
+    //     errorToast(`Error: ${error.message}. [${error.path?.join(", ")}]`);
+    //   });
+    // }
+
     return data;
   } catch (e) {
     console.group("Error");
@@ -89,6 +95,7 @@ async function fetchQuery(
     console.log(e);
     console.groupEnd();
     console.groupEnd();
+    // errorToast("Error: " + e.message);     // エラーのsnackbarをもし入れたら、このコードを使える
   }
 }
 
