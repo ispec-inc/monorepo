@@ -62,8 +62,6 @@ async function fetchQuery(
   console.groupEnd();
 
   try {
-    await new Promise((r) => setTimeout(r, Math.random() * 500 + 100));
-
     // TODO: Add enpoint URL
     const endpoint = "http://localhost:9000/graphql";
 
@@ -91,7 +89,6 @@ async function fetchQuery(
     return data;
   } catch (e) {
     console.group("Error");
-    // deleteToken();
     console.log(e);
     console.groupEnd();
     console.groupEnd();
