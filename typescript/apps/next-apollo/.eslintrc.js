@@ -11,6 +11,9 @@ module.exports = {
     'plugin:typescript-sort-keys/recommended',
   ],
   ignorePatterns: [
+    '/__generated__/**',
+    '**/*.config.js',
+    '**/*.config.ts',
     '**/node_modules/*',
     '**/out/*',
     '**/.next/*',
@@ -23,6 +26,7 @@ module.exports = {
     'eslint-plugin-import',
     'typescript-sort-keys',
   ],
+  root: true,
   rules: {
     '@typescript-eslint/array-type': [
       'error',

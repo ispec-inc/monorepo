@@ -15,6 +15,7 @@ module.exports = {
     'prettier/vue',
     'plugin:cypress/recommended',
     'plugin:nuxt/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   globals: {
     cy: true,
@@ -22,8 +23,9 @@ module.exports = {
   plugins: ['cypress', 'typescript', 'github'],
   // add your custom rules here
   rules: {
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars-experimental': 'error',
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
     'vue/component-tags-order': [
       'error',
       {
@@ -46,5 +48,7 @@ module.exports = {
     'comma-spacing': 'error',
     'max-statements': 'warn',
     'no-negated-condition': 'error',
+    '@typescript-eslint/no-namespace': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
   },
 }

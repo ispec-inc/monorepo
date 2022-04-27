@@ -1,15 +1,32 @@
-import { useQuery, gql } from '@apollo/client'
+import { NextPage } from 'next'
+import { gql } from '@apollo/client'
+import { useHomePageQuery } from '~/__generated__/graphql'
 
 const QUERY = gql`
-  query getArticles {
-    articles {
-      id
+  query HomePage {
+    viewer {
+      login
+      repositories(first: 10) {
+        pageInfo {
+          hasNextPage
+        }
+        nodes {
+          createdAt
+          id
+          name
+          nameWithOwner
+          url
+          description
+        }
+      }
     }
   }
 `
 
-const Home = () => {
-  const { data, loading, error } = useQuery(QUERY)
+const Home: NextPage = () => {
+  const { data, loading, error } = useHomePageQuery({
+    variables: {},
+  })
 
   if (loading) {
     return (
@@ -49,6 +66,13 @@ const Home = () => {
   return (
     <>
       <div>React Next Framework & Apollo Client</div>
+      <div className="flex flex-col items-center justify-center h-full">
+        {data?.viewer.repositories.nodes?.map((value) => (
+          <div key={value?.id} p="x-5p y-6p" text="19p warn">
+            {value?.name}: created at {value?.createdAt}
+          </div>
+        ))}
+      </div>
     </>
   )
 }
