@@ -9,13 +9,16 @@ const _MUTATION = gql`
         id
         title
         url
+        __typename
       }
     }
   }
 `
 
-export const useCreateIssueService = () => {
-  const [createIssueMutation, createIssueResponse] = useCreateIssueMutation()
+export const useCreateIssueService = (onCompleted: () => void) => {
+  const [createIssueMutation, createIssueResponse] = useCreateIssueMutation({
+    onCompleted: onCompleted,
+  })
 
   const createIssue = (mutationModel: CreateIssueMutateModel) => {
     createIssueMutation({ variables: mutationModel.variables() })

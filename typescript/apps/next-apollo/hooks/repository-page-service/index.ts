@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import gql from 'graphql-tag'
 import { useMemo } from 'react'
 import QueryRepositoryPageModel from '~/models/query/query-repository-page'
 import { useRepositoryPageQuery } from '~/__generated__/graphql'
@@ -14,6 +14,7 @@ const _QUERY = gql`
           id
           title
           url
+          __typename
         }
       }
     }
