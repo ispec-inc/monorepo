@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "dom"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./*"
+      ],
+      "@/*": [
+        "./*"
+      ]
+    },
+    "types": [
+      "@types/node",
+      "@nuxt/types",
+      "@nuxtjs/axios",
+      "@nuxtjs/auth",
+      "@types/jest"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    ".nuxt",
+    "dist",
+    "cypress/**/*.js",
+    "*.js",
+  ],
+  "vueCompilerOptions": {
+    "experimentalCompatMode": 2
+  }
+}
