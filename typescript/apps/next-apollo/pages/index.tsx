@@ -1,10 +1,38 @@
+import gql from 'graphql-tag'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useHomePageService } from '~/hooks/home-page-service'
+import { useMemo } from 'react'
+import QueryHomePageModel from '~/models/query/query-home-page'
+import { useHomePageQuery } from '~/__generated__/graphql'
+
+const _QUERY = gql`
+  query HomePage {
+    viewer {
+      login
+      repositories(first: 10, ownerAffiliations: OWNER) {
+        pageInfo {
+          hasNextPage
+        }
+        nodes {
+          createdAt
+          id
+          name
+          nameWithOwner
+          owner {
+            login
+          }
+          url
+          description
+        }
+      }
+    }
+  }
+`
 
 const Home: NextPage = () => {
   const router = useRouter()
-  const { queryModel, loading, error } = useHomePageService()
+  const { data, loading, error } = useHomePageQuery()
+  const queryModel = useMemo(() => data ? new QueryHomePageModel(data) : null, [data])
 
   const onClickRepository = (nameWithOwner: string) =>
     () =>

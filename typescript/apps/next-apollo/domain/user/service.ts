@@ -1,4 +1,4 @@
-import { User } from '../entity/user'
+import { User } from './user'
 
 export const isUserExist = (source: User[], user: User): boolean => {
   return !!source.find(fUser => fUser.email === user.email)

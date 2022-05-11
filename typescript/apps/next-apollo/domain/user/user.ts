@@ -1,7 +1,7 @@
-import { Gender } from '../value/gender'
-import { createUserAge } from '../value/user-age'
-import { createUserEmail } from '../value/user-email'
-import { createUserName, UserName } from '../value/user-name'
+import { Gender } from './gender'
+import { createUserAge } from './age'
+import { createUserEmail } from './email'
+import { createUserName, UserName } from './user-name'
 
 // domain model
 export type User = Readonly<{
