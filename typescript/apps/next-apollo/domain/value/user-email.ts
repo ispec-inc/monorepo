@@ -5,6 +5,18 @@ export type UserEmail = Readonly<string>
  * form validation libraryを使うのであれば、それに頼るのが良さそうである。
  * それで対応しきれないようなバリデーションを持つformがあればきっとそれはドメイン知識なので、
  * そのときはこのdomain層に隔離できるようにすれば良さそう。
+ *
+ * その値が保証されている状態で使いたい場合は、UserEmail の 型がついているだけでは保証されないので、
+ * そのユースケースの場合などは class の形を適宜採用する。
+ *
+ * class UserEmail {
+ *   readonly value: string
+ *   constructor(email: string) {
+ *     if (!email) { ... }
+ *     if (!emailPattern.test(email)) { ... }
+ *     this.value = email
+ *   }
+ * }
  */
 
 // constructor
@@ -21,3 +33,4 @@ export const createUserEmail = (v: string): UserEmail => {
 
   return v
 }
+
