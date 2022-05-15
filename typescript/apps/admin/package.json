@@ -39,7 +39,7 @@
     "@nuxt/typescript-runtime": "2.1.0",
     "@nuxtjs/auth": "4.9.1",
     "@nuxtjs/axios": "5.13.6",
-    "@types/jest": "27.5.0",
+    "@types/jest": "27.5.1",
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
