@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@apollo/client": "3.5.10",
-    "@babel/preset-env": "7.17.10",
+    "@babel/preset-env": "7.18.0",
     "@monorepo/fast-form": "./libs/fast-form",
     "@monorepo/util-functions": "./libs/util-functions",
     "@nuxt/typescript-build": "2.1.0",
