@@ -13611,10 +13611,10 @@ husky@7.0.4, husky@^7.0.4:
   resolved "https://registry.yarnpkg.com/husky/-/husky-7.0.4.tgz#242048245dc49c8fb1bf0cc7cfb98dd722531535"
   integrity sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==
 
-hygen@6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/hygen/-/hygen-6.2.0.tgz#9f71af9218a1cb24f2c9f017a2594a6d61e6874f"
-  integrity sha512-5kma/nx7K+gJu8Q8kirkamUDb2TLvDJEiG/hfAL2Jt93SGrWEd0vWVEwaJW7qQylbIoT7gBVefrXZS2sYS8aag==
+hygen@6.2.6:
+  version "6.2.6"
+  resolved "https://registry.yarnpkg.com/hygen/-/hygen-6.2.6.tgz#dae2812f467d54a7375f4fed17df932d92f32a40"
+  integrity sha512-uBnhhfmJKMh9AKuudk2ilD14G80HyBJavm4uwrQxI2hj8m2B3f7e8GnOYavUdd8uXJT1fTpA8tDZCVOXJ4+RTA==
   dependencies:
     "@types/node" "^17.0.19"
     chalk "^4.1.2"
@@ -13629,6 +13629,7 @@ hygen@6.2.0:
     fs-extra "^10.0.0"
     ignore-walk "^4.0.1"
     inflection "^1.12.0"
+    ora "^5.0.0"
     yargs-parser "^21.0.0"
 
 hyperlinker@^1.0.0:
@@ -17783,7 +17784,7 @@ ora@^1.3.0:
     cli-spinners "^1.0.1"
     log-symbols "^2.1.0"
 
-ora@^5.4.1:
+ora@^5.0.0, ora@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/ora/-/ora-5.4.1.tgz#1b2678426af4ac4a509008e5e4ac9e9959db9e18"
   integrity sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ==
