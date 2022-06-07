@@ -29,6 +29,14 @@ const _QUERY = gql`
   }
 `
 
+export interface IHomePageQueryModel {
+  repositories: Array<{
+    id: string
+    nameWithOwner: string
+    createdAt: string
+  }>
+}
+
 const Home: NextPage = () => {
   const router = useRouter()
   const { data, loading, error } = useHomePageQuery()

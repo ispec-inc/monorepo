@@ -5,6 +5,16 @@ import { useRepositoryPageService } from '~/hooks/repository-page-service'
 import { useCreateIssueService } from '~/hooks/craete-issue-service'
 import MutateCreateIssueModel from '~/models/mutate/mutate-create-issue'
 
+export interface IRepositoryPageQueryModel {
+  readonly repositoryId: string
+  readonly nameWithOwner: string
+  readonly issues: Array<{
+    id: string
+    title: string
+    url: string
+  }>
+}
+
 const RepositoryPage: NextPage = () => {
   const router = useRouter()
   const { queryModel, loading, error, refetch } = useRepositoryPageService(
