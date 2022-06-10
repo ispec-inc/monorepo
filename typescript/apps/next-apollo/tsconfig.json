@@ -4,6 +4,8 @@
     "experimentalDecorators": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "module": "ESNext",
     "noEmit": true,
     "incremental": true,
