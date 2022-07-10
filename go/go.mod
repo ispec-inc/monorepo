@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/DATA-DOG/go-txdb v0.1.5
-	github.com/aws/aws-sdk-go v1.43.37
+	github.com/aws/aws-sdk-go v1.44.51
 	github.com/caarlos0/env/v6 v6.9.1
 	github.com/getsentry/sentry-go v0.13.0
 	github.com/go-chi/chi v1.5.4
