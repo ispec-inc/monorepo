@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@aspida/axios": "1.10.2",
-    "@babel/preset-env": "7.18.6",
+    "@babel/preset-env": "7.18.9",
     "@monorepo/fast-form": "./libs/fast-form",
     "@monorepo/proto": "./libs/proto",
     "@monorepo/util-functions": "./libs/util-functions",
