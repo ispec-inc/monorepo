@@ -147,10 +147,10 @@
   dependencies:
     tslib "~2.0.1"
 
-"@aspida/axios@1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@aspida/axios/-/axios-1.10.2.tgz#d668da14e8905f59060254f4eab525d9e975cd81"
-  integrity sha512-8/7QR9vYWqdAHjZwHACwwbSsCMjYySqc39DMHdclbSQ8CAkNJ//Cuu49PihlOm5WNoHfmascS5008Xi3AfDkAw==
+"@aspida/axios@1.10.3":
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/@aspida/axios/-/axios-1.10.3.tgz#83b43321500351867e189b58a46c61e3ff6f2ae9"
+  integrity sha512-HS4AZ9/MqYesHcq2bQFZpQhjJaTfzDjDevHQoXB+H/mCD49vWmbqF96zxJlekMzkrhh/8n+ovTGRRRJR9Lto5A==
   dependencies:
     aspida "^1.7.1"
 
