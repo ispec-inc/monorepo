@@ -14301,10 +14301,10 @@ husky@7.0.4, husky@^7.0.4:
   resolved "https://registry.yarnpkg.com/husky/-/husky-7.0.4.tgz#242048245dc49c8fb1bf0cc7cfb98dd722531535"
   integrity sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==
 
-hygen@6.2.7:
-  version "6.2.7"
-  resolved "https://registry.yarnpkg.com/hygen/-/hygen-6.2.7.tgz#188c218e47c6fc3e4f17255241afc906b654211d"
-  integrity sha512-JKVS3cnOgKb+iY2/qP+6tq07P4U/gCmE2gmkSLDCoCGJONt2YCXimNT/2mzi2NuSzvisjjkVxwBY7kNvUufrAQ==
+hygen@6.2.8:
+  version "6.2.8"
+  resolved "https://registry.yarnpkg.com/hygen/-/hygen-6.2.8.tgz#c71fd8b4b26c91574a26eaf34248bebb770e3c83"
+  integrity sha512-hAf4zNDureugjoI59Bp5DfZ19GWwx0ArAHW8dmplxqzgIXdF8V87+PkmL2It8flMYj1qVj3VDptFD/ntGUfQkw==
   dependencies:
     "@types/node" "^17.0.19"
     chalk "^4.1.2"
@@ -14313,7 +14313,6 @@ hygen@6.2.7:
     degit "^2.8.4"
     ejs "^3.1.6"
     enquirer "^2.3.6"
-    eslint-plugin-prettier "^4.0.0"
     execa "^5.0.0"
     front-matter "^4.0.2"
     fs-extra "^10.0.0"
