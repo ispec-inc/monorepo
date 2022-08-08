@@ -4,8 +4,6 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 # TODO fix env setting
-ENV API_URL https://api.auto.lme.jp
-ENV NUXT_ENV_WS_URL wss://chat.auto.lme.jp/subscribe
 RUN npm run build
 
 FROM nginx:1.23.1 as production-stage
