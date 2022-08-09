@@ -49,7 +49,10 @@ module.exports = {
     'no-warning-comments': 'warn',
     'object-curly-spacing': ['error', 'always'],
     quotes: ['error', 'single', { avoidEscape: true }],
-    'react/jsx-filename-extension': ['error', { extensions: ['ts', '.tsx'] }],
+    'react/jsx-filename-extension': [
+      'error',
+      { extensions: ['ts', '.tsx', '.test.js'] },
+    ],
     'react/prefer-stateless-function': 2,
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
