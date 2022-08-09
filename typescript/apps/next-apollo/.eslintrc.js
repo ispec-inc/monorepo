@@ -9,6 +9,8 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:typescript-sort-keys/recommended',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
   ],
   ignorePatterns: [
     '/__generated__/**',
@@ -25,6 +27,7 @@ module.exports = {
     '@typescript-eslint',
     'eslint-plugin-import',
     'typescript-sort-keys',
+    'jest',
   ],
   root: true,
   rules: {
@@ -38,7 +41,7 @@ module.exports = {
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-namespace': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { 'varsIgnorePattern': '^_' }],
+    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_' }],
     'no-unused-vars': 'off',
     '@typescript-eslint/prefer-interface': 'off',
     'comma-spacing': 'error',
@@ -53,7 +56,7 @@ module.exports = {
     semi: ['error', 'never', { beforeStatementContinuationChars: 'never' }],
     'sort-keys': 'off',
     'spaced-comment': ['error', 'always', { markers: ['/ <reference'] }],
-    'typescript-sort-keys/interface': 'off'
+    'typescript-sort-keys/interface': 'off',
   },
   settings: {
     'import/resolver': {
