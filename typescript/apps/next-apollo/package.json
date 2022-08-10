@@ -13,7 +13,8 @@
     "lint:style": "stylelint **/*.{ts,tsx,css} --ignore-path .gitignore",
     "hygen": "hygen",
     "ggen": "graphql-codegen --config codegen.yml",
-    "unocss": "unocss \"./**/*.tsx\""
+    "unocss": "unocss \"./**/*.tsx\"",
+    "test": "jest --watch"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --max-warnings=0 --ext .tsx --ext .ts --fix",
