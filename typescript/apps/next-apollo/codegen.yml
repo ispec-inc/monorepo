@@ -7,7 +7,7 @@ generates:
     plugins:
       - 'typescript'
       - 'typescript-operations'
-      - 'typescript-graphql-request'
+      - 'typescript-react-apollo'
   ./__generated__/graphql.schema.json:
     schema: './schema.docs.graphql'
     plugins:
