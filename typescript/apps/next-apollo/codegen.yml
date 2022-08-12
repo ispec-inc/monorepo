@@ -1,7 +1,7 @@
 overwrite: true
+schema: './schema.docs.graphql'
 generates:
   ./__generated__/graphql.ts:
-    schema: './schema.docs.graphql'
     documents:
       - './**/*.{ts,tsx,graphql}'
     plugins:
@@ -9,11 +9,9 @@ generates:
       - 'typescript-operations'
       - 'typescript-react-apollo'
   ./__generated__/graphql.schema.json:
-    schema: './schema.docs.graphql'
     plugins:
       - 'introspection'
   ./__generated__/mocks.ts:
-    schema: './schema.docs.graphql'
     plugins:
       - typescript-mock-data:
           typesFile: './graphql.ts'
