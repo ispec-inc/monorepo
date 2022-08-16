@@ -27,7 +27,7 @@ func newGorm(method, model string, err error) error {
 		code = CodeError
 	}
 
-	return WithCode(
+	return New(
 		code,
 		&gormErr{fmt.Sprintf("%s record `%s` error: %s", method, model, err.Error())},
 	)

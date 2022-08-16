@@ -1,36 +1,25 @@
 package apperror
 
 import (
-	"fmt"
-
 	"github.com/pkg/errors"
 )
 
 type Error struct {
 	code Code
-	msg  string
-	org  error
+	err  error
 }
 
-func New(code Code, msg string) error {
+func New(code Code, err error) error {
 	return errors.WithStack(&Error{
 		code: code,
-		msg:  msg,
+		err:  err,
 	})
 }
 
-func Newf(code Code, msg string, args ...interface{}) error {
+func Errorf(code Code, msg string, args ...error) error {
 	return errors.WithStack(&Error{
 		code: code,
-		msg:  fmt.Sprintf(msg, args...),
-	})
-}
-
-func WithCode(code Code, err error) error {
-	return errors.WithStack(&Error{
-		code: code,
-		msg:  err.Error(),
-		org:  err,
+		err:  errors.Errorf(msg, args),
 	})
 }
 
@@ -47,11 +36,7 @@ func (e *Error) Code() Code {
 }
 
 func (e *Error) Error() string {
-	return e.msg
-}
-
-func (e *Error) Origin() error {
-	return e.org
+	return e.err.Error()
 }
 
 func Unwrap(err error) *Error {
@@ -61,7 +46,7 @@ func Unwrap(err error) *Error {
 
 	aerr, ok := errors.Cause(err).(*Error)
 	if ok {
-		aerr.msg = err.Error()
+		aerr.err = err
 		return aerr
 	}
 	return nil

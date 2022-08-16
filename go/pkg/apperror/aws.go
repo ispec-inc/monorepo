@@ -12,5 +12,5 @@ func NewAWS(err aws.Error) error {
 	case aws.ErrorCodeNetworkError:
 		code = CodeError
 	}
-	return WithCode(code, err.OrgErr())
+	return New(code, err.OrgErr())
 }
