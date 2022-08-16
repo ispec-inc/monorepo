@@ -11,6 +11,13 @@ if err := sample(); err != nil {
 }
 ```
 
+
+```
+if err := sample(); err != nil {
+	return apperror.Errorf(apperror.CodeError, "new error: %v", ErrDomainLogic)
+}
+```
+
 ## ライブラリ固有のエラー
 
 gormから返ってきたエラーを適切な`apperror.Code`にマッピングするために、apperrorパッケージでは、gormから返ってきたエラーをハンドリングする関数を提供している。
