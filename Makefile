@@ -10,6 +10,7 @@ ci-test: init test
 init: ## setup docker build, network, and databases
 	docker network create monorepo || true
 	docker-compose up -d article-mysql
+	docker-compose logs article-mysql
 	docker-compose up -d message-bus-redis
 	docker-compose run --rm dockerize -wait tcp://article-mysql:3306 -timeout 20s
 
@@ -61,7 +62,7 @@ help: ## display this help screen
 
 .PHOTY: down
 down: ## stop docker containers
-	dockre-compose down
+	docker-compose down
 
 .PHONY: mysql
 mysql: ## connect to local mysql database
