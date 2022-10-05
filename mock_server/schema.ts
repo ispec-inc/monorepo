@@ -1,6 +1,8 @@
 import {gql} from 'apollo-server'
+const axios = require('axios');
 
-export const typeDefs = gql`
+export const typeDefs =
+    gql`
     type Query {
         getUser(id: ID): User
     }
@@ -11,18 +13,11 @@ export const typeDefs = gql`
     }
 `
 
-const getSchema = () => {
+export const getSchema = async () => {
     try {
-        fetch('uri', {
-            method: "POST",
-            headers: {
-                "":""
-            }
-        }).then((response) => {
-            console.log(response.json());
-            return response.json()
-        })
+        const res = await axios.get('http://localhost:9000/graphql-ddd/schema.graphql')
+        return res.data
     } catch (error) {
-        alert(error)
+        return error
     }
 }
