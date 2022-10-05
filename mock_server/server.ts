@@ -1,22 +1,24 @@
 import { ApolloServer } from "apollo-server"
-import { typeDefs, getSchema } from "./schema"
+import { loadSchema } from '@graphql-tools/load'
 import { resolvers } from "./resolvers"
-import { users } from "./data/user"
+import { addResolversToSchema } from '@graphql-tools/schema'
 
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: () => {
-        return {
-            users: users,
-        }
-    }
-})
+async function main() {   
+    // const schema = await loadSchema(join(__dirname, 'schema/schema.graphql'), {
+    //     loaders: [new GraphQLFileLoader()] 
+    // })
 
-getSchema()
+    const schema = await loadSchema({{host}}/graphql-ddd/schema.graphql)
 
-server.listen({port: 3000}).then(({url}) => {
-    console.log(`🚀 Server ready at ${url}`)
-})
+    const schemaWithResolvers = addResolversToSchema({ schema, resolvers })
 
-export default server
+    const server = new ApolloServer({
+        schema: schemaWithResolvers,
+    })
+
+    server.listen({port: 3000}).then(({url}) => {
+        console.log(`🚀 Server ready at ${url}`)
+    })
+}
+
+main()
