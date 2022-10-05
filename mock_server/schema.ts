@@ -10,3 +10,19 @@ export const typeDefs = gql`
         name: String!
     }
 `
+
+const getSchema = () => {
+    try {
+        fetch('uri', {
+            method: "POST",
+            headers: {
+                "":""
+            }
+        }).then((response) => {
+            console.log(response.json());
+            return response.json()
+        })
+    } catch (error) {
+        alert(error)
+    }
+}

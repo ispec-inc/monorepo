@@ -61,7 +61,7 @@ help: ## display this help screen
 
 .PHOTY: down
 down: ## stop docker containers
-	dockre-compose down
+	docker-compose down
 
 .PHONY: mysql
 mysql: ## connect to local mysql database
