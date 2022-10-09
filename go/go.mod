@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go v1.43.37
 	github.com/caarlos0/env/v6 v6.9.1
 	github.com/getsentry/sentry-go v0.13.0
-	github.com/go-chi/chi v1.5.4
+	github.com/go-chi/chi/v3 v3.3.4+incompatible
 	github.com/go-chi/cors v1.2.0
 	github.com/gomodule/redigo v1.8.8
 	github.com/google/uuid v1.3.0
