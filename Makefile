@@ -66,3 +66,6 @@ down: ## stop docker containers
 .PHONY: mysql
 mysql: ## connect to local mysql database
 	. ./go/.env/server && docker-compose exec article-mysql mysql -u$${ADMIN_MYSQL_ARTICLE_USER} -p$${ADMIN_MYSQL_ARTICLE_PASSWORD} $${ADMIN_MYSQL_ARTICLE_DATABASE}
+
+schema:
+	docker-compose run api go run cmd/graphql/main.go
