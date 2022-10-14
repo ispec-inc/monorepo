@@ -69,3 +69,4 @@ mysql: ## connect to local mysql database
 
 schema:
 	docker-compose run api go run cmd/graphql/main.go
+	cd mock_server; node_modules/.bin/ts-node server.ts

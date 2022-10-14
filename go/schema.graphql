@@ -1,0 +1,23 @@
+type Mutation {
+    postArticle(input: PostArticleInput!): Article
+}
+
+type Query {
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Article {
+  id: ID!
+  title: String!
+  content: String!
+}
+
+input PostArticleInput {
+  title: String!
+  content: String!
+}
+
