@@ -5815,10 +5815,10 @@
   dependencies:
     "@types/react" "^17"
 
-"@types/react-relay@13.0.2":
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/@types/react-relay/-/react-relay-13.0.2.tgz#85ac65b13b7a67f8c75fc32dd175160c28d3cc9b"
-  integrity sha512-QyPV/BVKyv5/3bZKILIJYa2dM1r2HOMYNe6vuFbs/4G1uWj9RCbJiTcWFK2OxH3y70p1k9/A5gPS3lFDm0CvHQ==
+"@types/react-relay@13.0.4":
+  version "13.0.4"
+  resolved "https://registry.yarnpkg.com/@types/react-relay/-/react-relay-13.0.4.tgz#3e80b822eac8316f6b69d606eec511ba9d983f23"
+  integrity sha512-xak6OHxW36HmJdDMgyvGJIhDkvY46/WrEm6YiBq8KN29pyEf3n1TqTgDsK3i9fWlF1m/4PKnJDgDjqIStWfYCg==
   dependencies:
     "@types/react" "*"
     "@types/relay-runtime" "*"
