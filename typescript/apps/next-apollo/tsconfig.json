@@ -17,7 +17,7 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@types/node"],
+    "types": ["@types/node", "@types/jest"],
     "typeRoots": ["./node_modules/@types", "./@types"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
