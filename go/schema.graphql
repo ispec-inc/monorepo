@@ -3,6 +3,7 @@ type Mutation {
 }
 
 type Query {
+    getArticle(id: ID!): Article!
 }
 
 schema {

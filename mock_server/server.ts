@@ -1,15 +1,16 @@
 import { ApolloServer } from "apollo-server"
-import { loadSchema } from '@graphql-tools/load'
-import { resolvers } from "./resolvers"
+import { join } from 'node:path'
+import { loadSchemaSync } from '@graphql-tools/load'
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
+import { resolvers } from './resolvers'
 
-async function main() {   
-    // const schema = await loadSchema(join(__dirname, 'schema/schema.graphql'), {
-    //     loaders: [new GraphQLFileLoader()] 
-    // })
-
-    const schema = await loadSchema({{host}}/graphql-ddd/schema.graphql)
-
+function main() {
+    const schema = loadSchemaSync(
+        join(__dirname, '..', 'go/schema.graphql'), {
+            loaders: [new GraphQLFileLoader()],
+        }
+    )
     const schemaWithResolvers = addResolversToSchema({ schema, resolvers })
 
     const server = new ApolloServer({
