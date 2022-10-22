@@ -4,6 +4,7 @@ import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
 import { resolvers } from './resolvers'
+import { articles } from "./data/article"
 
 function main() {
     const schema = loadSchemaSync(
@@ -15,6 +16,11 @@ function main() {
 
     const server = new ApolloServer({
         schema: schemaWithResolvers,
+        context: () => {
+            return {
+                articles: articles,
+            }
+        }
     })
 
     server.listen({port: 3000}).then(({url}) => {
