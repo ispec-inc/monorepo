@@ -60,7 +60,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
-    "graphql-codegen-typescript-mock-data": "^2.2.5",
+    "graphql-codegen-typescript-mock-data": "2.5.2",
     "husky": "^7.0.4",
     "hygen": "^6.2.0",
     "jest": "^28.1.3",
