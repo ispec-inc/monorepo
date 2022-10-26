@@ -6,8 +6,4 @@ export const mocks = {
         title: casual.title,
         content: casual.sentence,
     }),
-    User: () => ({
-        id: casual.integer(1, 10),
-        name: casual.name,
-    })
 }

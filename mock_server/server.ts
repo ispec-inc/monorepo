@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
-import { resolvers } from './resolvers'
+import { resolvers } from './resolver/resolvers'
 import { mocks } from './data'
 
 function main() {

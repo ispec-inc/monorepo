@@ -3,7 +3,6 @@ type Mutation {
 }
 
 type Query {
-    getArticle(id: ID!): Article!
 }
 
 schema {
@@ -15,12 +14,6 @@ type Article {
   id: ID!
   title: String!
   content: String!
-  user: User!
-}
-
-type User{
-  id: ID!
-  name: String!
 }
 
 input PostArticleInput {
