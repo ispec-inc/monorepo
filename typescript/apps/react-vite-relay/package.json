@@ -2,7 +2,7 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-relay": "^13.0.2",
+    "react-relay": "^14.0.0",
     "react-router": "^6.2.2",
     "react-router-dom": "^6.2.2",
     "relay-runtime": "^13.0.2",
@@ -11,7 +11,7 @@
   "devDependencies": {
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
-    "@types/react-relay": "^13.0.1",
+    "@types/react-relay": "^14.0.0",
     "@types/rebass": "^4.0.10",
     "@types/relay-config": "^6.0.2",
     "@types/relay-runtime": "^13.0.1",
