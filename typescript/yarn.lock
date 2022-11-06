@@ -13043,10 +13043,10 @@ eslint-plugin-flowtype@5.10.0, eslint-plugin-flowtype@^5.2.0:
     lodash "^4.17.15"
     string-natural-compare "^3.0.1"
 
-eslint-plugin-github@4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-github/-/eslint-plugin-github-4.4.0.tgz#3d1bf4bce00bbda81b6e98e49102da4b146dce15"
-  integrity sha512-jmVjy86WqVblKuvWnAQAEUMPZnAWbOUuV2hmAjQ54BvmukUW5PBml84NnyKe1QMt6k5a6JoIrbkLkyISTUDSxA==
+eslint-plugin-github@4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-github/-/eslint-plugin-github-4.4.1.tgz#56bbe3bf68cd9fd83f9aaa9fbfd573da1fefcba0"
+  integrity sha512-wpxUIPw+EK5bdUssB8W5Z9/tapZptfJuLkThwPY8p52v75MV/Fb1AkCrLGlYO0yi3mQGFoa3uE0NMzssVAFrUw==
   dependencies:
     "@github/browserslist-config" "^1.0.0"
     "@typescript-eslint/eslint-plugin" "^5.1.0"
