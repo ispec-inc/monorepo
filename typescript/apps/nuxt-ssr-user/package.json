@@ -51,7 +51,7 @@
     "typescript-eslint": "0.0.1-alpha.0",
     "vee-validate": "3.4.14",
     "vue-class-component": "7.2.6",
-    "vue-eslint-parser": "7.11.0",
+    "vue-eslint-parser": "8.3.0",
     "vue-jest": "3.0.7",
     "vuex-module-decorators": "1.0.1"
   },
