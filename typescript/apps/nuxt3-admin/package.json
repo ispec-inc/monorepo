@@ -1,0 +1,22 @@
+{
+  "name": "@monorepo/nuxt3-admin",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "prepare": "cd ../../../ && husky install typescript/apps/nuxt3-admin/.husky"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.0.96",
+    "browserslist": "^4.21.4",
+    "sass": "^1.56.1",
+    "vuetify": "^3.0.1"
+  }
+}
