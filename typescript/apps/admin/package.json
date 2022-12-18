@@ -57,7 +57,7 @@
     "nuxt": "2.15.8",
     "nuxt-typed-vuex": "0.3.1",
     "pathpida": "0.20.1",
-    "sass": "1.56.1",
+    "sass": "1.57.0",
     "snakecase-keys": "3.2.1",
     "ts-jest": "27.1.5",
     "ts-loader": "8.4.0",
