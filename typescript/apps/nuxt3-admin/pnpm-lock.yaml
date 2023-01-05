@@ -1,6 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@fantasy-color/hsv-to-rgb': ^2.1.0
+  '@fantasy-color/rgb-to-hsv': ^2.1.0
   '@mdi/font': ^7.0.96
   body-parser: ^1.20.1
   browserslist: ^4.21.4
@@ -13,6 +15,8 @@ specifiers:
   vuetify: ^3.0.2
 
 dependencies:
+  '@fantasy-color/hsv-to-rgb': 2.1.0
+  '@fantasy-color/rgb-to-hsv': 2.1.0
   '@mdi/font': 7.0.96
   body-parser: 1.20.1
   browserslist: 4.21.4
@@ -344,6 +348,33 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@fantasy-color/hsv-to-rgb/2.1.0:
+    resolution: {integrity: sha512-j4RiFNelSuWbtL3edLIoYXInnZC8QMOIZr1Ow4Vf+AQHqy+gUrGxF11OYRZiK/5aZdPbNwWdgjVZBtVfEGurWg==}
+    engines: {node: '>=12.13.0'}
+    dependencies:
+      '@fantasy-color/types': 2.1.0
+    dev: false
+
+  /@fantasy-color/normalize-rgb/2.1.0:
+    resolution: {integrity: sha512-Uu0L17N4aQ6nCmB14X8UEz8EIUz3C6vXR4Rk5dzinlXoh3lVwvr6K2gUu9x/eeKyeIQ8fUFQgK2oFPjScsUvpg==}
+    engines: {node: '>=12.13.0'}
+    dependencies:
+      '@fantasy-color/types': 2.1.0
+    dev: false
+
+  /@fantasy-color/rgb-to-hsv/2.1.0:
+    resolution: {integrity: sha512-dCoP4FBfGpR3vX3fXeRmDVnggTilE00/TcJ5ehGwzvIphJAqAqQSUrdlzKRt539stkFPzVVko4C4Ns95KEKzXg==}
+    engines: {node: '>=12.13.0'}
+    dependencies:
+      '@fantasy-color/normalize-rgb': 2.1.0
+      '@fantasy-color/types': 2.1.0
+    dev: false
+
+  /@fantasy-color/types/2.1.0:
+    resolution: {integrity: sha512-OREWZch2RV8wYE8IFBxMwgE2rvM4QRC8dMgmvrhpNBeeK+acvBTxaahQ+KbXjkyLMxaXf2GhH+krAPqBGTDF7g==}
+    engines: {node: '>=12.13.0'}
+    dev: false
 
   /@ioredis/commands/1.2.0:
     resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}

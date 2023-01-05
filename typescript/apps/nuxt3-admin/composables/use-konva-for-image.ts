@@ -1,12 +1,15 @@
 import Konva from "konva"
 import { Ref } from "vue"
+import { KonvaFilters } from '~/types/konva-filter'
 
 type UseKonvaForImageResult = {
-  initKonva(config: Konva.StageConfig): void
-  setImageSrc(src?: string): Promise<void>
+  initKonva(config: Konva.StageConfig): Konva.Stage
+  setImageSrc(filters: KonvaFilters, src?: string): Promise<void>
+  centeringImage(stage: Konva.Stage, image: Konva.Image, imageObj: HTMLImageElement): void
   stage: Ref<Konva.Stage | null>
   imageObj: Ref<HTMLImageElement | null>
   image: Ref<Konva.Image | null>
+  layer: Ref<Konva.Layer>
 }
 
 export type UseKonvaForImage = {
@@ -19,12 +22,15 @@ const useKonvaForImage: UseKonvaForImage = () => {
   const image: Ref<Konva.Image | null> = ref(null)
   const layer: Ref<Konva.Layer> = ref(new Konva.Layer()) as Ref<Konva.Layer>
 
-  const initKonva = (config: Konva.StageConfig) => {
-    stage.value = new Konva.Stage(config)
+  const initKonva = (config: Konva.StageConfig): Konva.Stage => {
+    const newStage = new Konva.Stage(config)
+    stage.value = newStage
     stage.value.add(layer.value)
+
+    return newStage
   }
 
-  const setImageSrc = (src?: string): Promise<void> => {
+  const setImageSrc = (filters: KonvaFilters, src?: string): Promise<void> => {
     image.value?.destroy()
 
     return new Promise((resolve, reject) => {
@@ -43,7 +49,9 @@ const useKonvaForImage: UseKonvaForImage = () => {
           return reject()
         }
         image.value.cache()
-        image.value.filters([Konva.Filters.HSL])
+        image.value.filters(filters)
+
+        console.log(image.value.getContext().getImageData(0, 0, image.value.width(), image.value.height()))
         resolve()
       })
       imageObj.value.onerror = ((e) => {
@@ -58,12 +66,26 @@ const useKonvaForImage: UseKonvaForImage = () => {
     })
   }
 
+  const centeringImage = (stage: Konva.Stage, image: Konva.Image, imageObj: HTMLImageElement) => {
+    const widthRatio = stage.width() / imageObj.width
+    const heightRatio = stage.height() / imageObj.height
+    const bestRatio = Math.min(widthRatio, heightRatio)
+    image.scale({ x: bestRatio, y: bestRatio })
+
+    image.position({
+      x: stage.width() / 2 - imageObj.width * bestRatio / 2,
+      y: stage.height() / 2 - imageObj.height * bestRatio / 2
+    })
+  }
+
   return {
     initKonva,
     setImageSrc,
+    centeringImage,
     stage,
     imageObj,
     image,
+    layer
   }
 }
 

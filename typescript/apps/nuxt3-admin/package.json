@@ -12,6 +12,8 @@
     "nuxt": "3.0.0"
   },
   "dependencies": {
+    "@fantasy-color/hsv-to-rgb": "^2.1.0",
+    "@fantasy-color/rgb-to-hsv": "^2.1.0",
     "@mdi/font": "^7.0.96",
     "body-parser": "^1.20.1",
     "browserslist": "^4.21.4",
