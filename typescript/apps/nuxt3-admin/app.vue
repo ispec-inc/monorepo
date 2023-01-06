@@ -140,6 +140,7 @@ async function onInputImage(fs: File[]): Promise<void> {
 
 function onClearImage(): void {
   clearInput()
+  clearPaint()
   setImageSrc([])
 }
 
