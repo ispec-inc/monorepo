@@ -20,7 +20,7 @@ require (
 	golang.org/x/text v0.3.7
 	gorm.io/driver/mysql v1.3.3
 	gorm.io/driver/postgres v1.3.4
-	gorm.io/gorm v1.23.4
+	gorm.io/gorm v1.24.3
 )
 
 require (
