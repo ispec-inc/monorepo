@@ -38,7 +38,7 @@ services:
 
   test:
     container_name: monorepo-test
-    image: golang:1.18
+    image: golang:1.19
     env_file:
       - go/.env/server
     depends_on:
