@@ -1,7 +1,7 @@
 {
   "name": "@monorepo/nuxt-apollo-admin",
   "version": "1.0.0",
-  "packageManager": "yarn@1.22.17",
+  "packageManager": "yarn@1.22.19",
   "private": true,
   "scripts": {
     "dev": "run-p dev:*",
