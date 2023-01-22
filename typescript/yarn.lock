@@ -3869,10 +3869,10 @@
     kolorist "^1.5.1"
     local-pkg "^0.4.1"
 
-"@ionic/core@5.9.3":
-  version "5.9.3"
-  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-5.9.3.tgz#8c4d963a3498918509fa7ea1abb5b4ab404a422e"
-  integrity sha512-WM50vVxAAw+MQYqWXKUK4usBgkr7iQ9UWSb6t59mG4ZSy/fPAb7ZIdAjxY0U5i1ykk6A7Ur4B9ZJMpC/a7nnug==
+"@ionic/core@5.9.4":
+  version "5.9.4"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-5.9.4.tgz#6fe39099bc102322428671154b613e0eded72245"
+  integrity sha512-Ngz9yVT6fIiGdSxxBer8uJxP4w6PasvohYpLxhtMgYiWnyIu0vZra2ui3HrYukCzUo5/SbNPiUr1l7cj1E+7qw==
   dependencies:
     "@stencil/core" "^2.4.0"
     ionicons "^5.5.3"
@@ -3885,12 +3885,12 @@
   dependencies:
     tslib "*"
 
-"@ionic/react@5.9.3":
-  version "5.9.3"
-  resolved "https://registry.yarnpkg.com/@ionic/react/-/react-5.9.3.tgz#f4a2336bc27e0ccc4b456607a98d46e655529bdc"
-  integrity sha512-jw9rWfZBT2+39A5Pq6buPF8NrmuC4AFU6uWttmo5jsxPjFzo1Hm8igOwP5rbBKx+tpleb3SJD1agTOF1cx/xmg==
+"@ionic/react@5.9.4":
+  version "5.9.4"
+  resolved "https://registry.yarnpkg.com/@ionic/react/-/react-5.9.4.tgz#5cc290fe120286f27419daf52b6415d10a59f8db"
+  integrity sha512-bchcrYuVwzPMZpQZygPI06iHPCdSfkqN1Dj+RJk3XcIVI6VyUq6xG+dFBPAOxHHsWcu21D8/hg1NjSQwrMJwsQ==
   dependencies:
-    "@ionic/core" "5.9.3"
+    "@ionic/core" "5.9.4"
     ionicons "^5.1.2"
     tslib "*"
 
