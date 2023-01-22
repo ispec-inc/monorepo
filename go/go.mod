@@ -11,7 +11,7 @@ require (
 	github.com/go-chi/cors v1.2.0
 	github.com/gomodule/redigo v1.8.8
 	github.com/google/uuid v1.3.0
-	github.com/graph-gophers/graphql-go v1.4.0
+	github.com/graph-gophers/graphql-go v1.5.0
 	github.com/k0kubun/pp v3.0.1+incompatible
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.7.1
