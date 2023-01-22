@@ -18,14 +18,14 @@ require (
 	go.uber.org/multierr v1.8.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	golang.org/x/text v0.3.7
-	gorm.io/driver/mysql v1.3.3
+	gorm.io/driver/mysql v1.4.5
 	gorm.io/driver/postgres v1.3.4
-	gorm.io/gorm v1.23.4
+	gorm.io/gorm v1.23.8
 )
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/go-sql-driver/mysql v1.6.0 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.11.0 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
