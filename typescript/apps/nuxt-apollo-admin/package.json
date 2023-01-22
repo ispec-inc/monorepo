@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "3.5.10",
+    "@apollo/client": "3.7.4",
     "@babel/preset-env": "7.20.2",
     "@monorepo/fast-form": "./libs/fast-form",
     "@monorepo/util-functions": "./libs/util-functions",
