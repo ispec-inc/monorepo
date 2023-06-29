@@ -1,1 +1,0 @@
-Atomic Designをする場合、organismsに該当するコンポーネントをここに配置していってください.

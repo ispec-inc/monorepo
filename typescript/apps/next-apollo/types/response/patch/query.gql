@@ -1,5 +1,0 @@
-query getPatches {
-  getPatches {
-    id
-  }
-}
